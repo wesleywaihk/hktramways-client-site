@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strapi Backend Setup Guide</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 860px;
+        margin: 40px auto;
+        padding: 0 20px;
+        color: #222;
+      }
+      h1 {
+        border-bottom: 2px solid #4945ff;
+        padding-bottom: 8px;
+        color: #4945ff;
+      }
+      h2 {
+        margin-top: 36px;
+        color: #333;
+      }
+      pre {
+        background: #1e1e2e;
+        color: #cdd6f4;
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+      code {
+        font-family: monospace;
+        font-size: 0.9em;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+      .note {
+        background: #fff8e1;
+        border-left: 4px solid #f59e0b;
+        padding: 10px 14px;
+        border-radius: 4px;
+        margin: 12px 0;
+      }
+      .warn {
+        background: #fff0f0;
+        border-left: 4px solid #ef4444;
+        padding: 10px 14px;
+        border-radius: 4px;
+        margin: 12px 0;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 16px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px 14px;
+        text-align: left;
+      }
+      th {
+        background: #f5f5f5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Strapi Backend Setup Guide</h1>
+    <p>
+      Sets up a Strapi CMS inside <code>backend/</code> using Docker for local
+      dev (SQLite), ready to deploy to cloud (Postgres + S3) later.
+    </p>
+
+    <div class="warn">
+      <strong>WSL2 OpenSSL Issue:</strong> If you see
+      <code>ERR_SSL_CIPHER_OPERATION_FAILED</code> during npm install, use:<br />
+      <code>npm install --registry http://registry.npmjs.org/</code><br />
+      To install Node 18 via nvm:
+      <code>NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist nvm install 18</code>
+    </div>
+
+    <hr />
+
+    <h2>Step 1: Scaffold the Strapi App</h2>
+    <p>
+      Inside the <code>backend/</code> directory, run the Strapi CLI to create a
+      new project:
+    </p>
+    <pre><code>cd backend
+npx create-strapi-app@latest . --no-run</code></pre>
+    <p>Choose these options when prompted:</p>
+    <ul>
+      <li><strong>Login/Sign up:</strong> Skip</li>
+      <li><strong>Installation type:</strong> Custom</li>
+      <li>
+        <strong>Database:</strong> SQLite (for local dev simplicity; you'll swap
+        it per environment)
+      </li>
+      <li><strong>TypeScript:</strong> Yes (recommended)</li>
+    </ul>
+
+    <h2>Step 2: Add Docker for Local Development</h2>
+    <p>Create <code>backend/Dockerfile.dev</code>:</p>
+    <pre><code>FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 1337
+CMD ["npm", "run", "develop"]</code></pre>
+
+    <p>Create <code>backend/docker-compose.yml</code>:</p>
+    <pre><code>services:
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "1337:1337"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: .tmp/data.db
+      APP_KEYS: "tobemodified1,tobemodified2"
+      API_TOKEN_SALT: tobemodified
+      ADMIN_JWT_SECRET: tobemodified
+      JWT_SECRET: tobemodified</code></pre>
+
+    <p>Then start it:</p>
+    <pre><code>docker compose up</code></pre>
+
+    <h2>Step 3: Configure Environment-Based Database</h2>
+    <p>
+      Edit <code>config/database.ts</code> to read from env vars so you can swap
+      SQLite (local) for Postgres (UAT/prod):
+    </p>
+    <pre><code>export default ({ env }) => ({
+  connection: {
+    client: env('DATABASE_CLIENT', 'sqlite'),
+    connection: {
+      host: env('DATABASE_HOST', '127.0.0.1'),
+      port: env.int('DATABASE_PORT', 5432),
+      database: env('DATABASE_NAME', 'strapi'),
+      user: env('DATABASE_USERNAME', 'strapi'),
+      password: env('DATABASE_PASSWORD', ''),
+      filename: env('DATABASE_FILENAME', '.tmp/data.db'),
+    },
+    useNullAsDefault: true,
+  },
+});</code></pre>
+
+    <h2>Step 4: Add S3 Upload Plugin</h2>
+    <p>Install the provider:</p>
+    <pre><code>npm install @strapi/provider-upload-aws-s3</code></pre>
+
+    <p>Create <code>config/plugins.ts</code>:</p>
+    <pre><code>export default ({ env }) => ({
+  upload: {
+    config: {
+      provider: env('UPLOAD_PROVIDER', 'local'),
+      ...(env('UPLOAD_PROVIDER') === 'aws-s3' && {
+        providerOptions: {
+          accessKeyId: env('AWS_ACCESS_KEY_ID'),
+          secretAccessKey: env('AWS_ACCESS_SECRET'),
+          region: env('AWS_REGION'),
+          params: { Bucket: env('AWS_BUCKET') },
+        },
+      }),
+    },
+  },
+});</code></pre>
+    <p>
+      Local dev leaves <code>UPLOAD_PROVIDER</code> unset (defaults to
+      <code>local</code>). UAT/prod sets it to <code>aws-s3</code>.
+    </p>
+
+    <h2>Step 5: Create Environment Files</h2>
+    <pre><code>backend/
+  .env                  ← local dev (SQLite, local uploads)
+  .env.uat              ← UAT (Postgres, S3)
+  .env.production       ← Production (Postgres, S3)</code></pre>
+    <div class="note">
+      Add <code>.env*</code> to <code>.gitignore</code>. Commit
+      <code>.env.example</code> with placeholder keys only.
+    </div>
+
+    <h2>Step 6: Production Dockerfile (for Cloud Deploy)</h2>
+    <p>Create <code>backend/Dockerfile</code>:</p>
+    <pre><code>FROM node:18-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=build /app ./
+EXPOSE 1337
+CMD ["npm", "start"]</code></pre>
+    <p>
+      This image is what you push to your cloud provider (Railway, Render,
+      Fly.io, ECS, etc.).
+    </p>
+
+    <h2>Step 7: Verify Local Setup Works</h2>
+    <pre><code>cd backend
+docker compose up
+# Open http://localhost:1337/admin</code></pre>
+    <p>
+      Complete the admin registration — if you see the Strapi dashboard, the
+      local setup is done.
+    </p>
+
+    <hr />
+
+    <h2>Environment Summary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Concern</th>
+          <th>Local Dev</th>
+          <th>UAT / Production</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Database</td>
+          <td>SQLite (file-based)</td>
+          <td>Postgres (managed, e.g. RDS / Supabase)</td>
+        </tr>
+        <tr>
+          <td>File uploads</td>
+          <td>Local disk</td>
+          <td>AWS S3</td>
+        </tr>
+        <tr>
+          <td>Secrets</td>
+          <td><code>.env</code></td>
+          <td>Cloud env vars</td>
+        </tr>
+        <tr>
+          <td>Run command</td>
+          <td><code>docker compose up</code></td>
+          <td>Production <code>Dockerfile</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>What's Next (Cloud Deploy)</h2>
+    <ul>
+      <li>Pick a cloud provider (Railway, Render, Fly.io, AWS ECS)</li>
+      <li>Set up a managed Postgres instance (RDS, Supabase, Neon)</li>
+      <li>Create S3 bucket + IAM user with least-privilege policy</li>
+      <li>
+        Set <code>UPLOAD_PROVIDER=aws-s3</code> and all AWS env vars in cloud
+        dashboard
+      </li>
+      <li>Build and push the production Docker image via CI/CD</li>
+    </ul>
+  </body>
+</html>

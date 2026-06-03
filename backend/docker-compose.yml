@@ -1,0 +1,18 @@
+services:
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "1337:1337"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: .tmp/data.db
+      APP_KEYS: "tobemodified1,tobemodified2"
+      API_TOKEN_SALT: tobemodified
+      ADMIN_JWT_SECRET: tobemodified
+      JWT_SECRET: tobemodified
