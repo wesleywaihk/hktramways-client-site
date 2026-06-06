@@ -16,6 +16,7 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
+    "shared-resources": "*",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@strapi/plugin-cloud": "5.47.0",
     "@strapi/plugin-documentation": "^5.47.1",

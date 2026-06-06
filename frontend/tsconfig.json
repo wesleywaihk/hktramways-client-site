@@ -19,7 +19,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "shared-resources/cons": ["../shared-resources/cons/index.ts"]
     }
   },
   "include": [

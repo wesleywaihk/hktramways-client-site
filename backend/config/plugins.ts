@@ -16,6 +16,7 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
     config: {
       defaultLocale: 'en',
       locales: ['en', 'zh-HK', 'zh-CN'],
+        // zh-HK was previously stored as zh-Hant-HK; migrated via scripts/migrate-locale-zh-hant-hk.js
     },
   },
   upload: {

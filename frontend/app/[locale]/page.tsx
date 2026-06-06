@@ -17,7 +17,7 @@ export default function LandingPage() {
       .then((res) => setLanding(res.data[0] ?? null))
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [fetchLanding]);
 
   if (loading) {
     return (
