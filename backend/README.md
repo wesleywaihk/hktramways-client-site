@@ -1,5 +1,16 @@
 # 🚀 Getting started with Strapi
 
+## API Documentation
+
+The `@strapi/plugin-documentation` plugin auto-generates an OpenAPI spec on every server start.
+
+| Resource | URL |
+|---|---|
+| Swagger UI | http://localhost:1337/documentation |
+| OpenAPI JSON | http://localhost:1337/documentation/v1.0.0/openapi.json |
+
+---
+
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 
 ### `develop`

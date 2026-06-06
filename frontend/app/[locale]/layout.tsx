@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import "@/app/globals.css";
 
 const geistSans = Geist({
@@ -37,9 +38,10 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} style={{ background: "#ffffff", color: "#171717" }}>
+      <body className="min-h-full flex flex-col" style={{ background: "#ffffff", color: "#171717" }}>
         <NextIntlClientProvider messages={messages}>
+          <LanguageSwitcher />
           {children}
         </NextIntlClientProvider>
       </body>

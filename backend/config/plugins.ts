@@ -1,6 +1,16 @@
 import type { Core } from '@strapi/strapi';
 
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin => ({
+  documentation: {
+    enabled: true,
+    config: {
+      openapi: '3.0.0',
+      info: { version: '1.0.0' },
+      'x-strapi-config': {
+        plugins: ['upload', 'i18n'],
+      },
+    },
+  },
   i18n: {
     enabled: true,
     config: {
