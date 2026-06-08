@@ -1,5 +1,5 @@
 import type { Core } from '@strapi/strapi';
-import { PREVIEW_SECRET } from 'shared-resources/cons';
+import { PREVIEW_SECRET } from 'shared-resources/consts';
 
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => ({
   auth: {

@@ -6,5 +6,13 @@
     "frontend",
     "backend",
     "shared-resources"
-  ]
+  ],
+  "scripts": {
+    "frontend:dev": "npm run dev --workspace=frontend",
+    "backend:dev": "npm run dev --workspace=backend",
+    "dev": "npm-run-all --parallel frontend:dev backend:dev"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }

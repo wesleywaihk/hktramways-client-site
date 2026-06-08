@@ -1,20 +1,32 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface SharedSeo extends Struct.ComponentSchema {
-  collectionName: 'components_shared_seos';
+export interface SeoSeo extends Struct.ComponentSchema {
+  collectionName: 'components_seo_seos';
   info: {
-    description: '';
     displayName: 'Seo';
-    icon: 'allergies';
-    name: 'Seo';
   };
-  attributes: {};
+  attributes: {
+    keywords: Schema.Attribute.Text & Schema.Attribute.Required;
+    metaDescription: Schema.Attribute.Text & Schema.Attribute.Required;
+    metaRobots: Schema.Attribute.Enumeration<
+      [
+        'index, follow',
+        'noindex, follow',
+        'index, nofollow',
+        'noindex, nofollow',
+      ]
+    >;
+    metaTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    shareImage: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    structuredData: Schema.Attribute.JSON;
+  };
 }
 
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'shared.seo': SharedSeo;
+      'seo.seo': SeoSeo;
     }
   }
 }

@@ -2,22 +2,24 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useApiEndpoint, type Landing } from "@/hooks/useApiEndpoint";
-
-const STRAPI_URL = process.env.NEXT_PUBLIC_API_URL?.replace("/api", "") ?? "";
+import { useApiEndpoint } from "@/hooks/useApiEndpoint/";
+import type { Landing } from "@/types/api";
+import { API_URL } from "@/consts";
 
 export default function LandingPage() {
-  const { fetchLanding } = useApiEndpoint();
+  const { fetchApi } = useApiEndpoint();
   const [landing, setLanding] = useState<Landing | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchLanding()
+    fetchApi
+      .landing()
       .then((res) => setLanding(res.data[0] ?? null))
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [fetchLanding]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchApi.landing]);
 
   if (loading) {
     return (
@@ -55,7 +57,7 @@ export default function LandingPage() {
       {bannerUrl && (
         <div className="relative w-full aspect-video rounded-xl overflow-hidden">
           <Image
-            src={`${STRAPI_URL}${bannerUrl}`}
+            src={`${API_URL}${bannerUrl}`}
             alt={bannerAlt}
             fill
             sizes="(max-width: 768px) 100vw, 768px"

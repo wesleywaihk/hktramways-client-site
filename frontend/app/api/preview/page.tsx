@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { notFound } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { PREVIEW_SECRET } from "shared-resources/cons";
+import { PREVIEW_SECRET } from "shared-resources/consts";
 import { setPreview } from "@/store/previewSlice";
 import type { AppDispatch } from "@/store";
 
@@ -12,7 +12,7 @@ const SLUG_ROUTES: Record<string, (locale: string) => string> = {
   landing: (locale) => `/${locale}`,
 };
 
-export default function PreviewPage() {
+function PreviewHandler() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
@@ -36,4 +36,12 @@ export default function PreviewPage() {
   }, []);
 
   return null;
+}
+
+export default function PreviewPage() {
+  return (
+    <Suspense>
+      <PreviewHandler />
+    </Suspense>
+  );
 }

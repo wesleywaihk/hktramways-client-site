@@ -2,8 +2,8 @@
   "name": "shared-resources",
   "version": "1.0.0",
   "private": true,
-  "main": "./cons/index.js",
-  "types": "./cons/index.ts",
+  "main": "./consts/index.js",
+  "types": "./consts/index.ts",
   "dependencies": {
     "dotenv": "^17.4.2"
   }

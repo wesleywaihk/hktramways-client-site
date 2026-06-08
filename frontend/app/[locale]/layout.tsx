@@ -1,50 +1,33 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { use } from "react";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import I18nProvider from "@/components/I18nProvider";
+import MetaUpdater from "@/components/MetaUpdater";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import "@/app/globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "HK Tramways",
-  description: "Hong Kong Tramways",
-};
-
-export default async function LocaleLayout({
+export default function LocaleLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const { locale } = use(params);
 
   if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }
 
-  const messages = await getMessages();
-
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} style={{ background: "#ffffff", color: "#171717" }}>
-      <body className="min-h-full flex flex-col" style={{ background: "#ffffff", color: "#171717" }}>
-        <NextIntlClientProvider messages={messages}>
-          <LanguageSwitcher />
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <I18nProvider locale={locale}>
+      <MetaUpdater />
+      <LanguageSwitcher />
+      {children}
+    </I18nProvider>
   );
 }

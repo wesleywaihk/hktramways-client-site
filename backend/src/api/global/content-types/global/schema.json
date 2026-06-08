@@ -8,7 +8,7 @@
     "description": "Define global settings"
   },
   "options": {
-    "draftAndPublish": false
+    "draftAndPublish": true
   },
   "pluginOptions": {
     "i18n": {
@@ -26,10 +26,15 @@
         "videos"
       ]
     },
-    "defaultSeo": {
+    "seo": {
       "type": "component",
-      "component": "shared.seo",
-      "repeatable": false
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "seo.seo",
+      "repeatable": true
     }
   }
 }
