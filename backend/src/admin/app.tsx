@@ -64,20 +64,20 @@ export default {
         },
       },
     },
-    locales: ["zh-Hans", "zh"],
+    // locales: ["zh-Hans", "zh"],
     translations: {
       en: {
         "Auth.form.welcome.title": "HK Tramway",
         "Auth.form.welcome.subtitle": "Client site CMS",
       },
-      zh: {
-        "Auth.form.welcome.title": "香港電車",
-        "Auth.form.welcome.subtitle": "客戶網站內容管理系統",
-      },
-      "zh-Hans": {
-        "Auth.form.welcome.title": "香港电车",
-        "Auth.form.welcome.subtitle": "客户网站内容管理系统",
-      },
+      // zh: {
+      //   "Auth.form.welcome.title": "香港電車",
+      //   "Auth.form.welcome.subtitle": "客戶網站內容管理系統",
+      // },
+      // "zh-Hans": {
+      //   "Auth.form.welcome.title": "香港电车",
+      //   "Auth.form.welcome.subtitle": "客户网站内容管理系统",
+      // },
     },
   },
   bootstrap(_app: StrapiApp) {
