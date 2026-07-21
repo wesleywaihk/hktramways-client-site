@@ -3,6 +3,7 @@
 // Keep these values in sync with styles/_colors.scss.
 export const colors = {
   green: "#007549",
+  greenLight: "#009a5a",
   white: "#ffffff",
   earthLight: "#edebda",
   redDark: "#5a1716",

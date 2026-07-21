@@ -4,6 +4,7 @@
 
 :root {
   --color-green: #{colors.$color-green};
+  --color-green-light: #{colors.$color-green-light};
   --color-white: #{colors.$color-white};
   --color-earth-light: #{colors.$color-earth-light};
   --color-red-dark: #{colors.$color-red-dark};
@@ -12,6 +13,7 @@
 
 @theme inline {
   --color-green: var(--color-green);
+  --color-green-light: var(--color-green-light);
   --color-white: var(--color-white);
   --color-earth-light: var(--color-earth-light);
   --color-red-dark: var(--color-red-dark);

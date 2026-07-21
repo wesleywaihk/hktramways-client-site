@@ -5,6 +5,7 @@ import I18nProvider from "@/components/I18nProvider";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
 import MetaUpdater from "@/components/MetaUpdater";
 import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 import "@/app/globals.scss";
 
 export function generateStaticParams() {
@@ -29,7 +30,8 @@ export default function LocaleLayout({
       <MuiThemeProvider>
         <MetaUpdater />
         <Header />
-        {children}
+        <main className="flex flex-col min-h-[calc(100dvh-76px)]">{children}</main>
+        <Footer />
       </MuiThemeProvider>
     </I18nProvider>
   );
