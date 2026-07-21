@@ -4,7 +4,7 @@ import { routing } from "@/i18n/routing";
 import I18nProvider from "@/components/I18nProvider";
 import MetaUpdater from "@/components/MetaUpdater";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import "@/app/globals.css";
+import "@/app/globals.scss";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

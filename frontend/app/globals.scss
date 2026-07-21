@@ -1,0 +1,25 @@
+@use "../styles/colors" as colors;
+@import "tailwindcss";
+
+:root {
+  --color-green: #{colors.$color-green};
+  --color-white: #{colors.$color-white};
+  --color-earth-light: #{colors.$color-earth-light};
+  --color-red-dark: #{colors.$color-red-dark};
+  --color-accent-brown: #{colors.$color-accent-brown};
+}
+
+@theme inline {
+  --color-green: var(--color-green);
+  --color-white: var(--color-white);
+  --color-earth-light: var(--color-earth-light);
+  --color-red-dark: var(--color-red-dark);
+  --color-accent-brown: var(--color-accent-brown);
+  --font-sans: var(--font-outfit);
+}
+
+body {
+  background: var(--color-white);
+  color: #171717;
+  font-family: var(--font-sans);
+}

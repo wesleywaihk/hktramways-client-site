@@ -1,0 +1,18 @@
+$font-family-base: var(--font-outfit), sans-serif;
+
+$text-title-page: 80px, 100%;
+$text-title-section: 56px, 107%;
+$text-title-subsection: 42px, 118%;
+$text-title-body: 30px, 110%;
+$text-body-base: 16px, 162.5%;
+$text-body-emphasized: 16px, 162.5%; // font-weight 600
+$text-body-big: 21px, 152.4%;
+$text-body-big-emphasized: 21px, 152.4%; // font-weight 600
+$text-body-small: 13px, 145%;
+$text-body-small-emphasized: 13px, 145%; // font-weight 600
+$text-button: 14px, 157%;
+
+@mixin font-style($pair) {
+  font-size: nth($pair, 1);
+  line-height: nth($pair, 2);
+}
