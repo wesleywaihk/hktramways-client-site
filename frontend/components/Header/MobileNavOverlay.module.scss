@@ -1,0 +1,111 @@
+@use "@/styles/colors" as colors;
+@use "@/styles/typography" as typography;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+
+  &.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 61;
+  width: 100%;
+  max-width: 393px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+
+  background: #{colors.$color-green};
+  color: #{colors.$color-white};
+
+  transform: translateX(100%);
+  transition: transform 500ms ease-in-out;
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.localeList {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.localeButton {
+  @include typography.font-style(typography.$text-button);
+  font-family: typography.$font-family-base;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #{colors.$color-white};
+  background: transparent;
+  border: none;
+  opacity: 0.6;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: none;
+  color: #{colors.$color-white};
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  max-width: 333px;
+  margin-top: 120px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  @include typography.font-style(typography.$text-nav-mobile);
+  font-family: typography.$font-family-base;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #{colors.$color-white};
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 20px;
+
+  @include typography.font-style(typography.$text-body-small);
+  font-family: typography.$font-family-base;
+  font-weight: 400;
+  color: #{colors.$color-white};
+}

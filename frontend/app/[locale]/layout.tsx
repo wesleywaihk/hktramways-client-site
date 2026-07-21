@@ -2,8 +2,9 @@ import { use } from "react";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import I18nProvider from "@/components/I18nProvider";
+import MuiThemeProvider from "@/components/MuiThemeProvider";
 import MetaUpdater from "@/components/MetaUpdater";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import Header from "@/components/Header/Header";
 import "@/app/globals.scss";
 
 export function generateStaticParams() {
@@ -25,9 +26,11 @@ export default function LocaleLayout({
 
   return (
     <I18nProvider locale={locale}>
-      <MetaUpdater />
-      <LanguageSwitcher />
-      {children}
+      <MuiThemeProvider>
+        <MetaUpdater />
+        <Header />
+        {children}
+      </MuiThemeProvider>
     </I18nProvider>
   );
 }
