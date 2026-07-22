@@ -1,4 +1,5 @@
 import { API_URL } from "@/consts";
+import { buildPopulate } from "@/lib/buildPopulate";
 
 export async function fetchGlobal(locale: string) {
   const res = await fetch(`${API_URL}/api/global?populate=*&locale=${locale}`, {
@@ -14,7 +15,7 @@ export async function fetchHome(
   previewMode: boolean,
   locale: string,
 ) {
-  const populate = "populate[bannerImage][populate]=*";
+  const populate = buildPopulate(["headerStyle", "bannerImage"]);
   const url = previewMode
     ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`
     : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;

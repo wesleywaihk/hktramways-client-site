@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import I18nProvider from "@/components/I18nProvider";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
+import { HeaderStyleProvider } from "@/components/HeaderStyleProvider";
 import MetaUpdater from "@/components/MetaUpdater";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
@@ -28,10 +29,14 @@ export default function LocaleLayout({
   return (
     <I18nProvider locale={locale}>
       <MuiThemeProvider>
-        <MetaUpdater />
-        <Header />
-        <main className="flex flex-col min-h-[calc(100dvh-76px)]">{children}</main>
-        <Footer />
+        <HeaderStyleProvider>
+          <MetaUpdater />
+          <Header />
+          <main className="flex flex-col min-h-[calc(100dvh-76px)]">
+            {children}
+          </main>
+          <Footer />
+        </HeaderStyleProvider>
       </MuiThemeProvider>
     </I18nProvider>
   );

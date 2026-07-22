@@ -6,10 +6,12 @@ import { useApiEndpoint } from "@/hooks/useApiEndpoint/";
 import type { Home } from "@/types/api";
 import { API_URL } from "@/consts";
 import { setPageTitle } from "@/store/pageTitleSlice";
+import { useHeaderStyle } from "@/components/HeaderStyleProvider";
 
 export default function LandingPage() {
   const { fetchApi } = useApiEndpoint();
   const dispatch = useDispatch();
+  const { setHeaderStyle } = useHeaderStyle();
   const [home, setHome] = useState<Home | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -21,6 +23,7 @@ export default function LandingPage() {
         const homeData = res.data[0] ?? null;
         setHome(homeData);
         dispatch(setPageTitle(homeData?.Title ?? ""));
+        setHeaderStyle(homeData?.headerStyle?.headerStyle ?? "default");
       })
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
@@ -30,31 +33,32 @@ export default function LandingPage() {
   useEffect(() => {
     return () => {
       dispatch(setPageTitle(""));
+      setHeaderStyle("default");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
     return (
-      <main className="flex flex-1 items-center justify-center">
+      <section className="flex flex-1 items-center justify-center">
         <p className="text-zinc-500">Loading...</p>
-      </main>
+      </section>
     );
   }
 
   if (error) {
     return (
-      <main className="flex flex-1 items-center justify-center">
+      <section className="flex flex-1 items-center justify-center">
         <p className="text-red-500">{error}</p>
-      </main>
+      </section>
     );
   }
 
   if (!home) {
     return (
-      <main className="flex flex-1 items-center justify-center">
+      <section className="flex flex-1 items-center justify-center">
         <p className="text-zinc-500">No content available.</p>
-      </main>
+      </section>
     );
   }
 
@@ -64,16 +68,15 @@ export default function LandingPage() {
   const bannerMAlt = home.bannerImage?.bannerM?.alternativeText ?? "";
 
   return (
-    <main className="flex flex-col flex-1 max-w-3xl mx-auto w-full px-6 py-12 gap-8">
-      <h1 className="text-4xl font-bold tracking-tight text-zinc-900">
-        {home.Title}
-      </h1>
-
+    <section className="flex flex-col flex-1 mx-auto w-full p-0 lg:px-6 lg:pb-12 gap-8 bg-green mt-[-76px] lg:mt-0">
       {(bannerDUrl || bannerMUrl) && (
-        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+        <div className="relative w-full h-[calc(100dvh-52px)] lg:h-[calc(100dvh-160px)] rounded-none lg:rounded-[30px] overflow-hidden">
           <picture>
             {bannerDUrl && (
-              <source media="(min-width: 768px)" srcSet={`${API_URL}${bannerDUrl}`} />
+              <source
+                media="(min-width: 1024px)"
+                srcSet={`${API_URL}${bannerDUrl}`}
+              />
             )}
             <img
               src={`${API_URL}${bannerMUrl ?? bannerDUrl}`}
@@ -83,6 +86,6 @@ export default function LandingPage() {
           </picture>
         </div>
       )}
-    </main>
+    </section>
   );
 }

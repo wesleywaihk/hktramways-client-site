@@ -5,7 +5,7 @@ import type { RootState } from "@/store";
 import { fetchGlobal, fetchHome } from "./api";
 import type { GlobalResponse, HomeResponse } from "@/types/api";
 
-export type { GlobalFavicon, GlobalSeo, GlobalData, GlobalResponse, HomeBanner, Home, HomeResponse } from "@/types/api";
+export type { GlobalFavicon, GlobalSeo, GlobalData, GlobalResponse, HomeBanner, HomeHeaderStyle, Home, HomeResponse } from "@/types/api";
 
 export function useApiEndpoint() {
   const locale = useLocale();

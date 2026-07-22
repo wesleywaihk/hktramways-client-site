@@ -16,14 +16,16 @@ export default function MobileNavOverlay({
   return (
     <>
       <div
-        className={`fixed inset-0 z-[60] bg-black/40 transition-opacity duration-300 ease-in-out ${
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 z-[1010] bg-black/40 transition-opacity duration-300 ease-in-out ${
+          open
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={onClose}
         aria-hidden="true"
       />
       <div
-        className={`fixed top-0 right-0 bottom-0 z-[61] w-full max-w-[393px] flex flex-col p-5 px-[30px] bg-green text-white transition-transform duration-500 ease-in-out ${
+        className={`fixed top-0 right-0 bottom-0 z-[1011] w-full max-w-[393px] flex flex-col p-5 px-[30px] bg-green text-white transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"

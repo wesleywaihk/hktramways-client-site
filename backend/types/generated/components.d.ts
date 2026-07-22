@@ -1,5 +1,19 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface LayoutHeaderStyle extends Struct.ComponentSchema {
+  collectionName: 'components_layout_header_styles';
+  info: {
+    displayName: 'headerStyle';
+    icon: 'code';
+  };
+  attributes: {
+    headerStyle: Schema.Attribute.Enumeration<
+      ['default', 'transparent', 'white']
+    > &
+      Schema.Attribute.DefaultTo<'default'>;
+  };
+}
+
 export interface MediaBannerImage extends Struct.ComponentSchema {
   collectionName: 'components_media_banner_images';
   info: {
@@ -38,6 +52,7 @@ export interface SeoSeo extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'layout.header-style': LayoutHeaderStyle;
       'media.banner-image': MediaBannerImage;
       'seo.seo': SeoSeo;
     }
