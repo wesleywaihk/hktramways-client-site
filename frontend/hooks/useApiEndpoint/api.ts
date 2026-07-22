@@ -9,15 +9,18 @@ export async function fetchGlobal(locale: string) {
   return res.json();
 }
 
-export async function fetchLanding(
+export async function fetchHome(
   documentId: string,
   previewMode: boolean,
   locale: string,
 ) {
+  const populate = "populate[bannerImage][populate]=*";
   const url = previewMode
-    ? `${API_URL}/api/landings/${documentId}?status=draft&populate=banner`
-    : `${API_URL}/api/landings?populate=banner&locale=${locale}`;
+    ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`
+    : `${API_URL}/api/homes?${populate}&locale=${locale}`;
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to fetch landing: ${res.status}`);
-  return res.json();
+  if (!res.ok) throw new Error(`Failed to fetch home: ${res.status}`);
+  const json = await res.json();
+  // The single-document (preview) endpoint returns `data` as an object, not an array.
+  return previewMode ? { data: json.data ? [json.data] : [] } : json;
 }

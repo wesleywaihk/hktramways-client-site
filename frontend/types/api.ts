@@ -1,19 +1,24 @@
-export interface LandingBanner {
+export interface HomeBanner {
   id: number;
   url: string;
   alternativeText: string | null;
 }
 
-export interface Landing {
+export interface HomeBannerImage {
   id: number;
-  documentId: string;
-  title: string;
-  contents: string;
-  banner: LandingBanner | null;
+  bannerD: HomeBanner | null;
+  bannerM: HomeBanner | null;
 }
 
-export interface LandingResponse {
-  data: Landing[];
+export interface Home {
+  id: number;
+  documentId: string;
+  Title: string;
+  bannerImage: HomeBannerImage | null;
+}
+
+export interface HomeResponse {
+  data: Home[];
 }
 
 export interface GlobalFaviconFormat {

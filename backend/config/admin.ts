@@ -27,7 +27,7 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => 
       allowedOrigins: [env('FRONTEND_URL', 'http://localhost:3000')],
       async handler(uid, { documentId, locale, status }) {
         const frontendUrl = env('FRONTEND_URL', 'http://localhost:3000');
-        // uid is e.g. "api::landing.landing" — extract the singular name as slug
+        // uid is e.g. "api::home.home" — extract the singular name as slug
         const uidParam = uid.split('::')[1]?.split('.')[0] ?? uid;
         const params = new URLSearchParams({ documentId, locale, status, secret: PREVIEW_SECRET, uid: uidParam });
         return `${frontendUrl}/api/preview?${params}`;

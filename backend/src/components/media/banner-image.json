@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_media_banner_images",
+  "info": {
+    "displayName": "Banner Image",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "bannerD": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "bannerM": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

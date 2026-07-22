@@ -9,7 +9,7 @@ import { setPreview } from "@/store/previewSlice";
 import type { AppDispatch } from "@/store";
 
 const SLUG_ROUTES: Record<string, (locale: string) => string> = {
-  landing: (locale) => `/${locale}`,
+  home: (locale) => `/${locale}`,
 };
 
 function PreviewHandler() {

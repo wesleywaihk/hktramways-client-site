@@ -3,23 +3,23 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useApiEndpoint } from "@/hooks/useApiEndpoint/";
-import type { Landing } from "@/types/api";
+import type { Home } from "@/types/api";
 import { API_URL } from "@/consts";
 
 export default function LandingPage() {
   const { fetchApi } = useApiEndpoint();
-  const [landing, setLanding] = useState<Landing | null>(null);
+  const [home, setHome] = useState<Home | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchApi
-      .landing()
-      .then((res) => setLanding(res.data[0] ?? null))
+      .home()
+      .then((res) => setHome(res.data[0] ?? null))
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchApi.landing]);
+  }, [fetchApi.home]);
 
   if (loading) {
     return (
@@ -37,7 +37,7 @@ export default function LandingPage() {
     );
   }
 
-  if (!landing) {
+  if (!home) {
     return (
       <main className="flex flex-1 items-center justify-center">
         <p className="text-zinc-500">No content available.</p>
@@ -45,20 +45,22 @@ export default function LandingPage() {
     );
   }
 
-  const bannerUrl = landing.banner?.url;
-  const bannerAlt = landing.banner?.alternativeText ?? "";
+  const bannerDUrl = home.bannerImage?.bannerD?.url;
+  const bannerDAlt = home.bannerImage?.bannerD?.alternativeText ?? "";
+  const bannerMUrl = home.bannerImage?.bannerM?.url;
+  const bannerMAlt = home.bannerImage?.bannerM?.alternativeText ?? "";
 
   return (
     <main className="flex flex-col flex-1 max-w-3xl mx-auto w-full px-6 py-12 gap-8">
       <h1 className="text-4xl font-bold tracking-tight text-zinc-900">
-        {landing.title}
+        {home.Title}
       </h1>
 
-      {bannerUrl && (
-        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+      {bannerDUrl && (
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden hidden md:block">
           <Image
-            src={`${API_URL}${bannerUrl}`}
-            alt={bannerAlt}
+            src={`${API_URL}${bannerDUrl}`}
+            alt={bannerDAlt}
             fill
             sizes="(max-width: 768px) 100vw, 768px"
             className="object-cover"
@@ -68,11 +70,18 @@ export default function LandingPage() {
         </div>
       )}
 
-      {landing.contents && (
-        <div
-          className="prose prose-zinc max-w-none text-zinc-700"
-          dangerouslySetInnerHTML={{ __html: landing.contents }}
-        />
+      {bannerMUrl && (
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden md:hidden">
+          <Image
+            src={`${API_URL}${bannerMUrl}`}
+            alt={bannerMAlt}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+            unoptimized
+          />
+        </div>
       )}
     </main>
   );

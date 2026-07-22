@@ -1,5 +1,17 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface MediaBannerImage extends Struct.ComponentSchema {
+  collectionName: 'components_media_banner_images';
+  info: {
+    displayName: 'Banner Image';
+    icon: 'picture';
+  };
+  attributes: {
+    bannerD: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    bannerM: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
 export interface SeoSeo extends Struct.ComponentSchema {
   collectionName: 'components_seo_seos';
   info: {
@@ -26,6 +38,7 @@ export interface SeoSeo extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'media.banner-image': MediaBannerImage;
       'seo.seo': SeoSeo;
     }
   }

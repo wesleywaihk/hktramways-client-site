@@ -1,4 +1,5 @@
 import { Outfit } from "next/font/google";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import StoreProvider from "@/store/StoreProvider";
 
 const outfit = Outfit({
@@ -11,7 +12,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html className={outfit.variable}>
       <body>
-        <StoreProvider>{children}</StoreProvider>
+        <AppRouterCacheProvider>
+          <StoreProvider>{children}</StoreProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );
