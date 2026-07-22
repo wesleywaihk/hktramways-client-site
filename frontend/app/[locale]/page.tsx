@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useDispatch } from "react-redux";
 import { useApiEndpoint } from "@/hooks/useApiEndpoint/";
 import type { Home } from "@/types/api";
 import { API_URL } from "@/consts";
+import { setPageTitle } from "@/store/pageTitleSlice";
 
 export default function LandingPage() {
   const { fetchApi } = useApiEndpoint();
+  const dispatch = useDispatch();
   const [home, setHome] = useState<Home | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -15,11 +17,22 @@ export default function LandingPage() {
   useEffect(() => {
     fetchApi
       .home()
-      .then((res) => setHome(res.data[0] ?? null))
+      .then((res) => {
+        const homeData = res.data[0] ?? null;
+        setHome(homeData);
+        dispatch(setPageTitle(homeData?.Title ?? ""));
+      })
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchApi.home]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setPageTitle(""));
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (loading) {
     return (
@@ -56,31 +69,18 @@ export default function LandingPage() {
         {home.Title}
       </h1>
 
-      {bannerDUrl && (
-        <div className="relative w-full aspect-video rounded-xl overflow-hidden hidden md:block">
-          <Image
-            src={`${API_URL}${bannerDUrl}`}
-            alt={bannerDAlt}
-            fill
-            sizes="(max-width: 768px) 100vw, 768px"
-            className="object-cover"
-            priority
-            unoptimized
-          />
-        </div>
-      )}
-
-      {bannerMUrl && (
-        <div className="relative w-full aspect-video rounded-xl overflow-hidden md:hidden">
-          <Image
-            src={`${API_URL}${bannerMUrl}`}
-            alt={bannerMAlt}
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
-            unoptimized
-          />
+      {(bannerDUrl || bannerMUrl) && (
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+          <picture>
+            {bannerDUrl && (
+              <source media="(min-width: 768px)" srcSet={`${API_URL}${bannerDUrl}`} />
+            )}
+            <img
+              src={`${API_URL}${bannerMUrl ?? bannerDUrl}`}
+              alt={bannerMAlt || bannerDAlt}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </picture>
         </div>
       )}
     </main>

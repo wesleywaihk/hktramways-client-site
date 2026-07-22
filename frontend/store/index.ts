@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import previewReducer from "./previewSlice";
+import pageTitleReducer from "./pageTitleSlice";
 
 export const store = configureStore({
   reducer: {
     preview: previewReducer,
+    pageTitle: pageTitleReducer,
   },
 });
 

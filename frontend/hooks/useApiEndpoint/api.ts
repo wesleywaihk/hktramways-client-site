@@ -17,7 +17,7 @@ export async function fetchHome(
   const populate = "populate[bannerImage][populate]=*";
   const url = previewMode
     ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`
-    : `${API_URL}/api/homes?${populate}&locale=${locale}`;
+    : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to fetch home: ${res.status}`);
   const json = await res.json();

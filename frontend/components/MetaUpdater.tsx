@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
+import { useSelector } from "react-redux";
 import { useApiEndpoint } from "@/hooks/useApiEndpoint";
 import { API_URL } from "@/consts";
+import type { RootState } from "@/store";
 
 function setMeta(name: string, content: string) {
   let el = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
@@ -18,6 +20,8 @@ function setMeta(name: string, content: string) {
 export default function MetaUpdater() {
   const locale = useLocale();
   const { fetchApi } = useApiEndpoint();
+  const pageTitle = useSelector((state: RootState) => state.pageTitle.title);
+  const [metaTitle, setMetaTitle] = useState("");
 
   useEffect(() => {
     fetchApi
@@ -26,10 +30,7 @@ export default function MetaUpdater() {
         const seo = res.data?.seo?.[0];
         const favicon = res.data?.favicon;
 
-        if (seo?.metaTitle) {
-          document.title = seo.metaTitle;
-        }
-
+        setMetaTitle(seo?.metaTitle ?? "");
         setMeta("description", seo?.metaDescription ?? "");
         setMeta("keywords", seo?.keywords ?? "");
 
@@ -46,6 +47,11 @@ export default function MetaUpdater() {
       })
       .catch(() => null);
   }, [locale, fetchApi]);
+
+  useEffect(() => {
+    if (!metaTitle) return;
+    document.title = pageTitle ? `${pageTitle} | ${metaTitle}` : metaTitle;
+  }, [pageTitle, metaTitle]);
 
   return null;
 }
