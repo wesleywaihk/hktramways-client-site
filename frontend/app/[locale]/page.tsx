@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useApiEndpoint } from "@/hooks/useApiEndpoint/";
 import type { Home } from "@/types/api";
-import { API_URL } from "@/consts";
 import { setPageTitle } from "@/store/pageTitleSlice";
 import { useHeaderStyle } from "@/components/HeaderStyleProvider";
+import Banner from "@/components/Banner/Banner";
+import NewsBar from "@/components/NewsBar/NewsBar";
+import Loading from "@/components/Loading/Loading";
+import ErrorPage from "@/components/ErrorPage/ErrorPage";
 
 export default function LandingPage() {
   const { fetchApi } = useApiEndpoint();
@@ -39,53 +42,26 @@ export default function LandingPage() {
   }, []);
 
   if (loading) {
-    return (
-      <section className="flex flex-1 items-center justify-center">
-        <p className="text-zinc-500">Loading...</p>
-      </section>
-    );
+    return <Loading />;
   }
 
   if (error) {
-    return (
-      <section className="flex flex-1 items-center justify-center">
-        <p className="text-red-500">{error}</p>
-      </section>
-    );
+    return <ErrorPage message={error} />;
   }
 
   if (!home) {
-    return (
-      <section className="flex flex-1 items-center justify-center">
-        <p className="text-zinc-500">No content available.</p>
-      </section>
-    );
+    return <ErrorPage message="No content available." />;
   }
 
-  const bannerDUrl = home.bannerImage?.bannerD?.url;
-  const bannerDAlt = home.bannerImage?.bannerD?.alternativeText ?? "";
-  const bannerMUrl = home.bannerImage?.bannerM?.url;
-  const bannerMAlt = home.bannerImage?.bannerM?.alternativeText ?? "";
-
   return (
-    <section className="flex flex-col flex-1 mx-auto w-full p-0 lg:px-6 lg:pb-12 gap-8 bg-green mt-[-76px] lg:mt-0">
-      {(bannerDUrl || bannerMUrl) && (
-        <div className="relative w-full h-[calc(100dvh-52px)] lg:h-[calc(100dvh-160px)] rounded-none lg:rounded-[30px] overflow-hidden">
-          <picture>
-            {bannerDUrl && (
-              <source
-                media="(min-width: 1024px)"
-                srcSet={`${API_URL}${bannerDUrl}`}
-              />
-            )}
-            <img
-              src={`${API_URL}${bannerMUrl ?? bannerDUrl}`}
-              alt={bannerMAlt || bannerDAlt}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </picture>
-        </div>
-      )}
-    </section>
+    <div className="pageWrapper mt-[-76px] lg:mt-0">
+      <Banner
+        srcD={home.bannerImage?.bannerD?.url}
+        srcM={home.bannerImage?.bannerM?.url}
+        alt={home.bannerImage?.altText}
+        className="!h-[calc(100dvh-52px)] lg:!h-[calc(100dvh-160px)] lg:pt-0"
+      />
+      <NewsBar />
+    </div>
   );
 }

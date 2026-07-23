@@ -21,6 +21,7 @@ export interface MediaBannerImage extends Struct.ComponentSchema {
     icon: 'picture';
   };
   attributes: {
+    altText: Schema.Attribute.String;
     bannerD: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     bannerM: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };

@@ -26,3 +26,15 @@ body {
   color: #171717;
   font-family: var(--font-sans);
 }
+
+@utility pageBorder {
+  @apply pb-0 px-5 lg:px-6;
+}
+
+@utility pageWrapper {
+  @apply flex flex-col mx-auto w-full pageBorder;
+}
+
+@utility borderless {
+  @apply -mx-5 w-[calc(100%+2.5rem)] lg:-mx-6 lg:w-[calc(100%+3rem)];
+}

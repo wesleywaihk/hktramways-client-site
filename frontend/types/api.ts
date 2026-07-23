@@ -6,6 +6,7 @@ export interface HomeBanner {
 
 export interface HomeBannerImage {
   id: number;
+  altText: string | null;
   bannerD: HomeBanner | null;
   bannerM: HomeBanner | null;
 }

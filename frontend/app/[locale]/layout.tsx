@@ -32,7 +32,7 @@ export default function LocaleLayout({
         <HeaderStyleProvider>
           <MetaUpdater />
           <Header />
-          <main className="flex flex-col min-h-[calc(100dvh-76px)]">
+          <main className="flex flex-col min-h-[calc(100dvh-76px)] lg:min-h-[calc(100dvh-100px)]">
             {children}
           </main>
           <Footer />

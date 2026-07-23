@@ -25,6 +25,9 @@
         "videos",
         "audios"
       ]
+    },
+    "altText": {
+      "type": "string"
     }
   },
   "config": {}
