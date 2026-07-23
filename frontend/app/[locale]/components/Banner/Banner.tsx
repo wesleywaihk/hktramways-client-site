@@ -18,6 +18,7 @@ export default function Banner({
     >
       <ResponsiveImg
         {...rest}
+        isHero={true}
         className={`w-full h-full object-cover rounded-none lg:rounded-[30px] overflow-hidden ${imgClassName}`}
       />
     </section>
