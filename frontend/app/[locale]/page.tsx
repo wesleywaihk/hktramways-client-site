@@ -64,9 +64,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
     <div className="pageWrapper mt-[-76px] lg:mt-0">
       <SetHeaderStyle style="transparent" />
       <Banner
-        srcD={home.bannerImage?.bannerD?.url}
-        srcM={home.bannerImage?.bannerM?.url}
-        alt={home.bannerImage?.altText}
+        bannerImage={home.bannerImage}
         className="!h-[calc(100dvh-52px)] lg:!h-[calc(100dvh-160px)] lg:pt-0"
       />
       <NewsBar />

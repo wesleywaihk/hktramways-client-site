@@ -1,7 +1,17 @@
+export interface HomeBannerFormat {
+  url: string;
+  width: number;
+  height: number;
+  size: number;
+}
+
 export interface HomeBanner {
   id: number;
   url: string;
+  width: number;
+  height: number;
   alternativeText: string | null;
+  formats: Record<string, HomeBannerFormat> | null;
 }
 
 export interface HomeBannerImage {
