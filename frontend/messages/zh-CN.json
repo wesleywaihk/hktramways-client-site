@@ -1,6 +1,7 @@
 {
   "landing": {},
   "common": {
-    "noContent": "没有可用内容。"
+    "noContent": "没有可用内容。",
+    "newsBarFallback": "香港电车 始于1904年"
   }
 }

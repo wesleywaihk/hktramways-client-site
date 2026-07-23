@@ -67,7 +67,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
         bannerImage={home.bannerImage}
         className="!h-[calc(100dvh-52px)] lg:!h-[calc(100dvh-160px)] lg:pt-0"
       />
-      <NewsBar items={home.newsBar ?? []} />
+      <NewsBar items={home.newsBar ?? []} locale={locale} />
     </div>
   );
 }

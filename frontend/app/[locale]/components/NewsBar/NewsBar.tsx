@@ -1,13 +1,15 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import type { HomeNewsBarItem } from "@/types/api";
 import NewsBarEntry from "./NewsBarEntry";
 
 export interface NewsBarProps {
   items: HomeNewsBarItem[];
+  locale: string;
 }
 
-export default function NewsBar({ items }: NewsBarProps) {
-  if (!items?.length) return null;
+export default async function NewsBar({ items, locale }: NewsBarProps) {
+  const t = await getTranslations({ locale, namespace: "common" });
 
   return (
     <section className="borderless h-[52px] lg:h-[60px] bg-white relative overflow-visible pl-[53px] lg:pl-[92px] flex">
@@ -21,9 +23,18 @@ export default function NewsBar({ items }: NewsBarProps) {
       />
       <div className="flex grow items-center overflow-hidden">
         <div className="flex items-center animate-marquee">
-          {[...items, ...items].map((item, index) => (
-            <NewsBarEntry key={index} {...item} />
-          ))}
+          {items.length
+            ? [...items, ...items].map((item, index) => (
+                <NewsBarEntry key={index} {...item} />
+              ))
+            : Array.from({ length: 10 }).map((_, index) => (
+                <span
+                  key={index}
+                  className="font-semibold text-sm lg:text-[15px] tracking-[0.02em] whitespace-nowrap text-green lg:text-black mr-10"
+                >
+                  {t("newsBarFallback")}
+                </span>
+              ))}
         </div>
       </div>
     </section>

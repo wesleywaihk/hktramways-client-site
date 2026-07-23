@@ -19,14 +19,14 @@ export default function NewsBarEntry({
       {url ? (
         <a
           href={url}
-          className="text-black font-semibold text-sm lg:text-[15px] tracking-[0.02em] whitespace-nowrap cursor-pointer hover:underline transition-colors duration-300 text-green lg:text-black"
+          className="font-semibold text-sm lg:text-[15px] tracking-[0.02em] whitespace-nowrap cursor-pointer hover:underline transition-colors duration-300 text-green lg:text-black"
           {...(isExternal ? { rel: "nofollow noreferrer" } : {})}
           target={isExternal ? "_blank" : "_self"}
         >
           {text}
         </a>
       ) : (
-        <span className="text-black font-semibold text-sm lg:text-[15px] tracking-[0.02em] whitespace-nowrap text-green lg:text-black">
+        <span className="font-semibold text-sm lg:text-[15px] tracking-[0.02em] whitespace-nowrap text-green lg:text-black">
           {text}
         </span>
       )}

@@ -1,6 +1,7 @@
 {
   "landing": {},
   "common": {
-    "noContent": "沒有可用內容。"
+    "noContent": "沒有可用內容。",
+    "newsBarFallback": "香港電車 始於1904年"
   }
 }
