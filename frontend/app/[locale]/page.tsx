@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 import { useApiEndpoint } from "@/hooks/useApiEndpoint/";
 import type { Home } from "@/types/api";
 import { setPageTitle } from "@/store/pageTitleSlice";
-import { useHeaderStyle } from "@/components/HeaderStyleProvider";
+import { useHeaderStyleOnMount } from "@/hooks/useHeaderStyleOnMount";
 import Banner from "@/components/Banner/Banner";
 import NewsBar from "@/components/NewsBar/NewsBar";
 import Loading from "@/components/Loading/Loading";
@@ -14,10 +15,12 @@ import ErrorPage from "@/components/ErrorPage/ErrorPage";
 export default function LandingPage() {
   const { fetchApi } = useApiEndpoint();
   const dispatch = useDispatch();
-  const { setHeaderStyle } = useHeaderStyle();
+  const t = useTranslations("common");
   const [home, setHome] = useState<Home | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+
+  useHeaderStyleOnMount("transparent");
 
   useEffect(() => {
     fetchApi
@@ -26,7 +29,6 @@ export default function LandingPage() {
         const homeData = res.data[0] ?? null;
         setHome(homeData);
         dispatch(setPageTitle(homeData?.Title ?? ""));
-        setHeaderStyle(homeData?.headerStyle?.headerStyle ?? "default");
       })
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false));
@@ -36,7 +38,6 @@ export default function LandingPage() {
   useEffect(() => {
     return () => {
       dispatch(setPageTitle(""));
-      setHeaderStyle("default");
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -45,12 +46,8 @@ export default function LandingPage() {
     return <Loading />;
   }
 
-  if (error) {
-    return <ErrorPage message={error} />;
-  }
-
-  if (!home) {
-    return <ErrorPage message="No content available." />;
+  if (error || !home) {
+    return <ErrorPage message={t("noContent")} />;
   }
 
   return (

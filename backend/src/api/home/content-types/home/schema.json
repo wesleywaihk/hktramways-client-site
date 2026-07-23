@@ -23,16 +23,6 @@
         }
       }
     },
-    "headerStyle": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "layout.header-style",
-      "repeatable": false
-    },
     "bannerImage": {
       "type": "component",
       "pluginOptions": {

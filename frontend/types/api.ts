@@ -11,16 +11,10 @@ export interface HomeBannerImage {
   bannerM: HomeBanner | null;
 }
 
-export interface HomeHeaderStyle {
-  id: number;
-  headerStyle: "default" | "transparent" | "white";
-}
-
 export interface Home {
   id: number;
   documentId: string;
   Title: string;
-  headerStyle: HomeHeaderStyle | null;
   bannerImage: HomeBannerImage | null;
 }
 

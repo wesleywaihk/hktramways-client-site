@@ -6,12 +6,7 @@ export interface LayoutHeaderStyle extends Struct.ComponentSchema {
     displayName: 'headerStyle';
     icon: 'code';
   };
-  attributes: {
-    headerStyle: Schema.Attribute.Enumeration<
-      ['default', 'transparent', 'white']
-    > &
-      Schema.Attribute.DefaultTo<'default'>;
-  };
+  attributes: {};
 }
 
 export interface MediaBannerImage extends Struct.ComponentSchema {

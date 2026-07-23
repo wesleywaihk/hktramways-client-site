@@ -18,6 +18,8 @@ export default function ResponsiveImg({
   if (!srcD && !srcM) {
     return (
       <div
+        role="img"
+        aria-label={alt ?? ""}
         className={`flex items-center justify-center bg-gray-100 ${className}`}
       >
         <ImageNotSupportedIcon

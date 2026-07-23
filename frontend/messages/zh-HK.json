@@ -1,3 +1,6 @@
 {
-  "landing": {}
+  "landing": {},
+  "common": {
+    "noContent": "沒有可用內容。"
+  }
 }
