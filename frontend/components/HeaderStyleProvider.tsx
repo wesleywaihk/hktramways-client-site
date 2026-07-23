@@ -11,12 +11,12 @@ interface HeaderStyleContextValue {
 
 const HeaderStyleContext = createContext<HeaderStyleContextValue | null>(null);
 
-export function HeaderStyleProvider({ children }: { children: React.ReactNode }) {
+export function HeaderStyleProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [headerStyle, setHeaderStyle] = useState<HeaderStyle>("default");
-
-  useEffect(() => {
-    console.log("[HeaderStyleProvider] headerStyle changed:", headerStyle);
-  }, [headerStyle]);
 
   return (
     <HeaderStyleContext.Provider value={{ headerStyle, setHeaderStyle }}>

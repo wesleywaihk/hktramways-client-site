@@ -33,23 +33,29 @@ export default function ResponsiveImg({
   }
 
   return (
-    <picture
+    <div
       className={`relative flex items-center justify-center overflow-hidden ${className}`}
     >
-      <div className="absolute inset-0 bg-earth-light animate-pulse z-0">
+      <div
+        className="absolute inset-0 bg-earth-light animate-pulse z-0"
+        aria-hidden="true"
+      >
         <ImageIcon
           className="absolute inset-0 m-auto text-green-30"
           sx={{ fontSize: 44 }}
         />
       </div>
-
-      {srcD && <source media="(min-width: 1024px)" srcSet={`${url}${srcD}`} />}
-      <img
-        src={`${url}${srcM ?? srcD}`}
-        alt={alt ?? ""}
-        loading="lazy"
-        className="absolute inset-0 z-10 h-full w-full object-cover"
-      />
-    </picture>
+      <picture className="absolute inset-0 z-10 h-[calc(100%+2px)] w-[calc(100%+2px)] -m-[1px]">
+        {srcD && (
+          <source media="(min-width: 1024px)" srcSet={`${url}${srcD}`} />
+        )}
+        <img
+          src={`${url}${srcM ?? srcD}`}
+          alt={alt ?? ""}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </picture>
+    </div>
   );
 }
