@@ -21,11 +21,21 @@ export interface HomeBannerImage {
   bannerM: HomeBanner | null;
 }
 
+export interface HomeNewsBarItem {
+  id: number;
+  dateTime: string;
+  type: string;
+  text: string;
+  url: string | null;
+  isExternal: boolean | null;
+}
+
 export interface Home {
   id: number;
   documentId: string;
   Title: string;
   bannerImage: HomeBannerImage | null;
+  newsBar: HomeNewsBarItem[];
 }
 
 export interface HomeResponse {

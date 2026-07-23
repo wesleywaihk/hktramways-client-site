@@ -503,6 +503,12 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::home.home'>;
+    newsBar: Schema.Attribute.Component<'content.news-items', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     Title: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{

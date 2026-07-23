@@ -1,12 +1,23 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface LayoutHeaderStyle extends Struct.ComponentSchema {
-  collectionName: 'components_layout_header_styles';
+export interface ContentNewsItems extends Struct.ComponentSchema {
+  collectionName: 'components_content_news_items';
   info: {
-    displayName: 'headerStyle';
-    icon: 'code';
+    displayName: 'newsItems';
+    icon: 'television';
   };
-  attributes: {};
+  attributes: {
+    dateTime: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    isExternal: Schema.Attribute.Boolean;
+    text: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    type: Schema.Attribute.Enumeration<['event', 'discount', 'news']> &
+      Schema.Attribute.Required;
+    url: Schema.Attribute.String;
+  };
 }
 
 export interface MediaBannerImage extends Struct.ComponentSchema {
@@ -48,7 +59,7 @@ export interface SeoSeo extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'layout.header-style': LayoutHeaderStyle;
+      'content.news-items': ContentNewsItems;
       'media.banner-image': MediaBannerImage;
       'seo.seo': SeoSeo;
     }

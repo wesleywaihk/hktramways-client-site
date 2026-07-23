@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_content_news_items",
+  "info": {
+    "displayName": "newsItems",
+    "icon": "television"
+  },
+  "options": {},
+  "attributes": {
+    "dateTime": {
+      "type": "datetime",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "event",
+        "discount",
+        "news"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 100,
+      "required": true
+    },
+    "url": {
+      "type": "string"
+    },
+    "isExternal": {
+      "type": "boolean"
+    }
+  },
+  "config": {}
+}

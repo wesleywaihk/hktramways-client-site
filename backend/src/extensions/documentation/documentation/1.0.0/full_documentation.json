@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-07-23T06:53:08.078Z"
+    "x-generation-date": "2026-07-23T14:43:05.356Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -2972,6 +2972,12 @@
               "bannerImage": {
                 "$ref": "#/components/schemas/MediaBannerImageComponent"
               },
+              "newsBar": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContentNewsItemsComponent"
+                }
+              },
               "locale": {
                 "type": "string"
               },
@@ -3050,6 +3056,12 @@
           "bannerImage": {
             "$ref": "#/components/schemas/MediaBannerImageComponent"
           },
+          "newsBar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentNewsItemsComponent"
+            }
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -3124,6 +3136,12 @@
                 },
                 "bannerImage": {
                   "$ref": "#/components/schemas/MediaBannerImageComponent"
+                },
+                "newsBar": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentNewsItemsComponent"
+                  }
                 },
                 "createdAt": {
                   "type": "string",
@@ -3572,6 +3590,42 @@
           },
           "altText": {
             "type": "string"
+          }
+        }
+      },
+      "ContentNewsItemsComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "event",
+              "discount",
+              "news"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "isExternal": {
+            "type": "boolean"
           }
         }
       },

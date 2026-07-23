@@ -8,4 +8,5 @@ export const colors = {
   earthLight: "#edebda",
   redDark: "#5a1716",
   accentBrown: "#703900",
+  black: "#222",
 } as const;
