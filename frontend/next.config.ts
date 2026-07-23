@@ -8,7 +8,6 @@ dotenv.config({ path: path.join(import.meta.dirname, "../shared-resources/.env.l
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  output: "export",
   trailingSlash: true,
   env: {
     PREVIEW_SECRET: process.env.PREVIEW_SECRET ?? "",

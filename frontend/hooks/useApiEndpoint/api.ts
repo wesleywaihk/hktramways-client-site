@@ -1,9 +1,12 @@
 import { API_URL } from "@/consts";
 import { buildPopulate } from "@/lib/buildPopulate";
 
-export async function fetchGlobal(locale: string) {
+export async function fetchGlobal(
+  locale: string,
+  options?: { cache?: RequestCache },
+) {
   const res = await fetch(`${API_URL}/api/global?populate=*&locale=${locale}`, {
-    cache: "no-store",
+    cache: options?.cache ?? "no-store",
   });
   if (!res.ok) throw new Error(`Failed to fetch global: ${res.status}`);
 

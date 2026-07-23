@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useHeaderStyle, type HeaderStyle } from "@/components/HeaderStyleProvider";
 
-export function useHeaderStyleOnMount(style: HeaderStyle) {
+export default function SetHeaderStyle({ style }: { style: HeaderStyle }) {
   const { setHeaderStyle } = useHeaderStyle();
 
   useEffect(() => {
@@ -11,4 +11,6 @@ export function useHeaderStyleOnMount(style: HeaderStyle) {
     return () => setHeaderStyle("default");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [style]);
+
+  return null;
 }

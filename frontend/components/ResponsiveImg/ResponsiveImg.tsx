@@ -1,5 +1,7 @@
+import ImageIcon from "@mui/icons-material/Image";
 import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 import { API_URL } from "@/consts";
+
 export interface ResponsiveImgProps {
   url?: string | null;
   srcD?: string | null;
@@ -20,23 +22,33 @@ export default function ResponsiveImg({
       <div
         role="img"
         aria-label={alt ?? ""}
-        className={`flex items-center justify-center bg-gray-100 ${className}`}
+        className={`flex items-center justify-center bg-earth-light ${className}`}
       >
         <ImageNotSupportedIcon
-          className="text-gray-300"
-          sx={{ fontSize: 48 }}
+          className="text-green-30"
+          sx={{ fontSize: 44 }}
         />
       </div>
     );
   }
 
   return (
-    <picture>
+    <picture
+      className={`relative flex items-center justify-center overflow-hidden ${className}`}
+    >
+      <div className="absolute inset-0 bg-earth-light animate-pulse z-0">
+        <ImageIcon
+          className="absolute inset-0 m-auto text-green-30"
+          sx={{ fontSize: 44 }}
+        />
+      </div>
+
       {srcD && <source media="(min-width: 1024px)" srcSet={`${url}${srcD}`} />}
       <img
         src={`${url}${srcM ?? srcD}`}
         alt={alt ?? ""}
-        className={className}
+        loading="lazy"
+        className="absolute inset-0 z-10 h-full w-full object-cover"
       />
     </picture>
   );

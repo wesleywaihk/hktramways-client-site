@@ -1,49 +1,49 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
-import { useDispatch } from "react-redux";
-import { useApiEndpoint } from "@/hooks/useApiEndpoint/";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { fetchGlobal, fetchHome } from "@/hooks/useApiEndpoint/api";
 import type { Home } from "@/types/api";
-import { setPageTitle } from "@/store/pageTitleSlice";
-import { useHeaderStyleOnMount } from "@/hooks/useHeaderStyleOnMount";
-import Banner from "@/components/Banner/Banner";
-import NewsBar from "@/components/NewsBar/NewsBar";
-import Loading from "@/components/Loading/Loading";
+import Banner from "./components/Banner/Banner";
+import NewsBar from "./components/NewsBar/NewsBar";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
+import SetHeaderStyle from "@/components/SetHeaderStyle";
 
-export default function LandingPage() {
-  const { fetchApi } = useApiEndpoint();
-  const dispatch = useDispatch();
-  const t = useTranslations("common");
-  const [home, setHome] = useState<Home | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+interface LandingPageProps {
+  params: Promise<{ locale: string }>;
+}
 
-  useHeaderStyleOnMount("transparent");
+export async function generateMetadata({
+  params,
+}: LandingPageProps): Promise<Metadata> {
+  const { locale } = await params;
 
-  useEffect(() => {
-    fetchApi
-      .home()
-      .then((res) => {
-        const homeData = res.data[0] ?? null;
-        setHome(homeData);
-        dispatch(setPageTitle(homeData?.Title ?? ""));
-      })
-      .catch((e: Error) => setError(e.message))
-      .finally(() => setLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchApi.home]);
+  try {
+    const [homeRes, globalRes] = await Promise.all([
+      fetchHome("", false, locale),
+      fetchGlobal(locale, { cache: "force-cache" }),
+    ]);
+    const home = homeRes.data[0] ?? null;
+    const metaTitle = globalRes.data?.seo?.[0]?.metaTitle;
 
-  useEffect(() => {
-    return () => {
-      dispatch(setPageTitle(""));
+    return {
+      title: home?.Title && metaTitle ? `${home.Title} | ${metaTitle}` : metaTitle,
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  } catch {
+    return {};
+  }
+}
 
-  if (loading) {
-    return <Loading />;
+export default async function LandingPage({ params }: LandingPageProps) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "common" });
+
+  let home: Home | null = null;
+  let error: string | null = null;
+
+  try {
+    const res = await fetchHome("", false, locale);
+    home = res.data[0] ?? null;
+  } catch (e) {
+    error = (e as Error).message;
   }
 
   if (error || !home) {
@@ -52,6 +52,7 @@ export default function LandingPage() {
 
   return (
     <div className="pageWrapper mt-[-76px] lg:mt-0">
+      <SetHeaderStyle style="transparent" />
       <Banner
         srcD={home.bannerImage?.bannerD?.url}
         srcM={home.bannerImage?.bannerM?.url}
