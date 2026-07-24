@@ -20,7 +20,7 @@ export async function fetchHome(
   previewMode: boolean,
   locale: string,
 ) {
-  const populate = buildPopulate(["bannerImage", "newsBar"]);
+  const populate = buildPopulate(["bannerImage", "newsBar", "arcCarousel"]);
   const url = previewMode
     ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`
     : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;

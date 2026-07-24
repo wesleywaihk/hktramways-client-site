@@ -24,25 +24,10 @@
       "maxLength": 100,
       "required": true
     },
-    "url": {
-      "type": "string"
-    },
-    "openNewWindow": {
-      "type": "boolean",
-      "default": false
-    },
-    "noRefer": {
-      "type": "boolean",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "openNewWindow"
-            },
-            true
-          ]
-        }
-      }
+    "hyperlink": {
+      "type": "component",
+      "component": "content.hyperlink",
+      "repeatable": false
     }
   },
   "config": {}

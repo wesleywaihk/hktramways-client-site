@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_content_arc_carousels",
+  "info": {
+    "displayName": "arcCarousel",
+    "icon": "landscape"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "item": {
+      "type": "component",
+      "component": "content.carousel-item",
+      "repeatable": true
+    },
+    "actionButton": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

@@ -1,5 +1,62 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ContentActionButton extends Struct.ComponentSchema {
+  collectionName: 'components_content_action_buttons';
+  info: {
+    displayName: 'actionButton';
+    icon: 'code';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    link: Schema.Attribute.Component<'content.hyperlink', true>;
+  };
+}
+
+export interface ContentArcCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_content_arc_carousels';
+  info: {
+    displayName: 'arcCarousel';
+    icon: 'landscape';
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    item: Schema.Attribute.Component<'content.carousel-item', true>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
+  };
+}
+
+export interface ContentCarouselItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_carousel_items';
+  info: {
+    displayName: 'carouselItem';
+    icon: 'code';
+  };
+  attributes: {
+    desc: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }>;
+    hyperlink: Schema.Attribute.Component<'content.hyperlink', false>;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
+export interface ContentHyperlink extends Struct.ComponentSchema {
+  collectionName: 'components_content_hyperlinks';
+  info: {
+    displayName: 'hyperlink';
+    icon: 'link';
+  };
+  attributes: {
+    noRefer: Schema.Attribute.Boolean;
+    openNewWindow: Schema.Attribute.Boolean;
+    url: Schema.Attribute.String;
+  };
+}
+
 export interface ContentNewsItems extends Struct.ComponentSchema {
   collectionName: 'components_content_news_items';
   info: {
@@ -8,8 +65,7 @@ export interface ContentNewsItems extends Struct.ComponentSchema {
   };
   attributes: {
     dateTime: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    noRefer: Schema.Attribute.Boolean;
-    openNewWindow: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    hyperlink: Schema.Attribute.Component<'content.hyperlink', false>;
     text: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -17,7 +73,6 @@ export interface ContentNewsItems extends Struct.ComponentSchema {
       }>;
     type: Schema.Attribute.Enumeration<['event', 'discount', 'news']> &
       Schema.Attribute.Required;
-    url: Schema.Attribute.String;
   };
 }
 
@@ -60,6 +115,10 @@ export interface SeoSeo extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'content.action-button': ContentActionButton;
+      'content.arc-carousel': ContentArcCarousel;
+      'content.carousel-item': ContentCarouselItem;
+      'content.hyperlink': ContentHyperlink;
       'content.news-items': ContentNewsItems;
       'media.banner-image': MediaBannerImage;
       'seo.seo': SeoSeo;

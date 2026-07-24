@@ -5,10 +5,12 @@ export default function NewsBarEntry({
   dateTime,
   type,
   text,
-  url,
-  openNewWindow,
-  noRefer,
+  hyperlink,
 }: HomeNewsBarItem) {
+  const url = hyperlink?.url ?? null;
+  const openNewWindow = hyperlink?.openNewWindow ?? false;
+  const noRefer = hyperlink?.noRefer ?? false;
+
   return (
     <div className="flex items-center gap-4 mr-10">
       <span className="text-green uppercase leading-none tracking-[0.02em] whitespace-nowrap font-normal text-[14px] lg:font-semibold lg:text-[15px]">

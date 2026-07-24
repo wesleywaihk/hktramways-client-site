@@ -21,14 +21,19 @@ export interface HomeBannerImage {
   bannerM: HomeBanner | null;
 }
 
+export interface HomeNewsBarItemHyperlink {
+  id: number;
+  url: string | null;
+  openNewWindow: boolean | null;
+  noRefer: boolean | null;
+}
+
 export interface HomeNewsBarItem {
   id: number;
   dateTime: string;
   type: string;
   text: string;
-  url: string | null;
-  openNewWindow: boolean | null;
-  noRefer: boolean | null;
+  hyperlink: HomeNewsBarItemHyperlink | null;
 }
 
 export interface Home {

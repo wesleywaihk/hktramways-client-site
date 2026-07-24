@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-07-24T08:55:49.079Z"
+    "x-generation-date": "2026-07-24T15:02:41.702Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -2978,6 +2978,9 @@
                   "$ref": "#/components/schemas/ContentNewsItemsComponent"
                 }
               },
+              "arcCarousel": {
+                "$ref": "#/components/schemas/ContentArcCarouselComponent"
+              },
               "locale": {
                 "type": "string"
               },
@@ -3062,6 +3065,9 @@
               "$ref": "#/components/schemas/ContentNewsItemsComponent"
             }
           },
+          "arcCarousel": {
+            "$ref": "#/components/schemas/ContentArcCarouselComponent"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -3142,6 +3148,9 @@
                   "items": {
                     "$ref": "#/components/schemas/ContentNewsItemsComponent"
                   }
+                },
+                "arcCarousel": {
+                  "$ref": "#/components/schemas/ContentArcCarouselComponent"
                 },
                 "createdAt": {
                   "type": "string",
@@ -3593,6 +3602,30 @@
           }
         }
       },
+      "ContentHyperlinkComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "url": {
+            "type": "string"
+          },
+          "openNewWindow": {
+            "type": "boolean"
+          },
+          "noRefer": {
+            "type": "boolean"
+          }
+        }
+      },
       "ContentNewsItemsComponent": {
         "type": "object",
         "properties": {
@@ -3621,14 +3654,252 @@
           "text": {
             "type": "string"
           },
-          "url": {
+          "hyperlink": {
+            "$ref": "#/components/schemas/ContentHyperlinkComponent"
+          }
+        }
+      },
+      "ContentCarouselItemComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "image": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "documentId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "focalPoint": {},
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {},
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number",
+                "format": "float"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {},
+              "related": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "folder": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "folderPath": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "publishedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "updatedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "desc": {
             "type": "string"
           },
-          "openNewWindow": {
-            "type": "boolean"
+          "hyperlink": {
+            "$ref": "#/components/schemas/ContentHyperlinkComponent"
+          }
+        }
+      },
+      "ContentActionButtonComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
           },
-          "noRefer": {
-            "type": "boolean"
+          "label": {
+            "type": "string"
+          },
+          "link": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentHyperlinkComponent"
+            }
+          }
+        }
+      },
+      "ContentArcCarouselComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "item": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentCarouselItemComponent"
+            }
+          },
+          "actionButton": {
+            "$ref": "#/components/schemas/ContentActionButtonComponent"
           }
         }
       },

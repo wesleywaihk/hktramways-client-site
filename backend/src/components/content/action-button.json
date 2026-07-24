@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_content_action_buttons",
+  "info": {
+    "displayName": "actionButton",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "link": {
+      "type": "component",
+      "component": "content.hyperlink",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
