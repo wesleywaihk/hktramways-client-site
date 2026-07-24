@@ -55,7 +55,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
         className="!h-[calc(100dvh-52px)] lg:!h-[calc(100dvh-160px)] lg:pt-0"
       />
       <NewsBar items={home.newsBar ?? []} locale={locale} />
-      <ArcCarousel />
+      <ArcCarousel data={home.arcCarousel} />
       <div className="h-[300px]" />
     </div>
   );

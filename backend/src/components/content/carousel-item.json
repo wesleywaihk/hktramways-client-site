@@ -18,7 +18,7 @@
     },
     "desc": {
       "type": "text",
-      "maxLength": 30
+      "maxLength": 80
     },
     "hyperlink": {
       "type": "component",

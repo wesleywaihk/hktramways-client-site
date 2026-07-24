@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
+import type { ArcCarouselData, ArcCarouselImage } from "@/types/api";
 
 /**
  * ArcCarousel — fanned-poster carousel, cards arranged like posters fanned
@@ -15,10 +17,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 export interface ArcCarouselItem {
   id: string;
-  imageUrl?: string;
-  bgClassName: string;
+  image?: ArcCarouselImage;
   caption: string;
-  linkLabel?: string;
   linkUrl?: string;
 }
 
@@ -26,38 +26,49 @@ export interface ArcCarouselItem {
 const DUMMY_ITEMS: ArcCarouselItem[] = [
   {
     id: "1",
-    bgClassName: "bg-[#3f7a54]",
     caption: "「Visa × 叮叮」優惠延長\nTap to Pay & enjoy $1 off each ride",
   },
   {
     id: "2",
-    bgClassName: "bg-[#f2e2c8]",
     caption:
       "Paul Lafayet x Hong Kong Tramways Mid-Autumn Festival Exclusive Collaboration",
-    linkLabel: "ORDER NOW",
     linkUrl: "#",
   },
   {
     id: "3",
-    bgClassName: "bg-[#1f3d2b]",
     caption: "新票價現已生效\nNew Fares Now Effective",
   },
   {
     id: "4",
-    bgClassName: "bg-[#e0b93a]",
     caption: "KEUNG TO x Hong Kong Tramways",
   },
   {
     id: "5",
-    bgClassName: "bg-[#2c5f8a]",
     caption: "Ride the Tram, See the City",
   },
 ];
 
+function mapCarouselData(data: ArcCarouselData | null | undefined) {
+  const items = data?.item ?? [];
+  if (!items.length) return null;
+
+  return {
+    heading: data?.title ?? "HAPPENINGS",
+    buttonLabel: data?.actionButton?.label ?? undefined,
+    buttonUrl: data?.actionButton?.link?.[0]?.url ?? undefined,
+    items: items.map((item) => ({
+      id: String(item.id),
+      image: item.image ?? undefined,
+      caption: item.desc ?? "",
+      linkUrl: item.hyperlink?.url ?? undefined,
+    })),
+  };
+}
+
 const DESKTOP_CARD_WIDTH = "33.6dvh";
 const DESKTOP_CARD_HEIGHT = "42dvh";
 const DESKTOP_TILT = 7;
-const DESKTOP_DROPS = [0, 20, 81];
+const DESKTOP_DROPS = [0, 37, 125];
 const DESKTOP_VISIBLE_RANGE = 2;
 /**
  * Slot spacing for desktop: the edge cards (offset = ±2, the 1st/last of 5)
@@ -104,18 +115,15 @@ function loopedOffset(index: number, active: number, total: number) {
 }
 
 export interface ArcCarouselProps {
-  items?: ArcCarouselItem[];
-  heading?: string;
-  buttonLabel?: string;
-  buttonUrl?: string;
+  data?: ArcCarouselData | null;
 }
 
-export default function ArcCarousel({
-  items = DUMMY_ITEMS,
-  heading = "HAPPENINGS",
-  buttonLabel = "NEWS & EVENTS",
-  buttonUrl = "#",
-}: ArcCarouselProps) {
+export default function ArcCarousel({ data }: ArcCarouselProps) {
+  const mapped = mapCarouselData(data);
+  const items = mapped?.items ?? DUMMY_ITEMS;
+  const heading = mapped?.heading ?? "HAPPENINGS";
+  const buttonLabel = mapped?.buttonLabel ?? "NEWS & EVENTS";
+  const buttonUrl = mapped?.buttonUrl ?? "#";
   const total = items.length;
   const maxOff = Math.floor(total / 2);
   const [active, setActive] = useState(0);
@@ -246,17 +254,42 @@ export default function ArcCarousel({
               }}
               onClick={() => off !== 0 && (off > 0 ? next() : prev())}
             >
-              <div
-                className={`w-full h-full relative flex items-end p-4 ${item.bgClassName}`}
-              >
-                {item.imageUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={item.imageUrl}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                ) : null}
+              <div className="w-full h-full relative flex items-end bg-earth-light">
+                {item.linkUrl ? (
+                  <a
+                    href={item.linkUrl}
+                    className="absolute inset-0"
+                    draggable={false}
+                    onDragStart={(e) => e.preventDefault()}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ResponsiveImg
+                      bannerImage={{
+                        id: item.image?.id ?? 0,
+                        altText: item.image?.alternativeText ?? null,
+                        bannerD: item.image ?? null,
+                        bannerM: null,
+                      }}
+                      className="absolute inset-0 w-full h-full pointer-events-none select-none"
+                    />
+                  </a>
+                ) : (
+                  <div
+                    className="absolute inset-0"
+                    draggable={false}
+                    onDragStart={(e) => e.preventDefault()}
+                  >
+                    <ResponsiveImg
+                      bannerImage={{
+                        id: item.image?.id ?? 0,
+                        altText: item.image?.alternativeText ?? null,
+                        bannerD: item.image ?? null,
+                        bannerM: null,
+                      }}
+                      className="absolute inset-0 w-full h-full pointer-events-none select-none"
+                    />
+                  </div>
+                )}
               </div>
             </figure>
           );
@@ -264,23 +297,24 @@ export default function ArcCarousel({
       </div>
 
       <div className="relative z-30 shrink-0 mt-6 md:mt-8 px-8 text-center">
-        <p className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto">
-          {active_.caption}
-        </p>
-        {active_.linkLabel ? (
+        {active_.linkUrl ? (
           <a
-            href={active_.linkUrl ?? "#"}
-            className="inline-block mt-2 text-white text-sm underline underline-offset-4"
+            href={active_.linkUrl}
+            className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto inline-block hover:underline underline-offset-4"
           >
-            {active_.linkLabel}
+            {active_.caption}
           </a>
-        ) : null}
+        ) : (
+          <p className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto">
+            {active_.caption}
+          </p>
+        )}
       </div>
 
       <div className="shrink-0 mt-6 md:mt-8 flex justify-center">
         <a
           href={buttonUrl}
-          className="inline-flex items-center gap-2 border border-white text-white rounded-[16px] px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-white hover:text-green transition-colors"
+          className="inline-flex items-center gap-2 border border-white text-white rounded-[16px] px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-white hover:text-green transition-colors uppercase"
         >
           {buttonLabel}
           <ArrowForwardIcon fontSize="small" />

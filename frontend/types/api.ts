@@ -21,7 +21,7 @@ export interface HomeBannerImage {
   bannerM: HomeBanner | null;
 }
 
-export interface HomeNewsBarItemHyperlink {
+export interface Hyperlink {
   id: number;
   url: string | null;
   openNewWindow: boolean | null;
@@ -33,7 +33,43 @@ export interface HomeNewsBarItem {
   dateTime: string;
   type: string;
   text: string;
-  hyperlink: HomeNewsBarItemHyperlink | null;
+  hyperlink: Hyperlink | null;
+}
+
+export interface ArcCarouselImageFormat {
+  url: string;
+  width: number;
+  height: number;
+  size: number;
+}
+
+export interface ArcCarouselImage {
+  id: number;
+  url: string;
+  width: number;
+  height: number;
+  alternativeText: string | null;
+  formats: Record<string, ArcCarouselImageFormat> | null;
+}
+
+export interface ArcCarouselItem {
+  id: number;
+  image: ArcCarouselImage | null;
+  desc: string | null;
+  hyperlink: Hyperlink | null;
+}
+
+export interface ArcCarouselActionButton {
+  id: number;
+  label: string | null;
+  link: Hyperlink[];
+}
+
+export interface ArcCarouselData {
+  id: number;
+  title: string | null;
+  item: ArcCarouselItem[];
+  actionButton: ArcCarouselActionButton | null;
 }
 
 export interface Home {
@@ -42,6 +78,7 @@ export interface Home {
   Title: string;
   bannerImage: HomeBannerImage | null;
   newsBar: HomeNewsBarItem[];
+  arcCarousel: ArcCarouselData | null;
 }
 
 export interface HomeResponse {

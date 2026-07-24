@@ -37,7 +37,7 @@ export interface ContentCarouselItem extends Struct.ComponentSchema {
   attributes: {
     desc: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
-        maxLength: 30;
+        maxLength: 80;
       }>;
     hyperlink: Schema.Attribute.Component<'content.hyperlink', false>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
