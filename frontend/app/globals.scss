@@ -39,19 +39,3 @@ body {
   @apply -mx-5 w-[calc(100%+2.5rem)] lg:-mx-6 lg:w-[calc(100%+3rem)];
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@utility animate-marquee {
-  animation: marquee 14s linear infinite;
-
-  &:hover {
-    animation-play-state: paused;
-  }
-}

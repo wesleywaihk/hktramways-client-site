@@ -1,15 +1,49 @@
+"use client";
+
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
+import { useEffect, useRef } from "react";
 import type { HomeNewsBarItem } from "@/types/api";
 import NewsBarEntry from "./NewsBarEntry";
 
 export interface NewsBarProps {
   items: HomeNewsBarItem[];
   locale: string;
+  /** Scroll speed in pixels per second. */
+  speed?: number;
 }
 
-export default async function NewsBar({ items, locale }: NewsBarProps) {
-  const t = await getTranslations({ locale, namespace: "common" });
+export default function NewsBar({ items, speed = 120 }: NewsBarProps) {
+  const t = useTranslations("common");
+  const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
+  const pausedRef = useRef(false);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const halfWidth = track.scrollWidth / 2;
+    let frameId: number;
+    let lastTime: number | null = null;
+
+    const step = (time: number) => {
+      if (lastTime === null) lastTime = time;
+      const delta = time - lastTime;
+      lastTime = time;
+
+      if (!pausedRef.current && halfWidth > 0) {
+        offsetRef.current =
+          (offsetRef.current + (speed * delta) / 1000) % halfWidth;
+        track.style.transform = `translateX(-${offsetRef.current}px)`;
+      }
+
+      frameId = requestAnimationFrame(step);
+    };
+
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, [speed, items]);
 
   return (
     <section className="borderless h-[52px] lg:h-[60px] bg-white relative overflow-visible pl-[53px] lg:pl-[92px] flex">
@@ -21,8 +55,16 @@ export default async function NewsBar({ items, locale }: NewsBarProps) {
         className="absolute left-[10px] lg:left-[20px] bottom-0 z-10 w-[85px] h-[67px] lg:w-[108px] lg:h-[85px]"
         aria-hidden="true"
       />
-      <div className="flex grow items-center overflow-hidden">
-        <div className="flex items-center animate-marquee">
+      <div
+        className="flex grow items-center overflow-hidden"
+        onMouseEnter={() => {
+          pausedRef.current = true;
+        }}
+        onMouseLeave={() => {
+          pausedRef.current = false;
+        }}
+      >
+        <div ref={trackRef} className="flex items-center will-change-transform">
           {items.length
             ? [...items, ...items].map((item, index) => (
                 <NewsBarEntry key={index} {...item} />

@@ -27,7 +27,8 @@ export interface HomeNewsBarItem {
   type: string;
   text: string;
   url: string | null;
-  isExternal: boolean | null;
+  openNewWindow: boolean | null;
+  noRefer: boolean | null;
 }
 
 export interface Home {

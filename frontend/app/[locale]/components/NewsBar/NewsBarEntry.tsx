@@ -6,7 +6,8 @@ export default function NewsBarEntry({
   type,
   text,
   url,
-  isExternal,
+  openNewWindow,
+  noRefer,
 }: HomeNewsBarItem) {
   return (
     <div className="flex items-center gap-4 mr-10">
@@ -20,8 +21,8 @@ export default function NewsBarEntry({
         <a
           href={url}
           className="font-semibold text-sm lg:text-[15px] tracking-[0.02em] whitespace-nowrap cursor-pointer hover:underline transition-colors duration-300 text-green lg:text-black"
-          {...(isExternal ? { rel: "nofollow noreferrer" } : {})}
-          target={isExternal ? "_blank" : "_self"}
+          target={openNewWindow ? "_blank" : "_self"}
+          {...(openNewWindow && noRefer ? { rel: "nofollow noreferrer" } : {})}
         >
           {text}
         </a>

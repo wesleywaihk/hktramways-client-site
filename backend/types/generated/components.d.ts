@@ -8,7 +8,8 @@ export interface ContentNewsItems extends Struct.ComponentSchema {
   };
   attributes: {
     dateTime: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    isExternal: Schema.Attribute.Boolean;
+    noRefer: Schema.Attribute.Boolean;
+    openNewWindow: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     text: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{

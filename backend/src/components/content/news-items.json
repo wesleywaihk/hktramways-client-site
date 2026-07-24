@@ -27,8 +27,22 @@
     "url": {
       "type": "string"
     },
-    "isExternal": {
-      "type": "boolean"
+    "openNewWindow": {
+      "type": "boolean",
+      "default": false
+    },
+    "noRefer": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "openNewWindow"
+            },
+            true
+          ]
+        }
+      }
     }
   },
   "config": {}
