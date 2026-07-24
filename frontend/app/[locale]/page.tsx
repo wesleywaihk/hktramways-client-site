@@ -5,6 +5,7 @@ import { fetchGlobal, fetchHome } from "@/hooks/useApiEndpoint/api";
 import type { Home } from "@/types/api";
 import Banner from "./components/Banner/Banner";
 import NewsBar from "./components/NewsBar/NewsBar";
+import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import SetHeaderStyle from "@/components/SetHeaderStyle";
 
@@ -34,7 +35,8 @@ export async function generateMetadata({
     const metaTitle = globalRes.data?.seo?.[0]?.metaTitle;
 
     return {
-      title: home?.Title && metaTitle ? `${home.Title} | ${metaTitle}` : metaTitle,
+      title:
+        home?.Title && metaTitle ? `${home.Title} | ${metaTitle}` : metaTitle,
     };
   } catch {
     return {};
@@ -68,6 +70,8 @@ export default async function LandingPage({ params }: LandingPageProps) {
         className="!h-[calc(100dvh-52px)] lg:!h-[calc(100dvh-160px)] lg:pt-0"
       />
       <NewsBar items={home.newsBar ?? []} locale={locale} />
+      <ArcCarousel />
+      <div className="h-[300px]" />
     </div>
   );
 }
