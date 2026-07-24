@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { cookies, draftMode } from "next/headers";
 import { getTranslations } from "next-intl/server";
-import { fetchGlobal, fetchHome } from "@/hooks/useApiEndpoint/api";
+import { fetchHome } from "@/hooks/useApiEndpoint/api";
+import { generatePageMetadata, getPreviewDocumentId } from "@/lib/pageMetadata";
 import type { Home } from "@/types/api";
 import Banner from "./components/Banner/Banner";
 import NewsBar from "./components/NewsBar/NewsBar";
@@ -13,13 +13,6 @@ interface LandingPageProps {
   params: Promise<{ locale: string }>;
 }
 
-async function getPreviewDocumentId() {
-  const { isEnabled } = await draftMode();
-  if (!isEnabled) return null;
-
-  return (await cookies()).get("preview-documentId")?.value ?? null;
-}
-
 export async function generateMetadata({
   params,
 }: LandingPageProps): Promise<Metadata> {
@@ -27,17 +20,9 @@ export async function generateMetadata({
   const documentId = await getPreviewDocumentId();
 
   try {
-    const [homeRes, globalRes] = await Promise.all([
-      fetchHome(documentId ?? "", documentId !== null, locale),
-      fetchGlobal(locale, { cache: "force-cache" }),
-    ]);
-    const home = homeRes.data[0] ?? null;
-    const metaTitle = globalRes.data?.seo?.[0]?.metaTitle;
-
-    return {
-      title:
-        home?.Title && metaTitle ? `${home.Title} | ${metaTitle}` : metaTitle,
-    };
+    const res = await fetchHome(documentId ?? "", documentId !== null, locale);
+    const home = res.data[0] ?? null;
+    return generatePageMetadata(locale, home?.Title);
   } catch {
     return {};
   }
