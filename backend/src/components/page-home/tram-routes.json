@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_page_home_tram_routes",
+  "info": {
+    "displayName": "tramRoutes",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "text"
+    },
+    "mapButton": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

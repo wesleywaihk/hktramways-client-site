@@ -8,7 +8,7 @@ export interface ContentActionButton extends Struct.ComponentSchema {
   };
   attributes: {
     label: Schema.Attribute.String;
-    link: Schema.Attribute.Component<'content.hyperlink', true>;
+    link: Schema.Attribute.Component<'content.hyperlink', false>;
   };
 }
 
@@ -86,6 +86,19 @@ export interface PageHomeArcCarousel extends Struct.ComponentSchema {
   };
 }
 
+export interface PageHomeTramRoutes extends Struct.ComponentSchema {
+  collectionName: 'components_page_home_tram_routes';
+  info: {
+    displayName: 'tramRoutes';
+    icon: 'code';
+  };
+  attributes: {
+    desc: Schema.Attribute.Text;
+    mapButton: Schema.Attribute.Component<'content.action-button', false>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SeoSeo extends Struct.ComponentSchema {
   collectionName: 'components_seo_seos';
   info: {
@@ -118,6 +131,7 @@ declare module '@strapi/strapi' {
       'content.news-items': ContentNewsItems;
       'media.banner-image': MediaBannerImage;
       'page-home.arc-carousel': PageHomeArcCarousel;
+      'page-home.tram-routes': PageHomeTramRoutes;
       'seo.seo': SeoSeo;
     }
   }

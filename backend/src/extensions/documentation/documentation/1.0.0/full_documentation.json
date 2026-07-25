@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-07-25T05:45:56.969Z"
+    "x-generation-date": "2026-07-25T07:36:02.364Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -2981,6 +2981,9 @@
               "arcCarousel": {
                 "$ref": "#/components/schemas/PageHomeArcCarouselComponent"
               },
+              "tramRoute": {
+                "$ref": "#/components/schemas/PageHomeTramRoutesComponent"
+              },
               "locale": {
                 "type": "string"
               },
@@ -3068,6 +3071,9 @@
           "arcCarousel": {
             "$ref": "#/components/schemas/PageHomeArcCarouselComponent"
           },
+          "tramRoute": {
+            "$ref": "#/components/schemas/PageHomeTramRoutesComponent"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -3151,6 +3157,9 @@
                 },
                 "arcCarousel": {
                   "$ref": "#/components/schemas/PageHomeArcCarouselComponent"
+                },
+                "tramRoute": {
+                  "$ref": "#/components/schemas/PageHomeTramRoutesComponent"
                 },
                 "createdAt": {
                   "type": "string",
@@ -3869,10 +3878,7 @@
             "type": "string"
           },
           "link": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ContentHyperlinkComponent"
-            }
+            "$ref": "#/components/schemas/ContentHyperlinkComponent"
           }
         }
       },
@@ -3899,6 +3905,30 @@
             }
           },
           "actionButton": {
+            "$ref": "#/components/schemas/ContentActionButtonComponent"
+          }
+        }
+      },
+      "PageHomeTramRoutesComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "mapButton": {
             "$ref": "#/components/schemas/ContentActionButtonComponent"
           }
         }

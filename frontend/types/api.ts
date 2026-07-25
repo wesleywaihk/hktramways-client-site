@@ -72,6 +72,19 @@ export interface ArcCarouselData {
   actionButton: ArcCarouselActionButton | null;
 }
 
+export interface TramRouteMapButton {
+  id: number;
+  label: string | null;
+  link: Hyperlink[];
+}
+
+export interface TramRouteData {
+  id: number;
+  title: string | null;
+  desc: string | null;
+  mapButton: TramRouteMapButton | null;
+}
+
 export interface Home {
   id: number;
   documentId: string;
@@ -79,6 +92,7 @@ export interface Home {
   bannerImage: HomeBannerImage | null;
   newsBar: HomeNewsBarItem[];
   arcCarousel: ArcCarouselData | null;
+  tramRoute: TramRouteData | null;
 }
 
 export interface HomeResponse {
