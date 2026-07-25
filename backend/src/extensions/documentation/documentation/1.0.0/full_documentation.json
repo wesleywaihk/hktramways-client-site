@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-07-24T15:23:17.796Z"
+    "x-generation-date": "2026-07-25T05:45:56.969Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -2979,7 +2979,7 @@
                 }
               },
               "arcCarousel": {
-                "$ref": "#/components/schemas/ContentArcCarouselComponent"
+                "$ref": "#/components/schemas/PageHomeArcCarouselComponent"
               },
               "locale": {
                 "type": "string"
@@ -3066,7 +3066,7 @@
             }
           },
           "arcCarousel": {
-            "$ref": "#/components/schemas/ContentArcCarouselComponent"
+            "$ref": "#/components/schemas/PageHomeArcCarouselComponent"
           },
           "createdAt": {
             "type": "string",
@@ -3150,7 +3150,7 @@
                   }
                 },
                 "arcCarousel": {
-                  "$ref": "#/components/schemas/ContentArcCarouselComponent"
+                  "$ref": "#/components/schemas/PageHomeArcCarouselComponent"
                 },
                 "createdAt": {
                   "type": "string",
@@ -3876,7 +3876,7 @@
           }
         }
       },
-      "ContentArcCarouselComponent": {
+      "PageHomeArcCarouselComponent": {
         "type": "object",
         "properties": {
           "id": {

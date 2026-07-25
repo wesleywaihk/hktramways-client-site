@@ -50,7 +50,7 @@
           "localized": true
         }
       },
-      "component": "content.arc-carousel",
+      "component": "page-home.arc-carousel",
       "repeatable": false
     }
   }

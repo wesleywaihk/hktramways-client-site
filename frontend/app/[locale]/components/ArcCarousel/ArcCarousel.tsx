@@ -22,32 +22,6 @@ export interface ArcCarouselItem {
   linkUrl?: string;
 }
 
-// TODO: replace with CMS-driven data once the API contract is defined.
-const DUMMY_ITEMS: ArcCarouselItem[] = [
-  {
-    id: "1",
-    caption: "「Visa × 叮叮」優惠延長\nTap to Pay & enjoy $1 off each ride",
-  },
-  {
-    id: "2",
-    caption:
-      "Paul Lafayet x Hong Kong Tramways Mid-Autumn Festival Exclusive Collaboration",
-    linkUrl: "#",
-  },
-  {
-    id: "3",
-    caption: "新票價現已生效\nNew Fares Now Effective",
-  },
-  {
-    id: "4",
-    caption: "KEUNG TO x Hong Kong Tramways",
-  },
-  {
-    id: "5",
-    caption: "Ride the Tram, See the City",
-  },
-];
-
 function mapCarouselData(data: ArcCarouselData | null | undefined) {
   const items = data?.item ?? [];
   if (!items.length) return null;
@@ -79,12 +53,14 @@ const DESKTOP_VISIBLE_RANGE = 2;
  * For maxOff = 2 this is 25vw + cardWidth/8, so the gap scales with the
  * viewport instead of a fixed px value.
  */
-const desktopGap = (cardWidth: string) => `calc(25vw + (${cardWidth}) / 8)`;
+const lgGap = (cardWidth: string) => `calc(25vw + (${cardWidth}) / 8)`;
+/** tighter than lgGap: less space between cards at xl (1280px) and above */
+const xlGap = (cardWidth: string) => `calc(22vw + (${cardWidth}) / 8)`;
 
 const MOBILE_CARD_WIDTH = "30.34dvmax";
 const MOBILE_CARD_HEIGHT = "38dvmax";
 const MOBILE_TILT = 8;
-const MOBILE_DROPS = [0, 14];
+const MOBILE_DROPS = [0, 32];
 const MOBILE_VISIBLE_RANGE = 1;
 /**
  * Slot spacing for mobile: only offsets -1/0/1 are visible, so the 1st/last
@@ -92,6 +68,12 @@ const MOBILE_VISIBLE_RANGE = 1;
  *   1 * gap = viewportWidth/2 + 0.25 * cardWidth = 50vw + cardWidth/4
  */
 const mobileGap = (cardWidth: string) => `calc(50vw + (${cardWidth}) / 4)`;
+/**
+ * Slot spacing for the sm→md range (640–767.99px): same card size/tilt as
+ * mobile, but tighter — the 1st/last visible card should sit only ~60%
+ * off-screen instead of ~75%, and the gap between cards shrinks with it.
+ */
+const smGap = (cardWidth: string) => `calc(44vw + (${cardWidth}) / 5)`;
 
 /** matches the project's md breakpoint (768px) used elsewhere for mobile/desktop layout */
 function useIsMobile(query = "(max-width: 767.99px)") {
@@ -104,6 +86,32 @@ function useIsMobile(query = "(max-width: 767.99px)") {
     return () => mq.removeEventListener("change", update);
   }, [query]);
   return isMobile;
+}
+
+/** true between the sm and md breakpoints (640px–767.99px) */
+function useIsSmToMd(query = "(min-width: 640px) and (max-width: 767.99px)") {
+  const [isSmToMd, setIsSmToMd] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const update = () => setIsSmToMd(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [query]);
+  return isSmToMd;
+}
+
+/** true at the xl breakpoint (1280px) and above */
+function useIsXl(query = "(min-width: 1280px)") {
+  const [isXl, setIsXl] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const update = () => setIsXl(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [query]);
+  return isXl;
 }
 
 /** shortest looped distance from the active card (…-2,-1,0,1,2…) */
@@ -120,16 +128,30 @@ export interface ArcCarouselProps {
 
 export default function ArcCarousel({ data }: ArcCarouselProps) {
   const mapped = mapCarouselData(data);
-  const items = mapped?.items ?? DUMMY_ITEMS;
-  const heading = mapped?.heading ?? "HAPPENINGS";
-  const buttonLabel = mapped?.buttonLabel ?? "NEWS & EVENTS";
-  const buttonUrl = mapped?.buttonUrl ?? "#";
+
+  return mapped ? <ArcCarouselView mapped={mapped} /> : null;
+}
+
+interface MappedArcCarousel {
+  heading: string;
+  buttonLabel?: string;
+  buttonUrl?: string;
+  items: ArcCarouselItem[];
+}
+
+function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
+  const items = mapped.items;
+  const heading = mapped.heading;
+  const buttonLabel = mapped.buttonLabel ?? "NEWS & EVENTS";
+  const buttonUrl = mapped.buttonUrl ?? "#";
   const total = items.length;
   const maxOff = Math.floor(total / 2);
   const [active, setActive] = useState(0);
   const [dir, setDir] = useState(0); // last navigation direction: 1 = next, -1 = prev
   const dragStart = useRef<number | null>(null);
   const isMobile = useIsMobile();
+  const isSmToMd = useIsSmToMd();
+  const isXl = useIsXl();
 
   const cardWidth = isMobile ? MOBILE_CARD_WIDTH : DESKTOP_CARD_WIDTH;
   const cardHeight = isMobile ? MOBILE_CARD_HEIGHT : DESKTOP_CARD_HEIGHT;
@@ -138,10 +160,16 @@ export default function ArcCarousel({ data }: ArcCarouselProps) {
   const visibleRange = isMobile ? MOBILE_VISIBLE_RANGE : DESKTOP_VISIBLE_RANGE;
   const active_ = items[active] ?? items[0];
 
-  const translateX = (off: number) =>
-    isMobile
-      ? `calc(-50% + ${off} * ${mobileGap(cardWidth)})`
-      : `calc(-50% + ${off} * ${desktopGap(cardWidth)})`;
+  const translateX = (off: number) => {
+    const gap = isSmToMd
+      ? smGap(cardWidth)
+      : isMobile
+        ? mobileGap(cardWidth)
+        : isXl
+          ? xlGap(cardWidth)
+          : lgGap(cardWidth);
+    return `calc(-50% + ${off} * ${gap})`;
+  };
 
   const prev = useCallback(() => {
     setDir(-1);

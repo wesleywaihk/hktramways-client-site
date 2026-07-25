@@ -492,7 +492,7 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
-    arcCarousel: Schema.Attribute.Component<'content.arc-carousel', false> &
+    arcCarousel: Schema.Attribute.Component<'page-home.arc-carousel', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

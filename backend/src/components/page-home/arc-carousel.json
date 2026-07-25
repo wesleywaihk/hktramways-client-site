@@ -1,14 +1,13 @@
 {
-  "collectionName": "components_content_arc_carousels",
+  "collectionName": "components_page_home_arc_carousels",
   "info": {
-    "displayName": "arcCarousel",
+    "displayName": "ArcCarousel",
     "icon": "landscape"
   },
   "options": {},
   "attributes": {
     "title": {
-      "type": "string",
-      "maxLength": 20
+      "type": "string"
     },
     "item": {
       "type": "component",

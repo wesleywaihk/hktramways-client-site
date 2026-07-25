@@ -12,22 +12,6 @@ export interface ContentActionButton extends Struct.ComponentSchema {
   };
 }
 
-export interface ContentArcCarousel extends Struct.ComponentSchema {
-  collectionName: 'components_content_arc_carousels';
-  info: {
-    displayName: 'arcCarousel';
-    icon: 'landscape';
-  };
-  attributes: {
-    actionButton: Schema.Attribute.Component<'content.action-button', false>;
-    item: Schema.Attribute.Component<'content.carousel-item', true>;
-    title: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 20;
-      }>;
-  };
-}
-
 export interface ContentCarouselItem extends Struct.ComponentSchema {
   collectionName: 'components_content_carousel_items';
   info: {
@@ -89,6 +73,19 @@ export interface MediaBannerImage extends Struct.ComponentSchema {
   };
 }
 
+export interface PageHomeArcCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_page_home_arc_carousels';
+  info: {
+    displayName: 'ArcCarousel';
+    icon: 'landscape';
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    item: Schema.Attribute.Component<'content.carousel-item', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SeoSeo extends Struct.ComponentSchema {
   collectionName: 'components_seo_seos';
   info: {
@@ -116,11 +113,11 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'content.action-button': ContentActionButton;
-      'content.arc-carousel': ContentArcCarousel;
       'content.carousel-item': ContentCarouselItem;
       'content.hyperlink': ContentHyperlink;
       'content.news-items': ContentNewsItems;
       'media.banner-image': MediaBannerImage;
+      'page-home.arc-carousel': PageHomeArcCarousel;
       'seo.seo': SeoSeo;
     }
   }
