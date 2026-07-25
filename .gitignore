@@ -12,3 +12,6 @@ backend/data/
 backend/database/*.db
 backend/database/*.db-journal
 backend/public/uploads/
+
+# aws
+hktramways-client-site-uat.pem*
