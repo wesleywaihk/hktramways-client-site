@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "local-uat": "dotenv -e .env.uat -- next dev",
+    "local-uat": "dotenv -e .env.local-uat -- next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "docker-local-test": "bash scripts/docker-local-test.sh"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
