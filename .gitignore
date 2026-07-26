@@ -12,6 +12,9 @@ backend/data/
 backend/database/*.db
 backend/database/*.db-journal
 backend/public/uploads/
+backend/export_*.log
+backend/import_*.log
+backend/*.tar.gz
 
 # aws
 hktramways-client-site-uat.pem*
