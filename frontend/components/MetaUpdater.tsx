@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
 import { useSelector } from "react-redux";
 import { useApiEndpoint } from "@/hooks/useApiEndpoint";
-import { API_URL } from "@/consts";
+import { IMG_URL } from "@/consts";
 import type { RootState } from "@/store";
 
 function setMeta(name: string, content: string) {
@@ -42,7 +42,7 @@ export default function MetaUpdater() {
             link.rel = "icon";
             document.head.appendChild(link);
           }
-          link.href = `${API_URL}${favicon.url}`;
+          link.href = `${IMG_URL}${favicon.url}`;
         }
       })
       .catch(() => null);

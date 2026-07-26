@@ -1,6 +1,6 @@
 import ImageIcon from "@mui/icons-material/Image";
 import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
-import { API_URL } from "@/consts";
+import { IMG_URL } from "@/consts";
 import { HomeBanner, HomeBannerImage } from "@/types/api";
 
 export interface ResponsiveImgProps {
@@ -25,7 +25,7 @@ function buildSrcSet(
 }
 
 export default function ResponsiveImg({
-  url = API_URL,
+  url = IMG_URL,
   bannerImage,
   className = "",
   sizes = "100vw",
