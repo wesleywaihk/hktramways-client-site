@@ -117,7 +117,7 @@ jobs:
           docker pull $ECR_IMAGE
           docker compose -f backend/docker-compose.uat.yml down || true
           docker compose -f backend/docker-compose.uat.yml up -d
-          docker compose -f backend/docker-compose.uat.yml logs -f --tail=50
+          timeout 30 docker compose -f backend/docker-compose.uat.yml logs -f --tail=50 || true
           EOF
 
       - name: Notify deployment
