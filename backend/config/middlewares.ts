@@ -12,6 +12,8 @@ const config: Core.Config.Middlewares = [
         useDefaults: true,
         directives: {
           'frame-ancestors': ["'self'", FRONTEND_URL],
+          'img-src': ["'self'", 'data:', 'blob:', 'https://market-assets.strapi.io', 'https://*.amazonaws.com'],
+          'media-src': ["'self'", 'data:', 'blob:', 'https://*.amazonaws.com'],
         },
       },
     },

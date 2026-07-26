@@ -10,7 +10,10 @@
   "scripts": {
     "frontend:dev": "npm run dev --workspace=frontend",
     "backend:dev": "npm run dev --workspace=backend",
-    "dev": "npm-run-all --parallel frontend:dev backend:dev"
+    "dev": "npm-run-all --parallel frontend:dev backend:dev",
+    "frontend:local-uat": "npm run local-uat --workspace=frontend",
+    "backend:local-uat": "npm run local-uat --workspace=backend",
+    "local-uat": "npm-run-all --parallel frontend:local-uat backend:local-uat"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5"
