@@ -9,7 +9,7 @@ env:
   AWS_REGION: ap-southeast-1
   ECR_REGISTRY: 279122550963.dkr.ecr.ap-southeast-1.amazonaws.com
   ECR_REPOSITORY: hktramways-client-site-uat-backend
-  EC2_HOST: 52.77.250.176
+  EC2_HOST: 18.138.214.243
   EC2_USER: ubuntu
   GITHUB_USERNAME: wesleywaihk
 
@@ -90,7 +90,7 @@ jobs:
           AWS_REGION=ap-southeast-1
           AWS_BUCKET=hktramways-client-site-uat-uploads
 
-          FRONTEND_URL=http://52.77.250.176:3000
+          FRONTEND_URL=http://18.138.214.243:3000
           ENVFILE
 
           # Install AWS CLI if not present
@@ -117,7 +117,7 @@ jobs:
         if: success()
         run: |
           echo "✅ Deployment successful!"
-          echo "Backend available at: http://52.77.250.176:1337/admin"
+          echo "Backend available at: http://18.138.214.243:1337/admin"
 
       - name: Notify failure
         if: failure()
