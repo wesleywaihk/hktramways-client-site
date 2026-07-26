@@ -1,8 +1,6 @@
 services:
   strapi:
-    build:
-      context: ..
-      dockerfile: backend/Dockerfile
+    image: ${ECR_IMAGE}
     ports:
       - "1337:1337"
     env_file:

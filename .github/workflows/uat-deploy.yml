@@ -7,19 +7,42 @@ on:
 
 env:
   AWS_REGION: ap-southeast-1
+  ECR_REGISTRY: 279122550963.dkr.ecr.ap-southeast-1.amazonaws.com
+  ECR_REPOSITORY: hktramways-client-site-uat-backend
   EC2_HOST: 52.77.250.176
   EC2_USER: ubuntu
   GITHUB_USERNAME: wesleywaihk
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and push Docker image
+        id: docker_build
+        env:
+          IMAGE_TAG: latest
+        run: |
+          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG -f backend/Dockerfile .
+          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
+          echo "image=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
       - name: Deploy to EC2
         env:
+          ECR_IMAGE: ${{ steps.docker_build.outputs.image }}
           EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -70,7 +93,11 @@ jobs:
           FRONTEND_URL=http://52.77.250.176:3000
           ENVFILE
 
-          # Deploy with docker-compose
+          # Login to ECR and pull image
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
+
+          # Deploy with docker-compose using ECR image
+          export ECR_IMAGE=${{ env.ECR_IMAGE }}
           docker compose -f backend/docker-compose.uat.yml down || true
           docker compose -f backend/docker-compose.uat.yml up -d
           docker compose -f backend/docker-compose.uat.yml logs -f --tail=50
