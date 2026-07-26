@@ -108,6 +108,7 @@ jobs:
 
           # Deploy with docker-compose using ECR image
           export ECR_IMAGE=${{ env.ECR_IMAGE }}
+          docker pull $ECR_IMAGE
           docker compose -f backend/docker-compose.uat.yml down || true
           docker compose -f backend/docker-compose.uat.yml up -d
           docker compose -f backend/docker-compose.uat.yml logs -f --tail=50
