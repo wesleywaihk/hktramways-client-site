@@ -9,6 +9,7 @@
     "deploy": "strapi deploy",
     "dev": "strapi develop",
     "develop": "strapi develop",
+    "local-uat": "dotenv -e .env.uat -- strapi develop",
     "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
     "strapi": "strapi",
@@ -16,7 +17,6 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "shared-resources": "*",
     "@radix-ui/react-tooltip": "^1.2.8",
     "@strapi/plugin-cloud": "5.47.0",
     "@strapi/plugin-documentation": "^5.47.1",
@@ -30,12 +30,14 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
+    "shared-resources": "*",
     "styled-components": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "dotenv-cli": "^7.4.4",
     "typescript": "^5"
   },
   "engines": {

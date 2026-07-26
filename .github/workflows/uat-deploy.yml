@@ -7,10 +7,11 @@ on:
 
 env:
   AWS_REGION: ap-southeast-1
+  ECR_REGISTRY: 279122550963.dkr.ecr.ap-southeast-1.amazonaws.com
   ECR_REPOSITORY: hktramways-client-site-uat-backend
   EC2_HOST: 18.138.214.243
-  EC2_USER: ec2-user
-  BACKEND_PATH: backend
+  EC2_USER: ubuntu
+  GITHUB_USERNAME: wesleywaihk
 
 jobs:
   build-and-deploy:
@@ -33,36 +34,91 @@ jobs:
       - name: Build and push Docker image
         id: docker_build
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: latest
         run: |
-          cd ${{ env.BACKEND_PATH }}
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG -f backend/Dockerfile .
+          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
+          echo "image=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Deploy to EC2
         env:
           ECR_IMAGE: ${{ steps.docker_build.outputs.image }}
           EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           mkdir -p ~/.ssh
           echo "$EC2_SSH_KEY" > ~/.ssh/ec2-key.pem
           chmod 600 ~/.ssh/ec2-key.pem
+
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
           set -e
-          cd ~/hktramways-client-site/backend
+
+          # Clone/update repo
+          if [ ! -d ~/hktramways-client-site ]; then
+            git clone https://github.com/${{ env.GITHUB_USERNAME }}/hktramways-client-site.git ~/hktramways-client-site
+          fi
+
+          cd ~/hktramways-client-site
+          git checkout uat-deploy
           git pull origin uat-deploy
-          docker-compose -f docker-compose.uat.yml down || true
-          docker-compose -f docker-compose.uat.yml up -d
-          docker-compose -f docker-compose.uat.yml logs -f --tail=50
+
+          # Create .env.uat from secrets
+          cat > backend/.env.uat << 'ENVFILE'
+          HOST=0.0.0.0
+          PORT=1337
+
+          APP_KEYS=/aicWR3UPu3TDOAli6Q4+bshrSpg/5GU7Vg1B2N9a2g=
+          API_TOKEN_SALT=ZAQB5qK6ljVOV1b1an8b40yLfhNgiAqh3JWl0CvxsoE=
+          ADMIN_JWT_SECRET=r12P21NhUQkwX1yuGsEtxhKyKduB+whPsRIVVanRId0=
+          TRANSFER_TOKEN_SALT=GQZI7duMQDzAhFwD5DNAWHiDGHoXdCryalWOPqTBQsk=
+          JWT_SECRET=kT52/YXLQU9huarK1O7Ec/qT6jvn6xrLrXtGcRI6V8Q=
+          ENCRYPTION_KEY=HLi+jhPMz2bc9SvPuL2aSk2RInuf9hnDtF9MimGED/w=
+
+          DATABASE_CLIENT=postgres
+          DATABASE_HOST=hktramways-client-uat-db.cv4ay0e6y5b7.ap-southeast-1.rds.amazonaws.com
+          DATABASE_PORT=5432
+          DATABASE_NAME=strapi
+          DATABASE_USERNAME=strapi
+          DATABASE_PASSWORD=ZcYvXgA24W3uDftiClMf
+          DATABASE_SSL=true
+          DATABASE_SSL_REJECT_UNAUTHORIZED=false
+
+          UPLOAD_PROVIDER=aws-s3
+          AWS_ACCESS_KEY_ID=${{ env.AWS_ACCESS_KEY_ID }}
+          AWS_ACCESS_SECRET=${{ env.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION=ap-southeast-1
+          AWS_BUCKET=hktramways-client-site-uat-uploads
+
+          FRONTEND_URL=http://18.138.214.243:3000
+          ENVFILE
+
+          # Install AWS CLI if not present
+          if ! command -v aws &> /dev/null; then
+            sudo apt-get update && sudo apt-get install -y awscli
+          fi
+
+          # Export AWS credentials
+          export AWS_ACCESS_KEY_ID=${{ env.AWS_ACCESS_KEY_ID }}
+          export AWS_SECRET_ACCESS_KEY=${{ env.AWS_SECRET_ACCESS_KEY }}
+          export AWS_REGION=${{ env.AWS_REGION }}
+
+          # Login to ECR and pull image
+          aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
+
+          # Deploy with docker-compose using ECR image
+          export ECR_IMAGE=${{ env.ECR_IMAGE }}
+          docker pull $ECR_IMAGE
+          docker compose -f backend/docker-compose.uat.yml down || true
+          docker compose -f backend/docker-compose.uat.yml up -d
+          docker compose -f backend/docker-compose.uat.yml logs -f --tail=50
           EOF
 
       - name: Notify deployment
         if: success()
         run: |
           echo "✅ Deployment successful!"
-          echo "Backend available at: http://${{ env.EC2_HOST }}:1337"
+          echo "Backend available at: http://18.138.214.243:1337/admin"
 
       - name: Notify failure
         if: failure()
