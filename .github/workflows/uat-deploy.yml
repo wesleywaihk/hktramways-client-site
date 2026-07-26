@@ -93,6 +93,11 @@ jobs:
           FRONTEND_URL=http://52.77.250.176:3000
           ENVFILE
 
+          # Install AWS CLI if not present
+          if ! command -v aws &> /dev/null; then
+            sudo apt-get update && sudo apt-get install -y awscli
+          fi
+
           # Login to ECR and pull image
           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
 
