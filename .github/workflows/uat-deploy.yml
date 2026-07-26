@@ -1,0 +1,71 @@
+name: UAT Deploy
+
+on:
+  push:
+    branches:
+      - uat-deploy
+
+env:
+  AWS_REGION: ap-southeast-1
+  ECR_REPOSITORY: hktramways-client-site-uat-backend
+  EC2_HOST: 18.138.214.243
+  EC2_USER: ec2-user
+  BACKEND_PATH: backend
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and push Docker image
+        id: docker_build
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: latest
+        run: |
+          cd ${{ env.BACKEND_PATH }}
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Deploy to EC2
+        env:
+          ECR_IMAGE: ${{ steps.docker_build.outputs.image }}
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$EC2_SSH_KEY" > ~/.ssh/ec2-key.pem
+          chmod 600 ~/.ssh/ec2-key.pem
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/ec2-key.pem $EC2_USER@$EC2_HOST << 'EOF'
+          set -e
+          cd ~/hktramways-client-site/backend
+          git pull origin uat-deploy
+          docker-compose -f docker-compose.uat.yml down || true
+          docker-compose -f docker-compose.uat.yml up -d
+          docker-compose -f docker-compose.uat.yml logs -f --tail=50
+          EOF
+
+      - name: Notify deployment
+        if: success()
+        run: |
+          echo "✅ Deployment successful!"
+          echo "Backend available at: http://${{ env.EC2_HOST }}:1337"
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          echo "❌ Deployment failed!"
+          exit 1
