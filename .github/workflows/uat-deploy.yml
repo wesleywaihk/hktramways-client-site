@@ -106,6 +106,12 @@ jobs:
           # Login to ECR and pull image
           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
 
+          # Free disk space before pulling the new image (small root volume fills up fast)
+          docker system prune -af --volumes
+          sudo apt-get clean
+          sudo journalctl --vacuum-time=3d
+          df -h /
+
           # Deploy with docker-compose using ECR image
           export ECR_IMAGE=${{ env.ECR_IMAGE }}
           docker pull $ECR_IMAGE
