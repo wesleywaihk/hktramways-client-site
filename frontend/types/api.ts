@@ -131,7 +131,7 @@ export interface GlobalData {
   documentId: string;
   locale: string;
   favicon: GlobalFavicon | null;
-  seo: GlobalSeo[];
+  seo: GlobalSeo | null;
 }
 
 export interface GlobalResponse {

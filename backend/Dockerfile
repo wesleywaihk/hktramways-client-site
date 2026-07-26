@@ -9,9 +9,10 @@ RUN NODE_OPTIONS=--max-old-space-size=2048 npm run build
 
 FROM node:20-alpine
 WORKDIR /app/backend
-COPY --from=build /app/backend/dist ./dist
-COPY --from=build /app/backend/dist/config ./config
+COPY --from=build /app/backend/dist ./
 COPY --from=build /app/node_modules ../node_modules
+COPY --from=build /app/shared-resources ../shared-resources
 COPY --from=build /app/backend/package.json ./
+RUN mkdir -p public/uploads
 EXPOSE 1337
 CMD ["npm", "start"]

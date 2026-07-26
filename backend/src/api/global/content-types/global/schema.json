@@ -34,7 +34,7 @@
         }
       },
       "component": "seo.seo",
-      "repeatable": true
+      "repeatable": false
     }
   }
 }

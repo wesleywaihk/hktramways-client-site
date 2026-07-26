@@ -27,7 +27,7 @@ export default function MetaUpdater() {
     fetchApi
       .global()
       .then((res) => {
-        const seo = res.data?.seo?.[0];
+        const seo = res.data?.seo;
         const favicon = res.data?.favicon;
 
         setMetaTitle(seo?.metaTitle ?? "");

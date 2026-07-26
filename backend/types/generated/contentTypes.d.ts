@@ -464,7 +464,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::global.global'>;
     publishedAt: Schema.Attribute.DateTime;
-    seo: Schema.Attribute.Component<'seo.seo', true> &
+    seo: Schema.Attribute.Component<'seo.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

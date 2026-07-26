@@ -17,7 +17,7 @@ export async function generatePageMetadata(
 ): Promise<Metadata> {
   try {
     const globalRes = await fetchGlobal(locale, { cache: "force-cache" });
-    const metaTitle = globalRes.data?.seo?.[0]?.metaTitle;
+    const metaTitle = globalRes.data?.seo?.metaTitle;
 
     return {
       title: pageTitle && metaTitle ? `${pageTitle} | ${metaTitle}` : metaTitle,
