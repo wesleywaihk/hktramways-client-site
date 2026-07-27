@@ -13,7 +13,10 @@
     "dev": "npm-run-all --parallel frontend:dev backend:dev",
     "frontend:local-uat": "npm run local-uat --workspace=frontend",
     "backend:local-uat": "npm run local-uat --workspace=backend",
-    "local-uat": "npm-run-all --parallel frontend:local-uat backend:local-uat"
+    "local-uat": "npm-run-all --parallel frontend:local-uat backend:local-uat",
+    "docker-stop": "bash scripts/docker-stop.sh",
+    "kill-port": "bash scripts/kill-port.sh",
+    "docker-clean": "bash scripts/docker-clean.sh"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5"
