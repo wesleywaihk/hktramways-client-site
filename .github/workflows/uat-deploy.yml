@@ -8,10 +8,13 @@ on:
 env:
   AWS_REGION: ap-southeast-1
   ECR_REGISTRY: 279122550963.dkr.ecr.ap-southeast-1.amazonaws.com
-  ECR_REPOSITORY: hktramways-client-site-uat-backend
+  ECR_REPOSITORY_BACKEND: hktramways-client-site-uat-backend
+  ECR_REPOSITORY_FRONTEND: hktramways-client-site-uat-frontend
   EC2_HOST: 18.138.214.243
   EC2_USER: ubuntu
   GITHUB_USERNAME: wesleywaihk
+  BACKEND_URL: https://d3jz3hkcc92e4l.cloudfront.net
+  FRONTEND_URL: https://d20oy6et7fzwde.cloudfront.net
 
 jobs:
   build-and-deploy:
@@ -31,18 +34,31 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build and push Docker image
+      - name: Build and push backend Docker image
         id: docker_build
         env:
           IMAGE_TAG: latest
         run: |
-          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG -f backend/Dockerfile .
-          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG
-          echo "image=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_BACKEND }}:$IMAGE_TAG -f backend/Dockerfile .
+          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_BACKEND }}:$IMAGE_TAG
+          echo "image=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_BACKEND }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Build and push frontend Docker image
+        id: docker_build_frontend
+        env:
+          IMAGE_TAG: latest
+        run: |
+          docker build \
+            --build-arg NEXT_PUBLIC_API_URL=${{ env.BACKEND_URL }} \
+            --build-arg NEXT_PUBLIC_IMG_URL= \
+            -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_FRONTEND }}:$IMAGE_TAG -f frontend/Dockerfile .
+          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_FRONTEND }}:$IMAGE_TAG
+          echo "image=${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY_FRONTEND }}:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Deploy to EC2
         env:
-          ECR_IMAGE: ${{ steps.docker_build.outputs.image }}
+          ECR_IMAGE_BACKEND: ${{ steps.docker_build.outputs.image }}
+          ECR_IMAGE_FRONTEND: ${{ steps.docker_build_frontend.outputs.image }}
           EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -90,7 +106,13 @@ jobs:
           AWS_REGION=ap-southeast-1
           AWS_BUCKET=hktramways-client-site-uat-uploads
 
-          FRONTEND_URL=https://d20oy6et7fzwde.cloudfront.net
+          FRONTEND_URL=${{ env.FRONTEND_URL }}
+          ENVFILE
+
+          # Create frontend .env.uat
+          cat > frontend/.env.uat << 'ENVFILE'
+          NEXT_PUBLIC_API_URL=${{ env.BACKEND_URL }}
+          NEXT_PUBLIC_IMG_URL=
           ENVFILE
 
           # Install AWS CLI if not present
@@ -112,12 +134,19 @@ jobs:
           sudo journalctl --vacuum-time=3d
           df -h /
 
-          # Deploy with docker-compose using ECR image
-          export ECR_IMAGE=${{ env.ECR_IMAGE }}
+          # Deploy backend with docker-compose using ECR image
+          export ECR_IMAGE=${{ env.ECR_IMAGE_BACKEND }}
           docker pull $ECR_IMAGE
           docker compose -f backend/docker-compose.uat.yml down || true
           docker compose -f backend/docker-compose.uat.yml up -d
           timeout 30 docker compose -f backend/docker-compose.uat.yml logs -f --tail=50 || true
+
+          # Deploy frontend with docker-compose using ECR image
+          export ECR_IMAGE=${{ env.ECR_IMAGE_FRONTEND }}
+          docker pull $ECR_IMAGE
+          docker compose -f frontend/docker-compose.uat.yml down || true
+          docker compose -f frontend/docker-compose.uat.yml up -d
+          timeout 30 docker compose -f frontend/docker-compose.uat.yml logs -f --tail=50 || true
           EOF
 
       - name: Notify deployment
@@ -125,6 +154,7 @@ jobs:
         run: |
           echo "✅ Deployment successful!"
           echo "Backend available at: http://18.138.214.243:1337/admin"
+          echo "Frontend available at: ${{ env.FRONTEND_URL }}"
 
       - name: Notify failure
         if: failure()
