@@ -90,7 +90,7 @@ jobs:
           AWS_REGION=ap-southeast-1
           AWS_BUCKET=hktramways-client-site-uat-uploads
 
-          FRONTEND_URL=http://18.138.214.243:3000
+          FRONTEND_URL=https://d20oy6et7fzwde.cloudfront.net
           ENVFILE
 
           # Install AWS CLI if not present
