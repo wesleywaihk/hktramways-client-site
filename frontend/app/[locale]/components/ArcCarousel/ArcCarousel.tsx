@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Button from "@/components/Button/Button";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import type { ArcCarouselData, ArcCarouselImage } from "@/types/api";
 
@@ -239,7 +240,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           type="button"
           aria-label="Previous poster"
           onClick={prev}
-          className="md:hidden grid absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer"
+          className="md:hidden grid absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer hover:-translate-x-1 transition-all"
         >
           <ArrowBackIcon fontSize="small" />
         </button>
@@ -247,7 +248,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           type="button"
           aria-label="Next poster"
           onClick={next}
-          className="md:hidden grid absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer"
+          className="md:hidden grid absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer hover:translate-x-1 transition-all"
         >
           <ArrowForwardIcon fontSize="small" />
         </button>
@@ -340,13 +341,9 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
       </div>
 
       <div className="shrink-0 mt-6 md:mt-8 flex justify-center">
-        <a
-          href={buttonUrl}
-          className="inline-flex items-center gap-2 border border-white text-white rounded-[16px] px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-white hover:text-green transition-colors uppercase"
-        >
+        <Button href={buttonUrl} className="text-white">
           {buttonLabel}
-          <ArrowForwardIcon fontSize="small" />
-        </a>
+        </Button>
       </div>
     </section>
   );
