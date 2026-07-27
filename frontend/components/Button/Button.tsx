@@ -1,15 +1,19 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 type ButtonProps = {
   children: React.ReactNode;
   href?: string;
   onClick?: () => void;
   className?: string;
+  /** Whether to render the trailing arrow icon. Defaults to true. */
+  useArrow?: boolean;
+  startIcon?: ReactNode;
 };
 
 const buttonClasses =
-  "inline-flex items-center justify-center gap-2.5 lg:gap-3.5 " +
-  "px-5 py-3.5 lg:px-7 lg:py-[19px] " +
+  "group inline-flex items-center justify-center gap-2.5 lg:gap-3.5 " +
+  "px-5 py-3.5 lg:px-6.5 lg:py-[19px] " +
   "rounded-[18px] lg:rounded-[21px] border-2 border-current bg-transparent cursor-pointer " +
   "font-sans text-[14px] leading-[157%] font-semibold uppercase tracking-[0.02em] whitespace-nowrap " +
   "hover:opacity-80 transition-opacity";
@@ -17,7 +21,7 @@ const buttonClasses =
 function Arrow() {
   return (
     <svg
-      className="shrink-0"
+      className="shrink-0 transition-transform group-hover:translate-x-1"
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -35,22 +39,39 @@ function Arrow() {
   );
 }
 
-export default function Button({ children, href, onClick, className }: ButtonProps) {
+export default function Button({
+  children,
+  href,
+  onClick,
+  className,
+  useArrow = true,
+  startIcon,
+}: ButtonProps) {
   const classes = [buttonClasses, className].filter(Boolean).join(" ");
+
+  const content = (
+    <>
+      {startIcon && (
+        <span className="inline-flex shrink-0 transition-transform group-hover:scale-[115%]">
+          {startIcon}
+        </span>
+      )}
+      <span className="translate-y-[1px]">{children}</span>
+      {useArrow && <Arrow />}
+    </>
+  );
 
   if (href) {
     return (
       <Link href={href} className={classes}>
-        <span>{children}</span>
-        <Arrow />
+        {content}
       </Link>
     );
   }
 
   return (
     <button type="button" onClick={onClick} className={classes}>
-      <span>{children}</span>
-      <Arrow />
+      {content}
     </button>
   );
 }

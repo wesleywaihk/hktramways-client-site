@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Button from "@/components/Button/Button";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import type { ArcCarouselData, ArcCarouselImage } from "@/types/api";
 
@@ -340,13 +341,9 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
       </div>
 
       <div className="shrink-0 mt-6 md:mt-8 flex justify-center">
-        <a
-          href={buttonUrl}
-          className="inline-flex items-center gap-2 border border-white text-white rounded-[16px] px-6 py-2.5 text-sm font-semibold tracking-wide hover:bg-white hover:text-green transition-colors uppercase"
-        >
+        <Button href={buttonUrl} className="text-white">
           {buttonLabel}
-          <ArrowForwardIcon fontSize="small" />
-        </a>
+        </Button>
       </div>
     </section>
   );

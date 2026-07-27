@@ -23,8 +23,11 @@ export default function TramRoute({ data }: TramRouteProps) {
         <p className="mt-4 md:mt-6 text-black text-[15px] md:text-[16px] leading-[163%] tracking-[0.02em]">
           {desc}
         </p>
-        <Button href={buttonUrl} className="mt-6 md:mt-8 text-green">
-          <span className="inline-flex items-center gap-2">
+        <Button
+          href={buttonUrl}
+          className="mt-6 md:mt-8 text-green"
+          useArrow={false}
+          startIcon={
             <Image
               src="/ico/map.svg"
               alt=""
@@ -33,8 +36,9 @@ export default function TramRoute({ data }: TramRouteProps) {
               className="shrink-0 w-5 h-5"
               aria-hidden="true"
             />
-            {buttonLabel}
-          </span>
+          }
+        >
+          {buttonLabel}
         </Button>
       </div>
 
