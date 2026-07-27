@@ -15,7 +15,10 @@ export interface NewsBarProps {
 
 const MIN_ITEMS = 10;
 
-function repeatToMinimum(items: HomeNewsBarItem[], minLength: number) {
+function repeatToMinimum(
+  items: HomeNewsBarItem[],
+  minLength: number = MIN_ITEMS,
+) {
   if (items.length === 0) return items;
   const repeated: HomeNewsBarItem[] = [];
   while (repeated.length < minLength) repeated.push(...items);
@@ -76,8 +79,7 @@ export default function NewsBar({ items, speed = 120 }: NewsBarProps) {
         <div ref={trackRef} className="flex items-center will-change-transform">
           {items.length
             ? (() => {
-                const repeated = repeatToMinimum(items, MIN_ITEMS);
-                return [...repeated, ...repeated].map((item, index) => (
+                return repeatToMinimum(items).map((item, index) => (
                   <NewsBarEntry key={index} {...item} />
                 ));
               })()

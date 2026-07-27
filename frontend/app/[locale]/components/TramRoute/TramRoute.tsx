@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import Button from "@/components/Button/Button";
 import type { TramRouteData } from "@/types/api";
 
@@ -6,13 +7,12 @@ export interface TramRouteProps {
   data?: TramRouteData | null;
 }
 
-export default function TramRoute({ data }: TramRouteProps) {
-  if (!data) return null;
-
-  const title = data.title ?? "6 TRAM ROUTES";
-  const desc = data.desc ?? "";
-  const buttonLabel = data.mapButton?.label ?? "INTERACTIVE ROUTE MAP";
-  const buttonUrl = data.mapButton?.link?.[0]?.url ?? "#";
+export default function TramRoute({ data = undefined }: TramRouteProps) {
+  const t = useTranslations("common");
+  const title = data?.title ?? t("tramRouteTitleFallback");
+  const desc = data?.desc ?? "";
+  const buttonLabel = data?.mapButton?.label ?? t("tramRouteButtonFallback");
+  const buttonUrl = data?.mapButton?.link?.[0]?.url ?? "#";
 
   return (
     <section className="borderless pageHeight relative bg-earth-light pt-16 md:pt-20 lg:pt-24">
