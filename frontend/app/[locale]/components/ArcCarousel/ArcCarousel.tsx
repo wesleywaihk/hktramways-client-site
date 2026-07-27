@@ -240,7 +240,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           type="button"
           aria-label="Previous poster"
           onClick={prev}
-          className="md:hidden grid absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer"
+          className="md:hidden grid absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer hover:-translate-x-1 transition-all"
         >
           <ArrowBackIcon fontSize="small" />
         </button>
@@ -248,7 +248,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           type="button"
           aria-label="Next poster"
           onClick={next}
-          className="md:hidden grid absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer"
+          className="md:hidden grid absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer hover:translate-x-1 transition-all"
         >
           <ArrowForwardIcon fontSize="small" />
         </button>
