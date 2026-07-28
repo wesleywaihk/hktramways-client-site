@@ -11,6 +11,7 @@
     "develop": "strapi develop",
     "local-uat": "dotenv -e .env.uat -- strapi develop",
     "sync-to-uat": "bash scripts/sync-to-uat.sh",
+    "sync-from-uat": "bash scripts/sync-from-uat.sh",
     "docker-local-test": "bash scripts/docker-local-test.sh",
     "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
