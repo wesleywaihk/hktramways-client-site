@@ -1,14 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 
 type ButtonProps = {
   children: React.ReactNode;
   href?: string;
   onClick?: () => void;
   className?: string;
-  /** Whether to render the trailing arrow icon. Defaults to true. */
   useArrow?: boolean;
-  startIcon?: ReactNode;
+  useMapIcon?: boolean;
 };
 
 const buttonClasses =
@@ -18,26 +17,37 @@ const buttonClasses =
   "font-sans text-[14px] leading-[157%] font-semibold uppercase tracking-[0.02em] whitespace-nowrap " +
   "hover:opacity-80 transition-opacity";
 
-function Arrow() {
-  return (
-    <svg
-      className="shrink-0 transition-transform group-hover:translate-x-1"
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
+const Arrow = () => (
+  <svg
+    className="shrink-0 transition-transform group-hover:translate-x-1"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const MapIcon = () => (
+  <span className="inline-flex shrink-0 transition-transform group-hover:scale-[115%]">
+    <Image
+      src="/ico/map.svg"
+      alt=""
+      width={20}
+      height={20}
+      className="shrink-0 w-5 h-5"
       aria-hidden="true"
-    >
-      <path
-        d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+    />
+  </span>
+);
 
 export default function Button({
   children,
@@ -45,17 +55,13 @@ export default function Button({
   onClick,
   className,
   useArrow = true,
-  startIcon,
+  useMapIcon = false,
 }: ButtonProps) {
   const classes = [buttonClasses, className].filter(Boolean).join(" ");
 
   const content = (
     <>
-      {startIcon && (
-        <span className="inline-flex shrink-0 transition-transform group-hover:scale-[115%]">
-          {startIcon}
-        </span>
-      )}
+      {useMapIcon && <MapIcon />}
       <span className="translate-y-[1px]">{children}</span>
       {useArrow && <Arrow />}
     </>

@@ -26,8 +26,8 @@ export default function Footer() {
               Download HK Tramways App
             </h2>
             <p className="font-sans text-[15px] leading-[163%] tracking-[0.02em] mt-4 lg:text-[16px] lg:leading-[163%] lg:mt-5">
-              Get our latest news of us, and track the time of next tram
-              coming in your location easily!
+              Get our latest news of us, and track the time of next tram coming
+              in your location easily!
             </p>
             <Button href="/app" className="text-white mt-6 lg:mt-8">
               Learn More
@@ -65,7 +65,13 @@ export default function Footer() {
                 aria-label={social.name}
                 className="flex items-center justify-center w-[26px] h-8 p-0.5 rounded-[21px] hover:opacity-80"
               >
-                <Image src={social.icon} alt="" width={22} height={22} aria-hidden="true" />
+                <Image
+                  src={social.icon}
+                  alt=""
+                  width={22}
+                  height={22}
+                  aria-hidden="true"
+                />
               </a>
             ))}
           </div>
@@ -116,7 +122,11 @@ export default function Footer() {
           <div className="flex-1">
             <h3 className={columnHeading}>Download App</h3>
             <div className="flex flex-col gap-[15px]">
-              <a href="https://play.google.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://play.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src="/footer/googlePlay.png"
                   alt="Get it on Google Play"
@@ -125,7 +135,11 @@ export default function Footer() {
                   className="w-[140px] h-auto"
                 />
               </a>
-              <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://apps.apple.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src="/footer/appStore.png"
                   alt="Download on the App Store"

@@ -27,16 +27,7 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
           href={buttonUrl}
           className="mt-6 md:mt-8 text-green"
           useArrow={false}
-          startIcon={
-            <Image
-              src="/ico/map.svg"
-              alt=""
-              width={20}
-              height={20}
-              className="shrink-0 w-5 h-5"
-              aria-hidden="true"
-            />
-          }
+          useMapIcon
         >
           {buttonLabel}
         </Button>

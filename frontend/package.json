@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "docker-local-test": "bash scripts/docker-local-test.sh"
+    "docker-local-test": "bash scripts/docker-local-test.sh",
+    "docker-kill": "bash scripts/docker-kill.sh"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
