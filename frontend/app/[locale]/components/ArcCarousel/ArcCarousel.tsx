@@ -5,7 +5,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Button from "@/components/Button/Button";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
-import type { ArcCarouselData, ArcCarouselImage } from "@/types/api";
+import type { ArcCarouselData, ResponsiveImage } from "@/types/api";
 
 /**
  * ArcCarousel — fanned-poster carousel, cards arranged like posters fanned
@@ -18,7 +18,7 @@ import type { ArcCarouselData, ArcCarouselImage } from "@/types/api";
 
 export interface ArcCarouselItem {
   id: string;
-  image?: ArcCarouselImage;
+  image?: ResponsiveImage;
   caption: string;
   linkUrl?: string;
 }

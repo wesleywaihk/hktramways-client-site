@@ -43,7 +43,7 @@ export interface ArcCarouselImageFormat {
   size: number;
 }
 
-export interface ArcCarouselImage {
+export interface ResponsiveImage {
   id: number;
   url: string;
   width: number;
@@ -54,7 +54,7 @@ export interface ArcCarouselImage {
 
 export interface ArcCarouselItem {
   id: number;
-  image: ArcCarouselImage | null;
+  image: ResponsiveImage | null;
   desc: string | null;
   hyperlink: Hyperlink | null;
 }
@@ -81,10 +81,10 @@ export interface TramRouteData {
 
 export interface TramoramicTourData {
   id: number;
-  mianImage: ArcCarouselImage | null;
+  mianImage: ResponsiveImage | null;
   hashTagTxt: string | null;
-  supportImage1: ArcCarouselImage | null;
-  supportImage2: ArcCarouselImage | null;
+  supportImage1: ResponsiveImage | null;
+  supportImage2: ResponsiveImage | null;
   title1: string | null;
   title2: string | null;
   desc: string | null;
