@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 import { IMG_URL } from "@/consts";
 import { HomeBanner, HomeBannerImage } from "@/types/api";
@@ -36,9 +35,6 @@ export default function ResponsiveImg({
   sizes = "100vw",
   useMultiImg = true,
   isHero = false,
-  autoHeightSm = "to-parent",
-  autoHeightMd = "to-parent",
-  autoHeightLg = "to-parent",
 }: ResponsiveImgProps) {
   const bannerD = bannerImage?.bannerD;
   const bannerM = bannerImage?.bannerM;
@@ -71,27 +67,9 @@ export default function ResponsiveImg({
   const thumbnail =
     bannerM?.formats?.thumbnail?.url ?? bannerD?.formats?.thumbnail?.url;
 
-  const usesAutoToImg =
-    autoHeightSm === "to-img" ||
-    autoHeightMd === "to-img" ||
-    autoHeightLg === "to-img";
-  const aspectRatioStyle = usesAutoToImg
-    ? ({
-        "--ar-m": bannerM ? `${bannerM.width} / ${bannerM.height}` : undefined,
-        "--ar-d": bannerD ? `${bannerD.width} / ${bannerD.height}` : undefined,
-      } as CSSProperties)
-    : undefined;
-  const smAspectClass =
-    autoHeightSm === "to-img" ? "aspect-[var(--ar-m)]" : "aspect-auto";
-  const mdAspectClass =
-    autoHeightMd === "to-img" ? "md:aspect-[var(--ar-d)]" : "md:aspect-auto";
-  const lgAspectClass =
-    autoHeightLg === "to-img" ? "lg:aspect-[var(--ar-d)]" : "lg:aspect-auto";
-
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden ${smAspectClass} ${mdAspectClass} ${lgAspectClass} ${className}`}
-      style={aspectRatioStyle}
+      className={`relative flex items-center justify-center overflow-hidden w-full h-full aspect-auto ${className}`}
     >
       <div
         className={`absolute inset-0 z-0 ${thumbnail ? "bg-cover bg-center blur-xl" : "bg-earth-light animate-pulse"}`}

@@ -299,7 +299,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
                         bannerD: item.image ?? null,
                         bannerM: null,
                       }}
-                      className="absolute inset-0 w-full h-full pointer-events-none select-none"
+                      className="pointer-events-none select-none"
                     />
                   </a>
                 ) : (
@@ -315,7 +315,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
                         bannerD: item.image ?? null,
                         bannerM: null,
                       }}
-                      className="absolute inset-0 w-full h-full pointer-events-none select-none"
+                      className="pointer-events-none select-none"
                     />
                   </div>
                 )}

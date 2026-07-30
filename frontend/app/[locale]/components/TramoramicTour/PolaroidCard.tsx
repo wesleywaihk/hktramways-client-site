@@ -24,7 +24,7 @@ export default function PolaroidCard({
           bannerD: image ?? null,
           bannerM: null,
         }}
-        className="w-full aspect-square"
+        className="!aspect-square"
       />
       {children}
     </div>
