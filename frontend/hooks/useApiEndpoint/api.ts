@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { API_URL } from "@/consts";
 import { buildPopulate } from "@/lib/buildPopulate";
 
@@ -6,7 +7,8 @@ export async function fetchGlobal(
   options?: { cache?: RequestCache },
 ) {
   const url = `${API_URL}/api/global?populate=*&locale=${locale}`;
-  if (process.env.NODE_ENV === "development") console.log(url);
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
   const res = await fetch(url, {
     cache: options?.cache ?? "no-store",
   });
@@ -15,7 +17,7 @@ export async function fetchGlobal(
   return res.json();
 }
 
-export async function fetchHome(
+export const fetchHome = cache(async function fetchHome(
   documentId: string,
   previewMode: boolean,
   locale: string,
@@ -41,4 +43,4 @@ export async function fetchHome(
   const json = await res.json();
   // The single-document (preview) endpoint returns `data` as an object, not an array.
   return previewMode ? { data: json.data ? [json.data] : [] } : json;
-}
+});
