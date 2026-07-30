@@ -30,19 +30,19 @@ export default function TramoramicTour({
   const action2Url = data?.action2?.link?.[0]?.url ?? "#";
 
   return (
-    <section className="borderless relative bg-red-dark py-0 py-20 lg:py-24 h-auto md:h-[calc(100dvh-52px)] lg:h-[calc(100dvh-100px)] flex">
+    <section className="borderless h-auto pageHeight-md pageHeight-lg relative bg-red-dark py-20 lg:py-24 flex">
       <div className="flex flex-col md:flex-row items-center gap-12 md:gap-8 lg:gap-16 px-5 lg:px-6 max-w-[1200px] mx-auto">
         <div className="relative w-[87vmin] md:w-full min-h-[84.5vmin] md:min-h-0 md:flex-1 mt-[12vmin] mb-[6vmin] md:my-0">
           {supportImage2 && (
             <PolaroidCard
               image={supportImage2}
-              className="z-0 -translate-x-[11%] -translate-y-[60%] shadow-lg"
+              className="z-0 -translate-x-[8%] -translate-y-[58%] md:-translate-x-[11%] md:-translate-y-[60%] shadow-lg"
             />
           )}
           {supportImage1 && (
             <PolaroidCard
               image={supportImage1}
-              className="z-10 -translate-x-[18%] -translate-y-[42%] shadow-lg"
+              className="z-10 -translate-x-[13%] -translate-y-[42%] md:-translate-x-[18%] md:-translate-y-[42%] shadow-lg"
             />
           )}
           <PolaroidCard
@@ -50,7 +50,7 @@ export default function TramoramicTour({
             className="z-20 -translate-y-1/2 -translate-y-1/2 shadow-xl"
           >
             {hashTagTxt && (
-              <p className="absolute bottom-[36px] left-0 right-0 px-[40px] text-center text-gold font-sans font-semibold whitespace-nowrap [font-size:clamp(0.875rem,6cqw,32px)] leading-[1.25em] tracking-[0.02em]">
+              <p className="absolute bottom-[5vmin] md:bottom-[2.9vmin] lg:bottom-[40px] left-0 right-0 px-[40px] text-center text-gold font-sans font-semibold whitespace-nowrap [font-size:clamp(0.875rem,6cqw,32px)] leading-[1.25em] tracking-[0.02em]">
                 {hashTagTxt}
               </p>
             )}
@@ -58,7 +58,7 @@ export default function TramoramicTour({
         </div>
 
         <div className="flex flex-col items-center text-center md:items-start md:text-left md:flex-1">
-          <h2 className="text-gold font-semibold uppercase text-[40px] md:text-[56px] leading-[107%] tracking-[0.02em]">
+          <h2 className="text-gold font-semibold uppercase text-[40px] md:text-[44px] lg:text-[56px] leading-[107%] tracking-[0.02em]">
             {title1}
             <br />
             <span className="text-white">{title2}</span>

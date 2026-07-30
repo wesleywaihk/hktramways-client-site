@@ -41,6 +41,15 @@ body {
   @apply -mx-5 w-[calc(100%+2.5rem)] lg:-mx-6 lg:w-[calc(100%+3rem)];
 }
 
+@utility pageHeight-sm {
+  @apply h-[calc(100dvh-52px)];
+}
+@utility pageHeight-md {
+  @apply md:h-[calc(100dvh-52px)];
+}
+@utility pageHeight-lg {
+  @apply lg:h-[calc(100dvh-100px)];
+}
 @utility pageHeight {
-  @apply h-[calc(100dvh-52px)] lg:h-[calc(100dvh-100px)];
+  @apply pageHeight-sm pageHeight-md pageHeight-lg;
 }
