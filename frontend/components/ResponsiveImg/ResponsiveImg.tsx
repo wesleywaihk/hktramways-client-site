@@ -1,6 +1,9 @@
+import type { CSSProperties } from "react";
 import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 import { IMG_URL } from "@/consts";
 import { HomeBanner, HomeBannerImage } from "@/types/api";
+
+type AutoHeight = "to-img" | "to-parent";
 
 export interface ResponsiveImgProps {
   url?: string | null;
@@ -9,7 +12,9 @@ export interface ResponsiveImgProps {
   sizes?: string;
   useMultiImg?: boolean;
   isHero?: boolean;
-  mobileHeight?: "auto" | "screen";
+  autoHeightSm?: AutoHeight;
+  autoHeightMd?: AutoHeight;
+  autoHeightLg?: AutoHeight;
 }
 
 function buildSrcSet(
@@ -31,7 +36,9 @@ export default function ResponsiveImg({
   sizes = "100vw",
   useMultiImg = true,
   isHero = false,
-  mobileHeight = "screen",
+  autoHeightSm = "to-parent",
+  autoHeightMd = "to-parent",
+  autoHeightLg = "to-parent",
 }: ResponsiveImgProps) {
   const bannerD = bannerImage?.bannerD;
   const bannerM = bannerImage?.bannerM;
@@ -64,24 +71,37 @@ export default function ResponsiveImg({
   const thumbnail =
     bannerM?.formats?.thumbnail?.url ?? bannerD?.formats?.thumbnail?.url;
 
+  const usesAutoToImg =
+    autoHeightSm === "to-img" ||
+    autoHeightMd === "to-img" ||
+    autoHeightLg === "to-img";
+  const aspectRatioStyle = usesAutoToImg
+    ? ({
+        "--ar-m": bannerM ? `${bannerM.width} / ${bannerM.height}` : undefined,
+        "--ar-d": bannerD ? `${bannerD.width} / ${bannerD.height}` : undefined,
+      } as CSSProperties)
+    : undefined;
+  const smAspectClass =
+    autoHeightSm === "to-img" ? "aspect-[var(--ar-m)]" : "aspect-auto";
+  const mdAspectClass =
+    autoHeightMd === "to-img" ? "md:aspect-[var(--ar-d)]" : "md:aspect-auto";
+  const lgAspectClass =
+    autoHeightLg === "to-img" ? "lg:aspect-[var(--ar-d)]" : "lg:aspect-auto";
+
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden ${smAspectClass} ${mdAspectClass} ${lgAspectClass} ${className}`}
+      style={aspectRatioStyle}
     >
-      {mobileHeight === "screen" && (
-        <div
-          className={`absolute inset-0 z-0 ${thumbnail ? "bg-cover bg-center blur-xl" : "bg-earth-light animate-pulse"}`}
-          style={
-            thumbnail
-              ? { backgroundImage: `url(${url}${thumbnail})` }
-              : undefined
-          }
-          aria-hidden="true"
-        />
-      )}
-      <picture
-        className={`${mobileHeight === "screen" ? "absolute" : "relative h-auto md:absolute"} inset-0 z-10 h-[calc(100%+2px)] w-[calc(100%+2px)] -m-[1px]`}
-      >
+      <div
+        className={`absolute inset-0 z-0 ${thumbnail ? "bg-cover bg-center blur-xl" : "bg-earth-light animate-pulse"}`}
+        style={
+          thumbnail ? { backgroundImage: `url(${url}${thumbnail})` } : undefined
+        }
+        aria-hidden="true"
+      />
+
+      <picture className="absolute inset-0 z-10 h-[calc(100%+2px)] w-[calc(100%+2px)] -m-[1px]">
         {bannerD && (
           <source media="(min-width: 1024px)" srcSet={srcSetD} sizes={sizes} />
         )}
@@ -91,7 +111,7 @@ export default function ResponsiveImg({
           sizes={sizes}
           alt={alt}
           loading={isHero ? "eager" : "lazy"}
-          className={`${mobileHeight === "screen" ? "absolute" : "relative h-auto md:absolute"} inset-0 w-full h-full object-cover`}
+          className="absolute inset-0 w-full h-full object-cover"
         />
       </picture>
     </div>

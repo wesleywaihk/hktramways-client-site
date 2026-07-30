@@ -26,7 +26,7 @@ export default function PartyTram() {
           },
         }}
         useMultiImg={false}
-        mobileHeight="auto"
+        autoHeightSm="to-img"
         className="w-full h-full"
       />
     </section>
