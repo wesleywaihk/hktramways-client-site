@@ -1,0 +1,63 @@
+{
+  "collectionName": "components_page_home_tramoramic_tours",
+  "info": {
+    "displayName": "tramoramicTour",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "mianImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "hashTagTxt": {
+      "type": "string"
+    },
+    "supportImage1": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "supportImage2": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "title1": {
+      "type": "string"
+    },
+    "title2": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "text"
+    },
+    "action1": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    },
+    "action2": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

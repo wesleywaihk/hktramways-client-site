@@ -7,6 +7,7 @@ export const colors = {
   white: "#ffffff",
   earthLight: "#edebda",
   redDark: "#5a1716",
+  gold: "#c8a96f",
   accentBrown: "#703900",
   black: "#222",
 } as const;

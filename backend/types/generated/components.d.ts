@@ -99,6 +99,29 @@ export interface PageHomeTramRoutes extends Struct.ComponentSchema {
   };
 }
 
+export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
+  collectionName: 'components_page_home_tramoramic_tours';
+  info: {
+    displayName: 'tramoramicTour';
+    icon: 'code';
+  };
+  attributes: {
+    action1: Schema.Attribute.Component<'content.action-button', false>;
+    action2: Schema.Attribute.Component<'content.action-button', false>;
+    desc: Schema.Attribute.Text;
+    hashTagTxt: Schema.Attribute.String;
+    mianImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    supportImage1: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    supportImage2: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    title1: Schema.Attribute.String;
+    title2: Schema.Attribute.String;
+  };
+}
+
 export interface SeoSeo extends Struct.ComponentSchema {
   collectionName: 'components_seo_seos';
   info: {
@@ -132,6 +155,7 @@ declare module '@strapi/strapi' {
       'media.banner-image': MediaBannerImage;
       'page-home.arc-carousel': PageHomeArcCarousel;
       'page-home.tram-routes': PageHomeTramRoutes;
+      'page-home.tramoramic-tour': PageHomeTramoramicTour;
       'seo.seo': SeoSeo;
     }
   }

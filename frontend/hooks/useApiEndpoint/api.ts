@@ -32,6 +32,12 @@ export const fetchHome = cache(async function fetchHome(
     "tramRoute",
     "tramRoute.mapButton",
     "tramRoute.mapButton.link",
+    "tramoramicTour",
+    "tramoramicTour.mianImage",
+    "tramoramicTour.supportImage1",
+    "tramoramicTour.supportImage2",
+    "tramoramicTour.action1",
+    "tramoramicTour.action2",
   ]);
   const url = previewMode
     ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`

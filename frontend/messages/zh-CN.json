@@ -4,6 +4,8 @@
     "noContent": "没有可用内容。",
     "newsBarFallback": "香港电车 始于1904年",
     "tramRouteTitleFallback": "6条电车路线",
-    "tramRouteButtonFallback": "互动路线图"
+    "tramRouteButtonFallback": "互动路线图",
+    "tramoramicTourAction1Fallback": "电车游",
+    "tramoramicTourAction2Fallback": "立即预订"
   }
 }

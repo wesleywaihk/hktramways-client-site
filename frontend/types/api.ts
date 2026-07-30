@@ -59,7 +59,7 @@ export interface ArcCarouselItem {
   hyperlink: Hyperlink | null;
 }
 
-export interface ArcCarouselActionButton {
+export interface ActionButton {
   id: number;
   label: string | null;
   link: Hyperlink[];
@@ -69,20 +69,27 @@ export interface ArcCarouselData {
   id: number;
   title: string | null;
   item: ArcCarouselItem[];
-  actionButton: ArcCarouselActionButton | null;
-}
-
-export interface TramRouteMapButton {
-  id: number;
-  label: string | null;
-  link: Hyperlink[];
+  actionButton: ActionButton | null;
 }
 
 export interface TramRouteData {
   id: number;
   title: string | null;
   desc: string | null;
-  mapButton: TramRouteMapButton | null;
+  mapButton: ActionButton | null;
+}
+
+export interface TramoramicTourData {
+  id: number;
+  mianImage: ArcCarouselImage | null;
+  hashTagTxt: string | null;
+  supportImage1: ArcCarouselImage | null;
+  supportImage2: ArcCarouselImage | null;
+  title1: string | null;
+  title2: string | null;
+  desc: string | null;
+  action1: ActionButton | null;
+  action2: ActionButton | null;
 }
 
 export interface Home {
@@ -93,6 +100,7 @@ export interface Home {
   newsBar: HomeNewsBarItem[];
   arcCarousel: ArcCarouselData | null;
   tramRoute: TramRouteData | null;
+  tramoramicTour: TramoramicTourData | null;
 }
 
 export interface HomeResponse {
