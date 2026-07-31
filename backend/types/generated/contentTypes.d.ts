@@ -522,15 +522,6 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    tramoramicTour: Schema.Attribute.Component<
-      'page-home.tramoramic-tour',
-      false
-    > &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     tramRoute: Schema.Attribute.Component<'page-home.tram-routes', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

@@ -28,9 +28,7 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
           href={buttonUrl}
           className="mt-6 md:mt-8 text-green"
           useArrow={false}
-          startIcon={
-            <MapIco className="shrink-0 w-5 h-5" aria-hidden="true" />
-          }
+          startIcon={<MapIco className="shrink-0 w-5 h-5" aria-hidden="true" />}
         >
           {buttonLabel}
         </Button>

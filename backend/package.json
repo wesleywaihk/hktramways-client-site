@@ -13,6 +13,7 @@
     "sync-to-uat": "bash scripts/sync-to-uat.sh",
     "sync-from-uat": "bash scripts/sync-from-uat.sh",
     "docker-local-test": "bash scripts/docker-local-test.sh",
+    "docker-kill": "bash scripts/docker-kill.sh",
     "seed:example": "node ./scripts/seed.js",
     "start": "strapi start",
     "strapi": "strapi",

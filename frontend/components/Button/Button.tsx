@@ -1,14 +1,12 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 
 type ButtonProps = {
   children: React.ReactNode;
   href?: string;
   onClick?: () => void;
   className?: string;
-  /** Whether to render the trailing arrow icon. Defaults to true. */
   useArrow?: boolean;
-  startIcon?: ReactNode;
+  startIcon?: React.ReactNode;
 };
 
 const buttonClasses =
@@ -18,26 +16,24 @@ const buttonClasses =
   "font-sans text-[14px] leading-[157%] font-semibold uppercase tracking-[0.02em] whitespace-nowrap " +
   "hover:opacity-80 transition-opacity";
 
-function Arrow() {
-  return (
-    <svg
-      className="shrink-0 transition-transform group-hover:translate-x-1"
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const Arrow = () => (
+  <svg
+    className="shrink-0 transition-transform group-hover:translate-x-1"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 export default function Button({
   children,

@@ -68,8 +68,8 @@ export interface MediaBannerImage extends Struct.ComponentSchema {
   };
   attributes: {
     altText: Schema.Attribute.String;
-    imageD: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    imageM: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    bannerD: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    bannerM: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 
@@ -96,29 +96,6 @@ export interface PageHomeTramRoutes extends Struct.ComponentSchema {
     desc: Schema.Attribute.Text;
     mapButton: Schema.Attribute.Component<'content.action-button', false>;
     title: Schema.Attribute.String;
-  };
-}
-
-export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
-  collectionName: 'components_page_home_tramoramic_tours';
-  info: {
-    displayName: 'tramoramicTour';
-    icon: 'code';
-  };
-  attributes: {
-    action1: Schema.Attribute.Component<'content.action-button', false>;
-    action2: Schema.Attribute.Component<'content.action-button', false>;
-    desc: Schema.Attribute.Text;
-    hashTagTxt: Schema.Attribute.String;
-    mianImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    supportImage1: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    supportImage2: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    title1: Schema.Attribute.String;
-    title2: Schema.Attribute.String;
   };
 }
 
@@ -155,7 +132,6 @@ declare module '@strapi/strapi' {
       'media.banner-image': MediaBannerImage;
       'page-home.arc-carousel': PageHomeArcCarousel;
       'page-home.tram-routes': PageHomeTramRoutes;
-      'page-home.tramoramic-tour': PageHomeTramoramicTour;
       'seo.seo': SeoSeo;
     }
   }
