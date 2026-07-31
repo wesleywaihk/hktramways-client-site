@@ -44,7 +44,7 @@ export const fetchHome = cache(async function fetchHome(
     : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch home: ${res.status}`);
   const json = await res.json();
   // The single-document (preview) endpoint returns `data` as an object, not an array.
