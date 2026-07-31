@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import Button from "@/components/Button/Button";
+import MapIco from "@/components/icons/MapIco";
 import type { TramRouteData } from "@/types/api";
 
 export interface TramRouteProps {
@@ -27,7 +28,7 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
           href={buttonUrl}
           className="mt-6 md:mt-8 text-green"
           useArrow={false}
-          useMapIcon
+          startIcon={<MapIco className="shrink-0 w-5 h-5" aria-hidden="true" />}
         >
           {buttonLabel}
         </Button>

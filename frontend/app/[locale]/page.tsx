@@ -7,6 +7,8 @@ import Banner from "./components/Banner/Banner";
 import NewsBar from "./components/NewsBar/NewsBar";
 import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
 import TramRoute from "./components/TramRoute/TramRoute";
+import TramoramicTour from "./components/TramoramicTour/TramoramicTour";
+import PartyTram from "./components/PartyTram/PartyTram";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import SetHeaderStyle from "@/components/SetHeaderStyle";
 
@@ -58,6 +60,8 @@ export default async function LandingPage({ params }: LandingPageProps) {
       <NewsBar items={home.newsBar ?? []} locale={locale} />
       <ArcCarousel data={home.arcCarousel} />
       <TramRoute data={home.tramRoute} />
+      <PartyTram />
+      <TramoramicTour data={home.tramoramicTour} />
       <div className="h-[300px]" />
     </div>
   );

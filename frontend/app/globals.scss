@@ -8,6 +8,7 @@
   --color-white: #{colors.$color-white};
   --color-earth-light: #{colors.$color-earth-light};
   --color-red-dark: #{colors.$color-red-dark};
+  --color-gold: #{colors.$color-gold};
   --color-accent-brown: #{colors.$color-accent-brown};
 }
 
@@ -17,6 +18,7 @@
   --color-white: var(--color-white);
   --color-earth-light: var(--color-earth-light);
   --color-red-dark: var(--color-red-dark);
+  --color-gold: var(--color-gold);
   --color-accent-brown: var(--color-accent-brown);
   --font-sans: var(--font-outfit);
 }
@@ -39,6 +41,15 @@ body {
   @apply -mx-5 w-[calc(100%+2.5rem)] lg:-mx-6 lg:w-[calc(100%+3rem)];
 }
 
+@utility pageHeight-sm {
+  @apply h-[calc(100dvh-52px)];
+}
+@utility pageHeight-md {
+  @apply md:h-[calc(100dvh-52px)];
+}
+@utility pageHeight-lg {
+  @apply lg:h-[calc(100dvh-100px)];
+}
 @utility pageHeight {
-  @apply h-[calc(100dvh-52px)] lg:h-[calc(100dvh-100px)];
+  @apply pageHeight-sm pageHeight-md pageHeight-lg;
 }

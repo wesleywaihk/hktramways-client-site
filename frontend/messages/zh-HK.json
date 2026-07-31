@@ -4,6 +4,8 @@
     "noContent": "沒有可用內容。",
     "newsBarFallback": "香港電車 始於1904年",
     "tramRouteTitleFallback": "6條電車路線",
-    "tramRouteButtonFallback": "互動路線圖"
+    "tramRouteButtonFallback": "互動路線圖",
+    "tramoramicTourAction1Fallback": "電車遊",
+    "tramoramicTourAction2Fallback": "立即預訂"
   }
 }

@@ -62,6 +62,16 @@
       },
       "component": "page-home.tram-routes",
       "repeatable": false
+    },
+    "tramoramicTour": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "page-home.tramoramic-tour",
+      "repeatable": false
     }
   }
 }
