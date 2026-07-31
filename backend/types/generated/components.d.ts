@@ -68,8 +68,8 @@ export interface MediaBannerImage extends Struct.ComponentSchema {
   };
   attributes: {
     altText: Schema.Attribute.String;
-    bannerD: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    bannerM: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    imageD: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    imageM: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 

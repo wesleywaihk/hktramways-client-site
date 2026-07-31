@@ -6,7 +6,7 @@
   },
   "options": {},
   "attributes": {
-    "bannerD": {
+    "imageD": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
@@ -16,7 +16,7 @@
         "audios"
       ]
     },
-    "bannerM": {
+    "imageM": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
