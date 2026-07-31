@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 type ButtonProps = {
@@ -7,7 +6,7 @@ type ButtonProps = {
   onClick?: () => void;
   className?: string;
   useArrow?: boolean;
-  useMapIcon?: boolean;
+  startIcon?: React.ReactNode;
 };
 
 const buttonClasses =
@@ -36,32 +35,23 @@ const Arrow = () => (
   </svg>
 );
 
-const MapIcon = () => (
-  <span className="inline-flex shrink-0 transition-transform group-hover:scale-[115%]">
-    <Image
-      src="/ico/map.svg"
-      alt=""
-      width={20}
-      height={20}
-      className="shrink-0 w-5 h-5"
-      aria-hidden="true"
-    />
-  </span>
-);
-
 export default function Button({
   children,
   href,
   onClick,
   className,
   useArrow = true,
-  useMapIcon = false,
+  startIcon,
 }: ButtonProps) {
   const classes = [buttonClasses, className].filter(Boolean).join(" ");
 
   const content = (
     <>
-      {useMapIcon && <MapIcon />}
+      {startIcon && (
+        <span className="inline-flex shrink-0 transition-transform group-hover:scale-[115%]">
+          {startIcon}
+        </span>
+      )}
       <span className="translate-y-[1px]">{children}</span>
       {useArrow && <Arrow />}
     </>
