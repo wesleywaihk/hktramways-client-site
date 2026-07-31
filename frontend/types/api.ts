@@ -1,24 +1,24 @@
-export interface HomeBannerFormat {
+export interface ImageFormat {
   url: string;
   width: number;
   height: number;
   size: number;
 }
 
-export interface HomeBanner {
+export interface Image {
   id: number;
   url: string;
   width: number;
   height: number;
   alternativeText: string | null;
-  formats: Record<string, HomeBannerFormat> | null;
+  formats: Record<string, ImageFormat> | null;
 }
 
-export interface HomeBannerImage {
+export interface ResponsiveImage {
   id: number;
   altText: string | null;
-  bannerD: HomeBanner | null;
-  bannerM: HomeBanner | null;
+  imageD: Image | null;
+  imageM: Image | null;
 }
 
 export interface Hyperlink {
@@ -36,25 +36,9 @@ export interface HomeNewsBarItem {
   hyperlink: Hyperlink | null;
 }
 
-export interface ArcCarouselImageFormat {
-  url: string;
-  width: number;
-  height: number;
-  size: number;
-}
-
-export interface ResponsiveImage {
-  id: number;
-  url: string;
-  width: number;
-  height: number;
-  alternativeText: string | null;
-  formats: Record<string, ArcCarouselImageFormat> | null;
-}
-
 export interface ArcCarouselItem {
   id: number;
-  image: ResponsiveImage | null;
+  image: Image | null;
   desc: string | null;
   hyperlink: Hyperlink | null;
 }
@@ -81,10 +65,10 @@ export interface TramRouteData {
 
 export interface TramoramicTourData {
   id: number;
-  mianImage: ResponsiveImage | null;
+  mianImage: Image | null;
   hashTagTxt: string | null;
-  supportImage1: ResponsiveImage | null;
-  supportImage2: ResponsiveImage | null;
+  supportImage1: Image | null;
+  supportImage2: Image | null;
   title1: string | null;
   title2: string | null;
   desc: string | null;
@@ -96,7 +80,7 @@ export interface Home {
   id: number;
   documentId: string;
   Title: string;
-  bannerImage: HomeBannerImage | null;
+  bannerImage: ResponsiveImage | null;
   newsBar: HomeNewsBarItem[];
   arcCarousel: ArcCarouselData | null;
   tramRoute: TramRouteData | null;

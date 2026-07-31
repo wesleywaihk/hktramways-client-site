@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
-import type { ResponsiveImage } from "@/types/api";
+import type { Image } from "@/types/api";
 
 export interface PolaroidCardProps {
-  image: ResponsiveImage | null;
+  image: Image | null;
   className?: string;
   children?: ReactNode;
 }
@@ -21,8 +21,8 @@ export default function PolaroidCard({
         bannerImage={{
           id: image?.id ?? 0,
           altText: image?.alternativeText ?? null,
-          bannerD: image ?? null,
-          bannerM: null,
+          imageD: image ?? null,
+          imageM: null,
         }}
         className="!aspect-square"
       />

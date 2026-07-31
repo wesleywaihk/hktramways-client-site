@@ -5,7 +5,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Button from "@/components/Button/Button";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
-import type { ArcCarouselData, ResponsiveImage } from "@/types/api";
+import type { ArcCarouselData, Image } from "@/types/api";
 
 /**
  * ArcCarousel — fanned-poster carousel, cards arranged like posters fanned
@@ -18,7 +18,7 @@ import type { ArcCarouselData, ResponsiveImage } from "@/types/api";
 
 export interface ArcCarouselItem {
   id: string;
-  image?: ResponsiveImage;
+  image?: Image;
   caption: string;
   linkUrl?: string;
 }
@@ -296,8 +296,8 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
                       bannerImage={{
                         id: item.image?.id ?? 0,
                         altText: item.image?.alternativeText ?? null,
-                        bannerD: item.image ?? null,
-                        bannerM: null,
+                        imageD: item.image ?? null,
+                        imageM: null,
                       }}
                       className="pointer-events-none select-none"
                     />
@@ -312,8 +312,8 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
                       bannerImage={{
                         id: item.image?.id ?? 0,
                         altText: item.image?.alternativeText ?? null,
-                        bannerD: item.image ?? null,
-                        bannerM: null,
+                        imageD: item.image ?? null,
+                        imageM: null,
                       }}
                       className="pointer-events-none select-none"
                     />

@@ -1,12 +1,12 @@
 import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 import { IMG_URL } from "@/consts";
-import { HomeBanner, HomeBannerImage } from "@/types/api";
+import { Image, ResponsiveImage } from "@/types/api";
 
 type AutoHeight = "to-img" | "to-parent";
 
 export interface ResponsiveImgProps {
   url?: string | null;
-  bannerImage?: HomeBannerImage | null;
+  bannerImage?: ResponsiveImage | null;
   className?: string;
   sizes?: string;
   useMultiImg?: boolean;
@@ -16,10 +16,7 @@ export interface ResponsiveImgProps {
   autoHeightLg?: AutoHeight;
 }
 
-function buildSrcSet(
-  banner: HomeBanner | null | undefined,
-  url: string | null,
-) {
+function buildSrcSet(banner: Image | null | undefined, url: string | null) {
   if (!banner) return undefined;
   const sizes = [
     ...Object.values(banner.formats ?? {}),
@@ -36,11 +33,11 @@ export default function ResponsiveImg({
   useMultiImg = true,
   isHero = false,
 }: ResponsiveImgProps) {
-  const bannerD = bannerImage?.bannerD;
-  const bannerM = bannerImage?.bannerM;
+  const imageD = bannerImage?.imageD;
+  const imageM = bannerImage?.imageM;
   const alt = bannerImage?.altText ?? "";
-  const srcD = bannerD?.url;
-  const srcM = bannerM?.url;
+  const srcD = imageD?.url;
+  const srcM = imageM?.url;
 
   if (!srcD && !srcM) {
     return (
@@ -58,14 +55,14 @@ export default function ResponsiveImg({
   }
 
   const src = `${url}${srcM ?? srcD}`;
-  const srcSetD = !useMultiImg ? `${url}${srcD}` : buildSrcSet(bannerD, url);
+  const srcSetD = !useMultiImg ? `${url}${srcD}` : buildSrcSet(imageD, url);
   const srcSetM = !useMultiImg
     ? undefined
-    : bannerM
-      ? buildSrcSet(bannerM, url)
+    : imageM
+      ? buildSrcSet(imageM, url)
       : srcSetD;
   const thumbnail =
-    bannerM?.formats?.thumbnail?.url ?? bannerD?.formats?.thumbnail?.url;
+    imageM?.formats?.thumbnail?.url ?? imageD?.formats?.thumbnail?.url;
 
   return (
     <div
@@ -80,7 +77,7 @@ export default function ResponsiveImg({
       />
 
       <picture className="absolute inset-0 z-10 h-[calc(100%+2px)] w-[calc(100%+2px)] -m-[1px]">
-        {bannerD && (
+        {imageD && (
           <source media="(min-width: 1024px)" srcSet={srcSetD} sizes={sizes} />
         )}
         <img
