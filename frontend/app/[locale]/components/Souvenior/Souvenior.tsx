@@ -104,7 +104,7 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
         {data.actionButton && (
           <ActionButton
             {...data.actionButton}
-            className="!hidden lg:!inline-flex lg:shrink-0 px-[28px] py-[19px]"
+            className="hidden! lg:inline-flex! lg:shrink-0 px-[28px]! py-[19px]!"
           />
         )}
       </div>
@@ -171,7 +171,7 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
 
       <div className="w-full pageBorder max-w-screen-xl mx-auto block lg:hidden mt-10 flex items-center justify-center">
         {data.actionButton && (
-          <ActionButton {...data.actionButton} className="px-6 py-[14px]" />
+          <ActionButton {...data.actionButton} className="!px-6 !py-[14px]" />
         )}
       </div>
     </section>
