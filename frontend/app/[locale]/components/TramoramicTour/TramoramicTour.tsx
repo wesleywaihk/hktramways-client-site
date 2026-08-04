@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 import Button from "@/components/Button/Button";
-import CalendarIco from "@/components/icons/CalendarIco";
 import PolaroidCard from "./PolaroidCard";
 import type { TramoramicTourData } from "@/types/api";
 
@@ -12,6 +11,8 @@ export default function TramoramicTour({
   data = undefined,
 }: TramoramicTourProps) {
   const t = useTranslations("common");
+
+  if (!data) return null;
 
   const hashTagTxt = data?.hashTagTxt ?? "";
   const title1 = data?.title1 ?? "";
@@ -25,9 +26,14 @@ export default function TramoramicTour({
   const action1Label =
     data?.action1?.label ?? t("tramoramicTourAction1Fallback");
   const action1Url = data?.action1?.link?.[0]?.url ?? "#";
+  const action1UseArrow = data?.action1?.useArrow ?? true;
+  const action1StartIcon = data?.action1?.startIcon;
+
   const action2Label =
     data?.action2?.label ?? t("tramoramicTourAction2Fallback");
   const action2Url = data?.action2?.link?.[0]?.url ?? "#";
+  const action2UseArrow = data?.action2?.useArrow ?? false;
+  const action2StartIcon = data?.action2?.startIcon ?? "calendar";
 
   return (
     <section className="borderless h-auto pageHeight-md pageHeight-lg relative bg-red-dark py-20 lg:py-24 flex">
@@ -67,19 +73,19 @@ export default function TramoramicTour({
             {desc}
           </p>
           <div className="mt-6 md:mt-8 flex flex-wrap justify-center md:justify-start gap-4">
-            <Button href={action1Url} className="text-white" useArrow={true}>
+            <Button
+              href={action1Url}
+              className="text-white"
+              useArrow={action1UseArrow}
+              startIcon={action1StartIcon}
+            >
               {action1Label}
             </Button>
             <Button
               href={action2Url}
               className="text-white"
-              useArrow={false}
-              startIcon={
-                <CalendarIco
-                  className="shrink-0 w-5 h-5 text-white"
-                  aria-hidden="true"
-                />
-              }
+              useArrow={action2UseArrow}
+              startIcon={action2StartIcon}
             >
               {action2Label}
             </Button>

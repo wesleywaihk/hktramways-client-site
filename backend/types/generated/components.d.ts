@@ -9,6 +9,10 @@ export interface ContentActionButton extends Struct.ComponentSchema {
   attributes: {
     label: Schema.Attribute.String;
     link: Schema.Attribute.Component<'content.hyperlink', false>;
+    startIcon: Schema.Attribute.Enumeration<
+      ['map', 'calendar', 'bucket', 'upRightArrow']
+    >;
+    useArrow: Schema.Attribute.Boolean;
   };
 }
 
@@ -60,6 +64,31 @@ export interface ContentNewsItems extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentSouveniorItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_souvenior_items';
+  info: {
+    displayName: 'souveniorItem';
+    icon: 'gift';
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    pirce: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    preDiscountPrice: Schema.Attribute.Decimal;
+    rank: Schema.Attribute.Enumeration<['r1', 'r2', 'r3']>;
+  };
+}
+
 export interface MediaBannerImage extends Struct.ComponentSchema {
   collectionName: 'components_media_banner_images';
   info: {
@@ -86,6 +115,18 @@ export interface PageHomeArcCarousel extends Struct.ComponentSchema {
   };
 }
 
+export interface PageHomeSouvenior extends Struct.ComponentSchema {
+  collectionName: 'components_page_home_souveniors';
+  info: {
+    displayName: 'souvenior';
+    icon: 'gift';
+  };
+  attributes: {
+    item: Schema.Attribute.Component<'content.souvenior-item', true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface PageHomeTramRoutes extends Struct.ComponentSchema {
   collectionName: 'components_page_home_tram_routes';
   info: {
@@ -93,8 +134,8 @@ export interface PageHomeTramRoutes extends Struct.ComponentSchema {
     icon: 'code';
   };
   attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
     desc: Schema.Attribute.Text;
-    mapButton: Schema.Attribute.Component<'content.action-button', false>;
     title: Schema.Attribute.String;
   };
 }
@@ -152,8 +193,10 @@ declare module '@strapi/strapi' {
       'content.carousel-item': ContentCarouselItem;
       'content.hyperlink': ContentHyperlink;
       'content.news-items': ContentNewsItems;
+      'content.souvenior-item': ContentSouveniorItem;
       'media.banner-image': MediaBannerImage;
       'page-home.arc-carousel': PageHomeArcCarousel;
+      'page-home.souvenior': PageHomeSouvenior;
       'page-home.tram-routes': PageHomeTramRoutes;
       'page-home.tramoramic-tour': PageHomeTramoramicTour;
       'seo.seo': SeoSeo;

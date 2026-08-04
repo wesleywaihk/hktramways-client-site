@@ -30,14 +30,19 @@ export const fetchHome = cache(async function fetchHome(
     "arcCarousel.actionButton",
     "arcCarousel.actionButton.link",
     "tramRoute",
-    "tramRoute.mapButton",
-    "tramRoute.mapButton.link",
+    "tramRoute.actionButton",
+    "tramRoute.actionButton.link",
     "tramoramicTour",
     "tramoramicTour.mianImage",
     "tramoramicTour.supportImage1",
     "tramoramicTour.supportImage2",
     "tramoramicTour.action1",
     "tramoramicTour.action2",
+    "souvenior",
+    "souvenior.item",
+    "souvenior.item.image",
+    "souvenior.item.actionButton",
+    "souvenior.item.actionButton.link",
   ]);
   const url = previewMode
     ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`

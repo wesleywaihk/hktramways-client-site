@@ -1,0 +1,51 @@
+{
+  "collectionName": "components_content_souvenior_items",
+  "info": {
+    "displayName": "souveniorItem",
+    "icon": "gift"
+  },
+  "options": {},
+  "attributes": {
+    "rank": {
+      "type": "enumeration",
+      "enum": [
+        "r1",
+        "r2",
+        "r3"
+      ]
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "actionButton": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "pirce": {
+      "type": "decimal",
+      "required": true
+    },
+    "preDiscountPrice": {
+      "type": "decimal"
+    }
+  },
+  "config": {}
+}

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import Button from "@/components/Button/Button";
-import MapIco from "@/components/icons/MapIco";
 import type { TramRouteData } from "@/types/api";
 
 export interface TramRouteProps {
@@ -10,10 +9,15 @@ export interface TramRouteProps {
 
 export default function TramRoute({ data = undefined }: TramRouteProps) {
   const t = useTranslations("common");
+
+  if (!data) return null;
+
   const title = data?.title ?? t("tramRouteTitleFallback");
   const desc = data?.desc ?? "";
-  const buttonLabel = data?.mapButton?.label ?? t("tramRouteButtonFallback");
-  const buttonUrl = data?.mapButton?.link?.[0]?.url ?? "#";
+  const buttonLabel = data?.actionButton?.label ?? t("tramRouteButtonFallback");
+  const buttonUrl = data?.actionButton?.link?.[0]?.url ?? "#";
+  const buttonUseArrow = data?.actionButton?.useArrow ?? false;
+  const buttonStartIcon = data?.actionButton?.startIcon ?? "map";
 
   return (
     <section className="borderless pageHeight relative bg-earth-light pt-16 md:pt-20 lg:pt-24">
@@ -27,8 +31,8 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
         <Button
           href={buttonUrl}
           className="mt-6 md:mt-8 text-green"
-          useArrow={false}
-          startIcon={<MapIco className="shrink-0 w-5 h-5" aria-hidden="true" />}
+          useArrow={buttonUseArrow}
+          startIcon={buttonStartIcon}
         >
           {buttonLabel}
         </Button>
