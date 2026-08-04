@@ -25,6 +25,8 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
           rel={item.link?.noRefer ? "noreferrer" : undefined}
           aria-label={item.name}
           className="absolute inset-0 z-30"
+          draggable={false}
+          onDragStart={(e) => e.preventDefault()}
         />
       )}
       <div className="relative w-full aspect-square">

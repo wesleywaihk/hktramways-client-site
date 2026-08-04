@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-04T13:51:47.698Z"
+    "x-generation-date": "2026-08-04T14:43:29.412Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -3870,6 +3870,30 @@
           }
         }
       },
+      "SharedIconEnumComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "icon": {
+            "type": "string",
+            "enum": [
+              "map",
+              "calendar",
+              "bucket",
+              "upRightArrow"
+            ]
+          }
+        }
+      },
       "ContentActionButtonComponent": {
         "type": "object",
         "properties": {
@@ -3887,13 +3911,7 @@
             "type": "string"
           },
           "startIcon": {
-            "type": "string",
-            "enum": [
-              "map",
-              "calendar",
-              "bucket",
-              "upRightArrow"
-            ]
+            "$ref": "#/components/schemas/SharedIconEnumComponent"
           },
           "useArrow": {
             "type": "boolean"
@@ -4696,8 +4714,8 @@
               }
             }
           },
-          "actionButton": {
-            "$ref": "#/components/schemas/ContentActionButtonComponent"
+          "icon": {
+            "$ref": "#/components/schemas/SharedIconEnumComponent"
           },
           "name": {
             "type": "string"
@@ -4709,6 +4727,9 @@
           "preDiscountPrice": {
             "type": "number",
             "format": "float"
+          },
+          "link": {
+            "$ref": "#/components/schemas/ContentHyperlinkComponent"
           }
         }
       },

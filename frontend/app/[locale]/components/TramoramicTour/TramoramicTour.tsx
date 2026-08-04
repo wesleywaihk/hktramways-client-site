@@ -25,15 +25,15 @@ export default function TramoramicTour({
 
   const action1Label =
     data?.action1?.label ?? t("tramoramicTourAction1Fallback");
-  const action1Url = data?.action1?.link?.[0]?.url ?? "#";
+  const action1Url = data?.action1?.link?.url ?? "#";
   const action1UseArrow = data?.action1?.useArrow ?? true;
-  const action1StartIcon = data?.action1?.startIcon;
+  const action1StartIcon = data?.action1?.startIcon?.icon;
 
   const action2Label =
     data?.action2?.label ?? t("tramoramicTourAction2Fallback");
-  const action2Url = data?.action2?.link?.[0]?.url ?? "#";
+  const action2Url = data?.action2?.link?.url ?? "#";
   const action2UseArrow = data?.action2?.useArrow ?? false;
-  const action2StartIcon = data?.action2?.startIcon ?? "calendar";
+  const action2StartIcon = data?.action2?.startIcon?.icon ?? "calendar";
 
   return (
     <section className="borderless h-auto pageHeight-md pageHeight-lg relative bg-red-dark py-20 lg:py-24 flex">
