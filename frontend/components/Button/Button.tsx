@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ActionButtonIcon from "@/components/icons/actionButtonIcon";
-import type { ActionButtonStartIcon } from "@/types/api";
+import type { IconEnum } from "@/types/api";
 
 export type ButtonProps = {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ export type ButtonProps = {
   onClick?: () => void;
   className?: string;
   useArrow?: boolean;
-  startIcon?: ActionButtonStartIcon | null;
+  startIcon?: IconEnum | null;
 };
 
 const buttonClasses =

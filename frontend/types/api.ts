@@ -43,7 +43,7 @@ export interface ArcCarouselItem {
   hyperlink: Hyperlink | null;
 }
 
-export type ActionButtonStartIcon =
+export type IconEnum =
   | "map"
   | "calendar"
   | "bucket"
@@ -53,7 +53,7 @@ export interface ActionButton {
   id: number;
   label: string | null;
   link: Hyperlink[];
-  startIcon: ActionButtonStartIcon | null;
+  startIcon: IconEnum | null;
   useArrow: boolean | null;
 }
 
@@ -86,11 +86,17 @@ export interface TramoramicTourData {
 
 export type SouveniorItemRank = "r1" | "r2" | "r3";
 
+export interface SouveniorItemIcon {
+  id: number;
+  icon: IconEnum | null;
+}
+
 export interface SouveniorItem {
   id: number;
   rank: SouveniorItemRank | null;
   image: Image | null;
-  actionButton: ActionButton | null;
+  icon: SouveniorItemIcon | null;
+  link: Hyperlink | null;
   name: string;
   pirce: number;
   preDiscountPrice: number | null;

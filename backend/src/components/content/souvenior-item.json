@@ -25,9 +25,9 @@
         "audios"
       ]
     },
-    "actionButton": {
+    "icon": {
       "type": "component",
-      "component": "content.action-button",
+      "component": "shared.icon-enum",
       "repeatable": false
     },
     "name": {
@@ -40,6 +40,11 @@
     },
     "preDiscountPrice": {
       "type": "decimal"
+    },
+    "link": {
+      "type": "component",
+      "component": "content.hyperlink",
+      "repeatable": false
     }
   },
   "config": {}
