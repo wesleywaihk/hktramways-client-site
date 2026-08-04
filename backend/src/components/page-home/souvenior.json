@@ -10,6 +10,11 @@
       "type": "string",
       "required": true
     },
+    "actionButton": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    },
     "item": {
       "type": "component",
       "component": "content.souvenior-item",

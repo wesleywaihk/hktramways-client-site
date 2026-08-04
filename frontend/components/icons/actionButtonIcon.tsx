@@ -15,12 +15,24 @@ const startIconComponents: Record<
   upRightArrow: UprightArrowIco,
 };
 
-export function getActionButtonStartIcon(
-  startIcon: ActionButtonStartIcon | null | undefined,
-  props?: SVGProps<SVGSVGElement>,
-) {
-  if (!startIcon) return undefined;
-  const Icon = startIconComponents[startIcon];
-  if (!Icon) return undefined;
-  return <Icon className="shrink-0 w-5 h-5" aria-hidden="true" {...props} />;
+export interface ActionButtonIconProps extends SVGProps<SVGSVGElement> {
+  icon: ActionButtonStartIcon | null | undefined;
+}
+
+export default function ActionButtonIcon({
+  icon,
+  className,
+  ...props
+}: ActionButtonIconProps) {
+  if (!icon) return null;
+  const Icon = startIconComponents[icon];
+  if (!Icon) return null;
+
+  return (
+    <Icon
+      className={`shrink-0 w-5 h-5 ${className ?? ""}`}
+      aria-hidden="true"
+      {...props}
+    />
+  );
 }

@@ -114,6 +114,7 @@ export interface PageHomeSouvenior extends Struct.ComponentSchema {
     icon: 'gift';
   };
   attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
     item: Schema.Attribute.Component<'content.souvenior-item', true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };

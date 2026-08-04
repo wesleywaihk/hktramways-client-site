@@ -39,6 +39,7 @@ export const fetchHome = cache(async function fetchHome(
     "tramoramicTour.action1",
     "tramoramicTour.action2",
     "souvenior",
+    "souvenior.actionButton",
     "souvenior.item",
     "souvenior.item.image",
     "souvenior.item.actionButton",
