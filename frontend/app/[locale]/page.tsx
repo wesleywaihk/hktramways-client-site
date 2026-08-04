@@ -56,9 +56,11 @@ export default async function LandingPage({ params }: LandingPageProps) {
       <SetHeaderStyle style="transparent" />
       <Banner
         bannerImage={home.bannerImage}
-        className="!h-[calc(100dvh-52px)] lg:!h-[calc(100dvh-160px)] lg:pt-0"
+        // isFullScreen false: news bar is rendered, so header + banner + newsBar = 100dvh
+        // isFullScreen true: no news bar, so header + banner = 100dvh
+        isFullScreen={!home.newsBar.length}
       />
-      <NewsBar items={home.newsBar ?? []} locale={locale} />
+      <NewsBar items={home.newsBar} />
       <ArcCarousel data={home.arcCarousel} />
       <TramRoute data={home.tramRoute} />
       <PartyTram />

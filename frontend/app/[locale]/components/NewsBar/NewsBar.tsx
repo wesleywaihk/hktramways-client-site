@@ -1,14 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 import { useEffect, useRef } from "react";
 import type { HomeNewsBarItem } from "@/types/api";
 import NewsBarEntry from "./NewsBarEntry";
 
 export interface NewsBarProps {
-  items: HomeNewsBarItem[];
-  locale: string;
+  items?: HomeNewsBarItem[];
   /** Scroll speed in pixels per second. */
   speed?: number;
 }
@@ -25,15 +23,14 @@ function repeatToMinimum(
   return repeated;
 }
 
-export default function NewsBar({ items, speed = 120 }: NewsBarProps) {
-  const t = useTranslations("common");
+export default function NewsBar({ items = [], speed = 120 }: NewsBarProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
 
   useEffect(() => {
     const track = trackRef.current;
-    if (!track) return;
+    if (!track || items.length === 0) return;
 
     const halfWidth = track.scrollWidth / 2;
     let frameId: number;
@@ -57,6 +54,8 @@ export default function NewsBar({ items, speed = 120 }: NewsBarProps) {
     return () => cancelAnimationFrame(frameId);
   }, [speed, items]);
 
+  if (!items.length) return null;
+
   return (
     <section className="borderless h-[52px] lg:h-[60px] bg-white relative overflow-visible pl-[53px] lg:pl-[92px] flex">
       <Image
@@ -77,20 +76,9 @@ export default function NewsBar({ items, speed = 120 }: NewsBarProps) {
         }}
       >
         <div ref={trackRef} className="flex items-center will-change-transform">
-          {items.length
-            ? (() => {
-                return repeatToMinimum(items).map((item, index) => (
-                  <NewsBarEntry key={index} {...item} />
-                ));
-              })()
-            : Array.from({ length: 10 }).map((_, index) => (
-                <span
-                  key={index}
-                  className="font-semibold text-sm lg:text-[15px] tracking-[0.02em] whitespace-nowrap text-green lg:text-black mr-10"
-                >
-                  {t("newsBarFallback")}
-                </span>
-              ))}
+          {repeatToMinimum(items).map((item, index) => (
+            <NewsBarEntry key={index} {...item} />
+          ))}
         </div>
       </div>
     </section>
