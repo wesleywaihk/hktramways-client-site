@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-04T11:36:56.247Z"
+    "x-generation-date": "2026-08-04T13:02:14.150Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4503,6 +4503,30 @@
           }
         }
       },
+      "SharedIconEnumComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "icon": {
+            "type": "string",
+            "enum": [
+              "map",
+              "calendar",
+              "bucket",
+              "upRightArrow"
+            ]
+          }
+        }
+      },
       "ContentSouveniorItemComponent": {
         "type": "object",
         "properties": {
@@ -4696,8 +4720,8 @@
               }
             }
           },
-          "actionButton": {
-            "$ref": "#/components/schemas/ContentActionButtonComponent"
+          "icon": {
+            "$ref": "#/components/schemas/SharedIconEnumComponent"
           },
           "name": {
             "type": "string"
@@ -4709,6 +4733,9 @@
           "preDiscountPrice": {
             "type": "number",
             "format": "float"
+          },
+          "link": {
+            "$ref": "#/components/schemas/ContentHyperlinkComponent"
           }
         }
       },

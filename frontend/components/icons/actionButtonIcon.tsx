@@ -3,10 +3,10 @@ import MapIco from "@/components/icons/MapIco";
 import CalendarIco from "@/components/icons/CalendarIco";
 import BucketIco from "@/components/icons/BucketIco";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
-import type { ActionButtonStartIcon } from "@/types/api";
+import type { IconEnum } from "@/types/api";
 
 const startIconComponents: Record<
-  ActionButtonStartIcon,
+  IconEnum,
   (props: SVGProps<SVGSVGElement>) => React.ReactElement
 > = {
   map: MapIco,
@@ -16,7 +16,7 @@ const startIconComponents: Record<
 };
 
 export interface ActionButtonIconProps extends SVGProps<SVGSVGElement> {
-  icon: ActionButtonStartIcon | null | undefined;
+  icon: IconEnum | null | undefined;
 }
 
 export default function ActionButtonIcon({

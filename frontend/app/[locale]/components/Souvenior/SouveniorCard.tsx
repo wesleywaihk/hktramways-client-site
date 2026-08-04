@@ -1,4 +1,5 @@
-import IconButton from "@/components/Button/IconButton";
+import Link from "next/link";
+import SouveniorIcon from "./SouveniorIcon";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import RankCrownIco from "@/components/icons/RankCrownIco";
 import type { SouveniorItem } from "@/types/api";
@@ -13,10 +14,19 @@ export interface SouveniorCardProps {
 }
 
 export default function SouveniorCard({ item, order }: SouveniorCardProps) {
-  const actionUrl = item.actionButton?.link?.[0]?.url ?? undefined;
+  const href = item.link?.url ?? undefined;
 
   return (
-    <div className="flex flex-col items-center shrink-0 w-[53vw] md:w-[35vw] lg:w-[320px]">
+    <div className="group relative flex flex-col items-center shrink-0 w-[53vw] md:w-[35vw] lg:w-[320px]">
+      {href && (
+        <Link
+          href={href}
+          target={item.link?.openNewWindow ? "_blank" : undefined}
+          rel={item.link?.noRefer ? "noreferrer" : undefined}
+          aria-label={item.name}
+          className="absolute inset-0 z-30"
+        />
+      )}
       <div className="relative w-full aspect-square">
         <ResponsiveImg
           bannerImage={{
@@ -28,6 +38,8 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
           sizes="(min-width: 1024px) 258px, (min-width: 768px) 31vw, 48vw"
           className="rounded-[50%] bg-white/10 select-none pointer-events-none"
         />
+
+        <div className="absolute inset-0 rounded-full border-[20px] border-transparent group-hover:border-green-light transition-colors pointer-events-none z-10 ring-inset" />
 
         <div className="absolute z-20 top-0 left-2 pointer-events-none">
           {item.rank && (
@@ -44,14 +56,10 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
           </span>
         </div>
 
-        {item.actionButton && (
-          <IconButton
-            href={actionUrl ?? "#"}
-            startIcon={item.actionButton.startIcon}
-            className="absolute z-10 bottom-5 right-5"
-            tooltip={item.actionButton.label}
-          />
-        )}
+        <SouveniorIcon
+          icon={item.icon?.icon}
+          className="absolute z-10 bottom-5 right-5"
+        />
       </div>
 
       <p className="mt-3 md:mt-4 font-sans font-normal text-white text-center text-[15px] lg:text-[16px] leading-[163%] tracking-[0.02em] line-clamp-2 min-h-[2.9em]">

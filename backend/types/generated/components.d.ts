@@ -45,6 +45,19 @@ export interface ContentHyperlink extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentIconList extends Struct.ComponentSchema {
+  collectionName: 'components_content_icon_lists';
+  info: {
+    displayName: 'iconList';
+    icon: 'code';
+  };
+  attributes: {
+    icon: Schema.Attribute.Enumeration<
+      ['map', 'calendar', 'bucket', 'upRightArrow']
+    >;
+  };
+}
+
 export interface ContentNewsItems extends Struct.ComponentSchema {
   collectionName: 'components_content_news_items';
   info: {
@@ -71,9 +84,10 @@ export interface ContentSouveniorItem extends Struct.ComponentSchema {
     icon: 'gift';
   };
   attributes: {
-    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    icon: Schema.Attribute.Component<'shared.icon-enum', false>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;
+    link: Schema.Attribute.Component<'content.hyperlink', false>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     pirce: Schema.Attribute.Decimal & Schema.Attribute.Required;
     preDiscountPrice: Schema.Attribute.Decimal;
@@ -179,12 +193,26 @@ export interface SeoSeo extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedIconEnum extends Struct.ComponentSchema {
+  collectionName: 'components_shared_icon_enums';
+  info: {
+    displayName: 'icon-enum';
+    icon: 'bulletList';
+  };
+  attributes: {
+    icon: Schema.Attribute.Enumeration<
+      ['map', 'calendar', 'bucket', 'upRightArrow']
+    >;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'content.action-button': ContentActionButton;
       'content.carousel-item': ContentCarouselItem;
       'content.hyperlink': ContentHyperlink;
+      'content.icon-list': ContentIconList;
       'content.news-items': ContentNewsItems;
       'content.souvenior-item': ContentSouveniorItem;
       'media.banner-image': MediaBannerImage;
@@ -193,6 +221,7 @@ declare module '@strapi/strapi' {
       'page-home.tram-routes': PageHomeTramRoutes;
       'page-home.tramoramic-tour': PageHomeTramoramicTour;
       'seo.seo': SeoSeo;
+      'shared.icon-enum': SharedIconEnum;
     }
   }
 }

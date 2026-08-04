@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_content_icon_lists",
+  "info": {
+    "displayName": "iconList",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "map",
+        "calendar",
+        "bucket",
+        "upRightArrow"
+      ]
+    }
+  },
+  "config": {}
+}

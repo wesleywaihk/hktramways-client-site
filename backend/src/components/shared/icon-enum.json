@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_icon_enums",
+  "info": {
+    "displayName": "icon-enum",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "map",
+        "calendar",
+        "bucket",
+        "upRightArrow"
+      ]
+    }
+  },
+  "config": {}
+}

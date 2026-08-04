@@ -29,7 +29,7 @@ export default function Footer() {
               Get our latest news of us, and track the time of next tram coming
               in your location easily!
             </p>
-            <Button href="/app" className="text-white mt-6 lg:mt-8">
+            <Button href="/app" className="mt-6 lg:mt-8" useArrow>
               Learn More
             </Button>
           </div>
@@ -175,7 +175,7 @@ export default function Footer() {
           <p className="font-sans text-[15px] leading-[163%] tracking-[0.02em] m-0 mb-6 lg:text-[16px] lg:leading-[163%] lg:mb-7">
             Find us for enquiries, lost items, or suggestions
           </p>
-          <Button href="/contact-us" className="text-white">
+          <Button href="/contact-us" useArrow>
             Contact Us
           </Button>
         </div>
