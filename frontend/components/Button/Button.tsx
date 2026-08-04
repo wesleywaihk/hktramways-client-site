@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { getActionButtonStartIcon } from "@/components/icons/actionButtonIcon";
+import ActionButtonIcon from "@/components/icons/actionButtonIcon";
 import type { ActionButtonStartIcon } from "@/types/api";
 
-type ButtonProps = {
+export type ButtonProps = {
   children: React.ReactNode;
   href?: string;
   onClick?: () => void;
@@ -46,13 +46,12 @@ export default function Button({
   startIcon,
 }: ButtonProps) {
   const classes = [buttonClasses, className].filter(Boolean).join(" ");
-  const startIconEl = getActionButtonStartIcon(startIcon);
 
   const content = (
     <>
-      {startIconEl && (
+      {startIcon && (
         <span className="inline-flex shrink-0 transition-transform group-hover:scale-[115%]">
-          {startIconEl}
+          <ActionButtonIcon icon={startIcon} />
         </span>
       )}
       <span className="translate-y-[1px]">{children}</span>
@@ -62,7 +61,7 @@ export default function Button({
 
   if (href) {
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={`flex flex-row no-wrap ${classes}`}>
         {content}
       </Link>
     );

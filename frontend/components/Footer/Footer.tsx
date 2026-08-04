@@ -9,7 +9,7 @@ const columnHeading =
 export default function Footer() {
   return (
     <footer className="bg-green text-white">
-      <div className="p-5 lg:p-10">
+      <div className="p-5 lg:p-10 pt-0!">
         <div className="flex flex-col items-center gap-6 p-10 px-5 rounded-[21px] bg-green-light text-center lg:flex-row lg:justify-between lg:items-center lg:text-left lg:gap-10 lg:min-h-[373px] lg:py-0 lg:pl-10 lg:pr-20 lg:rounded-[30px]">
           <div className="shrink-0">
             <Image

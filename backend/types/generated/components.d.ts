@@ -75,14 +75,6 @@ export interface ContentSouveniorItem extends Struct.ComponentSchema {
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;
     name: Schema.Attribute.String & Schema.Attribute.Required;
-    order: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
     pirce: Schema.Attribute.Decimal & Schema.Attribute.Required;
     preDiscountPrice: Schema.Attribute.Decimal;
     rank: Schema.Attribute.Enumeration<['r1', 'r2', 'r3']>;
@@ -122,6 +114,7 @@ export interface PageHomeSouvenior extends Struct.ComponentSchema {
     icon: 'gift';
   };
   attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
     item: Schema.Attribute.Component<'content.souvenior-item', true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };

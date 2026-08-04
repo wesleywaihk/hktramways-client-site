@@ -89,7 +89,6 @@ export type SouveniorItemRank = "r1" | "r2" | "r3";
 export interface SouveniorItem {
   id: number;
   rank: SouveniorItemRank | null;
-  order: number;
   image: Image | null;
   actionButton: ActionButton | null;
   name: string;
@@ -100,6 +99,7 @@ export interface SouveniorItem {
 export interface SouveniorData {
   id: number;
   title: string;
+  actionButton: ActionButton | null;
   item: SouveniorItem[];
 }
 
