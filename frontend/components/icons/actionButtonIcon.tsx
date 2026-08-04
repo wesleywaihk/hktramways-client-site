@@ -12,7 +12,7 @@ const startIconComponents: Record<
   map: MapIco,
   calendar: CalendarIco,
   bucket: BucketIco,
-  uprightArrow: UprightArrowIco,
+  upRightArrow: UprightArrowIco,
 };
 
 export function getActionButtonStartIcon(
