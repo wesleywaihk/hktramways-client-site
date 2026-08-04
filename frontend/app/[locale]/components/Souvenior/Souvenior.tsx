@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import Button from "@/components/Button/Button";
 import IconButton from "@/components/Button/IconButton";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
@@ -25,7 +25,7 @@ function SouveniorCard({
   const actionUrl = item.actionButton?.link?.[0]?.url ?? undefined;
 
   return (
-    <div className="flex flex-col items-center shrink-0 snap-start w-[53vw] md:w-[35vw] lg:w-[320px]">
+    <div className="flex flex-col items-center shrink-0 w-[53vw] md:w-[35vw] lg:w-[320px]">
       <div className="relative w-full aspect-square">
         <ResponsiveImg
           bannerImage={{
@@ -80,12 +80,21 @@ function SouveniorCard({
 
 const MOMENTUM_FRICTION = 0.95;
 const MOMENTUM_MIN_VELOCITY = 0.05;
+const MAX_CONTAINER_WIDTH = 1280;
+const GUTTER = 24;
+
+function getStartX(viewportWidth: number) {
+  return Math.max(0, (viewportWidth - MAX_CONTAINER_WIDTH) / 2) + GUTTER;
+}
 
 export default function Souvenior({ data = undefined }: SouveniorProps) {
-  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const rowRef = useRef<HTMLDivElement | null>(null);
+  const xRef = useRef(0);
+  const boundsRef = useRef({ min: 0, max: 0 });
   const dragState = useRef<{
     startX: number;
-    startScrollLeft: number;
+    startTranslateX: number;
     dragging: boolean;
     moved: boolean;
     lastX: number;
@@ -93,6 +102,25 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
     velocity: number;
   } | null>(null);
   const momentumFrame = useRef<number | null>(null);
+
+  const applyX = (x: number) => {
+    const { min, max } = boundsRef.current;
+    const clamped = Math.min(max, Math.max(min, x));
+    xRef.current = clamped;
+    if (rowRef.current) {
+      rowRef.current.style.transform = `translateX(${clamped}px)`;
+    }
+  };
+
+  const recomputeBounds = () => {
+    const viewportWidth = window.innerWidth;
+    const containerWidth = containerRef.current?.clientWidth ?? viewportWidth;
+    const rowWidth = rowRef.current?.scrollWidth ?? 0;
+    const startX = getStartX(viewportWidth);
+    const minX = Math.min(startX, containerWidth - GUTTER - rowWidth);
+    boundsRef.current = { min: minX, max: startX };
+    return startX;
+  };
 
   const stopMomentum = () => {
     if (momentumFrame.current !== null) {
@@ -102,25 +130,32 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
   };
 
   const runMomentum = (velocity: number) => {
-    const el = scrollRef.current;
-    if (!el) return;
     let v = velocity;
-
     const step = () => {
-      const node = scrollRef.current;
-      if (!node || Math.abs(v) < MOMENTUM_MIN_VELOCITY) {
+      if (Math.abs(v) < MOMENTUM_MIN_VELOCITY) {
         momentumFrame.current = null;
-        if (node) node.style.scrollSnapType = "";
         return;
       }
-      node.scrollLeft -= v;
+      applyX(xRef.current + v);
       v *= MOMENTUM_FRICTION;
       momentumFrame.current = requestAnimationFrame(step);
     };
-
     stopMomentum();
     momentumFrame.current = requestAnimationFrame(step);
   };
+
+  useLayoutEffect(() => {
+    const startX = recomputeBounds();
+    applyX(startX);
+
+    const onResize = () => {
+      stopMomentum();
+      const resetX = recomputeBounds();
+      applyX(resetX);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [data]);
 
   if (!data) return null;
 
@@ -150,18 +185,18 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
           </Button>
         )}
       </div>
+
       <div
-        ref={scrollRef}
-        className="mt-10 md:mt-14 pt-[19px] lg:pt-[21px]  overflow-x-auto snap-x snap-mandatory touch-pan-x  cursor-grab active:cursor-grabbing select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        ref={containerRef}
+        className="mt-10 md:mt-14 pt-[19px] lg:pt-[21px] overflow-hidden touch-pan-y cursor-grab active:cursor-grabbing select-none"
         onPointerDown={(e) => {
-          const el = scrollRef.current;
-          if (!el || e.pointerType !== "mouse") return;
+          const el = containerRef.current;
+          if (!el) return;
           stopMomentum();
-          el.style.scrollSnapType = "none";
           el.setPointerCapture(e.pointerId);
           dragState.current = {
             startX: e.clientX,
-            startScrollLeft: el.scrollLeft,
+            startTranslateX: xRef.current,
             dragging: true,
             moved: false,
             lastX: e.clientX,
@@ -171,11 +206,10 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
         }}
         onPointerMove={(e) => {
           const state = dragState.current;
-          const el = scrollRef.current;
-          if (!state?.dragging || !el) return;
+          if (!state?.dragging) return;
           const dx = e.clientX - state.startX;
           if (Math.abs(dx) > 3) state.moved = true;
-          el.scrollLeft = state.startScrollLeft - dx;
+          applyX(state.startTranslateX + dx);
 
           const dt = e.timeStamp - state.lastT;
           if (dt > 0) {
@@ -186,26 +220,17 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
         }}
         onPointerUp={(e) => {
           const state = dragState.current;
-          const el = scrollRef.current;
+          const el = containerRef.current;
           if (!state) return;
           state.dragging = false;
           el?.releasePointerCapture(e.pointerId);
-          if (state.moved) {
-            runMomentum(state.velocity * 16);
-          } else if (el) {
-            el.style.scrollSnapType = "";
-          }
+          if (state.moved) runMomentum(state.velocity * 16);
         }}
         onPointerLeave={() => {
           const state = dragState.current;
-          const el = scrollRef.current;
           if (!state) return;
           state.dragging = false;
-          if (state.moved) {
-            runMomentum(state.velocity * 16);
-          } else if (el) {
-            el.style.scrollSnapType = "";
-          }
+          if (state.moved) runMomentum(state.velocity * 16);
         }}
         onClickCapture={(e) => {
           if (dragState.current?.moved) {
@@ -214,7 +239,7 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
           }
         }}
       >
-        <div className="flex gap-[30px] ">
+        <div ref={rowRef} className="flex gap-[30px] w-max">
           {items.map((item, index) => (
             <SouveniorCard key={item.id} item={item} order={index + 1} />
           ))}
