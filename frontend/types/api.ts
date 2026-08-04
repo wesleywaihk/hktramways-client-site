@@ -49,11 +49,16 @@ export type IconEnum =
   | "bucket"
   | "upRightArrow";
 
+export interface IconComponent {
+  id: number;
+  icon: IconEnum | null;
+}
+
 export interface ActionButton {
   id: number;
   label: string | null;
-  link: Hyperlink[];
-  startIcon: IconEnum | null;
+  link: Hyperlink | null;
+  startIcon: IconComponent | null;
   useArrow: boolean | null;
 }
 
@@ -86,16 +91,11 @@ export interface TramoramicTourData {
 
 export type SouveniorItemRank = "r1" | "r2" | "r3";
 
-export interface SouveniorItemIcon {
-  id: number;
-  icon: IconEnum | null;
-}
-
 export interface SouveniorItem {
   id: number;
   rank: SouveniorItemRank | null;
   image: Image | null;
-  icon: SouveniorItemIcon | null;
+  icon: IconComponent | null;
   link: Hyperlink | null;
   name: string;
   pirce: number;

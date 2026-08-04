@@ -14,10 +14,10 @@ export default function ActionButton({
 }: SouveniorActionButtonProps) {
   return (
     <Button
-      href={link?.[0]?.url ?? "#"}
+      href={link?.url ?? "#"}
       className={`text-white !px-4 !py-2.5 md:!px-6.5 md:!py-[19px] text-[11px] md:text-[14px] ${className}`}
       useArrow={useArrow ?? false}
-      startIcon={startIcon}
+      startIcon={startIcon?.icon}
     >
       {label}
     </Button>

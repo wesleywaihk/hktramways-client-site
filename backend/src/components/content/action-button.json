@@ -10,13 +10,9 @@
       "type": "string"
     },
     "startIcon": {
-      "type": "enumeration",
-      "enum": [
-        "map",
-        "calendar",
-        "bucket",
-        "upRightArrow"
-      ]
+      "type": "component",
+      "component": "shared.icon-enum",
+      "repeatable": false
     },
     "useArrow": {
       "type": "boolean"
