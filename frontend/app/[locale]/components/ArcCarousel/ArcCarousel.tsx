@@ -5,7 +5,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Button from "@/components/Button/Button";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
-import type { ArcCarouselData, Image } from "@/types/api";
+import type { ActionButtonStartIcon, ArcCarouselData, Image } from "@/types/api";
 
 /**
  * ArcCarousel — fanned-poster carousel, cards arranged like posters fanned
@@ -31,6 +31,8 @@ function mapCarouselData(data: ArcCarouselData | null | undefined) {
     heading: data?.title ?? "HAPPENINGS",
     buttonLabel: data?.actionButton?.label ?? undefined,
     buttonUrl: data?.actionButton?.link?.[0]?.url ?? undefined,
+    buttonUseArrow: data?.actionButton?.useArrow ?? undefined,
+    buttonStartIcon: data?.actionButton?.startIcon ?? undefined,
     items: items.map((item) => ({
       id: String(item.id),
       image: item.image ?? undefined,
@@ -137,6 +139,8 @@ interface MappedArcCarousel {
   heading: string;
   buttonLabel?: string;
   buttonUrl?: string;
+  buttonUseArrow?: boolean;
+  buttonStartIcon?: ActionButtonStartIcon;
   items: ArcCarouselItem[];
 }
 
@@ -145,6 +149,8 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   const heading = mapped.heading;
   const buttonLabel = mapped.buttonLabel ?? "NEWS & EVENTS";
   const buttonUrl = mapped.buttonUrl ?? "#";
+  const buttonUseArrow = mapped.buttonUseArrow ?? true;
+  const buttonStartIcon = mapped.buttonStartIcon;
   const total = items.length;
   const maxOff = Math.floor(total / 2);
   const [active, setActive] = useState(0);
@@ -341,7 +347,12 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
       </div>
 
       <div className="shrink-0 mt-6 md:mt-8 flex justify-center">
-        <Button href={buttonUrl} className="text-white">
+        <Button
+          href={buttonUrl}
+          className="text-white"
+          useArrow={buttonUseArrow}
+          startIcon={buttonStartIcon}
+        >
           {buttonLabel}
         </Button>
       </div>

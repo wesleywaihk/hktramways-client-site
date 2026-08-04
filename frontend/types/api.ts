@@ -43,10 +43,18 @@ export interface ArcCarouselItem {
   hyperlink: Hyperlink | null;
 }
 
+export type ActionButtonStartIcon =
+  | "map"
+  | "calendar"
+  | "bucket"
+  | "upRightArrow";
+
 export interface ActionButton {
   id: number;
   label: string | null;
   link: Hyperlink[];
+  startIcon: ActionButtonStartIcon | null;
+  useArrow: boolean | null;
 }
 
 export interface ArcCarouselData {
@@ -60,7 +68,7 @@ export interface TramRouteData {
   id: number;
   title: string | null;
   desc: string | null;
-  mapButton: ActionButton | null;
+  actionButton: ActionButton | null;
 }
 
 export interface TramoramicTourData {
@@ -76,6 +84,25 @@ export interface TramoramicTourData {
   action2: ActionButton | null;
 }
 
+export type SouveniorItemRank = "r1" | "r2" | "r3";
+
+export interface SouveniorItem {
+  id: number;
+  rank: SouveniorItemRank | null;
+  order: number;
+  image: Image | null;
+  actionButton: ActionButton | null;
+  name: string;
+  pirce: number;
+  preDiscountPrice: number | null;
+}
+
+export interface SouveniorData {
+  id: number;
+  title: string;
+  item: SouveniorItem[];
+}
+
 export interface Home {
   id: number;
   documentId: string;
@@ -85,6 +112,7 @@ export interface Home {
   arcCarousel: ArcCarouselData | null;
   tramRoute: TramRouteData | null;
   tramoramicTour: TramoramicTourData | null;
+  souvenior: SouveniorData | null;
 }
 
 export interface HomeResponse {

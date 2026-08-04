@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_page_home_souveniors",
+  "info": {
+    "displayName": "souvenior",
+    "icon": "gift"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "item": {
+      "type": "component",
+      "component": "content.souvenior-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

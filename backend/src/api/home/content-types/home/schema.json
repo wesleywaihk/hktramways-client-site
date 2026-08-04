@@ -72,6 +72,16 @@
       },
       "component": "page-home.tramoramic-tour",
       "repeatable": false
+    },
+    "souvenior": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "page-home.souvenior",
+      "repeatable": false
     }
   }
 }

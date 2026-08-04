@@ -9,6 +9,18 @@
     "label": {
       "type": "string"
     },
+    "startIcon": {
+      "type": "enumeration",
+      "enum": [
+        "map",
+        "calendar",
+        "bucket",
+        "upRightArrow"
+      ]
+    },
+    "useArrow": {
+      "type": "boolean"
+    },
     "link": {
       "type": "component",
       "component": "content.hyperlink",

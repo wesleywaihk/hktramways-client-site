@@ -12,7 +12,7 @@
     "desc": {
       "type": "text"
     },
-    "mapButton": {
+    "actionButton": {
       "type": "component",
       "component": "content.action-button",
       "repeatable": false

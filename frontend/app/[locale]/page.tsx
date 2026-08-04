@@ -62,7 +62,6 @@ export default async function LandingPage({ params }: LandingPageProps) {
       <TramRoute data={home.tramRoute} />
       <PartyTram />
       <TramoramicTour data={home.tramoramicTour} />
-      <div className="h-[300px]" />
     </div>
   );
 }
