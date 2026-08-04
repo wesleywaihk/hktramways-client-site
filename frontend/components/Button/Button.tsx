@@ -20,7 +20,7 @@ const buttonClasses =
 
 const Arrow = () => (
   <svg
-    className="shrink-0 transition-transform group-hover:translate-x-1"
+    className="shrink-0 transition-transform translate-y-[1px] group-hover:translate-x-1"
     width="16"
     height="16"
     viewBox="0 0 16 16"

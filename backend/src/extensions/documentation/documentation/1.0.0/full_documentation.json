@@ -14,10 +14,13 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-04T08:38:44.106Z"
+    "x-generation-date": "2026-08-04T11:36:56.247Z"
   },
   "x-strapi-config": {
-    "plugins": ["upload", "i18n"]
+    "plugins": [
+      "upload",
+      "i18n"
+    ]
   },
   "servers": [
     {
@@ -99,7 +102,9 @@
             }
           }
         },
-        "tags": ["Global"],
+        "tags": [
+          "Global"
+        ],
         "parameters": [
           {
             "name": "sort",
@@ -269,7 +274,9 @@
             }
           }
         },
-        "tags": ["Global"],
+        "tags": [
+          "Global"
+        ],
         "parameters": [],
         "operationId": "put/global",
         "requestBody": {
@@ -347,7 +354,9 @@
             }
           }
         },
-        "tags": ["Global"],
+        "tags": [
+          "Global"
+        ],
         "parameters": [],
         "operationId": "delete/global"
       }
@@ -416,7 +425,9 @@
             }
           }
         },
-        "tags": ["Home"],
+        "tags": [
+          "Home"
+        ],
         "parameters": [
           {
             "name": "sort",
@@ -586,7 +597,9 @@
             }
           }
         },
-        "tags": ["Home"],
+        "tags": [
+          "Home"
+        ],
         "parameters": [],
         "operationId": "post/homes",
         "requestBody": {
@@ -665,7 +678,9 @@
             }
           }
         },
-        "tags": ["Home"],
+        "tags": [
+          "Home"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -743,7 +758,9 @@
             }
           }
         },
-        "tags": ["Home"],
+        "tags": [
+          "Home"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -832,7 +849,9 @@
             }
           }
         },
-        "tags": ["Home"],
+        "tags": [
+          "Home"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -912,7 +931,9 @@
             }
           }
         },
-        "tags": ["I18n - Locale"],
+        "tags": [
+          "I18n - Locale"
+        ],
         "parameters": [],
         "operationId": "get/i18n/locales"
       }
@@ -936,14 +957,18 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "requestBody": {
           "description": "Upload files",
           "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
-                "required": ["files"],
+                "required": [
+                  "files"
+                ],
                 "type": "object",
                 "properties": {
                   "path": {
@@ -1006,7 +1031,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "requestBody": {
           "description": "Upload files",
           "required": true,
@@ -1042,7 +1069,9 @@
     },
     "/upload/files": {
       "get": {
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "responses": {
           "200": {
             "description": "Get a list of files",
@@ -1074,7 +1103,9 @@
             }
           }
         ],
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "responses": {
           "200": {
             "description": "Get a specific file",
@@ -1101,7 +1132,9 @@
             }
           }
         ],
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "responses": {
           "200": {
             "description": "Delete a file",
@@ -1128,7 +1161,9 @@
     "schemas": {
       "Error": {
         "type": "object",
-        "required": ["error"],
+        "required": [
+          "error"
+        ],
         "properties": {
           "data": {
             "nullable": true,
@@ -1165,7 +1200,9 @@
       },
       "GlobalRequest": {
         "type": "object",
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "object",
@@ -1661,7 +1698,10 @@
                                             },
                                             "kind": {
                                               "type": "string",
-                                              "enum": ["content-api", "admin"]
+                                              "enum": [
+                                                "content-api",
+                                                "admin"
+                                              ]
                                             },
                                             "type": {
                                               "type": "string",
@@ -2910,7 +2950,9 @@
       },
       "HomeRequest": {
         "type": "object",
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "object",
@@ -3621,7 +3663,11 @@
           },
           "type": {
             "type": "string",
-            "enum": ["event", "discount", "news"]
+            "enum": [
+              "event",
+              "discount",
+              "news"
+            ]
           },
           "text": {
             "type": "string"
@@ -3842,7 +3888,12 @@
           },
           "startIcon": {
             "type": "string",
-            "enum": ["map", "calendar", "bucket", "upRightArrow"]
+            "enum": [
+              "map",
+              "calendar",
+              "bucket",
+              "upRightArrow"
+            ]
           },
           "useArrow": {
             "type": "boolean"
@@ -4467,7 +4518,11 @@
           },
           "rank": {
             "type": "string",
-            "enum": ["r1", "r2", "r3"]
+            "enum": [
+              "r1",
+              "r2",
+              "r3"
+            ]
           },
           "image": {
             "type": "object",
@@ -4873,11 +4928,18 @@
                               },
                               "kind": {
                                 "type": "string",
-                                "enum": ["content-api", "admin"]
+                                "enum": [
+                                  "content-api",
+                                  "admin"
+                                ]
                               },
                               "type": {
                                 "type": "string",
-                                "enum": ["read-only", "full-access", "custom"]
+                                "enum": [
+                                  "read-only",
+                                  "full-access",
+                                  "custom"
+                                ]
                               },
                               "accessKey": {
                                 "type": "string"
