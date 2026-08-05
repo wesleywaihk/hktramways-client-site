@@ -36,7 +36,7 @@ export default function TramoramicTour({
   const action2StartIcon = data?.action2?.startIcon?.icon ?? "calendar";
 
   return (
-    <section className="borderless h-auto pageHeight-md pageHeight-lg relative bg-red-dark py-20 lg:py-24 flex">
+    <section className="borderless h-auto md:h-[100dvh] relative bg-red-dark py-20 lg:py-24 flex">
       <div className="flex flex-col md:flex-row items-center gap-12 md:gap-8 lg:gap-16 px-5 lg:px-6 max-w-[1200px] mx-auto">
         <div className="relative w-[87vmin] md:w-full min-h-[84.5vmin] md:min-h-0 md:flex-1 mt-[12vmin] mb-[6vmin] md:my-0">
           {supportImage2 && (

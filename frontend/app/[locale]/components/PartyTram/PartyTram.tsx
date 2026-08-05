@@ -2,7 +2,7 @@ import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 
 export default function PartyTram() {
   return (
-    <section className="borderless h-auto aspect-[750/1334]  pageHeight-lg lg:aspect-auto relative">
+    <section className="borderless h-auto aspect-[750/1334]  lg:h-[100dvh] lg:aspect-auto relative">
       <ResponsiveImg
         url=""
         bannerImage={{

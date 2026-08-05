@@ -209,7 +209,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   };
 
   return (
-    <section className="borderless pageHeight bg-green relative overflow-hidden py-[10dvh] md:py-[6dvh] select-none flex flex-col">
+    <section className="borderless h-[100dvh] bg-green relative overflow-hidden py-[10dvh] md:py-[6dvh] select-none flex flex-col">
       <div className="shrink-0 flex items-center justify-center gap-6 md:gap-16 pb-8 md:pb-10">
         <button
           type="button"
