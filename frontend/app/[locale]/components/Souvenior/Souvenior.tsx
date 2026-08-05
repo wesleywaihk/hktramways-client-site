@@ -85,7 +85,26 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
       applyX(resetX);
     };
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+
+    const el = containerRef.current;
+    const onWheel = (e: WheelEvent) => {
+      const delta =
+        Math.abs(e.deltaX) > Math.abs(e.deltaY)
+          ? e.deltaX
+          : e.shiftKey
+            ? e.deltaY
+            : 0;
+      if (delta === 0) return;
+      e.preventDefault();
+      stopMomentum();
+      applyX(xRef.current - delta);
+    };
+    el?.addEventListener("wheel", onWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      el?.removeEventListener("wheel", onWheel);
+    };
   }, [data]);
 
   if (!data) return null;
