@@ -84,12 +84,8 @@ export interface TramoramicTourData {
   action1: ActionButton | null;
   action2: ActionButton | null;
 }
-
-export type SouveniorItemRank = "r1" | "r2" | "r3";
-
 export interface SouveniorItem {
   id: number;
-  rank: SouveniorItemRank | null;
   image: Image | null;
   icon: IconComponent | null;
   link: Hyperlink | null;

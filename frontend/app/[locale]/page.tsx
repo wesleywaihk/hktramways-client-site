@@ -52,7 +52,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
   }
 
   return (
-    <div className="pageWrapper mt-[-76px] lg:mt-0">
+    <div className="pageWrapper mt-0">
       <SetHeaderStyle style="transparent" />
       <Banner
         bannerImage={home.bannerImage}

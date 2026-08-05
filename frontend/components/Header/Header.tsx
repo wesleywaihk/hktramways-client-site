@@ -8,7 +8,6 @@ import { desktopNavLinks } from "./navLinks";
 import MobileNavOverlay from "./MobileNavOverlay";
 import LocaleDropdown from "./LocaleDropdown";
 import { useHeaderStyle } from "@/components/HeaderStyleProvider";
-import styles from "./Header.module.scss";
 
 export default function Header() {
   const locale = useLocale();
@@ -17,7 +16,7 @@ export default function Header() {
   const { headerStyle } = useHeaderStyle();
 
   useEffect(() => {
-    const handleScroll = () => setAtTop(window.scrollY <= 120);
+    const handleScroll = () => setAtTop(window.scrollY <= 180);
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -27,9 +26,10 @@ export default function Header() {
     logoSrc: string,
     logoClassName: string,
     alignClassName = "items-center",
+    paddingClassName = "p-5 lg:py-[30px] lg:px-10",
   ) => (
     <div
-      className={`flex ${alignClassName} justify-between p-5 lg:py-[30px] lg:px-10`}
+      className={`flex ${alignClassName} justify-between ${paddingClassName}`}
     >
       <Link
         href={`/${locale}`}
@@ -81,9 +81,9 @@ export default function Header() {
           aria-label="Open menu"
           aria-expanded={navOpen}
         >
-          <span className="block w-full h-0.5 bg-white" />
-          <span className="block w-full h-0.5 bg-white" />
-          <span className="block w-full h-0.5 bg-white" />
+          <span className="block w-full h-0.5 bg-current" />
+          <span className="block w-full h-0.5 bg-current" />
+          <span className="block w-full h-0.5 bg-current" />
         </button>
       </div>
     </div>
@@ -92,7 +92,18 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-[1001] w-full bg-green text-white ${styles.header} ${styles[`style-${headerStyle}`]} ${atTop ? styles.top : ""}`}
+        className={`fixed top-0 z-[1002] w-full bg-white text-green shadow-md transition-transform duration-300 ease-in-out rounded-bl-[25px] rounded-br-[25px] ${atTop ? "-translate-y-full" : "translate-y-0"}`}
+      >
+        {renderHeaderContent(
+          "/logo-green.svg",
+          "min-w-[120.33px] h-9 lg:min-w-[133.7px] lg:h-10",
+          "items-center",
+          "px-5 py-3 lg:py-5 lg:px-10",
+        )}
+      </header>
+
+      <header
+        className={`relative top-0 z-[1001] w-full bg-green text-white ${headerStyle === "transparent" ? "hidden lg:block" : ""}`}
       >
         {renderHeaderContent(
           "/logo-white.svg",
@@ -101,9 +112,7 @@ export default function Header() {
       </header>
 
       {headerStyle === "transparent" && (
-        <header
-          className={`absolute top-0 z-[1000] w-full h-[200px] text-white lg:hidden ${styles.transparentHeader}`}
-        >
+        <header className="absolute top-0 z-[1000] w-full h-[200px] text-white lg:hidden bg-[linear-gradient(180deg,rgba(34,34,34,0.4)_0%,rgba(34,34,34,0)_100%)]">
           {renderHeaderContent("/logo-v.svg", "h-[110px]", "items-start")}
         </header>
       )}

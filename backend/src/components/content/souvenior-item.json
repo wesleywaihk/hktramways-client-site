@@ -6,14 +6,6 @@
   },
   "options": {},
   "attributes": {
-    "rank": {
-      "type": "enumeration",
-      "enum": [
-        "r1",
-        "r2",
-        "r3"
-      ]
-    },
     "image": {
       "type": "media",
       "multiple": false,

@@ -20,7 +20,7 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
   const buttonStartIcon = data?.actionButton?.startIcon?.icon ?? "map";
 
   return (
-    <section className="borderless pageHeight relative bg-earth-light pt-16 md:pt-20 lg:pt-24">
+    <section className="borderless h-[100dvh] relative bg-earth-light pt-16 md:pt-20 lg:pt-24">
       <div className="flex flex-col items-center text-center md:items-start md:text-left px-5 lg:px-6 max-w-[600px] mx-auto md:mx-0 md:ml-[8%]">
         <h2 className="text-green font-semibold uppercase text-[40px] md:text-[56px] leading-[107%] tracking-[0.02em]">
           {title}
