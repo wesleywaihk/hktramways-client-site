@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 import MapIco from "@/components/icons/MapIco";
 import CalendarIco from "@/components/icons/CalendarIco";
-import BucketIco from "@/components/icons/BucketIco";
+import BusketIco from "@/components/icons/BusketIco";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
 import type { IconEnum } from "@/types/api";
 
@@ -11,7 +11,7 @@ const startIconComponents: Record<
 > = {
   map: MapIco,
   calendar: CalendarIco,
-  bucket: BucketIco,
+  busket: BusketIco,
   upRightArrow: UprightArrowIco,
 };
 

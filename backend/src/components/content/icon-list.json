@@ -8,12 +8,7 @@
   "attributes": {
     "icon": {
       "type": "enumeration",
-      "enum": [
-        "map",
-        "calendar",
-        "bucket",
-        "upRightArrow"
-      ]
+      "enum": ["map", "calendar", "busket", "upRightArrow"]
     }
   },
   "config": {}

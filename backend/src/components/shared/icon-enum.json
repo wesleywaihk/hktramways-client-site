@@ -11,7 +11,7 @@
       "enum": [
         "map",
         "calendar",
-        "bucket",
+        "busket",
         "upRightArrow"
       ]
     }

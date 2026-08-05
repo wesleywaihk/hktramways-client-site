@@ -43,11 +43,7 @@ export interface ArcCarouselItem {
   hyperlink: Hyperlink | null;
 }
 
-export type IconEnum =
-  | "map"
-  | "calendar"
-  | "bucket"
-  | "upRightArrow";
+export type IconEnum = "map" | "calendar" | "busket" | "upRightArrow";
 
 export interface IconComponent {
   id: number;
