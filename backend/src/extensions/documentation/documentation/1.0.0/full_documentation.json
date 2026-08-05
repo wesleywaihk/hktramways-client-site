@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-04T15:20:23.359Z"
+    "x-generation-date": "2026-08-05T00:30:45.746Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -3888,7 +3888,7 @@
             "enum": [
               "map",
               "calendar",
-              "bucket",
+              "busket",
               "upRightArrow"
             ]
           }

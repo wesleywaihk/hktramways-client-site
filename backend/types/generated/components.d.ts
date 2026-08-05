@@ -51,7 +51,7 @@ export interface ContentIconList extends Struct.ComponentSchema {
   };
   attributes: {
     icon: Schema.Attribute.Enumeration<
-      ['map', 'calendar', 'bucket', 'upRightArrow']
+      ['map', 'calendar', 'busket', 'upRightArrow']
     >;
   };
 }
@@ -199,7 +199,7 @@ export interface SharedIconEnum extends Struct.ComponentSchema {
   };
   attributes: {
     icon: Schema.Attribute.Enumeration<
-      ['map', 'calendar', 'bucket', 'upRightArrow']
+      ['map', 'calendar', 'busket', 'upRightArrow']
     >;
   };
 }
