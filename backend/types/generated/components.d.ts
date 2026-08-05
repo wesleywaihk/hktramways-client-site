@@ -89,7 +89,6 @@ export interface ContentSouveniorItem extends Struct.ComponentSchema {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     pirce: Schema.Attribute.Decimal & Schema.Attribute.Required;
     preDiscountPrice: Schema.Attribute.Decimal;
-    rank: Schema.Attribute.Enumeration<['r1', 'r2', 'r3']>;
   };
 }
 

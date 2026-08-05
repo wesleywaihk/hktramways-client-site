@@ -111,7 +111,7 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
 
   const title = data.title;
 
-  const items = data.item ?? [];
+  const items = data.item.slice(0, 5) ?? [];
   if (!items.length) return null;
 
   return (
@@ -130,7 +130,7 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
 
       <div
         ref={containerRef}
-        className="mt-10 md:mt-14 pt-[5.1vw] md:pt-[75px] overflow-hidden touch-pan-y cursor-grab active:cursor-grabbing select-none"
+        className="mt-10 md:mt-14 pt-[34px] md:pt-[28px] lg:pt-[28px] overflow-hidden touch-pan-y cursor-grab active:cursor-grabbing select-none"
         onPointerDown={(e) => {
           const el = containerRef.current;
           if (!el) return;

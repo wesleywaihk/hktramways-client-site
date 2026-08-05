@@ -1,7 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import SouveniorIcon from "./SouveniorIcon";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
-import RankCrownIco from "@/components/icons/RankCrownIco";
 import type { SouveniorItem } from "@/types/api";
 
 function formatPrice(price: number) {
@@ -30,32 +30,38 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
         />
       )}
       <div className="relative w-full aspect-square">
-        <ResponsiveImg
-          bannerImage={{
-            id: item.image?.id ?? 0,
-            altText: item.name,
-            imageD: item.image ?? null,
-            imageM: null,
-          }}
-          sizes="(min-width: 1024px) 258px, (min-width: 768px) 31vw, 48vw"
-          className="rounded-[50%] bg-white/10 select-none pointer-events-none"
-        />
+        <div className="absolute inset-0 transition-all duration-300 ease-out group-hover:inset-[3vw] md:group-hover:inset-[2vw] lg:group-hover:inset-[18px]">
+          <ResponsiveImg
+            bannerImage={{
+              id: item.image?.id ?? 0,
+              altText: item.name,
+              imageD: item.image ?? null,
+              imageM: null,
+            }}
+            sizes="(min-width: 1024px) 258px, (min-width: 768px) 31vw, 48vw"
+            className="rounded-[50%] bg-white/10 select-none pointer-events-none"
+          />
+        </div>
 
-        <div className="absolute inset-0 rounded-full border-[20px] border-transparent group-hover:border-green-light transition-colors pointer-events-none z-10 ring-inset" />
+        <div className="absolute inset-0 rounded-full border-0 border-green-light group-hover:border-[3vw] md:group-hover:border-[2vw] lg:group-hover:border-[18px] transition-all duration-300 ease-out pointer-events-none z-10 ring-inset" />
 
-        <div className="absolute z-20 top-0 left-2 pointer-events-none">
-          {item.rank && (
-            <RankCrownIco
-              rank={item.rank}
-              className="absolute z-10 left-[5vw] -top-[5vw] md:-left-[15px] md:-top-[18px]  w-[4.7vw] h-auto -rotate-[10deg] md:w-[23px] md:h-[22px] md:-rotate-[30deg]"
-            />
-          )}
-          <span
-            className="font-sans font-semibold text-[10vw] md:text-[44px] lg:text-[62px] leading-none uppercase tracking-[0.05em] text-transparent"
-            style={{ WebkitTextStroke: "1px white" }}
-          >
-            {String(order).padStart(2, "0")}
-          </span>
+        <div className="absolute z-20 -top-[34px] -left-[3px] md:-top-[28px] md:-left-[16px] lg:-top-[28px] lg:-left-[16px] pointer-events-none">
+          <Image
+            src={`/home/souvenior/home-store-number${String(order).padStart(2, "0")}_m.svg`}
+            alt=""
+            width={59}
+            height={53.6}
+            className="md:hidden w-[14vw] h-auto"
+            aria-hidden="true"
+          />
+          <Image
+            src={`/home/souvenior/home-store-number${String(order).padStart(2, "0")}.svg`}
+            alt=""
+            width={84}
+            height={87}
+            className="hidden md:block md:w-[10vw] lg:w-[87px] h-auto"
+            aria-hidden="true"
+          />
         </div>
 
         <SouveniorIcon
