@@ -1,4 +1,5 @@
 import type { StrapiApp } from "@strapi/strapi/admin";
+import editorNoteSidePanel from "./extensions/EditorNote";
 
 export default {
   config: {
@@ -80,7 +81,15 @@ export default {
       // },
     },
   },
-  bootstrap(_app: StrapiApp) {
+  bootstrap(app: StrapiApp) {
     localStorage.setItem("STRAPI_THEME", "light");
+
+    const contentManagerPlugin = app.getPlugin("content-manager") as unknown as {
+      apis: {
+        addEditViewSidePanel: (panels: Array<(context: never) => unknown>) => void;
+      };
+    };
+
+    contentManagerPlugin.apis.addEditViewSidePanel([editorNoteSidePanel]);
   },
 };
