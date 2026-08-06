@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ActionButtonIcon from "@/components/icons/actionButtonIcon";
+import BtnIcon from "@/components/icons/BtnIcon";
 import type { IconEnum } from "@/types/api";
 
 export type ButtonProps = {
@@ -51,7 +51,7 @@ export default function Button({
     <>
       {startIcon && (
         <span className="inline-flex shrink-0 transition-transform group-hover:scale-[115%]">
-          <ActionButtonIcon icon={startIcon} />
+          <BtnIcon icon={startIcon} />
         </span>
       )}
       <span className="translate-y-[1px]">{children}</span>

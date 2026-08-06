@@ -5,7 +5,7 @@ import BusketIco from "@/components/icons/BusketIco";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
 import type { IconEnum } from "@/types/api";
 
-const startIconComponents: Record<
+const IconComponents: Record<
   IconEnum,
   (props: SVGProps<SVGSVGElement>) => React.ReactElement
 > = {
@@ -15,17 +15,13 @@ const startIconComponents: Record<
   upRightArrow: UprightArrowIco,
 };
 
-export interface ActionButtonIconProps extends SVGProps<SVGSVGElement> {
+export interface BtnIconProps extends SVGProps<SVGSVGElement> {
   icon: IconEnum | null | undefined;
 }
 
-export default function ActionButtonIcon({
-  icon,
-  className,
-  ...props
-}: ActionButtonIconProps) {
+export default function BtnIcon({ icon, className, ...props }: BtnIconProps) {
   if (!icon) return null;
-  const Icon = startIconComponents[icon];
+  const Icon = IconComponents[icon];
   if (!Icon) return null;
 
   return (

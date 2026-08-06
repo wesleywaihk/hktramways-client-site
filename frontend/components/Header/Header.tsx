@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import MobileNavOverlay from "./MobileNavOverlay";
 import HeaderContent from "./HeaderContent";
 import { useAtTop } from "./useAtTop";
-import { useHeaderStyle } from "@/components/HeaderStyleProvider";
+import { useHeaderStyle } from "./HeaderStyle/HeaderStyleProvider";
 
 export default function Header() {
   const locale = useLocale();

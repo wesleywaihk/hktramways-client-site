@@ -11,7 +11,7 @@ import TramoramicTour from "./components/TramoramicTour/TramoramicTour";
 import Souvenior from "./components/Souvenior/Souvenior";
 import PartyTram from "./components/PartyTram/PartyTram";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
-import SetHeaderStyle from "@/components/SetHeaderStyle";
+import SetHeaderStyle from "@/components/Header/HeaderStyle/SetHeaderStyle";
 
 interface LandingPageProps {
   params: Promise<{ locale: string }>;

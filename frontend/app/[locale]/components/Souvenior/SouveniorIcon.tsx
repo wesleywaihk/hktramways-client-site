@@ -1,4 +1,4 @@
-import ActionButtonIcon from "@/components/icons/actionButtonIcon";
+import BtnIcon from "@/components/icons/BtnIcon";
 import type { IconEnum } from "@/types/api";
 
 interface SouveniorIconProps {
@@ -15,7 +15,7 @@ export default function SouveniorIcon({
     <div
       className={`grid place-items-center w-[10vw] h-[10vw] md:w-15 md:h-15 rounded-full bg-white text-green shadow-md ${className}`}
     >
-      <ActionButtonIcon
+      <BtnIcon
         icon={icon}
         className="w-[6vw]! h-[6vw]! md:w-[30px]! md:h-[30px]!"
       />

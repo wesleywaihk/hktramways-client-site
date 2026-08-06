@@ -4,6 +4,7 @@ export interface ImgProps {
   url?: string | null;
   src?: string | null;
   alt?: string | null;
+  loading?: "lazy" | "eager";
   className?: string;
 }
 
@@ -11,6 +12,7 @@ export default function Img({
   url = IMG_URL,
   src,
   alt = "",
+  loading = "lazy",
   className = "",
 }: ImgProps) {
   if (!src) return null;
@@ -20,7 +22,7 @@ export default function Img({
     <img
       src={`${url}${src}`}
       alt={alt ?? ""}
-      loading="lazy"
+      loading={loading}
       className={className}
     />
   );
