@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useHeaderStyle, type HeaderStyle } from "@/components/HeaderStyleProvider";
+import { useHeaderStyle, type HeaderStyle } from "./HeaderStyleProvider";
 
 export default function SetHeaderStyle({ style }: { style: HeaderStyle }) {
   const { setHeaderStyle } = useHeaderStyle();

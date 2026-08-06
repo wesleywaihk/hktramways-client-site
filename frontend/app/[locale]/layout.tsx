@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import I18nProvider from "@/components/I18nProvider";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
-import { HeaderStyleProvider } from "@/components/HeaderStyleProvider";
+import { HeaderStyleProvider } from "@/components/Header/HeaderStyle/HeaderStyleProvider";
 import MetaUpdater from "@/components/MetaUpdater";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
