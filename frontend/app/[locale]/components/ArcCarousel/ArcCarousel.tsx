@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Button from "@/components/Button/Button";
-import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import type { IconEnum, ArcCarouselData, Image } from "@/types/api";
+import { useArcCarouselSwipe } from "./useArcCarouselSwipe";
+import ArcCarouselCard from "./ArcCarouselCard";
 
 /**
  * ArcCarousel — fanned-poster carousel, cards arranged like posters fanned
@@ -153,9 +154,16 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   const buttonStartIcon = mapped.buttonStartIcon;
   const total = items.length;
   const maxOff = Math.floor(total / 2);
-  const [active, setActive] = useState(0);
-  const [dir, setDir] = useState(0); // last navigation direction: 1 = next, -1 = prev
-  const dragStart = useRef<number | null>(null);
+  const {
+    active,
+    dir,
+    trackRef,
+    prev,
+    next,
+    onPointerDown,
+    onPointerUp,
+    onPointerLeave,
+  } = useArcCarouselSwipe(total);
   const isMobile = useIsMobile();
   const isSmToMd = useIsSmToMd();
   const isXl = useIsXl();
@@ -176,36 +184,6 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           ? xlGap(cardWidth)
           : lgGap(cardWidth);
     return `calc(-50% + ${off} * ${gap})`;
-  };
-
-  const prev = useCallback(() => {
-    setDir(-1);
-    setActive((a) => (a - 1 + total) % total);
-  }, [total]);
-
-  const next = useCallback(() => {
-    setDir(1);
-    setActive((a) => (a + 1) % total);
-  }, [total]);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [prev, next]);
-
-  const onPointerDown = (e: React.PointerEvent) => {
-    dragStart.current = e.clientX;
-  };
-  const onPointerUp = (e: React.PointerEvent) => {
-    if (dragStart.current === null) return;
-    const dx = e.clientX - dragStart.current;
-    if (dx > 40) prev();
-    else if (dx < -40) next();
-    dragStart.current = null;
   };
 
   return (
@@ -235,12 +213,11 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
       </div>
 
       <div
+        ref={trackRef}
         className="relative grow min-h-0 touch-pan-y cursor-grab active:cursor-grabbing"
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
-        onPointerLeave={() => {
-          dragStart.current = null;
-        }}
+        onPointerLeave={onPointerLeave}
       >
         <button
           type="button"
@@ -273,60 +250,21 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           const scale = Math.max(1 - abs * 0.08, 0.78);
 
           return (
-            <figure
+            <ArcCarouselCard
               key={item.id}
-              className="absolute left-1/2 top-1/2 m-0 overflow-hidden shadow-lg will-change-transform"
-              style={{
-                width: cardWidth,
-                height: cardHeight,
-                transform: `translateX(${translateX(off)}) translateY(calc(-50% + ${dropY}px)) rotate(${off * tilt}deg) scale(${scale})`,
-                zIndex: 20 - abs,
-                opacity: hidden ? 0 : 1,
-                pointerEvents: hidden ? "none" : "auto",
-                transition: wrapped
+              item={item}
+              cardWidth={cardWidth}
+              cardHeight={cardHeight}
+              transform={`translateX(${translateX(off)}) translateY(calc(-50% + ${dropY}px)) rotate(${off * tilt}deg) scale(${scale})`}
+              zIndex={20 - abs}
+              hidden={hidden}
+              transition={
+                wrapped
                   ? "none"
-                  : "transform 550ms cubic-bezier(0.22,0.9,0.3,1), opacity 300ms ease",
-              }}
+                  : "transform 550ms cubic-bezier(0.22,0.9,0.3,1), opacity 300ms ease"
+              }
               onClick={() => off !== 0 && (off > 0 ? next() : prev())}
-            >
-              <div className="w-full h-full relative flex items-end bg-earth-light">
-                {item.linkUrl ? (
-                  <a
-                    href={item.linkUrl}
-                    className="absolute inset-0"
-                    draggable={false}
-                    onDragStart={(e) => e.preventDefault()}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ResponsiveImg
-                      bannerImage={{
-                        id: item.image?.id ?? 0,
-                        altText: item.image?.alternativeText ?? null,
-                        imageD: item.image ?? null,
-                        imageM: null,
-                      }}
-                      className="pointer-events-none select-none"
-                    />
-                  </a>
-                ) : (
-                  <div
-                    className="absolute inset-0"
-                    draggable={false}
-                    onDragStart={(e) => e.preventDefault()}
-                  >
-                    <ResponsiveImg
-                      bannerImage={{
-                        id: item.image?.id ?? 0,
-                        altText: item.image?.alternativeText ?? null,
-                        imageD: item.image ?? null,
-                        imageM: null,
-                      }}
-                      className="pointer-events-none select-none"
-                    />
-                  </div>
-                )}
-              </div>
-            </figure>
+            />
           );
         })}
       </div>
