@@ -19,8 +19,8 @@ const SLIDE_INTERVAL_MS = 8000;
 // imageD and imageM must be the same media type (both image or both video),
 // otherwise the pair can't be rendered consistently across breakpoints.
 const isValidBanner = (banner: ResponsiveImage) =>
-  // (isImageMedia(banner.imageD) && isImageMedia(banner.imageM)) ||
-  isVideoMedia(banner.imageD) && isVideoMedia(banner.imageM);
+  (isImageMedia(banner.imageD) && isImageMedia(banner.imageM)) ||
+  (isVideoMedia(banner.imageD) && isVideoMedia(banner.imageM));
 
 export default function Banner({
   url = IMG_URL,
