@@ -20,9 +20,6 @@ export default function VideoCard({
   const srcD = imageD?.url ? `${url}${imageD.url}` : undefined;
   const srcM = imageM?.url ? `${url}${imageM.url}` : srcD;
 
-  const bgClass =
-    "absolute inset-0 object-cover bg-grey-200 max-w-[unset] max-h-[unset]";
-
   return (
     <div
       className={`absolute left-0 top-0 right-0 bottom-0 ${className}`}
@@ -30,33 +27,23 @@ export default function VideoCard({
       aria-label={alt}
       data-full-screen={isFullScreen}
     >
-      {srcM && (
+      {(srcM || srcD) && (
         <video
-          className={`${bgClass} w-full ${
-            !isFullScreen ? "h-[100dvh]!" : "h-[calc(100dvh-52px)]!"
-          } lg:hidden`}
-          src={srcM}
+          className={`absolute inset-0 object-cover bg-grey-200 max-w-[unset] max-h-[unset] w-full lg:w-[calc(100%-80px)] lg:left-10 lg:rounded-[30px] ${
+            isFullScreen
+              ? "h-[100dvh] lg:h-[calc(100dvh-140px)]"
+              : "h-[calc(100dvh-52px)] lg:h-[calc(100dvh-200px)]"
+          }`}
           autoPlay
           loop
           muted
           playsInline
           controls={false}
           disablePictureInPicture
-        />
-      )}
-      {srcD && (
-        <video
-          className={`${bgClass} rounded-[30px] left-10 w-[calc(100%-80px)] ${
-            isFullScreen ? "h-[calc(100dvh-140px)]" : "h-[calc(100dvh-200px)]"
-          } hidden lg:block`}
-          src={srcD}
-          autoPlay
-          loop
-          muted
-          playsInline
-          controls={false}
-          disablePictureInPicture
-        />
+        >
+          {srcD && <source src={srcD} media="(min-width: 1024px)" />}
+          {srcM && <source src={srcM} />}
+        </video>
       )}
     </div>
   );
