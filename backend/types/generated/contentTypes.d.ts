@@ -498,7 +498,7 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    bannerImage: Schema.Attribute.Component<'media.banner-image', false> &
+    bannerImage: Schema.Attribute.Component<'content.banner-image-unit', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

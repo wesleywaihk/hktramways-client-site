@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-06T07:50:32.484Z"
+    "x-generation-date": "2026-08-07T07:08:23.187Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -2961,7 +2961,10 @@
                 "type": "string"
               },
               "bannerImage": {
-                "$ref": "#/components/schemas/MediaBannerImageComponent"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
+                }
               },
               "newsBar": {
                 "type": "array",
@@ -3057,7 +3060,10 @@
             "type": "string"
           },
           "bannerImage": {
-            "$ref": "#/components/schemas/MediaBannerImageComponent"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
+            }
           },
           "newsBar": {
             "type": "array",
@@ -3150,7 +3156,10 @@
                   "type": "string"
                 },
                 "bannerImage": {
-                  "$ref": "#/components/schemas/MediaBannerImageComponent"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
+                  }
                 },
                 "newsBar": {
                   "type": "array",
@@ -3258,7 +3267,7 @@
           }
         }
       },
-      "MediaBannerImageComponent": {
+      "ContentBannerImageUnitComponent": {
         "type": "object",
         "properties": {
           "id": {

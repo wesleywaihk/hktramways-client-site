@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Button from "@/components/Button/Button";
-import type { IconEnum, ArcCarouselData, Image } from "@/types/api";
+import type { IconEnum, ArcCarouselData, Media } from "@/types/api";
+import { asImage } from "@/lib/media";
 import { useArcCarouselSwipe } from "./useArcCarouselSwipe";
 import ArcCarouselCard from "./ArcCarouselCard";
 
@@ -19,7 +20,7 @@ import ArcCarouselCard from "./ArcCarouselCard";
 
 export interface ArcCarouselItem {
   id: string;
-  image?: Image;
+  image?: Media;
   caption: string;
   linkUrl?: string;
 }
@@ -36,7 +37,7 @@ function mapCarouselData(data: ArcCarouselData | null | undefined) {
     buttonStartIcon: data?.actionButton?.startIcon?.icon ?? undefined,
     items: items.map((item) => ({
       id: String(item.id),
-      image: item.image ?? undefined,
+      image: asImage(item.image) ?? undefined,
       caption: item.desc ?? "",
       linkUrl: item.hyperlink?.url ?? undefined,
     })),

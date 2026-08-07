@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import Button from "@/components/Button/Button";
 import PolaroidCard from "./PolaroidCard";
 import type { TramoramicTourData } from "@/types/api";
+import { asImage } from "@/lib/media";
 
 export interface TramoramicTourProps {
   data?: TramoramicTourData | null;
@@ -19,9 +20,9 @@ export default function TramoramicTour({
   const title2 = data?.title2 ?? "";
   const desc = data?.desc ?? "";
 
-  const mainImage = data?.mianImage ?? null;
-  const supportImage1 = data?.supportImage1 ?? null;
-  const supportImage2 = data?.supportImage2 ?? null;
+  const mainImage = asImage(data?.mianImage);
+  const supportImage1 = asImage(data?.supportImage1);
+  const supportImage2 = asImage(data?.supportImage2);
 
   const action1Label =
     data?.action1?.label ?? t("tramoramicTourAction1Fallback");

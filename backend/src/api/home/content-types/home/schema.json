@@ -30,8 +30,8 @@
           "localized": true
         }
       },
-      "component": "media.banner-image",
-      "repeatable": false
+      "component": "content.banner-image-unit",
+      "repeatable": true
     },
     "newsBar": {
       "type": "component",

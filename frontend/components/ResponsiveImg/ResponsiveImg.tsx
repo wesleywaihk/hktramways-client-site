@@ -1,6 +1,7 @@
 import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 import { IMG_URL } from "@/consts";
-import { Image, ResponsiveImage } from "@/types/api";
+import { Media, ResponsiveImage } from "@/types/api";
+import { asImage } from "@/lib/media";
 
 type AutoHeight = "to-img" | "to-parent";
 
@@ -16,7 +17,7 @@ export interface ResponsiveImgProps {
   autoHeightLg?: AutoHeight;
 }
 
-function buildSrcSet(banner: Image | null | undefined, url: string | null) {
+function buildSrcSet(banner: Media | null | undefined, url: string | null) {
   if (!banner) return undefined;
   const sizes = [
     ...Object.values(banner.formats ?? {}),
@@ -33,8 +34,8 @@ export default function ResponsiveImg({
   useMultiImg = true,
   isHero = false,
 }: ResponsiveImgProps) {
-  const imageD = bannerImage?.imageD;
-  const imageM = bannerImage?.imageM;
+  const imageD = asImage(bannerImage?.imageD);
+  const imageM = asImage(bannerImage?.imageM);
   const alt = bannerImage?.altText ?? "";
   const srcD = imageD?.url;
   const srcM = imageM?.url;

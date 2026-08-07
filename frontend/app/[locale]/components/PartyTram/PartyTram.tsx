@@ -15,6 +15,7 @@ export default function PartyTram() {
             height: 1080,
             alternativeText: null,
             formats: null,
+            mime: "image/jpeg",
           },
           imageM: {
             id: 0,
@@ -23,6 +24,7 @@ export default function PartyTram() {
             height: 1334,
             alternativeText: null,
             formats: null,
+            mime: "image/jpeg",
           },
         }}
         useMultiImg={false}

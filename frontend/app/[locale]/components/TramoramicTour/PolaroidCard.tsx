@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
-import type { Image } from "@/types/api";
+import type { Media } from "@/types/api";
 
 export interface PolaroidCardProps {
-  image: Image | null;
+  image: Media | null;
   className?: string;
   children?: ReactNode;
 }
