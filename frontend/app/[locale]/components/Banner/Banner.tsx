@@ -1,12 +1,18 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
+import BannerCard from "./BannerCard";
 
 export interface BannerProps {
   url?: string | null;
-  bannerImage?: ResponsiveImage | null;
+  bannerImage?: ResponsiveImage[] | null;
   className?: string;
   isFullScreen?: boolean;
 }
+
+const SLIDE_INTERVAL_MS = 8000;
 
 export default function Banner({
   url = IMG_URL,
@@ -14,45 +20,39 @@ export default function Banner({
   className = "",
   isFullScreen = false,
 }: BannerProps) {
-  const imageD = bannerImage?.imageD;
-  const imageM = bannerImage?.imageM;
+  const banners = bannerImage?.filter((b) => b.imageD || b.imageM) ?? [];
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  if (!imageD && !imageM) return null;
+  useEffect(() => {
+    if (banners.length < 2) return;
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % banners.length);
+    }, SLIDE_INTERVAL_MS);
+    return () => clearInterval(timer);
+  }, [banners.length]);
 
-  const alt = bannerImage?.altText ?? "";
-  const srcD = imageD?.url ? `${url}${imageD.url}` : undefined;
-  const srcM = imageM?.url ? `${url}${imageM.url}` : srcD;
-
-  const bgClass = "absolute inset-0 bg-fixed bg-no-repeat bg-center bg-cover";
+  if (banners.length === 0) return null;
 
   return (
     <section
-      role="img"
-      aria-label={alt}
       // isFullScreen false: news bar is rendered, so header + banner + newsBar = 100dvh
       // isFullScreen true: no news bar, so header + banner = 100dvh
-      className={`bg-green relative borderless ${
+      className={`bg-green relative overflow-hidden borderless ${
         !isFullScreen
           ? "h-[calc(100dvh-52px)] lg:h-[calc(100dvh-160px)]"
           : "h-[100dvh] lg:h-[calc(100dvh-100px)]"
       } ${className}`}
     >
-      {srcM && (
-        <div
-          className={`${bgClass} lg:hidden`}
-          style={{
-            backgroundImage: `url(${srcM})`,
-          }}
+      {banners.map((banner, index) => (
+        <BannerCard
+          key={banner.id}
+          bannerImage={banner}
+          url={url}
+          className={`transition-opacity duration-1000 ease-in-out ${
+            index === activeIndex ? "opacity-100" : "opacity-0"
+          }`}
         />
-      )}
-      {srcD && (
-        <div
-          className={`${bgClass} rounded-[30px] left-10 right-10 bottom-10 hidden lg:block`}
-          style={{
-            backgroundImage: `url(${srcD})`,
-          }}
-        />
-      )}
+      ))}
     </section>
   );
 }

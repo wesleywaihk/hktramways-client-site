@@ -105,7 +105,7 @@ export interface Home {
   id: number;
   documentId: string;
   Title: string;
-  bannerImage: ResponsiveImage | null;
+  bannerImage: ResponsiveImage[] | null;
   newsBar: HomeNewsBarItem[];
   arcCarousel: ArcCarouselData | null;
   tramRoute: TramRouteData | null;

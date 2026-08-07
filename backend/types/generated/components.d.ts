@@ -14,6 +14,20 @@ export interface ContentActionButton extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentBannerImageUnit extends Struct.ComponentSchema {
+  collectionName: 'components_content_banner_image_units';
+  info: {
+    displayName: 'bannerImageUnit';
+  };
+  attributes: {
+    altText: Schema.Attribute.String;
+    imageD: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    imageM: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface ContentCarouselItem extends Struct.ComponentSchema {
   collectionName: 'components_content_carousel_items';
   info: {
@@ -207,6 +221,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'content.action-button': ContentActionButton;
+      'content.banner-image-unit': ContentBannerImageUnit;
       'content.carousel-item': ContentCarouselItem;
       'content.hyperlink': ContentHyperlink;
       'content.icon-list': ContentIconList;
