@@ -5,20 +5,21 @@ export interface ImageFormat {
   size: number;
 }
 
-export interface Image {
+export interface Media {
   id: number;
   url: string;
   width: number;
   height: number;
   alternativeText: string | null;
   formats: Record<string, ImageFormat> | null;
+  mime: string;
 }
 
 export interface ResponsiveImage {
   id: number;
   altText: string | null;
-  imageD: Image | null;
-  imageM: Image | null;
+  imageD: Media | null;
+  imageM: Media | null;
 }
 
 export interface Hyperlink {
@@ -38,7 +39,7 @@ export interface HomeNewsBarItem {
 
 export interface ArcCarouselItem {
   id: number;
-  image: Image | null;
+  image: Media | null;
   desc: string | null;
   hyperlink: Hyperlink | null;
 }
@@ -74,10 +75,10 @@ export interface TramRouteData {
 
 export interface TramoramicTourData {
   id: number;
-  mianImage: Image | null;
+  mianImage: Media | null;
   hashTagTxt: string | null;
-  supportImage1: Image | null;
-  supportImage2: Image | null;
+  supportImage1: Media | null;
+  supportImage2: Media | null;
   title1: string | null;
   title2: string | null;
   desc: string | null;
@@ -86,7 +87,7 @@ export interface TramoramicTourData {
 }
 export interface SouveniorItem {
   id: number;
-  image: Image | null;
+  image: Media | null;
   icon: IconComponent | null;
   link: Hyperlink | null;
   name: string;

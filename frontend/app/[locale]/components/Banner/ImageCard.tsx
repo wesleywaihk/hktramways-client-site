@@ -1,17 +1,17 @@
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
 
-export interface BannerCardProps {
+export interface ImageCardProps {
   bannerImage?: ResponsiveImage | null;
   url?: string | null;
   className?: string;
 }
 
-export default function BannerCard({
+export default function ImageCard({
   bannerImage,
   url = IMG_URL,
   className = "",
-}: BannerCardProps) {
+}: ImageCardProps) {
   const imageD = bannerImage?.imageD;
   const imageM = bannerImage?.imageM;
   const alt = bannerImage?.altText ?? "";

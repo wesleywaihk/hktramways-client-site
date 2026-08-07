@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
-import BannerCard from "./BannerCard";
+import { isImageMedia, isVideoMedia } from "@/lib/media";
+import ImageCard from "./ImageCard";
+import VideoCard from "./VideoCard";
 
 export interface BannerProps {
   url?: string | null;
@@ -14,13 +16,19 @@ export interface BannerProps {
 
 const SLIDE_INTERVAL_MS = 8000;
 
+// imageD and imageM must be the same media type (both image or both video),
+// otherwise the pair can't be rendered consistently across breakpoints.
+const isValidBanner = (banner: ResponsiveImage) =>
+  // (isImageMedia(banner.imageD) && isImageMedia(banner.imageM)) ||
+  isVideoMedia(banner.imageD) && isVideoMedia(banner.imageM);
+
 export default function Banner({
   url = IMG_URL,
   bannerImage,
   className = "",
   isFullScreen = false,
 }: BannerProps) {
-  const banners = bannerImage?.filter((b) => b.imageD || b.imageM) ?? [];
+  const banners = bannerImage?.filter(isValidBanner) ?? [];
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -43,16 +51,27 @@ export default function Banner({
           : "h-[100dvh] lg:h-[calc(100dvh-100px)]"
       } ${className}`}
     >
-      {banners.map((banner, index) => (
-        <BannerCard
-          key={banner.id}
-          bannerImage={banner}
-          url={url}
-          className={`transition-opacity duration-1000 ease-in-out ${
-            index === activeIndex ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      ))}
+      {banners.map((banner, index) => {
+        const cardClassName = `transition-opacity duration-1000 ease-in-out ${
+          index === activeIndex ? "opacity-100" : "opacity-0"
+        }`;
+        return isVideoMedia(banner.imageD) ? (
+          <VideoCard
+            key={banner.id}
+            bannerImage={banner}
+            url={url}
+            className={cardClassName}
+            isFullScreen={isFullScreen}
+          />
+        ) : (
+          <ImageCard
+            key={banner.id}
+            bannerImage={banner}
+            url={url}
+            className={cardClassName}
+          />
+        );
+      })}
     </section>
   );
 }
