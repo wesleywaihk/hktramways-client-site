@@ -32,7 +32,7 @@ export default function VideoCard({
     >
       {srcM && (
         <video
-          className={`${bgClass} w-[100dvw] ${
+          className={`${bgClass} w-full ${
             !isFullScreen ? "h-[100dvh]!" : "h-[calc(100dvh-52px)]!"
           } lg:hidden`}
           src={srcM}
@@ -46,7 +46,7 @@ export default function VideoCard({
       )}
       {srcD && (
         <video
-          className={`${bgClass} rounded-[30px] left-10 right-10 bottom-10 w-[calc(100vw-100px)] ${
+          className={`${bgClass} rounded-[30px] left-10 w-[calc(100%-80px)] ${
             isFullScreen ? "h-[calc(100dvh-140px)]" : "h-[calc(100dvh-200px)]"
           } hidden lg:block`}
           src={srcD}
