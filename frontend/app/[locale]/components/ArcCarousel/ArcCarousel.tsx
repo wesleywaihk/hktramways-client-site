@@ -158,7 +158,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           <ArrowBackIcon fontSize="small" />
         </button>
 
-        <h2 className="text-white text-center font-semibold uppercase text-[40px] md:text-[56px] leading-[107%] tracking-[0.02em]">
+        <h2 className="title-text text-white text-center">
           {heading}
         </h2>
 

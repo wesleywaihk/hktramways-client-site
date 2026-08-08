@@ -40,3 +40,8 @@ body {
 @utility borderless {
   @apply -mx-5 w-[calc(100%+2.5rem)] lg:-mx-6 lg:w-[calc(100%+3rem)];
 }
+
+@utility title-text {
+  @apply font-semibold uppercase leading-[107%] tracking-[0.02em];
+  font-size: clamp(40px, 24.73px + 4.07vw, 56px);
+}
