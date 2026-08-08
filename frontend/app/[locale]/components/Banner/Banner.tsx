@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
 import { isImageMedia, isVideoMedia } from "@/lib/media";
+import { useElementScrollProgress } from "@/hooks/useElementScrollProgress";
 import ImageCard from "./ImageCard";
 import VideoCard from "./VideoCard";
 
@@ -14,7 +15,9 @@ export interface BannerProps {
   isFullScreen?: boolean;
 }
 
-const SLIDE_INTERVAL_MS = 8000;
+const SLIDE_INTERVAL_MS = 10000;
+export const SCROLL_DISTANCE = 200;
+export const FADE_DURATION_MS = 1000;
 
 // imageD and imageM must be the same media type (both image or both video),
 // otherwise the pair can't be rendered consistently across breakpoints.
@@ -30,6 +33,8 @@ export default function Banner({
 }: BannerProps) {
   const banners = bannerImage?.filter(isValidBanner) ?? [];
   const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollProgress = useElementScrollProgress(sectionRef, "pageTop");
 
   useEffect(() => {
     if (banners.length < 2) return;
@@ -41,8 +46,14 @@ export default function Banner({
 
   if (banners.length === 0) return null;
 
+  const transY = Math.min(
+    Math.max(0, scrollProgress * SCROLL_DISTANCE),
+    SCROLL_DISTANCE,
+  );
+
   return (
     <section
+      ref={sectionRef}
       // isFullScreen false: news bar is rendered, so header + banner + newsBar = 100dvh
       // isFullScreen true: no news bar, so header + banner = 100dvh
       className={`bg-green relative overflow-hidden borderless ${
@@ -55,6 +66,7 @@ export default function Banner({
         const cardClassName = `transition-opacity duration-1000 ease-in-out ${
           index === activeIndex ? "opacity-100" : "opacity-0"
         }`;
+        const cardStyle = { transitionDuration: `${FADE_DURATION_MS}ms` };
         return isVideoMedia(banner.imageD) ? (
           <VideoCard
             key={banner.id}
@@ -62,6 +74,9 @@ export default function Banner({
             url={url}
             className={cardClassName}
             isFullScreen={isFullScreen}
+            isActive={index === activeIndex}
+            transY={transY}
+            style={cardStyle}
           />
         ) : (
           <ImageCard
@@ -69,6 +84,8 @@ export default function Banner({
             bannerImage={banner}
             url={url}
             className={cardClassName}
+            transY={transY}
+            style={cardStyle}
           />
         );
       })}
