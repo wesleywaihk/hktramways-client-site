@@ -46,9 +46,10 @@ export default function HeaderContent({
             <Link
               key={link.href}
               href={`/${locale}${link.href}`}
-              className="font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase whitespace-nowrap text-[var(--header-fg)] hover:opacity-80"
+              className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase whitespace-nowrap text-[var(--header-fg)]"
             >
               {link.label}
+              <span className="pointer-events-none absolute left-0 -bottom-1 h-[2px] w-full origin-right scale-x-0 bg-current/30 transition-transform duration-300 ease-out transform-gpu group-hover:origin-left group-hover:scale-x-100" />
             </Link>
           ))}
         </nav>
