@@ -1,11 +1,17 @@
+import { useEffect, useRef, useState } from "react";
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
+import { SCROLL_DISTANCE } from "./Banner";
+import { FADE_DURATION_MS } from "./Banner";
 
 export interface VideoCardProps {
   bannerImage?: ResponsiveImage | null;
   url?: string | null;
   className?: string;
   isFullScreen?: boolean;
+  isActive?: boolean;
+  transY?: number;
+  style?: React.CSSProperties;
 }
 
 export default function VideoCard({
@@ -13,50 +19,60 @@ export default function VideoCard({
   url = IMG_URL,
   className = "",
   isFullScreen = false,
+  isActive = false,
+  transY = 0,
+  style = {},
 }: VideoCardProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldRender, setShouldRender] = useState(isActive);
   const imageD = bannerImage?.imageD;
   const imageM = bannerImage?.imageM;
   const alt = bannerImage?.altText ?? "";
   const srcD = imageD?.url ? `${url}${imageD.url}` : undefined;
   const srcM = imageM?.url ? `${url}${imageM.url}` : srcD;
 
-  const bgClass =
-    "absolute inset-0 object-cover bg-grey-200 max-w-[unset] max-h-[unset]";
+  // keep the <video> mounted through the fade-out instead of popping it out mid-transition
+  if (isActive && !shouldRender) setShouldRender(true);
+
+  useEffect(() => {
+    if (isActive) return;
+    const timer = setTimeout(() => {
+      videoRef.current?.pause();
+      setShouldRender(false);
+    }, FADE_DURATION_MS);
+    return () => clearTimeout(timer);
+  }, [isActive]);
+
+  const videoStyle = {
+    top: `${0 - SCROLL_DISTANCE}px`,
+    height: `calc(100% + ${SCROLL_DISTANCE}px)`,
+    transform: `translateY(${transY}px)`,
+  };
 
   return (
     <div
-      className={`absolute left-0 top-0 right-0 bottom-0 ${className}`}
-      role="img"
-      aria-label={alt}
+      className={`absolute inset-0 lg:rounded-[30px] w-full lg:w-[calc(100%-80px)] lg:left-10 ${
+        isFullScreen
+          ? "h-[100dvh] lg:h-[calc(100dvh-140px)]"
+          : "h-[calc(100dvh-52px)] lg:h-[calc(100dvh-200px)]"
+      } overflow-hidden ${className}`}
+      style={style}
       data-full-screen={isFullScreen}
     >
-      {srcM && (
+      {shouldRender && (srcM || srcD) && (
         <video
-          className={`${bgClass} w-full ${
-            !isFullScreen ? "h-[100dvh]!" : "h-[calc(100dvh-52px)]!"
-          } lg:hidden`}
-          src={srcM}
+          className="absolute inset-0 object-cover max-w-[unset] max-h-[unset] w-full transform-gpu"
           autoPlay
           loop
           muted
           playsInline
           controls={false}
           disablePictureInPicture
-        />
-      )}
-      {srcD && (
-        <video
-          className={`${bgClass} rounded-[30px] left-10 w-[calc(100%-80px)] ${
-            isFullScreen ? "h-[calc(100dvh-140px)]" : "h-[calc(100dvh-200px)]"
-          } hidden lg:block`}
-          src={srcD}
-          autoPlay
-          loop
-          muted
-          playsInline
-          controls={false}
-          disablePictureInPicture
-        />
+          style={videoStyle}
+        >
+          {srcD && <source src={srcD} media="(min-width: 1024px)" />}
+          {srcM && <source src={srcM} />}
+        </video>
       )}
     </div>
   );

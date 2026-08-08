@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Button from "@/components/Button/Button";
 import type { IconEnum, ArcCarouselData, Media } from "@/types/api";
 import { asImage } from "@/lib/media";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useArcCarouselSwipe } from "./useArcCarouselSwipe";
 import ArcCarouselCard from "./ArcCarouselCard";
 
@@ -80,45 +80,6 @@ const mobileGap = (cardWidth: string) => `calc(50vw + (${cardWidth}) / 4)`;
  */
 const smGap = (cardWidth: string) => `calc(44vw + (${cardWidth}) / 5)`;
 
-/** matches the project's md breakpoint (768px) used elsewhere for mobile/desktop layout */
-function useIsMobile(query = "(max-width: 767.99px)") {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia(query);
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, [query]);
-  return isMobile;
-}
-
-/** true between the sm and md breakpoints (640px–767.99px) */
-function useIsSmToMd(query = "(min-width: 640px) and (max-width: 767.99px)") {
-  const [isSmToMd, setIsSmToMd] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia(query);
-    const update = () => setIsSmToMd(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, [query]);
-  return isSmToMd;
-}
-
-/** true at the xl breakpoint (1280px) and above */
-function useIsXl(query = "(min-width: 1280px)") {
-  const [isXl, setIsXl] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia(query);
-    const update = () => setIsXl(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, [query]);
-  return isXl;
-}
-
 /** shortest looped distance from the active card (…-2,-1,0,1,2…) */
 function loopedOffset(index: number, active: number, total: number) {
   let d = index - active;
@@ -165,9 +126,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
     onPointerUp,
     onPointerLeave,
   } = useArcCarouselSwipe(total);
-  const isMobile = useIsMobile();
-  const isSmToMd = useIsSmToMd();
-  const isXl = useIsXl();
+  const { isMobile, isSmToMd, isXl } = useMediaQuery();
 
   const cardWidth = isMobile ? MOBILE_CARD_WIDTH : DESKTOP_CARD_WIDTH;
   const cardHeight = isMobile ? MOBILE_CARD_HEIGHT : DESKTOP_CARD_HEIGHT;
