@@ -11,6 +11,8 @@ export interface HeaderContentProps {
   logoClassName: string;
   alignClassName?: string;
   paddingClassName?: string;
+  /** true when this header sits on a white background, so the lang button's hover state must invert to stay visible */
+  invertLangHover?: boolean;
 }
 
 export default function HeaderContent({
@@ -21,6 +23,7 @@ export default function HeaderContent({
   logoClassName,
   alignClassName = "items-center",
   paddingClassName = "p-5 lg:py-[30px] lg:px-10",
+  invertLangHover = false,
 }: HeaderContentProps) {
   return (
     <div
@@ -56,7 +59,7 @@ export default function HeaderContent({
 
         {/* Desktop: inline nav is already visible, so the language control is a dropdown, no hamburger */}
         <div className="flex items-center">
-          <LocaleDropdown />
+          <LocaleDropdown invertHover={invertLangHover} />
         </div>
       </div>
 
@@ -64,7 +67,11 @@ export default function HeaderContent({
       <div className="flex items-center gap-5 lg:hidden">
         <button
           type="button"
-          className="flex items-center justify-center w-9 h-9 rounded-xl border-2 border-[var(--header-border)] bg-transparent text-[var(--header-fg)] font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase"
+          className={`flex items-center justify-center w-9 h-9 rounded-xl border-2 border-[var(--header-border)] bg-transparent text-[var(--header-fg)] font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase transition-colors duration-200 ease-out cursor-pointer ${
+            invertLangHover
+              ? "hover:bg-green hover:text-white active:bg-green active:text-white"
+              : "hover:bg-white hover:text-green active:bg-white active:text-green"
+          }`}
           onClick={onOpenNav}
           aria-label="Language"
         >

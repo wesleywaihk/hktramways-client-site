@@ -26,6 +26,7 @@ export default function Header() {
           logoClassName="min-w-[120.33px] h-9 lg:min-w-[133.7px] lg:h-10"
           alignClassName="items-center"
           paddingClassName="px-5 lg:px-10 py-5 lg:py-5"
+          invertLangHover
         />
       </header>
 
