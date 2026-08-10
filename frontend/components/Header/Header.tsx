@@ -3,15 +3,18 @@
 import { useState } from "react";
 import { useLocale } from "next-intl";
 import MobileNavOverlay from "./MobileNavOverlay";
+import DesktopNavOverlay from "./DesktopNavOverlay";
 import HeaderContent from "./HeaderContent";
 import { useAtTop } from "./useAtTop";
 import { useHeaderStyle } from "./HeaderStyle/HeaderStyleProvider";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function Header() {
   const locale = useLocale();
   const [navOpen, setNavOpen] = useState(false);
   const atTop = useAtTop();
   const { headerStyle } = useHeaderStyle();
+  const { isLg } = useMediaQuery();
 
   return (
     <>
@@ -55,7 +58,11 @@ export default function Header() {
         </header>
       )}
 
-      <MobileNavOverlay open={navOpen} onClose={() => setNavOpen(false)} />
+      {isLg ? (
+        <DesktopNavOverlay open={navOpen} onClose={() => setNavOpen(false)} />
+      ) : (
+        <MobileNavOverlay open={navOpen} onClose={() => setNavOpen(false)} />
+      )}
     </>
   );
 }

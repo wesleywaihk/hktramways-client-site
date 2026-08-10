@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button/Button";
 import IconButton from "@/components/Button/IconButton";
 import type { IconEnum, ArcCarouselData, Media } from "@/types/api";
@@ -22,6 +23,7 @@ export interface ArcCarouselItem {
   image?: Media;
   caption: string;
   linkUrl?: string;
+  callActionText?: string;
 }
 
 function mapCarouselData(data: ArcCarouselData | null | undefined) {
@@ -39,6 +41,7 @@ function mapCarouselData(data: ArcCarouselData | null | undefined) {
       image: asImage(item.image) ?? undefined,
       caption: item.desc ?? "",
       linkUrl: item.hyperlink?.url ?? undefined,
+      callActionText: item.callActionText ?? undefined,
     })),
   };
 }
@@ -134,6 +137,41 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   const visibleRange = isMobile ? MOBILE_VISIBLE_RANGE : DESKTOP_VISIBLE_RANGE;
   const active_ = items[active] ?? items[0];
 
+  const circleRef = useRef<HTMLDivElement>(null);
+  const [circleVisible, setCircleVisible] = useState(false);
+  const [hoveredText, setHoveredText] = useState("");
+  const rafRef = useRef<number | null>(null);
+  const pendingPos = useRef<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  const handleHoverMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    text: string,
+  ) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const rect = track.getBoundingClientRect();
+    pendingPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    if (rafRef.current == null) {
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        const pos = pendingPos.current;
+        if (pos && circleRef.current) {
+          circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%)`;
+        }
+      });
+    }
+    setCircleVisible(true);
+    setHoveredText(text);
+  };
+
+  const handleHoverEnd = () => setCircleVisible(false);
+
   const translateX = (off: number) => {
     const gap = isSmToMd
       ? smGap(cardWidth)
@@ -156,9 +194,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           className="hidden md:grid shrink-0 z-10 w-11 h-11 md:rounded-[16px]"
         />
 
-        <h2 className="title-text text-white text-center">
-          {heading}
-        </h2>
+        <h2 className="title-text text-white text-center">{heading}</h2>
 
         <IconButton
           ariaLabel="Next poster"
@@ -217,9 +253,40 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
                   : "transform 550ms cubic-bezier(0.22,0.9,0.3,1), opacity 300ms ease"
               }
               onClick={() => off !== 0 && (off > 0 ? next() : prev())}
+              onHoverMove={handleHoverMove}
+              onHoverEnd={handleHoverEnd}
             />
           );
         })}
+
+        <div
+          ref={circleRef}
+          aria-hidden="true"
+          className={`absolute left-0 top-0 flex flex-col items-center justify-center gap-1 w-[150px] h-[150px] rounded-full border-2 border-white backdrop-blur-xs pointer-events-none z-20 will-change-transform transition-opacity duration-150 ease-out ${
+            circleVisible ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <span className="w-full max-w-[80%] mx-auto font-sans text-white text-[20px] font-semibold leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
+            {hoveredText}
+          </span>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+            className="shrink-0 mx-auto block"
+          >
+            <path
+              d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-white"
+            />
+          </svg>
+        </div>
       </div>
 
       <div className="relative z-30 shrink-0 mt-6 md:mt-8 px-8 text-center">

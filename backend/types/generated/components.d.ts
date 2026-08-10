@@ -35,6 +35,7 @@ export interface ContentCarouselItem extends Struct.ComponentSchema {
     icon: 'code';
   };
   attributes: {
+    callActionText: Schema.Attribute.String;
     desc: Schema.Attribute.Text &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 80;
