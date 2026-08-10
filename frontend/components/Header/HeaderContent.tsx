@@ -44,31 +44,30 @@ export default function HeaderContent({
         />
       </Link>
 
-      <div className="hidden lg:flex lg:items-center lg:gap-10">
-        <nav className="flex items-center gap-[30px]">
-          {desktopNavLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={`/${locale}${link.href}`}
-              className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase whitespace-nowrap text-[var(--header-fg)]"
-            >
-              {link.label}
-              <span className="pointer-events-none absolute left-0 -bottom-1 h-[2px] w-full origin-right scale-x-0 bg-current/30 transition-transform duration-300 ease-out transform-gpu group-hover:origin-left group-hover:scale-x-100" />
-            </Link>
-          ))}
-        </nav>
+      <div className="flex items-center gap-5 lg:gap-10">
+        <div className="hidden lg:flex lg:items-center lg:gap-10">
+          <nav className="flex items-center gap-[30px]">
+            {desktopNavLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={`/${locale}${link.href}`}
+                className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase whitespace-nowrap text-[var(--header-fg)]"
+              >
+                {link.label}
+                <span className="pointer-events-none absolute left-0 -bottom-1 h-[2px] w-full origin-right scale-x-0 bg-current/30 transition-transform duration-300 ease-out transform-gpu group-hover:origin-left group-hover:scale-x-100" />
+              </Link>
+            ))}
+          </nav>
 
-        {/* Desktop: inline nav is already visible, so the language control is a dropdown, no hamburger */}
-        <div className="flex items-center">
-          <LocaleDropdown invertHover={invertLangHover} />
+          <div className="flex items-center">
+            <LocaleDropdown invertHover={invertLangHover} />
+          </div>
         </div>
-      </div>
 
-      {/* Mobile: collapsed to a language toggle + hamburger, both open the slide-in nav overlay */}
-      <div className="flex items-center gap-5 lg:hidden">
+        {/* Language toggle + hamburger, both open the slide-in nav overlay. Hamburger stays visible on desktop alongside the horizontal nav */}
         <button
           type="button"
-          className={`flex items-center justify-center w-9 h-9 rounded-xl border-2 border-[var(--header-border)] bg-transparent text-[var(--header-fg)] font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase transition-colors duration-200 ease-out cursor-pointer ${
+          className={`flex items-center justify-center w-9 h-9 rounded-xl border-2 border-[var(--header-border)] bg-transparent text-[var(--header-fg)] font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase transition-colors duration-200 ease-out cursor-pointer lg:hidden ${
             invertLangHover
               ? "hover:bg-green hover:text-white active:bg-green active:text-white"
               : "hover:bg-white hover:text-green active:bg-white active:text-green"

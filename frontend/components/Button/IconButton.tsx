@@ -15,8 +15,8 @@ export type IconButtonProps = {
 };
 
 const colorClasses: Record<IconButtonColor, string> = {
-  green: "bg-white text-green",
-  white: "bg-green text-white",
+  green: "bg-white text-green hover:bg-green hover:text-white",
+  white: "bg-green text-white hover:bg-white hover:text-green",
 };
 
 export default function IconButton({
@@ -29,7 +29,7 @@ export default function IconButton({
   className,
 }: IconButtonProps) {
   const classes = [
-    "group place-items-center cursor-pointer rounded-full",
+    "group place-items-center cursor-pointer rounded-full border-2 border-transparent hover:border-white transition-colors duration-200 ease-out",
     colorClasses[color],
     reverse && "rotate-180",
     className,
