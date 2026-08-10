@@ -1,8 +1,7 @@
 "use client";
 
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Button from "@/components/Button/Button";
+import IconButton from "@/components/Button/IconButton";
 import type { IconEnum, ArcCarouselData, Media } from "@/types/api";
 import { asImage } from "@/lib/media";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -149,27 +148,24 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   return (
     <section className="borderless h-[100dvh] bg-green relative overflow-hidden py-[10dvh] md:py-[6dvh] select-none flex flex-col">
       <div className="shrink-0 flex items-center justify-center gap-6 md:gap-16 pb-8 md:pb-10">
-        <button
-          type="button"
-          aria-label="Previous poster"
+        <IconButton
+          ariaLabel="Previous poster"
           onClick={prev}
-          className="hidden md:grid shrink-0 z-10 w-11 h-11 rounded-full md:rounded-[16px] bg-white text-green place-items-center cursor-pointer hover:-translate-x-1 hover:shadow-lg transition-all"
-        >
-          <ArrowBackIcon fontSize="small" />
-        </button>
+          reverse
+          useArrow
+          className="hidden md:grid shrink-0 z-10 w-11 h-11 md:rounded-[16px]"
+        />
 
         <h2 className="title-text text-white text-center">
           {heading}
         </h2>
 
-        <button
-          type="button"
-          aria-label="Next poster"
+        <IconButton
+          ariaLabel="Next poster"
           onClick={next}
-          className="hidden md:grid shrink-0 z-10 w-11 h-11 rounded-full md:rounded-[16px] bg-white text-green place-items-center cursor-pointer hover:translate-x-1 hover:shadow-lg transition-all"
-        >
-          <ArrowForwardIcon fontSize="small" />
-        </button>
+          useArrow
+          className="hidden md:grid shrink-0 z-10 w-11 h-11 md:rounded-[16px]"
+        />
       </div>
 
       <div
@@ -179,22 +175,19 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
       >
-        <button
-          type="button"
-          aria-label="Previous poster"
+        <IconButton
+          ariaLabel="Previous poster"
           onClick={prev}
-          className="md:hidden grid absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer hover:-translate-x-1 transition-all"
-        >
-          <ArrowBackIcon fontSize="small" />
-        </button>
-        <button
-          type="button"
-          aria-label="Next poster"
+          reverse
+          useArrow
+          className="md:hidden grid absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9"
+        />
+        <IconButton
+          ariaLabel="Next poster"
           onClick={next}
-          className="md:hidden grid absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer hover:translate-x-1 transition-all"
-        >
-          <ArrowForwardIcon fontSize="small" />
-        </button>
+          useArrow
+          className="md:hidden grid absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9"
+        />
 
         {items.map((item, i) => {
           const off = loopedOffset(i, active, total);
@@ -247,7 +240,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
       <div className="shrink-0 mt-6 md:mt-8 flex justify-center">
         <Button
           href={buttonUrl}
-          className="text-white"
+          color="white"
           useArrow={buttonUseArrow}
           startIcon={buttonStartIcon}
         >

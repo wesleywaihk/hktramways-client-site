@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { desktopNavLinks } from "./navLinks";
 import LocaleDropdown from "./LocaleDropdown";
+import HamburgerIcon from "./HamburgerIcon";
 
 export interface HeaderContentProps {
   locale: string;
@@ -79,14 +80,12 @@ export default function HeaderContent({
         </button>
         <button
           type="button"
-          className="flex flex-col justify-center items-center gap-2 w-[22px] h-9 bg-transparent border-none"
+          className="bg-transparent border-none"
           onClick={onOpenNav}
           aria-label="Open menu"
           aria-expanded={navOpen}
         >
-          <span className="block w-full h-0.5 bg-current" />
-          <span className="block w-full h-0.5 bg-current" />
-          <span className="block w-full h-0.5 bg-current" />
+          <HamburgerIcon open={navOpen} />
         </button>
       </div>
     </div>

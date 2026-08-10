@@ -45,3 +45,15 @@ body {
   @apply font-semibold uppercase leading-[107%] tracking-[0.02em];
   font-size: clamp(40px, 24.73px + 4.07vw, 56px);
 }
+
+@keyframes btn-arrow-slide-in {
+  0% {
+    transform: translateX(-100%);
+  }
+  60% {
+    transform: translateX(15%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

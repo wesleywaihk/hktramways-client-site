@@ -15,7 +15,8 @@ export default function ActionButton({
   return (
     <Button
       href={link?.url ?? "#"}
-      className={`text-white !px-4 !py-2.5 md:!px-6.5 md:!py-[19px] text-[11px] md:text-[14px] ${className}`}
+      color="white"
+      className={`!px-4 !py-2.5 md:!px-6.5 md:!py-[19px] text-[11px] md:text-[14px] ${className}`}
       useArrow={useArrow ?? false}
       startIcon={startIcon?.icon}
     >

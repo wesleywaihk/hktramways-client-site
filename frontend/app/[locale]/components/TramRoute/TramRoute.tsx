@@ -30,7 +30,7 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
         </p>
         <Button
           href={buttonUrl}
-          className="mt-6 md:mt-8 text-green"
+          className="mt-6 md:mt-8"
           useArrow={buttonUseArrow}
           startIcon={buttonStartIcon}
         >
