@@ -1,8 +1,11 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import Button from "@/components/Button/Button";
-import PolaroidCard from "./PolaroidCard";
+import CardContainer from "./CardContainer";
 import type { TramoramicTourData } from "@/types/api";
 import { asImage } from "@/lib/media";
+import useSlideShow from "./useSlideShow";
 
 export interface TramoramicTourProps {
   data?: TramoramicTourData | null;
@@ -12,6 +15,7 @@ export default function TramoramicTour({
   data = undefined,
 }: TramoramicTourProps) {
   const t = useTranslations("common");
+  const { activeSlide, nextSlide } = useSlideShow();
 
   if (!data) return null;
 
@@ -39,27 +43,33 @@ export default function TramoramicTour({
     <section className="borderless h-auto md:h-[100dvh] relative bg-red-dark py-20 lg:py-24 flex overflow-hidden">
       <div className="flex flex-col md:flex-row items-center gap-12 md:gap-8 lg:gap-16 px-5 lg:px-6 max-w-[1200px] mx-auto">
         <div className="relative w-[87vmin] md:w-full min-h-[84.5vmin] md:min-h-0 md:flex-1 mt-[12vmin] mb-[6vmin] md:my-0">
-          <div className="absolute left-0 top-0 w-full h-full z-0">
-            <PolaroidCard
-              image={image3}
-              hashTag={data?.tramoramicTourItem3?.hashTag}
-              className="-translate-x-[8%] -translate-y-[58%] md:-translate-x-[11%] md:-translate-y-[60%] shadow-lg"
-            />
-          </div>
-          <div className="absolute left-0 top-0 w-full h-full z-10">
-            <PolaroidCard
-              image={image2}
-              hashTag={data?.tramoramicTourItem2?.hashTag}
-              className="-translate-x-[13%] -translate-y-[42%] md:-translate-x-[18%] md:-translate-y-[42%] shadow-lg"
-            />
-          </div>
-          <div className="absolute left-0 top-0 w-full h-full z-20">
-            <PolaroidCard
-              image={image1}
-              hashTag={data?.tramoramicTourItem1?.hashTag}
-              className="-translate-y-1/2 shadow-xl"
-            />
-          </div>
+          <CardContainer
+            zIndexClass={
+              activeSlide === 0 ? "z-0" : activeSlide === 1 ? "z-10" : "z-20"
+            }
+            animate={activeSlide === 2 && nextSlide === 0}
+            image={image3}
+            hashTag={data?.tramoramicTourItem3?.hashTag}
+            cardClassName="-translate-x-[8%] -translate-y-[58%] md:-translate-x-[11%] md:-translate-y-[60%] shadow-lg"
+          />
+          <CardContainer
+            zIndexClass={
+              activeSlide === 0 ? "z-10" : activeSlide === 1 ? "z-20" : "z-0"
+            }
+            animate={activeSlide === 1 && nextSlide === 2}
+            image={image2}
+            hashTag={data?.tramoramicTourItem2?.hashTag}
+            cardClassName="-translate-x-[13%] -translate-y-[42%] md:-translate-x-[18%] md:-translate-y-[42%] shadow-lg"
+          />
+          <CardContainer
+            zIndexClass={
+              activeSlide === 0 ? "z-20" : activeSlide === 1 ? "z-0" : "z-10"
+            }
+            animate={activeSlide === 0 && nextSlide === 1}
+            image={image1}
+            hashTag={data?.tramoramicTourItem1?.hashTag}
+            cardClassName="-translate-y-1/2 shadow-xl"
+          />
         </div>
 
         <div className="flex flex-col items-center text-center md:items-start md:text-left md:flex-1">
