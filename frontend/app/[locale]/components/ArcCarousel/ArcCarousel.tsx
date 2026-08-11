@@ -142,6 +142,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   const [hoveredText, setHoveredText] = useState("");
   const rafRef = useRef<number | null>(null);
   const pendingPos = useRef<{ x: number; y: number } | null>(null);
+  const isHoveringRef = useRef(false);
 
   useEffect(() => {
     return () => {
@@ -157,12 +158,26 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
     if (!track) return;
     const rect = track.getBoundingClientRect();
     pendingPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    const isEntering = !isHoveringRef.current;
+    isHoveringRef.current = true;
     if (rafRef.current == null) {
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = null;
         const pos = pendingPos.current;
-        if (pos && circleRef.current) {
-          circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%)`;
+        const circle = circleRef.current;
+        if (!pos || !circle) return;
+        if (isEntering) {
+          circle.style.transition = "none";
+          circle.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(0.1)`;
+          void circle.offsetWidth;
+          circle.style.transition = "";
+          requestAnimationFrame(() => {
+            if (circleRef.current) {
+              circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(1)`;
+            }
+          });
+        } else {
+          circle.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(1)`;
         }
       });
     }
@@ -170,7 +185,14 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
     setHoveredText(text);
   };
 
-  const handleHoverEnd = () => setCircleVisible(false);
+  const handleHoverEnd = () => {
+    isHoveringRef.current = false;
+    const pos = pendingPos.current;
+    if (pos && circleRef.current) {
+      circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(0.1)`;
+    }
+    setCircleVisible(false);
+  };
 
   const translateX = (off: number) => {
     const gap = isSmToMd
@@ -262,7 +284,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
         <div
           ref={circleRef}
           aria-hidden="true"
-          className={`absolute left-0 top-0 flex flex-col items-center justify-center gap-1 w-[150px] h-[150px] rounded-full border-2 border-white backdrop-blur-xs pointer-events-none z-20 will-change-transform transition-opacity duration-150 ease-out ${
+          className={`absolute left-0 top-0 flex flex-col items-center justify-center gap-1 w-[150px] h-[150px] rounded-full border-2 border-white backdrop-blur-xs pointer-events-none z-20 will-change-transform transition-[opacity,transform] duration-150 ease-out ${
             circleVisible ? "opacity-100" : "opacity-0"
           }`}
         >
