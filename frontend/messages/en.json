@@ -4,6 +4,7 @@
     "noContent": "No content available.",
     "tramRouteTitleFallback": "6 TRAM ROUTES",
     "tramRouteButtonFallback": "INTERACTIVE ROUTE MAP",
+    "tramRouteSelectFallback": "SELECT ROUTE",
     "tramoramicTourAction1Fallback": "TRAM TOURS",
     "tramoramicTourAction2Fallback": "BOOK NOW"
   }

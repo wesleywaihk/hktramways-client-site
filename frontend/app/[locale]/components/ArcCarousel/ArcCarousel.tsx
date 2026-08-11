@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button/Button";
 import IconButton from "@/components/Button/IconButton";
+import ArrowIco from "@/components/icons/ArrowIco";
 import type { IconEnum, ArcCarouselData, Media } from "@/types/api";
 import { asImage } from "@/lib/media";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -284,46 +285,27 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
         <div
           ref={circleRef}
           aria-hidden="true"
-          className={`absolute left-0 top-0 flex flex-col items-center justify-center gap-1 w-[150px] h-[150px] rounded-full border-2 border-white backdrop-blur-xs pointer-events-none z-20 will-change-transform transition-[opacity,transform] duration-150 ease-out ${
+          className={`absolute left-0 top-0 flex flex-col items-center justify-center gap-1 w-[150px] h-[150px] rounded-full bg-white pointer-events-none z-20 will-change-transform transition-[opacity,transform] duration-150 ease-out ${
             circleVisible ? "opacity-100" : "opacity-0"
           }`}
+          //backdrop-blur-xs
         >
-          <span className="w-full max-w-[80%] mx-auto font-sans text-white text-[20px] font-semibold leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
+          <span className="w-full max-w-[80%] mx-auto font-sans text-green text-[20px] font-semibold leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
             {hoveredText}
           </span>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 16 16"
-            fill="none"
+          <ArrowIco
+            width={20}
+            height={20}
             aria-hidden="true"
-            className="shrink-0 mx-auto block"
-          >
-            <path
-              d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-white"
-            />
-          </svg>
+            className="shrink-0 mx-auto block text-green"
+          />
         </div>
       </div>
 
       <div className="relative z-30 shrink-0 mt-6 md:mt-8 px-8 text-center">
-        {active_.linkUrl ? (
-          <a
-            href={active_.linkUrl}
-            className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto inline-block hover:underline underline-offset-4"
-          >
-            {active_.caption}
-          </a>
-        ) : (
-          <p className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto">
-            {active_.caption}
-          </p>
-        )}
+        <p className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto">
+          {active_.caption}
+        </p>
       </div>
 
       <div className="shrink-0 mt-6 md:mt-8 flex justify-center">
