@@ -22,7 +22,7 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
   return (
     <section className="borderless h-[100dvh] relative bg-earth-light pt-16 md:pt-20 lg:pt-24">
       <div className="flex flex-col items-center text-center md:items-start md:text-left px-5 lg:px-6 max-w-[600px] mx-auto md:mx-0 md:ml-[8%]">
-        <h2 className="text-green font-semibold uppercase text-[40px] md:text-[56px] leading-[107%] tracking-[0.02em]">
+        <h2 className="title-text text-green">
           {title}
         </h2>
         <p className="mt-4 md:mt-6 text-black text-[15px] md:text-[16px] leading-[163%] tracking-[0.02em]">
@@ -30,7 +30,7 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
         </p>
         <Button
           href={buttonUrl}
-          className="mt-6 md:mt-8 text-green"
+          className="mt-6 md:mt-8"
           useArrow={buttonUseArrow}
           startIcon={buttonStartIcon}
         >

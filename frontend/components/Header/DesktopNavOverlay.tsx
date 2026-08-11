@@ -8,7 +8,7 @@ import ChevronIcon from "./ChevronIcon";
 import CloseIcon from "./CloseIcon";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
 
-export default function MobileNavOverlay({
+export default function DesktopNavOverlay({
   open,
   onClose,
 }: {
@@ -17,6 +17,8 @@ export default function MobileNavOverlay({
 }) {
   const { locale, locales, switchLocale } = useLocaleSwitcher();
   const [activeParent, setActiveParent] = useState<string | null>(null);
+
+  const activeLink = mobileNavLinks.find((link) => link.href === activeParent);
 
   const handleClose = () => {
     setActiveParent(null);
@@ -35,7 +37,7 @@ export default function MobileNavOverlay({
         aria-hidden="true"
       />
       <div
-        className={`fixed top-0 right-0 bottom-0 z-[1011] w-full max-w-[393px] flex flex-col p-5 px-[30px] bg-green text-white transition-transform duration-500 ease-in-out ${
+        className={`fixed top-0 right-0 bottom-0 z-[1011] w-1/2 flex flex-col p-5 px-20 bg-green text-white transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
@@ -49,7 +51,7 @@ export default function MobileNavOverlay({
                 key={loc}
                 type="button"
                 className={`font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase text-white bg-transparent border-none ${
-                  loc === locale ? "opacity-100" : "opacity-60"
+                  loc === locale ? "opacity-100" : "opacity-30"
                 }`}
                 onClick={() => switchLocale(loc)}
               >
@@ -67,8 +69,11 @@ export default function MobileNavOverlay({
           </button>
         </div>
 
-        <nav className="flex items-start w-full mt-16">
-          <div className="flex flex-col gap-7 w-full max-w-[333px]">
+        <nav
+          className="flex items-start gap-20 w-full mt-[123px]"
+          onMouseLeave={() => setActiveParent(null)}
+        >
+          <div className="flex flex-col gap-[30px] w-[358px] shrink-0">
             {mobileNavLinks.map((link) => {
               const hasChildren = !!link.children?.length;
               const isActive = activeParent === link.href;
@@ -78,61 +83,48 @@ export default function MobileNavOverlay({
                 <>
                   {link.label}
                   {hasChildren && (
-                    <ChevronIcon active={isActive} className="w-[22px] h-[22px]" />
+                    <ChevronIcon desktop className="w-[26px] h-[26px]" />
                   )}
                   {link.external && (
-                    <UprightArrowIco className="w-[22px] h-[22px]" />
+                    <UprightArrowIco className="w-[26px] h-[26px]" />
                   )}
                 </>
               );
 
-              const sharedClassName = `flex items-center justify-between gap-2 font-sans text-[24px] leading-[118%] font-semibold tracking-[0.48px] text-white bg-transparent border-none text-left transition-opacity duration-200 ease-out cursor-pointer ${
+              const sharedClassName = `flex items-center justify-between gap-2 font-sans text-[32px] leading-[118%] font-semibold tracking-[0.64px] text-white bg-transparent border-none text-left transition-opacity duration-200 ease-out cursor-pointer ${
                 dimmed ? "opacity-30" : "opacity-100"
               }`;
 
               return (
-                <div key={link.href} className="flex flex-col">
-                  {hasChildren ? (
-                    <button
-                      type="button"
-                      className={sharedClassName}
-                      onClick={() =>
-                        setActiveParent((current) =>
-                          current === link.href ? null : link.href,
-                        )
-                      }
-                      aria-expanded={isActive}
-                    >
-                      {content}
-                    </button>
-                  ) : (
-                    <Link
-                      href={`/${locale}${link.href}`}
-                      className={sharedClassName}
-                      onClick={handleClose}
-                    >
-                      {content}
-                    </Link>
-                  )}
-
-                  {hasChildren && isActive && (
-                    <div className="flex flex-col gap-[10px] mt-3">
-                      {link.children!.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={`/${locale}${child.href}`}
-                          className="font-sans text-[18px] leading-[152.4%] font-normal tracking-[0.36px] text-white"
-                          onClick={handleClose}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <Link
+                  key={link.href}
+                  href={`/${locale}${link.href}`}
+                  className={sharedClassName}
+                  onClick={handleClose}
+                  onMouseEnter={() =>
+                    setActiveParent(hasChildren ? link.href : null)
+                  }
+                >
+                  {content}
+                </Link>
               );
             })}
           </div>
+
+          {activeLink?.children && (
+            <div className="flex flex-col gap-5 w-[140px] shrink-0">
+              {activeLink.children.map((child) => (
+                <Link
+                  key={child.href}
+                  href={`/${locale}${child.href}`}
+                  className="font-sans text-[21px] leading-[152.4%] font-normal tracking-[0.42px] text-white"
+                  onClick={handleClose}
+                >
+                  {child.label}
+                </Link>
+              ))}
+            </div>
+          )}
         </nav>
 
         <div className="mt-auto pt-5 font-sans text-[13px] leading-[145%] font-normal tracking-[0.26px] text-white">

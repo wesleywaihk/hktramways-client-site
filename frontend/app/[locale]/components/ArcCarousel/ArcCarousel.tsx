@@ -1,8 +1,8 @@
 "use client";
 
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button/Button";
+import IconButton from "@/components/Button/IconButton";
 import type { IconEnum, ArcCarouselData, Media } from "@/types/api";
 import { asImage } from "@/lib/media";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -23,6 +23,7 @@ export interface ArcCarouselItem {
   image?: Media;
   caption: string;
   linkUrl?: string;
+  callActionText?: string;
 }
 
 function mapCarouselData(data: ArcCarouselData | null | undefined) {
@@ -40,6 +41,7 @@ function mapCarouselData(data: ArcCarouselData | null | undefined) {
       image: asImage(item.image) ?? undefined,
       caption: item.desc ?? "",
       linkUrl: item.hyperlink?.url ?? undefined,
+      callActionText: item.callActionText ?? undefined,
     })),
   };
 }
@@ -135,6 +137,63 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   const visibleRange = isMobile ? MOBILE_VISIBLE_RANGE : DESKTOP_VISIBLE_RANGE;
   const active_ = items[active] ?? items[0];
 
+  const circleRef = useRef<HTMLDivElement>(null);
+  const [circleVisible, setCircleVisible] = useState(false);
+  const [hoveredText, setHoveredText] = useState("");
+  const rafRef = useRef<number | null>(null);
+  const pendingPos = useRef<{ x: number; y: number } | null>(null);
+  const isHoveringRef = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  const handleHoverMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    text: string,
+  ) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const rect = track.getBoundingClientRect();
+    pendingPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    const isEntering = !isHoveringRef.current;
+    isHoveringRef.current = true;
+    if (rafRef.current == null) {
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        const pos = pendingPos.current;
+        const circle = circleRef.current;
+        if (!pos || !circle) return;
+        if (isEntering) {
+          circle.style.transition = "none";
+          circle.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(0.1)`;
+          void circle.offsetWidth;
+          circle.style.transition = "";
+          requestAnimationFrame(() => {
+            if (circleRef.current) {
+              circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(1)`;
+            }
+          });
+        } else {
+          circle.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(1)`;
+        }
+      });
+    }
+    setCircleVisible(true);
+    setHoveredText(text);
+  };
+
+  const handleHoverEnd = () => {
+    isHoveringRef.current = false;
+    const pos = pendingPos.current;
+    if (pos && circleRef.current) {
+      circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(0.1)`;
+    }
+    setCircleVisible(false);
+  };
+
   const translateX = (off: number) => {
     const gap = isSmToMd
       ? smGap(cardWidth)
@@ -149,27 +208,22 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   return (
     <section className="borderless h-[100dvh] bg-green relative overflow-hidden py-[10dvh] md:py-[6dvh] select-none flex flex-col">
       <div className="shrink-0 flex items-center justify-center gap-6 md:gap-16 pb-8 md:pb-10">
-        <button
-          type="button"
-          aria-label="Previous poster"
+        <IconButton
+          ariaLabel="Previous poster"
           onClick={prev}
-          className="hidden md:grid shrink-0 z-10 w-11 h-11 rounded-full md:rounded-[16px] bg-white text-green place-items-center cursor-pointer hover:-translate-x-1 hover:shadow-lg transition-all"
-        >
-          <ArrowBackIcon fontSize="small" />
-        </button>
+          reverse
+          useArrow
+          className="hidden md:grid shrink-0 z-10 w-11 h-11 md:rounded-[16px]"
+        />
 
-        <h2 className="text-white text-center font-semibold uppercase text-[40px] md:text-[56px] leading-[107%] tracking-[0.02em]">
-          {heading}
-        </h2>
+        <h2 className="title-text text-white text-center">{heading}</h2>
 
-        <button
-          type="button"
-          aria-label="Next poster"
+        <IconButton
+          ariaLabel="Next poster"
           onClick={next}
-          className="hidden md:grid shrink-0 z-10 w-11 h-11 rounded-full md:rounded-[16px] bg-white text-green place-items-center cursor-pointer hover:translate-x-1 hover:shadow-lg transition-all"
-        >
-          <ArrowForwardIcon fontSize="small" />
-        </button>
+          useArrow
+          className="hidden md:grid shrink-0 z-10 w-11 h-11 md:rounded-[16px]"
+        />
       </div>
 
       <div
@@ -179,22 +233,19 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
       >
-        <button
-          type="button"
-          aria-label="Previous poster"
+        <IconButton
+          ariaLabel="Previous poster"
           onClick={prev}
-          className="md:hidden grid absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer hover:-translate-x-1 transition-all"
-        >
-          <ArrowBackIcon fontSize="small" />
-        </button>
-        <button
-          type="button"
-          aria-label="Next poster"
+          reverse
+          useArrow
+          className="md:hidden grid absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9"
+        />
+        <IconButton
+          ariaLabel="Next poster"
           onClick={next}
-          className="md:hidden grid absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 rounded-full bg-white text-green place-items-center cursor-pointer hover:translate-x-1 transition-all"
-        >
-          <ArrowForwardIcon fontSize="small" />
-        </button>
+          useArrow
+          className="md:hidden grid absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9"
+        />
 
         {items.map((item, i) => {
           const off = loopedOffset(i, active, total);
@@ -224,9 +275,40 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
                   : "transform 550ms cubic-bezier(0.22,0.9,0.3,1), opacity 300ms ease"
               }
               onClick={() => off !== 0 && (off > 0 ? next() : prev())}
+              onHoverMove={handleHoverMove}
+              onHoverEnd={handleHoverEnd}
             />
           );
         })}
+
+        <div
+          ref={circleRef}
+          aria-hidden="true"
+          className={`absolute left-0 top-0 flex flex-col items-center justify-center gap-1 w-[150px] h-[150px] rounded-full border-2 border-white backdrop-blur-xs pointer-events-none z-20 will-change-transform transition-[opacity,transform] duration-150 ease-out ${
+            circleVisible ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <span className="w-full max-w-[80%] mx-auto font-sans text-white text-[20px] font-semibold leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
+            {hoveredText}
+          </span>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+            className="shrink-0 mx-auto block"
+          >
+            <path
+              d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-white"
+            />
+          </svg>
+        </div>
       </div>
 
       <div className="relative z-30 shrink-0 mt-6 md:mt-8 px-8 text-center">
@@ -247,7 +329,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
       <div className="shrink-0 mt-6 md:mt-8 flex justify-center">
         <Button
           href={buttonUrl}
-          className="text-white"
+          color="white"
           useArrow={buttonUseArrow}
           startIcon={buttonStartIcon}
         >

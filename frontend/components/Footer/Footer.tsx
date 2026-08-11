@@ -29,7 +29,7 @@ export default function Footer() {
               Get our latest news of us, and track the time of next tram coming
               in your location easily!
             </p>
-            <Button href="/app" className="mt-6 lg:mt-8" useArrow>
+            <Button href="/app" color="white" className="mt-6 lg:mt-8" useArrow>
               Learn More
             </Button>
           </div>

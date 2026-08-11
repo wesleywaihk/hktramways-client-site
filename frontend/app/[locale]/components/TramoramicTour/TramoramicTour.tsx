@@ -76,7 +76,8 @@ export default function TramoramicTour({
           <div className="mt-6 md:mt-8 flex flex-wrap justify-center md:justify-start gap-4">
             <Button
               href={action1Url}
-              className="text-white"
+              color="white"
+              className="hover:!text-red-dark"
               useArrow={action1UseArrow}
               startIcon={action1StartIcon}
             >
@@ -84,7 +85,8 @@ export default function TramoramicTour({
             </Button>
             <Button
               href={action2Url}
-              className="text-white"
+              color="white"
+              className="hover:!text-red-dark"
               useArrow={action2UseArrow}
               startIcon={action2StartIcon}
             >

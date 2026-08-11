@@ -42,6 +42,7 @@ export interface ArcCarouselItem {
   image: Media | null;
   desc: string | null;
   hyperlink: Hyperlink | null;
+  callActionText: string | null;
 }
 
 export type IconEnum = "map" | "calendar" | "busket" | "upRightArrow";

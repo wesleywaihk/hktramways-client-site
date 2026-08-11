@@ -30,7 +30,7 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
   return (
     <section className="borderless h-auto  bg-green flex flex-col justify-center py-[90px] lg:py-[120px]">
       <div className="flex items-center justify-between gap-4 w-full pageBorder max-w-screen-xl mx-auto">
-        <h2 className="text-white font-semibold uppercase text-center lg:text-left text-[40px] lg:text-[56px] leading-[107%] tracking-[0.02em] px-0 mx-0 grow">
+        <h2 className="title-text text-white text-center lg:text-left px-0 mx-0 grow">
           {title}
         </h2>
         {data.actionButton && (

@@ -24,6 +24,9 @@
       "type": "component",
       "component": "content.hyperlink",
       "repeatable": false
+    },
+    "callActionText": {
+      "type": "string"
     }
   },
   "config": {}
