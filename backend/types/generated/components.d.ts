@@ -107,6 +107,17 @@ export interface ContentSouveniorItem extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentTramoramicTourItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_tramoramic_tour_items';
+  info: {
+    displayName: 'tramoramicTourItem';
+  };
+  attributes: {
+    hashTag: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
 export interface MediaBannerImage extends Struct.ComponentSchema {
   collectionName: 'components_media_banner_images';
   info: {
@@ -169,16 +180,20 @@ export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
     action1: Schema.Attribute.Component<'content.action-button', false>;
     action2: Schema.Attribute.Component<'content.action-button', false>;
     desc: Schema.Attribute.Text;
-    hashTagTxt: Schema.Attribute.String;
-    mianImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    supportImage1: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    supportImage2: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
     title1: Schema.Attribute.String;
     title2: Schema.Attribute.String;
+    tramoramicTourItem1: Schema.Attribute.Component<
+      'content.tramoramic-tour-item',
+      false
+    >;
+    tramoramicTourItem2: Schema.Attribute.Component<
+      'content.tramoramic-tour-item',
+      false
+    >;
+    tramoramicTourItem3: Schema.Attribute.Component<
+      'content.tramoramic-tour-item',
+      false
+    >;
   };
 }
 
@@ -228,6 +243,7 @@ declare module '@strapi/strapi' {
       'content.icon-list': ContentIconList;
       'content.news-items': ContentNewsItems;
       'content.souvenior-item': ContentSouveniorItem;
+      'content.tramoramic-tour-item': ContentTramoramicTourItem;
       'media.banner-image': MediaBannerImage;
       'page-home.arc-carousel': PageHomeArcCarousel;
       'page-home.souvenior': PageHomeSouvenior;

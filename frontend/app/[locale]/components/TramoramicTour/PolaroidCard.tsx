@@ -1,17 +1,16 @@
-import type { ReactNode } from "react";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import type { Media } from "@/types/api";
 
 export interface PolaroidCardProps {
   image: Media | null;
+  hashTag?: string | null;
   className?: string;
-  children?: ReactNode;
 }
 
 export default function PolaroidCard({
   image,
+  hashTag,
   className = "",
-  children,
 }: PolaroidCardProps) {
   return (
     <div
@@ -26,7 +25,11 @@ export default function PolaroidCard({
         }}
         className="!aspect-square"
       />
-      {children}
+      {hashTag && (
+        <p className="absolute bottom-[5vmin] md:bottom-[2.9vmin] lg:bottom-[40px] left-0 right-0 px-[40px] text-center text-gold font-sans font-semibold truncate [font-size:clamp(0.875rem,6cqw,32px)] leading-[1.25em] tracking-[0.02em]">
+          {hashTag}
+        </p>
+      )}
     </div>
   );
 }

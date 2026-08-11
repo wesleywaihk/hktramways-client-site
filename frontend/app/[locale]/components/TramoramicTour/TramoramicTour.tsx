@@ -15,14 +15,13 @@ export default function TramoramicTour({
 
   if (!data) return null;
 
-  const hashTagTxt = data?.hashTagTxt ?? "";
   const title1 = data?.title1 ?? "";
   const title2 = data?.title2 ?? "";
   const desc = data?.desc ?? "";
 
-  const mainImage = asImage(data?.mianImage);
-  const supportImage1 = asImage(data?.supportImage1);
-  const supportImage2 = asImage(data?.supportImage2);
+  const mainImage = asImage(data?.tramoramicTourItem1?.image);
+  const supportImage1 = asImage(data?.tramoramicTourItem2?.image);
+  const supportImage2 = asImage(data?.tramoramicTourItem3?.image);
 
   const action1Label =
     data?.action1?.label ?? t("tramoramicTourAction1Fallback");
@@ -37,31 +36,28 @@ export default function TramoramicTour({
   const action2StartIcon = data?.action2?.startIcon?.icon ?? "calendar";
 
   return (
-    <section className="borderless h-auto md:h-[100dvh] relative bg-red-dark py-20 lg:py-24 flex">
+    <section className="borderless h-auto md:h-[100dvh] relative bg-red-dark py-20 lg:py-24 flex overflow-hidden">
       <div className="flex flex-col md:flex-row items-center gap-12 md:gap-8 lg:gap-16 px-5 lg:px-6 max-w-[1200px] mx-auto">
         <div className="relative w-[87vmin] md:w-full min-h-[84.5vmin] md:min-h-0 md:flex-1 mt-[12vmin] mb-[6vmin] md:my-0">
           {supportImage2 && (
             <PolaroidCard
               image={supportImage2}
+              hashTag={data?.tramoramicTourItem3?.hashTag}
               className="z-0 -translate-x-[8%] -translate-y-[58%] md:-translate-x-[11%] md:-translate-y-[60%] shadow-lg"
             />
           )}
           {supportImage1 && (
             <PolaroidCard
               image={supportImage1}
+              hashTag={data?.tramoramicTourItem2?.hashTag}
               className="z-10 -translate-x-[13%] -translate-y-[42%] md:-translate-x-[18%] md:-translate-y-[42%] shadow-lg"
             />
           )}
           <PolaroidCard
             image={mainImage}
-            className="z-20 -translate-y-1/2 -translate-y-1/2 shadow-xl"
-          >
-            {hashTagTxt && (
-              <p className="absolute bottom-[5vmin] md:bottom-[2.9vmin] lg:bottom-[40px] left-0 right-0 px-[40px] text-center text-gold font-sans font-semibold whitespace-nowrap [font-size:clamp(0.875rem,6cqw,32px)] leading-[1.25em] tracking-[0.02em]">
-                {hashTagTxt}
-              </p>
-            )}
-          </PolaroidCard>
+            hashTag={data?.tramoramicTourItem1?.hashTag}
+            className="z-20 -translate-y-1/2 shadow-xl"
+          />
         </div>
 
         <div className="flex flex-col items-center text-center md:items-start md:text-left md:flex-1">

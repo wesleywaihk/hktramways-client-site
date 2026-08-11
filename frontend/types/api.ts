@@ -74,12 +74,17 @@ export interface TramRouteData {
   actionButton: ActionButton | null;
 }
 
+export interface TramoramicTourItem {
+  id: number;
+  hashTag: string | null;
+  image: Media | null;
+}
+
 export interface TramoramicTourData {
   id: number;
-  mianImage: Media | null;
-  hashTagTxt: string | null;
-  supportImage1: Media | null;
-  supportImage2: Media | null;
+  tramoramicTourItem1: TramoramicTourItem | null;
+  tramoramicTourItem2: TramoramicTourItem | null;
+  tramoramicTourItem3: TramoramicTourItem | null;
   title1: string | null;
   title2: string | null;
   desc: string | null;
