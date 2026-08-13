@@ -51,10 +51,10 @@ export default function VideoCard({
 
   return (
     <div
-      className={`absolute inset-0 lg:rounded-[30px] w-full lg:w-[calc(100%-80px)] lg:left-10 ${
+      className={`absolute inset-0 rounded-[21px] lg:rounded-[30px] w-[calc(100%-40px)] lg:w-[calc(100%-80px)] left-5 lg:left-10 ${
         isFullScreen
-          ? "h-[100dvh] lg:h-[calc(100dvh-140px)]"
-          : "h-[calc(100dvh-52px)] lg:h-[calc(100dvh-200px)]"
+          ? "h-[calc(100dvh-96px)] lg:h-[calc(100dvh-140px)]"
+          : "h-[calc(100dvh-148px)] lg:h-[calc(100dvh-200px)]"
       } overflow-hidden ${className}`}
       style={style}
       data-full-screen={isFullScreen}

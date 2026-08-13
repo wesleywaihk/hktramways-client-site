@@ -11,7 +11,7 @@ import TramoramicTour from "./components/TramoramicTour/TramoramicTour";
 import Souvenior from "./components/Souvenior/Souvenior";
 import PartyTram from "./components/PartyTram/PartyTram";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
-import SetHeaderStyle from "@/components/Header/HeaderStyle/SetHeaderStyle";
+// import SetHeaderStyle from "@/components/Header/HeaderStyle/SetHeaderStyle";
 
 interface LandingPageProps {
   params: Promise<{ locale: string }>;
@@ -53,7 +53,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
 
   return (
     <div className="pageWrapper mt-0">
-      <SetHeaderStyle style="transparent" />
+      {/* <SetHeaderStyle style="transparent" /> */}
       <Banner
         bannerImage={home.bannerImage}
         // isFullScreen false: news bar is rendered, so header + banner + newsBar = 100dvh

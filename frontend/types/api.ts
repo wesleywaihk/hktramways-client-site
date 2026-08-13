@@ -39,9 +39,11 @@ export interface HomeNewsBarItem {
 
 export interface ArcCarouselItem {
   id: number;
-  image: Media | null;
-  desc: string | null;
-  hyperlink: Hyperlink | null;
+  carouselItem: {
+    image: Media | null;
+    desc: string | null;
+    hyperlink: Hyperlink | null;
+  } | null;
   callActionText: string | null;
 }
 

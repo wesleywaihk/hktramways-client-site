@@ -26,7 +26,7 @@ export const fetchHome = cache(async function fetchHome(
     "bannerImage",
     "newsBar",
     "arcCarousel",
-    "arcCarousel.item",
+    "arcCarousel.item.carouselItem",
     "arcCarousel.actionButton",
     "tramRoute",
     "tramRoute.actionButton",

@@ -39,9 +39,9 @@ function mapCarouselData(data: ArcCarouselData | null | undefined) {
     buttonStartIcon: data?.actionButton?.startIcon?.icon ?? undefined,
     items: items.map((item) => ({
       id: String(item.id),
-      image: asImage(item.image) ?? undefined,
-      caption: item.desc ?? "",
-      linkUrl: item.hyperlink?.url ?? undefined,
+      image: asImage(item.carouselItem?.image ?? null) ?? undefined,
+      caption: item.carouselItem?.desc ?? "",
+      linkUrl: item.carouselItem?.hyperlink?.url ?? undefined,
       callActionText: item.callActionText ?? undefined,
     })),
   };

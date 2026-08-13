@@ -58,8 +58,8 @@ export default function Banner({
       // isFullScreen true: no news bar, so header + banner = 100dvh
       className={`bg-green relative overflow-hidden borderless ${
         !isFullScreen
-          ? "h-[calc(100dvh-52px)] lg:h-[calc(100dvh-160px)]"
-          : "h-[100dvh] lg:h-[calc(100dvh-100px)]"
+          ? "h-[calc(100dvh-128px)] lg:h-[calc(100dvh-160px)]"
+          : "h-[calc(100dvh-76px)] lg:h-[calc(100dvh-100px)]"
       } ${className}`}
     >
       {banners.map((banner, index) => {
