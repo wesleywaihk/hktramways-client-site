@@ -129,7 +129,7 @@ export interface PartyTramData {
   id: number;
   documentId: string;
   title: string;
-  item: PartyTramItem | null;
+  item: PartyTramItem[];
 }
 
 export interface PartyTramResponse {

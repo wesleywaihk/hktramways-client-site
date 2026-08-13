@@ -10,22 +10,30 @@ const WHEEL_NAV_COOLDOWN_MS = 900;
  * swipe, and pointer drag all drive the same `active` index. Wheel handling
  * also blocks the browser's edge-swipe back/forward navigation.
  */
-export function useArcCarouselSwipe(total: number) {
+export function useArcCarouselSwipe(
+  total: number,
+  navCooldownMs: number = WHEEL_NAV_COOLDOWN_MS,
+) {
   const [active, setActive] = useState(0);
   const [dir, setDir] = useState(0); // last navigation direction: 1 = next, -1 = prev
   const dragStart = useRef<number | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const lastWheelNavAt = useRef(0);
+  const navLockedUntil = useRef(0);
 
-  const prev = useCallback(() => {
-    setDir(-1);
-    setActive((a) => (a - 1 + total) % total);
-  }, [total]);
+  const navigate = useCallback(
+    (d: 1 | -1) => {
+      const now = Date.now();
+      if (now < navLockedUntil.current) return; // ignore nav while previous slide is still animating
+      navLockedUntil.current = now + navCooldownMs;
+      setDir(d);
+      setActive((a) => (a + d + total) % total);
+    },
+    [total, navCooldownMs],
+  );
 
-  const next = useCallback(() => {
-    setDir(1);
-    setActive((a) => (a + 1) % total);
-  }, [total]);
+  const prev = useCallback(() => navigate(-1), [navigate]);
+  const next = useCallback(() => navigate(1), [navigate]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -58,7 +66,9 @@ export function useArcCarouselSwipe(total: number) {
   }, [prev, next]);
 
   const onPointerDown = (e: React.PointerEvent) => {
+    if ((e.target as HTMLElement).closest("button")) return;
     dragStart.current = e.clientX;
+    e.currentTarget.setPointerCapture(e.pointerId);
   };
   const onPointerUp = (e: React.PointerEvent) => {
     if (dragStart.current === null) return;

@@ -5,14 +5,14 @@ const CLOUD_DRIFT_DURATION_S = 40;
 
 const Cloud = () => (
   <div
-    className="w-1/2 h-[66.5dvh] lg:h-[78.5dvh] bg-[url('/partyTram/partytram-bg-cloud_m.png')] lg:bg-[url('/partyTram/partytram-bg-cloud.png')]
+    className="w-1/2 h-full bg-[url('/partyTram/partytram-bg-cloud_m.png')] lg:bg-[url('/partyTram/partytram-bg-cloud.png')]
           bg-repeat-x bg-bottom bg-[length:auto_100%]"
   />
 );
 export default function CloudLayer() {
   return (
     <div
-      className="absolute inset-x-0 bottom-0 flex w-[200%] h-full [animation:cloud-drift_linear_infinite]"
+      className="absolute inset-x-0 bottom-0 flex w-auto h-[66.5dvh] aspect-[2892/436] lg:h-[78.5dvh] lg:aspect-[6168/1156] [animation:cloud-drift_linear_infinite] top-0"
       style={{ animationDuration: `${CLOUD_DRIFT_DURATION_S}s` }}
       aria-hidden="true"
     >
