@@ -1,6 +1,7 @@
 import BtnIcon from "@/components/icons/BtnIcon";
 import ArrowIco from "@/components/icons/ArrowIco";
 import type { IconEnum } from "@/types/api";
+import "./Button.scss";
 
 export type IconButtonColor = "green" | "white";
 

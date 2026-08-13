@@ -51,3 +51,22 @@ export const fetchHome = cache(async function fetchHome(
   // The single-document (preview) endpoint returns `data` as an object, not an array.
   return previewMode ? { data: json.data ? [json.data] : [] } : json;
 });
+
+export const fetchPartyTram = cache(async function fetchPartyTram(
+  locale: string,
+  options?: { cache?: RequestCache },
+) {
+  const populate = buildPopulate([
+    "item.carouselItem",
+    "item.tramDetailsItem",
+  ]);
+  const url = `${API_URL}/api/party-tram?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, {
+    cache: options?.cache ?? "no-store",
+  });
+  if (!res.ok) throw new Error(`Failed to fetch party tram: ${res.status}`);
+
+  return res.json();
+});

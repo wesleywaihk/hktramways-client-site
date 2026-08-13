@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-13T06:50:09.190Z"
+    "x-generation-date": "2026-08-13T07:32:42.542Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4801,7 +4801,10 @@
                 "type": "string"
               },
               "item": {
-                "$ref": "#/components/schemas/ContentPartyTramItemComponent"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContentPartyTramItemComponent"
+                }
               },
               "locale": {
                 "type": "string"
@@ -4882,7 +4885,10 @@
             "type": "string"
           },
           "item": {
-            "$ref": "#/components/schemas/ContentPartyTramItemComponent"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentPartyTramItemComponent"
+            }
           },
           "createdAt": {
             "type": "string",
@@ -4957,7 +4963,10 @@
                   "type": "string"
                 },
                 "item": {
-                  "$ref": "#/components/schemas/ContentPartyTramItemComponent"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContentPartyTramItemComponent"
+                  }
                 },
                 "createdAt": {
                   "type": "string",
@@ -5080,6 +5089,12 @@
           },
           "carouselItem": {
             "$ref": "#/components/schemas/ContentCarouselItemComponent"
+          },
+          "callActionNumber": {
+            "type": "integer"
+          },
+          "callActionText": {
+            "type": "string"
           },
           "tramDetailsItem": {
             "$ref": "#/components/schemas/ContentTramDetailsItemComponent"

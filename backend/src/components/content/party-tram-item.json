@@ -10,6 +10,12 @@
       "component": "content.carousel-item",
       "repeatable": false
     },
+    "callActionNumber": {
+      "type": "integer"
+    },
+    "callActionText": {
+      "type": "string"
+    },
     "tramDetailsItem": {
       "type": "component",
       "component": "content.tram-details-item",

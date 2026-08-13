@@ -37,13 +37,15 @@ export interface HomeNewsBarItem {
   hyperlink: Hyperlink | null;
 }
 
+export interface CarouselItem {
+  image: Media | null;
+  desc: string | null;
+  hyperlink: Hyperlink | null;
+}
+
 export interface ArcCarouselItem {
   id: number;
-  carouselItem: {
-    image: Media | null;
-    desc: string | null;
-    hyperlink: Hyperlink | null;
-  } | null;
+  carouselItem: CarouselItem | null;
   callActionText: string | null;
 }
 
@@ -108,6 +110,30 @@ export interface SouveniorData {
   title: string;
   actionButton: ActionButton | null;
   item: SouveniorItem[];
+}
+
+export interface TramDetailsItem {
+  id: number;
+  title: string;
+}
+
+export interface PartyTramItem {
+  id: number;
+  carouselItem: CarouselItem | null;
+  callActionNumber: number | null;
+  callActionText: string | null;
+  tramDetailsItem: TramDetailsItem | null;
+}
+
+export interface PartyTramData {
+  id: number;
+  documentId: string;
+  title: string;
+  item: PartyTramItem | null;
+}
+
+export interface PartyTramResponse {
+  data: PartyTramData | null;
 }
 
 export interface Home {

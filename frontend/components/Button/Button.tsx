@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BtnIcon from "@/components/icons/BtnIcon";
 import type { IconEnum } from "@/types/api";
+import "./Button.scss";
 
 export type ButtonVariant = "outline" | "solid" | "solid-light";
 export type ButtonColor = "green" | "white";

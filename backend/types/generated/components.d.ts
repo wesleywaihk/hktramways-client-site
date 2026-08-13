@@ -103,6 +103,8 @@ export interface ContentPartyTramItem extends Struct.ComponentSchema {
     displayName: 'partyTramItem';
   };
   attributes: {
+    callActionNumber: Schema.Attribute.Integer;
+    callActionText: Schema.Attribute.String;
     carouselItem: Schema.Attribute.Component<'content.carousel-item', false>;
     tramDetailsItem: Schema.Attribute.Component<
       'content.tram-details-item',
