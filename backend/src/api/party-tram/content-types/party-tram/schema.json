@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "party_trams",
+  "info": {
+    "singularName": "party-tram",
+    "pluralName": "party-trams",
+    "displayName": "partyTram"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "item": {
+      "type": "component",
+      "component": "content.party-tram-item",
+      "repeatable": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_content_party_tram_items",
+  "info": {
+    "displayName": "partyTramItem"
+  },
+  "options": {},
+  "attributes": {
+    "carouselItem": {
+      "type": "component",
+      "component": "content.carousel-item",
+      "repeatable": false
+    },
+    "tramDetailsItem": {
+      "type": "component",
+      "component": "content.tram-details-item",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

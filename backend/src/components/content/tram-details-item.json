@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_content_tram_details_items",
+  "info": {
+    "displayName": "tramDetailsItem"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}
