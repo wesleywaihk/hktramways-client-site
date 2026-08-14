@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
@@ -9,6 +9,7 @@ import FloatingCircle from "@/components/FloatingCircle/FloatingCircle";
 import { useFloatingCircle } from "@/components/FloatingCircle/useFloatingCircle";
 import { useArcCarouselSwipe } from "@/app/[locale]/components/ArcCarousel/useArcCarouselSwipe";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { usePreviousValue } from "./usePreviousValue";
 import { IMG_URL } from "@/consts";
 import type { PartyTramData } from "@/types/api";
 
@@ -101,12 +102,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
     onHoverEnd,
     hideForTransition,
   } = useFloatingCircle(trackRef);
-  const [renderedActive, setRenderedActive] = useState(active);
-  const [prevActive, setPrevActive] = useState(active);
-  if (active !== renderedActive) {
-    setPrevActive(renderedActive);
-    setRenderedActive(active);
-  }
+  const prevActive = usePreviousValue(active);
 
   useEffect(() => {
     hideForTransition(SLIDE_TOTAL_MS);
