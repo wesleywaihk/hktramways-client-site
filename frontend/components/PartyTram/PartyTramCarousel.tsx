@@ -159,7 +159,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
       >
-        <div className="relative h-full w-full overflow-hidden">
+        <div className="[container-type:size] relative h-full w-full overflow-hidden">
           {items.map((it, i) => {
             const off = loopedOffset(i, active, total);
             const hidden = Math.abs(off) > 2;
@@ -181,8 +181,13 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
               Math.abs(off) === wrapMax &&
               Math.sign(prevOff) !== Math.sign(off);
 
+            const cardHeightOffset = isLg ? "13dvh" : "11.5dvh";
+            const ratio = img ? img.width / img.height : undefined;
             const cardStyle: React.CSSProperties = {
-              width: `${CARD_WIDTH_PCT}%`,
+              width: ratio
+                ? `min(${CARD_WIDTH_PCT}%, calc((100cqh - ${cardHeightOffset}) * ${ratio}))`
+                : `${CARD_WIDTH_PCT}%`,
+              height: "auto",
               aspectRatio: img ? `${img.width} / ${img.height}` : undefined,
               transform: `translateX(calc(-50% + ${off * 100}% + ${off * CARD_GAP_VW}vw))`,
               transitionDuration: jumped
