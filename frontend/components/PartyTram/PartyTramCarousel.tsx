@@ -10,20 +10,28 @@ import { IMG_URL } from "@/consts";
 import type { PartyTramData } from "@/types/api";
 
 /** mobile peek-carousel: how much of the previous/next slide peeks in from each edge */
-const MOBILE_SIDE_PEEK_PCT = 5;
-const MOBILE_CARD_WIDTH_PCT = 100 - MOBILE_SIDE_PEEK_PCT * 2;
+const MOBILE_SIDE_PEEK_PCT = -5;
+const MOBILE_CARD_WIDTH_PCT = 100 + MOBILE_SIDE_PEEK_PCT * 2;
 
-/** mobile peek-carousel: transform transition speed/easing, and per-card stagger delay */
-const MOBILE_CARD_TRANSITION_DURATION_MS = 1300;
-const MOBILE_CARD_TRANSITION_EASING = "cubic-bezier(0.22,0.9,0.3,1)";
-const MOBILE_CARD_DELAY_BASE_MS = 400;
-const MOBILE_CARD_DELAY_STEP_MS = 100;
+/** desktop peek-carousel: how much of the previous/next slide peeks in from each edge */
+const LG_SIDE_PEEK_PCT = 10;
+const LG_CARD_WIDTH_PCT = 50 + LG_SIDE_PEEK_PCT * 2;
+
+/** peek-carousel: horizontal gap between cards */
+const MOBILE_CARD_GAP_VW = -7;
+const LG_CARD_GAP_VW = 0;
+
+/** peek-carousel: transform transition speed/easing, and per-card stagger delay */
+const CARD_TRANSITION_DURATION_MS = 1300;
+const CARD_TRANSITION_EASING = "cubic-bezier(0.22,0.9,0.3,1)";
+const CARD_DELAY_BASE_MS = 300;
+const CARD_DELAY_STEP_MS = 110;
 /** longest possible stagger rank (farthest entering card) + its transition, i.e. worst-case time for a slide to fully settle */
-const MOBILE_CARD_MAX_RANK = 3;
-const MOBILE_SLIDE_TOTAL_MS =
-  MOBILE_CARD_MAX_RANK * MOBILE_CARD_DELAY_STEP_MS +
-  MOBILE_CARD_DELAY_BASE_MS +
-  MOBILE_CARD_TRANSITION_DURATION_MS;
+const CARD_MAX_RANK = 3;
+const SLIDE_TOTAL_MS =
+  CARD_MAX_RANK * CARD_DELAY_STEP_MS +
+  CARD_DELAY_BASE_MS +
+  CARD_TRANSITION_DURATION_MS;
 
 function mediaSrc(url: string) {
   return url.startsWith("http") ? url : `${IMG_URL}${url}`;
@@ -58,7 +66,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
     onPointerDown,
     onPointerUp,
     onPointerLeave,
-  } = useArcCarouselSwipe(total, MOBILE_SLIDE_TOTAL_MS);
+  } = useArcCarouselSwipe(total, SLIDE_TOTAL_MS);
   const { isLg } = useMediaQuery();
   const [renderedActive, setRenderedActive] = useState(active);
   const [prevActive, setPrevActive] = useState(active);
@@ -76,13 +84,31 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
       ? `${item.callActionNumber != null ? `#${item.callActionNumber} ` : ""}${item.callActionText ?? ""}`.trim()
       : null;
 
-  return (
-    <div className="relative z-10 flex flex-col items-center lg:items-start h-full lg:px-16 pt-[calc(76px+8dvh)] lg:pt-[10dvh]">
-      <h2 className="title-text text-green text-center lg:text-left">
-        {data.title}
-      </h2>
+  const CARD_WIDTH_PCT = isLg ? LG_CARD_WIDTH_PCT : MOBILE_CARD_WIDTH_PCT;
+  const CARD_GAP_VW = isLg ? LG_CARD_GAP_VW : MOBILE_CARD_GAP_VW;
 
-      <p className="text-green font-semibold text-[16px] leading-[163%] tracking-[0.02em] text-center lg:text-left max-w-[520px] mt-4">
+  return (
+    <div className="relative z-10 flex flex-col items-center lg:items-start h-full pt-[calc(76px+8dvh)] lg:pt-[calc(76px+8dvh)] ">
+      <div className="flex items-center justify-center gap-6 lg:gap-16 w-full max-screen-lg mx-auto lg:px-16">
+        <IconButton
+          ariaLabel="Previous tram"
+          onClick={prev}
+          reverse
+          useArrow
+          className="hidden lg:grid shrink-0 z-10 w-11! h-11! rounded-[16px]! bg-transparent! border-green! hover:bg-green! hover:border-transparent!"
+        />
+
+        <h2 className="title-text text-green text-center">{data.title}</h2>
+
+        <IconButton
+          ariaLabel="Next tram"
+          onClick={next}
+          useArrow
+          className="hidden lg:grid shrink-0 z-10 w-11! h-11! rounded-[16px]! bg-transparent! border-green! hover:bg-green! hover:border-transparent!"
+        />
+      </div>
+
+      <p className="text-green font-semibold text-[16px] leading-[163%] tracking-[0.02em] text-center mt-4 lg:px-16 block mx-auto w-full max-w-[710px] block">
         {carouselItem?.desc}
       </p>
 
@@ -93,112 +119,74 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
       >
-        {isLg ? (
-          <div className="relative w-full h-full flex items-center justify-center gap-10">
-            <IconButton
-              ariaLabel="Previous tram"
-              onClick={prev}
-              reverse
-              useArrow
-              className="shrink-0 z-10 w-11 h-11 rounded-[16px]"
-            />
+        <div className="relative w-full h-full overflow-hidden">
+          {items.map((it, i) => {
+            const off = loopedOffset(i, active, total);
+            const hidden = Math.abs(off) > 2;
+            const img = it.carouselItem?.image;
 
-            <div
-              className="relative w-full max-w-[900px]"
-              style={
-                carouselItem?.image
-                  ? {
-                      aspectRatio: `${carouselItem.image.width} / ${carouselItem.image.height}`,
-                    }
-                  : undefined
-              }
-            >
-              {carouselItem?.image && (
-                <Image
-                  src={mediaSrc(carouselItem.image.url)}
-                  alt={carouselItem.image.alternativeText ?? ""}
-                  fill
-                  draggable={false}
-                  className="object-cover rounded-[18px] pointer-events-none select-none"
-                  sizes="70vw"
-                />
-              )}
-            </div>
+            const wrapMax = Math.floor(total / 2);
+            const prevOff = loopedOffset(i, prevActive, total);
+            const jumped =
+              prevActive !== active &&
+              Math.abs(prevOff) === wrapMax &&
+              Math.abs(off) === wrapMax &&
+              Math.sign(prevOff) !== Math.sign(off);
 
-            <IconButton
-              ariaLabel="Next tram"
-              onClick={next}
-              useArrow
-              className="shrink-0 z-10 w-11 h-11 rounded-[16px]"
-            />
-          </div>
-        ) : (
-          <div className="relative w-full h-full overflow-hidden">
-            {items.map((it, i) => {
-              const off = loopedOffset(i, active, total);
-              const hidden = Math.abs(off) > 2;
-              const img = it.carouselItem?.image;
+            const cardStyle: React.CSSProperties = {
+              width: `${CARD_WIDTH_PCT}%`,
+              aspectRatio: img ? `${img.width} / ${img.height}` : undefined,
+              transform: `translateX(calc(-50% + ${off * 100}% + ${off * CARD_GAP_VW}vw))`,
+              transitionDuration: jumped
+                ? "0ms"
+                : `${CARD_TRANSITION_DURATION_MS}ms`,
+              transitionTimingFunction: CARD_TRANSITION_EASING,
+              transitionDelay: jumped
+                ? "0ms"
+                : `${cardDelayRank(off, dir) * CARD_DELAY_STEP_MS + CARD_DELAY_BASE_MS}ms`,
+              opacity: hidden ? 0 : 1,
+              pointerEvents: hidden ? "none" : "auto",
+            };
+            const cardClassName =
+              "absolute top-auto bottom-[11.5dvh] lg:bottom-[13dvh] left-1/2 overflow-hidden transition-transform";
+            const cardContent = img && (
+              <Image
+                src={mediaSrc(img.url)}
+                alt={img.alternativeText ?? ""}
+                fill
+                draggable={false}
+                className="object-cover pointer-events-none select-none"
+                sizes={`${CARD_WIDTH_PCT}vw`}
+              />
+            );
 
-              const wrapMax = Math.floor(total / 2);
-              const prevOff = loopedOffset(i, prevActive, total);
-              const jumped =
-                prevActive !== active &&
-                Math.abs(prevOff) === wrapMax &&
-                Math.abs(off) === wrapMax &&
-                Math.sign(prevOff) !== Math.sign(off);
+            return (
+              <div
+                key={it.id}
+                className={cardClassName}
+                style={cardStyle}
+                onClick={() => off !== 0 && (off > 0 ? next() : prev())}
+                onDragStart={(e) => e.preventDefault()}
+              >
+                {cardContent}
+              </div>
+            );
+          })}
 
-              return (
-                <div
-                  key={it.id}
-                  className="absolute top-auto bottom-[11.5dvh] left-1/2 rounded-[18px] overflow-hidden transition-transform"
-                  style={{
-                    width: `${MOBILE_CARD_WIDTH_PCT}%`,
-                    aspectRatio: img
-                      ? `${img.width} / ${img.height}`
-                      : undefined,
-                    transform: `translateX(calc(-50% + ${off * 100}% - ${off * 7}vw))`,
-                    transitionDuration: jumped
-                      ? "0ms"
-                      : `${MOBILE_CARD_TRANSITION_DURATION_MS}ms`,
-                    transitionTimingFunction: MOBILE_CARD_TRANSITION_EASING,
-                    transitionDelay: jumped
-                      ? "0ms"
-                      : `${cardDelayRank(off, dir) * MOBILE_CARD_DELAY_STEP_MS + MOBILE_CARD_DELAY_BASE_MS}ms`,
-                    opacity: hidden ? 0 : 1,
-                    pointerEvents: hidden ? "none" : "auto",
-                  }}
-                  onClick={() => off !== 0 && (off > 0 ? next() : prev())}
-                  onDragStart={(e) => e.preventDefault()}
-                >
-                  {img && (
-                    <Image
-                      src={mediaSrc(img.url)}
-                      alt={img.alternativeText ?? ""}
-                      fill
-                      draggable={false}
-                      className="object-cover pointer-events-none select-none"
-                      sizes={`${MOBILE_CARD_WIDTH_PCT}vw`}
-                    />
-                  )}
-                </div>
-              );
-            })}
-
-            <IconButton
-              ariaLabel="Previous tram"
-              onClick={prev}
-              reverse
-              useArrow
-              className="grid absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10! h-10! rounded-[14px]!"
-            />
-            <IconButton
-              ariaLabel="Next tram"
-              onClick={next}
-              useArrow
-              className="grid absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10! h-10! rounded-[14px]!"
-            />
-          </div>
-        )}
+          <IconButton
+            ariaLabel="Previous tram"
+            onClick={prev}
+            reverse
+            useArrow
+            className="grid absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10! h-10! rounded-[14px]! lg:hidden"
+          />
+          <IconButton
+            ariaLabel="Next tram"
+            onClick={next}
+            useArrow
+            className="grid absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10! h-10! rounded-[14px]! lg:hidden"
+          />
+        </div>
       </div>
 
       {callAction && (
