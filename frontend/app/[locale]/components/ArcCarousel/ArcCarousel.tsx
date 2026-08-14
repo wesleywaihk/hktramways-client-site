@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import Button from "@/components/Button/Button";
 import IconButton from "@/components/Button/IconButton";
+import FloatingCircle from "@/components/FloatingCircle/FloatingCircle";
+import { useFloatingCircle } from "@/components/FloatingCircle/useFloatingCircle";
 import type { IconEnum, ArcCarouselData, Media } from "@/types/api";
 import { asImage } from "@/lib/media";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -38,9 +40,9 @@ function mapCarouselData(data: ArcCarouselData | null | undefined) {
     buttonStartIcon: data?.actionButton?.startIcon?.icon ?? undefined,
     items: items.map((item) => ({
       id: String(item.id),
-      image: asImage(item.image) ?? undefined,
-      caption: item.desc ?? "",
-      linkUrl: item.hyperlink?.url ?? undefined,
+      image: asImage(item.carouselItem?.image ?? null) ?? undefined,
+      caption: item.carouselItem?.desc ?? "",
+      linkUrl: item.carouselItem?.hyperlink?.url ?? undefined,
       callActionText: item.callActionText ?? undefined,
     })),
   };
@@ -81,6 +83,9 @@ const mobileGap = (cardWidth: string) => `calc(50vw + (${cardWidth}) / 4)`;
  * off-screen instead of ~75%, and the gap between cards shrinks with it.
  */
 const smGap = (cardWidth: string) => `calc(44vw + (${cardWidth}) / 5)`;
+
+/** matches the card transform transition duration below, used to know when a slide has settled */
+const CARD_TRANSITION_MS = 550;
 
 /** shortest looped distance from the active card (…-2,-1,0,1,2…) */
 function loopedOffset(index: number, active: number, total: number) {
@@ -137,62 +142,19 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   const visibleRange = isMobile ? MOBILE_VISIBLE_RANGE : DESKTOP_VISIBLE_RANGE;
   const active_ = items[active] ?? items[0];
 
-  const circleRef = useRef<HTMLDivElement>(null);
-  const [circleVisible, setCircleVisible] = useState(false);
-  const [hoveredText, setHoveredText] = useState("");
-  const rafRef = useRef<number | null>(null);
-  const pendingPos = useRef<{ x: number; y: number } | null>(null);
-  const isHoveringRef = useRef(false);
+  const {
+    circleRef,
+    visible: circleVisible,
+    content: hoveredContent,
+    onHoverMove: handleHoverMove,
+    onHoverEnd: handleHoverEnd,
+    hideForTransition,
+  } = useFloatingCircle(trackRef);
 
   useEffect(() => {
-    return () => {
-      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  const handleHoverMove = (
-    e: React.MouseEvent<HTMLDivElement>,
-    text: string,
-  ) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const rect = track.getBoundingClientRect();
-    pendingPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    const isEntering = !isHoveringRef.current;
-    isHoveringRef.current = true;
-    if (rafRef.current == null) {
-      rafRef.current = requestAnimationFrame(() => {
-        rafRef.current = null;
-        const pos = pendingPos.current;
-        const circle = circleRef.current;
-        if (!pos || !circle) return;
-        if (isEntering) {
-          circle.style.transition = "none";
-          circle.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(0.1)`;
-          void circle.offsetWidth;
-          circle.style.transition = "";
-          requestAnimationFrame(() => {
-            if (circleRef.current) {
-              circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(1)`;
-            }
-          });
-        } else {
-          circle.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(1)`;
-        }
-      });
-    }
-    setCircleVisible(true);
-    setHoveredText(text);
-  };
-
-  const handleHoverEnd = () => {
-    isHoveringRef.current = false;
-    const pos = pendingPos.current;
-    if (pos && circleRef.current) {
-      circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(0.1)`;
-    }
-    setCircleVisible(false);
-  };
+    hideForTransition(CARD_TRANSITION_MS);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
 
   const translateX = (off: number) => {
     const gap = isSmToMd
@@ -275,55 +237,30 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
                   : "transform 550ms cubic-bezier(0.22,0.9,0.3,1), opacity 300ms ease"
               }
               onClick={() => off !== 0 && (off > 0 ? next() : prev())}
-              onHoverMove={handleHoverMove}
+              onHoverMove={(e, text) =>
+                handleHoverMove(
+                  e,
+                  <span className="w-full max-w-[80%] mx-auto font-sans text-current text-[20px] font-semibold leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
+                    {text}
+                  </span>,
+                )
+              }
               onHoverEnd={handleHoverEnd}
             />
           );
         })}
 
-        <div
+        <FloatingCircle
           ref={circleRef}
-          aria-hidden="true"
-          className={`absolute left-0 top-0 flex flex-col items-center justify-center gap-1 w-[150px] h-[150px] rounded-full border-2 border-white backdrop-blur-xs pointer-events-none z-20 will-change-transform transition-[opacity,transform] duration-150 ease-out ${
-            circleVisible ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <span className="w-full max-w-[80%] mx-auto font-sans text-white text-[20px] font-semibold leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
-            {hoveredText}
-          </span>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden="true"
-            className="shrink-0 mx-auto block"
-          >
-            <path
-              d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-white"
-            />
-          </svg>
-        </div>
+          visible={circleVisible}
+          content={hoveredContent}
+        />
       </div>
 
       <div className="relative z-30 shrink-0 mt-6 md:mt-8 px-8 text-center">
-        {active_.linkUrl ? (
-          <a
-            href={active_.linkUrl}
-            className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto inline-block hover:underline underline-offset-4"
-          >
-            {active_.caption}
-          </a>
-        ) : (
-          <p className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto">
-            {active_.caption}
-          </p>
-        )}
+        <p className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto">
+          {active_.caption}
+        </p>
       </div>
 
       <div className="shrink-0 mt-6 md:mt-8 flex justify-center">

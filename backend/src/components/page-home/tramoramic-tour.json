@@ -6,38 +6,20 @@
   },
   "options": {},
   "attributes": {
-    "mianImage": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "tramoramicTourItem1": {
+      "type": "component",
+      "component": "content.tramoramic-tour-item",
+      "repeatable": false
     },
-    "hashTagTxt": {
-      "type": "string"
+    "tramoramicTourItem2": {
+      "type": "component",
+      "component": "content.tramoramic-tour-item",
+      "repeatable": false
     },
-    "supportImage1": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "supportImage2": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "tramoramicTourItem3": {
+      "type": "component",
+      "component": "content.tramoramic-tour-item",
+      "repeatable": false
     },
     "title1": {
       "type": "string"

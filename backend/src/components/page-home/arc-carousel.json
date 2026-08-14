@@ -11,7 +11,7 @@
     },
     "item": {
       "type": "component",
-      "component": "content.carousel-item",
+      "component": "content.arc-carousel-item",
       "repeatable": true
     },
     "actionButton": {

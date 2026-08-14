@@ -14,6 +14,17 @@ export interface ContentActionButton extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentArcCarouselItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_arc_carousel_items';
+  info: {
+    displayName: 'ArcCarouselItem';
+  };
+  attributes: {
+    callActionText: Schema.Attribute.String;
+    carouselItem: Schema.Attribute.Component<'content.carousel-item', false>;
+  };
+}
+
 export interface ContentBannerImageUnit extends Struct.ComponentSchema {
   collectionName: 'components_content_banner_image_units';
   info: {
@@ -35,11 +46,7 @@ export interface ContentCarouselItem extends Struct.ComponentSchema {
     icon: 'code';
   };
   attributes: {
-    callActionText: Schema.Attribute.String;
-    desc: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
-      }>;
+    desc: Schema.Attribute.Text;
     hyperlink: Schema.Attribute.Component<'content.hyperlink', false>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
@@ -90,6 +97,22 @@ export interface ContentNewsItems extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentPartyTramItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_party_tram_items';
+  info: {
+    displayName: 'partyTramItem';
+  };
+  attributes: {
+    callActionNumber: Schema.Attribute.Integer;
+    callActionText: Schema.Attribute.String;
+    carouselItem: Schema.Attribute.Component<'content.carousel-item', false>;
+    tramDetailsItem: Schema.Attribute.Component<
+      'content.tram-details-item',
+      false
+    >;
+  };
+}
+
 export interface ContentSouveniorItem extends Struct.ComponentSchema {
   collectionName: 'components_content_souvenior_items';
   info: {
@@ -104,6 +127,27 @@ export interface ContentSouveniorItem extends Struct.ComponentSchema {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     pirce: Schema.Attribute.Decimal & Schema.Attribute.Required;
     preDiscountPrice: Schema.Attribute.Decimal;
+  };
+}
+
+export interface ContentTramDetailsItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_tram_details_items';
+  info: {
+    displayName: 'tramDetailsItem';
+  };
+  attributes: {
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ContentTramoramicTourItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_tramoramic_tour_items';
+  info: {
+    displayName: 'tramoramicTourItem';
+  };
+  attributes: {
+    hashTag: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
   };
 }
 
@@ -128,7 +172,7 @@ export interface PageHomeArcCarousel extends Struct.ComponentSchema {
   };
   attributes: {
     actionButton: Schema.Attribute.Component<'content.action-button', false>;
-    item: Schema.Attribute.Component<'content.carousel-item', true>;
+    item: Schema.Attribute.Component<'content.arc-carousel-item', true>;
     title: Schema.Attribute.String;
   };
 }
@@ -169,16 +213,20 @@ export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
     action1: Schema.Attribute.Component<'content.action-button', false>;
     action2: Schema.Attribute.Component<'content.action-button', false>;
     desc: Schema.Attribute.Text;
-    hashTagTxt: Schema.Attribute.String;
-    mianImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    supportImage1: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    supportImage2: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
     title1: Schema.Attribute.String;
     title2: Schema.Attribute.String;
+    tramoramicTourItem1: Schema.Attribute.Component<
+      'content.tramoramic-tour-item',
+      false
+    >;
+    tramoramicTourItem2: Schema.Attribute.Component<
+      'content.tramoramic-tour-item',
+      false
+    >;
+    tramoramicTourItem3: Schema.Attribute.Component<
+      'content.tramoramic-tour-item',
+      false
+    >;
   };
 }
 
@@ -222,12 +270,16 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'content.action-button': ContentActionButton;
+      'content.arc-carousel-item': ContentArcCarouselItem;
       'content.banner-image-unit': ContentBannerImageUnit;
       'content.carousel-item': ContentCarouselItem;
       'content.hyperlink': ContentHyperlink;
       'content.icon-list': ContentIconList;
       'content.news-items': ContentNewsItems;
+      'content.party-tram-item': ContentPartyTramItem;
       'content.souvenior-item': ContentSouveniorItem;
+      'content.tram-details-item': ContentTramDetailsItem;
+      'content.tramoramic-tour-item': ContentTramoramicTourItem;
       'media.banner-image': MediaBannerImage;
       'page-home.arc-carousel': PageHomeArcCarousel;
       'page-home.souvenior': PageHomeSouvenior;

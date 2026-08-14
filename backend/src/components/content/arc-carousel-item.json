@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_content_arc_carousel_items",
+  "info": {
+    "displayName": "ArcCarouselItem"
+  },
+  "options": {},
+  "attributes": {
+    "carouselItem": {
+      "type": "component",
+      "component": "content.carousel-item",
+      "repeatable": false
+    },
+    "callActionText": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

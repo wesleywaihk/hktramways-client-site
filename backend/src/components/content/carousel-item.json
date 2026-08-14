@@ -17,16 +17,12 @@
       ]
     },
     "desc": {
-      "type": "text",
-      "maxLength": 80
+      "type": "text"
     },
     "hyperlink": {
       "type": "component",
       "component": "content.hyperlink",
       "repeatable": false
-    },
-    "callActionText": {
-      "type": "string"
     }
   },
   "config": {}

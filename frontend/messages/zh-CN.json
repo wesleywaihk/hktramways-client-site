@@ -4,6 +4,7 @@
     "noContent": "没有可用内容。",
     "tramRouteTitleFallback": "6条电车路线",
     "tramRouteButtonFallback": "互动路线图",
+    "tramRouteSelectFallback": "选择路线",
     "tramoramicTourAction1Fallback": "电车游",
     "tramoramicTourAction2Fallback": "立即预订"
   }

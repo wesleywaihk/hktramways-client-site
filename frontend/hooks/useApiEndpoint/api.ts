@@ -26,14 +26,14 @@ export const fetchHome = cache(async function fetchHome(
     "bannerImage",
     "newsBar",
     "arcCarousel",
-    "arcCarousel.item",
+    "arcCarousel.item.carouselItem",
     "arcCarousel.actionButton",
     "tramRoute",
     "tramRoute.actionButton",
     "tramoramicTour",
-    "tramoramicTour.mianImage",
-    "tramoramicTour.supportImage1",
-    "tramoramicTour.supportImage2",
+    "tramoramicTour.tramoramicTourItem1",
+    "tramoramicTour.tramoramicTourItem2",
+    "tramoramicTour.tramoramicTourItem3",
     "tramoramicTour.action1",
     "tramoramicTour.action2",
     "souvenior",
@@ -50,4 +50,23 @@ export const fetchHome = cache(async function fetchHome(
   const json = await res.json();
   // The single-document (preview) endpoint returns `data` as an object, not an array.
   return previewMode ? { data: json.data ? [json.data] : [] } : json;
+});
+
+export const fetchPartyTram = cache(async function fetchPartyTram(
+  locale: string,
+  options?: { cache?: RequestCache },
+) {
+  const populate = buildPopulate([
+    "item.carouselItem",
+    "item.tramDetailsItem",
+  ]);
+  const url = `${API_URL}/api/party-tram?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, {
+    cache: options?.cache ?? "no-store",
+  });
+  if (!res.ok) throw new Error(`Failed to fetch party tram: ${res.status}`);
+
+  return res.json();
 });

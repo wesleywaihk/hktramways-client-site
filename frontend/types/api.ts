@@ -37,11 +37,15 @@ export interface HomeNewsBarItem {
   hyperlink: Hyperlink | null;
 }
 
-export interface ArcCarouselItem {
-  id: number;
+export interface CarouselItem {
   image: Media | null;
   desc: string | null;
   hyperlink: Hyperlink | null;
+}
+
+export interface ArcCarouselItem {
+  id: number;
+  carouselItem: CarouselItem | null;
   callActionText: string | null;
 }
 
@@ -74,12 +78,17 @@ export interface TramRouteData {
   actionButton: ActionButton | null;
 }
 
+export interface TramoramicTourItem {
+  id: number;
+  hashTag: string | null;
+  image: Media | null;
+}
+
 export interface TramoramicTourData {
   id: number;
-  mianImage: Media | null;
-  hashTagTxt: string | null;
-  supportImage1: Media | null;
-  supportImage2: Media | null;
+  tramoramicTourItem1: TramoramicTourItem | null;
+  tramoramicTourItem2: TramoramicTourItem | null;
+  tramoramicTourItem3: TramoramicTourItem | null;
   title1: string | null;
   title2: string | null;
   desc: string | null;
@@ -101,6 +110,30 @@ export interface SouveniorData {
   title: string;
   actionButton: ActionButton | null;
   item: SouveniorItem[];
+}
+
+export interface TramDetailsItem {
+  id: number;
+  title: string;
+}
+
+export interface PartyTramItem {
+  id: number;
+  carouselItem: CarouselItem | null;
+  callActionNumber: number | null;
+  callActionText: string | null;
+  tramDetailsItem: TramDetailsItem | null;
+}
+
+export interface PartyTramData {
+  id: number;
+  documentId: string;
+  title: string;
+  item: PartyTramItem[];
+}
+
+export interface PartyTramResponse {
+  data: PartyTramData | null;
 }
 
 export interface Home {

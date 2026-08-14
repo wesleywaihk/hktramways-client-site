@@ -1,0 +1,38 @@
+{
+  "kind": "singleType",
+  "collectionName": "party_trams",
+  "info": {
+    "singularName": "party-tram",
+    "pluralName": "party-trams",
+    "displayName": "partyTram"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "item": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.party-tram-item",
+      "repeatable": true
+    }
+  }
+}
