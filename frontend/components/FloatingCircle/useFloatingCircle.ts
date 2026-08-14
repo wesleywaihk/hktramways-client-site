@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type RefObject,
+} from "react";
 
 /** debounce window after the last wheel event before treating a scroll as finished */
 const WHEEL_SETTLE_MS = 150;
@@ -139,5 +145,12 @@ export function useFloatingCircle(containerRef: RefObject<HTMLElement | null>) {
     };
   }, [recheckAtLastPointer]);
 
-  return { circleRef, visible, content, onHoverMove, onHoverEnd, hideForTransition };
+  return {
+    circleRef,
+    visible,
+    content,
+    onHoverMove,
+    onHoverEnd,
+    hideForTransition,
+  };
 }

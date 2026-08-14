@@ -9,7 +9,11 @@ export const socialLinks: SocialLink[] = [
   { name: "Instagram", icon: "/footer/ig.svg", href: "https://instagram.com" },
   { name: "Youtube", icon: "/footer/yt.svg", href: "https://youtube.com" },
   { name: "Weibo", icon: "/footer/wb.svg", href: "https://weibo.com" },
-  { name: "Tripadvisor", icon: "/footer/ta.svg", href: "https://tripadvisor.com" },
+  {
+    name: "Tripadvisor",
+    icon: "/footer/ta.svg",
+    href: "https://tripadvisor.com",
+  },
 ];
 
 export type FareRow = {

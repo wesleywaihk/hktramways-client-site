@@ -11,7 +11,8 @@ $text-body-big-emphasized: 21px, 152.4%; // font-weight 600
 $text-body-small: 13px, 145%;
 $text-body-small-emphasized: 13px, 145%; // font-weight 600
 $text-button: 14px, 157%;
-$text-nav-mobile: 24px, 118%; // mobile slide-in nav links (Outfit SemiBold, 2% letter-spacing)
+$text-nav-mobile:
+  24px, 118%; // mobile slide-in nav links (Outfit SemiBold, 2% letter-spacing)
 
 @mixin font-style($pair) {
   font-size: nth($pair, 1);

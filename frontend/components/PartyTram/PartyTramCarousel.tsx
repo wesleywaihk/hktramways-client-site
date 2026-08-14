@@ -58,16 +58,19 @@ function formatCallActionNumber(n: number) {
   return `#${String(n).padStart(2, "0")}`;
 }
 
-function buildHoverContent(number: string | null, text: string | null | undefined) {
+function buildHoverContent(
+  number: string | null,
+  text: string | null | undefined,
+) {
   return (
     <>
       {number && (
-        <span className="font-normal text-[15px] leading-[22px] tracking-[0.02em] text-center uppercase">
+        <span className="text-center text-[15px] leading-[22px] font-normal tracking-[0.02em] uppercase">
           {number}
         </span>
       )}
       {text && (
-        <span className="w-full max-w-[80%] mx-auto font-semibold text-[20px] leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
+        <span className="mx-auto w-full max-w-[80%] text-center text-[20px] leading-[24px] font-semibold tracking-[0.02em] text-wrap break-words uppercase">
           {text}
         </span>
       )}
@@ -122,14 +125,14 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
   const CARD_GAP_VW = isLg ? LG_CARD_GAP_VW : MOBILE_CARD_GAP_VW;
 
   return (
-    <div className="relative z-10 flex flex-col items-center lg:items-start h-full pt-[calc(76px+8dvh)] lg:pt-[calc(76px+8dvh)] ">
-      <div className="flex items-center justify-center gap-6 lg:gap-16 w-full max-screen-lg mx-auto lg:px-16">
+    <div className="relative z-10 flex h-full flex-col items-center pt-[calc(76px+8dvh)] lg:items-start lg:pt-[calc(76px+8dvh)]">
+      <div className="max-screen-lg mx-auto flex w-full items-center justify-center gap-6 lg:gap-16 lg:px-16">
         <IconButton
           ariaLabel="Previous tram"
           onClick={prev}
           reverse
           useArrow
-          className="hidden lg:grid shrink-0 z-10 w-11! h-11! rounded-[16px]! bg-transparent! border-green! hover:bg-green! hover:border-transparent!"
+          className="border-green! hover:bg-green! z-10 hidden h-11! w-11! shrink-0 rounded-[16px]! bg-transparent! hover:border-transparent! lg:grid"
         />
 
         <h2 className="title-text text-green text-center">{data.title}</h2>
@@ -138,17 +141,17 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
           ariaLabel="Next tram"
           onClick={next}
           useArrow
-          className="hidden lg:grid shrink-0 z-10 w-11! h-11! rounded-[16px]! bg-transparent! border-green! hover:bg-green! hover:border-transparent!"
+          className="border-green! hover:bg-green! z-10 hidden h-11! w-11! shrink-0 rounded-[16px]! bg-transparent! hover:border-transparent! lg:grid"
         />
       </div>
 
-      <p className="text-black font-normal text-[15px] lg:text-[16px] leading-[163%] tracking-[0.02em] text-center mt-4 lg:px-16 block mx-auto w-full max-w-[710px] block">
+      <p className="mx-auto mt-4 block w-full max-w-[710px] text-center text-[15px] leading-[163%] font-normal tracking-[0.02em] text-black lg:px-16 lg:text-[16px]">
         {carouselItem?.desc}
       </p>
 
       <div
         ref={trackRef}
-        className="relative w-full flex-1 min-h-0 mt-6 lg:mt-8 touch-pan-y cursor-grab active:cursor-grabbing"
+        className="relative mt-6 min-h-0 w-full flex-1 cursor-grab touch-pan-y active:cursor-grabbing lg:mt-8"
         onPointerDown={(e) => {
           onHoverEnd();
           onPointerDown(e);
@@ -156,7 +159,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
       >
-        <div className="relative w-full h-full overflow-hidden">
+        <div className="relative h-full w-full overflow-hidden">
           {items.map((it, i) => {
             const off = loopedOffset(i, active, total);
             const hidden = Math.abs(off) > 2;
@@ -200,7 +203,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
                 alt={img.alternativeText ?? ""}
                 fill
                 draggable={false}
-                className="object-cover pointer-events-none select-none"
+                className="pointer-events-none object-cover select-none"
                 sizes={`${CARD_WIDTH_PCT}vw`}
               />
             );
@@ -244,13 +247,13 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
             onClick={prev}
             reverse
             useArrow
-            className="grid absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10! h-10! rounded-[14px]! lg:hidden"
+            className="absolute top-1/2 left-2 z-20 grid h-10! w-10! -translate-y-1/2 rounded-[14px]! lg:hidden"
           />
           <IconButton
             ariaLabel="Next tram"
             onClick={next}
             useArrow
-            className="grid absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10! h-10! rounded-[14px]! lg:hidden"
+            className="absolute top-1/2 right-2 z-20 grid h-10! w-10! -translate-y-1/2 rounded-[14px]! lg:hidden"
           />
         </div>
 
@@ -259,12 +262,12 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
           visible={circleVisible}
           content={hoveredContent}
           visibleFrom="lg"
-          className="bg-[#703900]! text-white! w-[190px]! h-[190px]!"
+          className="h-[190px]! w-[190px]! bg-[#703900]! text-white!"
         />
       </div>
 
       {callAction && (
-        <div className="lg:hidden mt-6 mb-8">
+        <div className="mt-6 mb-8 lg:hidden">
           <Button
             href={carouselItem?.hyperlink?.url ?? undefined}
             color="green"

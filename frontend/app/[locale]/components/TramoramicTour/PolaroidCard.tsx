@@ -14,7 +14,7 @@ export default function PolaroidCard({
 }: PolaroidCardProps) {
   return (
     <div
-      className={`absolute right-0 top-1/2 w-[78vmin] md:w-[86%] pt-[5vmin] px-[5vmin] pb-[14vmin] md:pt-[2.8vmin] md:px-[2.8vmin] md:pb-[8.3vmin] lg:pt-[40px] lg:px-[40px] lg:pb-[100px] bg-white [container-type:inline-size] ${className}`}
+      className={`[container-type:inline-size] absolute top-1/2 right-0 w-[78vmin] bg-white px-[5vmin] pt-[5vmin] pb-[14vmin] md:w-[86%] md:px-[2.8vmin] md:pt-[2.8vmin] md:pb-[8.3vmin] lg:px-[40px] lg:pt-[40px] lg:pb-[100px] ${className}`}
     >
       <ResponsiveImg
         bannerImage={{
@@ -26,7 +26,7 @@ export default function PolaroidCard({
         className="!aspect-square"
       />
       {hashTag && (
-        <p className="absolute bottom-[5vmin] md:bottom-[2.9vmin] lg:bottom-[40px] left-0 right-0 px-[40px] text-center text-gold font-sans font-semibold truncate [font-size:clamp(0.875rem,6cqw,32px)] leading-[1.25em] tracking-[0.02em]">
+        <p className="text-gold absolute right-0 bottom-[5vmin] left-0 truncate px-[40px] text-center font-sans [font-size:clamp(0.875rem,6cqw,32px)] leading-[1.25em] font-semibold tracking-[0.02em] md:bottom-[2.9vmin] lg:bottom-[40px]">
           {hashTag}
         </p>
       )}

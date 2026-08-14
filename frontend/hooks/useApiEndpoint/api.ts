@@ -56,10 +56,7 @@ export const fetchPartyTram = cache(async function fetchPartyTram(
   locale: string,
   options?: { cache?: RequestCache },
 ) {
-  const populate = buildPopulate([
-    "item.carouselItem",
-    "item.tramDetailsItem",
-  ]);
+  const populate = buildPopulate(["item.carouselItem", "item.tramDetailsItem"]);
   const url = `${API_URL}/api/party-tram?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);

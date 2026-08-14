@@ -17,7 +17,10 @@ export default function LocaleDropdown({
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
         setOpen(false);
       }
     }
@@ -31,10 +34,10 @@ export default function LocaleDropdown({
     <div className="relative" ref={wrapperRef}>
       <button
         type="button"
-        className={`flex items-center justify-center w-10 h-10 rounded-[14px] border-2 border-[var(--header-border)] bg-transparent text-[var(--header-fg)] font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase transition-colors duration-200 ease-out cursor-pointer ${
+        className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-[14px] border-2 border-[var(--header-border)] bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-[var(--header-fg)] uppercase transition-colors duration-200 ease-out ${
           invertHover
-            ? "hover:bg-green hover:text-white active:bg-green active:text-white"
-            : "hover:bg-white hover:text-green active:bg-white active:text-green"
+            ? "hover:bg-green active:bg-green hover:text-white active:text-white"
+            : "hover:text-green active:text-green hover:bg-white active:bg-white"
         }`}
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="listbox"
@@ -44,14 +47,14 @@ export default function LocaleDropdown({
       </button>
       {open && (
         <div
-          className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 flex flex-col w-10 rounded-[14px] overflow-hidden bg-white shadow-[0_4px_12px_rgba(0,0,0,0.15)] z-10"
+          className="absolute top-[calc(100%+8px)] left-1/2 z-10 flex w-10 -translate-x-1/2 flex-col overflow-hidden rounded-[14px] bg-white shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
           role="listbox"
         >
           {otherLocales.map((loc) => (
             <button
               key={loc}
               type="button"
-              className="flex items-center justify-center py-2 bg-transparent border-none text-green font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase cursor-pointer transition-colors duration-200 ease-out hover:bg-[#e6f1ed]"
+              className="text-green flex cursor-pointer items-center justify-center border-none bg-transparent py-2 font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase transition-colors duration-200 ease-out hover:bg-[#e6f1ed]"
               role="option"
               aria-selected={false}
               onClick={() => {

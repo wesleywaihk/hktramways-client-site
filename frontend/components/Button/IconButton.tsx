@@ -39,8 +39,13 @@ export default function IconButton({
     .join(" ");
 
   return (
-    <button type="button" aria-label={ariaLabel} onClick={onClick} className={classes}>
-      <span className="relative shrink-0 w-5 h-5 overflow-hidden">
+    <button
+      type="button"
+      aria-label={ariaLabel}
+      onClick={onClick}
+      className={classes}
+    >
+      <span className="relative h-5 w-5 shrink-0 overflow-hidden">
         {useArrow ? (
           <ArrowIco
             className="absolute inset-0 m-auto group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"

@@ -19,7 +19,7 @@ export default function CardContainer({
 }: CardContainerProps) {
   return (
     <div
-      className={`absolute left-0 top-0 w-full h-full transition-transform ease-in-out gpu-transform ${zIndexClass} ${animate ? "translate-y-[-65dvh]" : ""}`}
+      className={`gpu-transform absolute top-0 left-0 h-full w-full transition-transform ease-in-out ${zIndexClass} ${animate ? "translate-y-[-65dvh]" : ""}`}
       style={{ transitionDuration: `${SLIDE_DURATION_MS}ms` }}
     >
       <PolaroidCard image={image} hashTag={hashTag} className={cardClassName} />

@@ -30,14 +30,14 @@ export default function DesktopNavOverlay({
       <div
         className={`fixed inset-0 z-[1010] bg-black/40 transition-opacity duration-300 ease-in-out ${
           open
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
         }`}
         onClick={handleClose}
         aria-hidden="true"
       />
       <div
-        className={`fixed top-0 right-0 bottom-0 z-[1011] w-1/2 flex flex-col p-5 px-20 bg-green text-white transition-transform duration-500 ease-in-out ${
+        className={`bg-green fixed top-0 right-0 bottom-0 z-[1011] flex w-1/2 flex-col p-5 px-20 text-white transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
@@ -50,7 +50,7 @@ export default function DesktopNavOverlay({
               <button
                 key={loc}
                 type="button"
-                className={`font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase text-white bg-transparent border-none ${
+                className={`border-none bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-white uppercase ${
                   loc === locale ? "opacity-100" : "opacity-30"
                 }`}
                 onClick={() => switchLocale(loc)}
@@ -61,7 +61,7 @@ export default function DesktopNavOverlay({
           </div>
           <button
             type="button"
-            className="flex items-center justify-center w-[26px] h-[26px] bg-transparent border-none text-white cursor-pointer transition-transform duration-200 ease-out hover:scale-90"
+            className="flex h-[26px] w-[26px] cursor-pointer items-center justify-center border-none bg-transparent text-white transition-transform duration-200 ease-out hover:scale-90"
             onClick={handleClose}
             aria-label="Close menu"
           >
@@ -70,10 +70,10 @@ export default function DesktopNavOverlay({
         </div>
 
         <nav
-          className="flex items-start gap-20 w-full mt-[123px]"
+          className="mt-[123px] flex w-full items-start gap-20"
           onMouseLeave={() => setActiveParent(null)}
         >
-          <div className="flex flex-col gap-[30px] w-[358px] shrink-0">
+          <div className="flex w-[358px] shrink-0 flex-col gap-[30px]">
             {mobileNavLinks.map((link) => {
               const hasChildren = !!link.children?.length;
               const isActive = activeParent === link.href;
@@ -83,10 +83,10 @@ export default function DesktopNavOverlay({
                 <>
                   {link.label}
                   {hasChildren && (
-                    <ChevronIcon desktop className="w-[26px] h-[26px]" />
+                    <ChevronIcon desktop className="h-[26px] w-[26px]" />
                   )}
                   {link.external && (
-                    <UprightArrowIco className="w-[26px] h-[26px]" />
+                    <UprightArrowIco className="h-[26px] w-[26px]" />
                   )}
                 </>
               );
@@ -112,7 +112,7 @@ export default function DesktopNavOverlay({
           </div>
 
           {activeLink?.children && (
-            <div className="flex flex-col gap-5 w-[140px] shrink-0">
+            <div className="flex w-[140px] shrink-0 flex-col gap-5">
               {activeLink.children.map((child) => (
                 <Link
                   key={child.href}

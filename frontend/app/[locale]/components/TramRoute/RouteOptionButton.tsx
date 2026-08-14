@@ -28,13 +28,13 @@ export default function RouteOptionButton({
         type="button"
         onClick={onClick}
         aria-pressed={active}
-        className={`${gridClasses} rounded-[21px] bg-green text-white shadow-md transition-colors duration-200 ease-out`}
+        className={`${gridClasses} bg-green rounded-[21px] text-white shadow-md transition-colors duration-200 ease-out`}
       >
-        <span className="flex items-center justify-center shrink-0 w-6 h-6 rounded-full bg-white text-green text-[12px] font-bold transition-colors duration-200 ease-out">
+        <span className="text-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-[12px] font-bold transition-colors duration-200 ease-out">
           {route.id}
         </span>
         <span className="text-center">{route.from}</span>
-        <ExchangeArrow className="w-5 h-5 mx-auto transition-colors duration-200 ease-out" />
+        <ExchangeArrow className="mx-auto h-5 w-5 transition-colors duration-200 ease-out" />
         <span className="text-center">{route.to}</span>
       </button>
     );
@@ -45,13 +45,13 @@ export default function RouteOptionButton({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`${gridClasses} group rounded-[21px] bg-transparent text-green transition-colors duration-200 ease-out hover:bg-green hover:text-white hover:shadow-md`}
+      className={`${gridClasses} group text-green hover:bg-green rounded-[21px] bg-transparent transition-colors duration-200 ease-out hover:text-white hover:shadow-md`}
     >
-      <span className="flex items-center justify-center shrink-0 w-6 h-6 rounded-full bg-green text-white text-[11px] font-bold transition-colors duration-200 ease-out group-hover:bg-white group-hover:text-green">
+      <span className="bg-green group-hover:text-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white transition-colors duration-200 ease-out group-hover:bg-white">
         {route.id}
       </span>
       <span>{route.from}</span>
-      <ExchangeArrow className="w-5 h-5 mx-auto text-green/40 transition-colors duration-200 ease-out group-hover:text-white" />
+      <ExchangeArrow className="text-green/40 mx-auto h-5 w-5 transition-colors duration-200 ease-out group-hover:text-white" />
       <span>{route.to}</span>
     </button>
   );

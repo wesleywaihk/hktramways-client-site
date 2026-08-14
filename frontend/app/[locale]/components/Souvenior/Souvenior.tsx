@@ -28,36 +28,36 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
   if (!items.length) return null;
 
   return (
-    <section className="borderless h-auto  bg-green flex flex-col justify-center py-[90px] lg:py-[120px]">
-      <div className="flex items-center justify-between gap-4 w-full pageBorder max-w-screen-xl mx-auto">
-        <h2 className="title-text text-white text-center lg:text-left px-0 mx-0 grow">
+    <section className="borderless bg-green flex h-auto flex-col justify-center py-[90px] lg:py-[120px]">
+      <div className="pageBorder mx-auto flex w-full max-w-screen-xl items-center justify-between gap-4">
+        <h2 className="title-text mx-0 grow px-0 text-center text-white lg:text-left">
           {title}
         </h2>
         {data.actionButton && (
           <ActionButton
             {...data.actionButton}
-            className="hidden! lg:inline-flex! lg:shrink-0 px-[28px]! py-[19px]!"
+            className="hidden! px-[28px]! py-[19px]! lg:inline-flex! lg:shrink-0"
           />
         )}
       </div>
 
       <div
         ref={containerRef}
-        className="mt-10 md:mt-14 pt-[34px] md:pt-[28px] lg:pt-[28px] overflow-hidden touch-pan-y cursor-grab active:cursor-grabbing select-none"
+        className="mt-10 cursor-grab touch-pan-y overflow-hidden pt-[34px] select-none active:cursor-grabbing md:mt-14 md:pt-[28px] lg:pt-[28px]"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
         onClickCapture={onClickCapture}
       >
-        <div ref={rowRef} className="flex gap-[30px] w-max">
+        <div ref={rowRef} className="flex w-max gap-[30px]">
           {items.map((item, index) => (
             <SouveniorCard key={item.id} item={item} order={index + 1} />
           ))}
         </div>
       </div>
 
-      <div className="w-full pageBorder max-w-screen-xl mx-auto block lg:hidden mt-10 flex items-center justify-center">
+      <div className="pageBorder mx-auto mt-10 block flex w-full max-w-screen-xl items-center justify-center lg:hidden">
         {data.actionButton && (
           <ActionButton {...data.actionButton} className="!px-6 !py-[14px]" />
         )}

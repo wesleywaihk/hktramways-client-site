@@ -50,7 +50,7 @@ export default async function LocaleLayout({
         <HeaderStyleProvider>
           <MetaUpdater metaTitle={metaTitle} />
           <Header />
-          <main className="flex flex-col min-h-[calc(100dvh-76px)] lg:min-h-[calc(100dvh-100px)]">
+          <main className="flex min-h-[calc(100dvh-76px)] flex-col lg:min-h-[calc(100dvh-100px)]">
             {children}
           </main>
           <Footer />

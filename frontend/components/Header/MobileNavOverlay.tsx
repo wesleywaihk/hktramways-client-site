@@ -28,14 +28,14 @@ export default function MobileNavOverlay({
       <div
         className={`fixed inset-0 z-[1010] bg-black/40 transition-opacity duration-300 ease-in-out ${
           open
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
         }`}
         onClick={handleClose}
         aria-hidden="true"
       />
       <div
-        className={`fixed top-0 right-0 bottom-0 z-[1011] w-full max-w-[393px] flex flex-col p-5 px-[30px] bg-green text-white transition-transform duration-500 ease-in-out ${
+        className={`bg-green fixed top-0 right-0 bottom-0 z-[1011] flex w-full max-w-[393px] flex-col p-5 px-[30px] text-white transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
@@ -48,7 +48,7 @@ export default function MobileNavOverlay({
               <button
                 key={loc}
                 type="button"
-                className={`font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase text-white bg-transparent border-none ${
+                className={`border-none bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-white uppercase ${
                   loc === locale ? "opacity-100" : "opacity-60"
                 }`}
                 onClick={() => switchLocale(loc)}
@@ -59,7 +59,7 @@ export default function MobileNavOverlay({
           </div>
           <button
             type="button"
-            className="flex items-center justify-center w-[26px] h-[26px] bg-transparent border-none text-white cursor-pointer transition-transform duration-200 ease-out hover:scale-90"
+            className="flex h-[26px] w-[26px] cursor-pointer items-center justify-center border-none bg-transparent text-white transition-transform duration-200 ease-out hover:scale-90"
             onClick={handleClose}
             aria-label="Close menu"
           >
@@ -67,8 +67,8 @@ export default function MobileNavOverlay({
           </button>
         </div>
 
-        <nav className="flex items-start w-full mt-16">
-          <div className="flex flex-col gap-7 w-full max-w-[333px]">
+        <nav className="mt-16 flex w-full items-start">
+          <div className="flex w-full max-w-[333px] flex-col gap-7">
             {mobileNavLinks.map((link) => {
               const hasChildren = !!link.children?.length;
               const isActive = activeParent === link.href;
@@ -78,10 +78,13 @@ export default function MobileNavOverlay({
                 <>
                   {link.label}
                   {hasChildren && (
-                    <ChevronIcon active={isActive} className="w-[22px] h-[22px]" />
+                    <ChevronIcon
+                      active={isActive}
+                      className="h-[22px] w-[22px]"
+                    />
                   )}
                   {link.external && (
-                    <UprightArrowIco className="w-[22px] h-[22px]" />
+                    <UprightArrowIco className="h-[22px] w-[22px]" />
                   )}
                 </>
               );
@@ -116,7 +119,7 @@ export default function MobileNavOverlay({
                   )}
 
                   {hasChildren && isActive && (
-                    <div className="flex flex-col gap-[10px] mt-3">
+                    <div className="mt-3 flex flex-col gap-[10px]">
                       {link.children!.map((child) => (
                         <Link
                           key={child.href}

@@ -13,11 +13,11 @@ export default function SouveniorIcon({
   if (!icon) return null;
   return (
     <div
-      className={`grid place-items-center w-[10vw] h-[10vw] md:w-15 md:h-15 rounded-full bg-white text-green shadow-md ${className}`}
+      className={`text-green grid h-[10vw] w-[10vw] place-items-center rounded-full bg-white shadow-md md:h-15 md:w-15 ${className}`}
     >
       <BtnIcon
         icon={icon}
-        className="w-[6vw]! h-[6vw]! md:w-[30px]! md:h-[30px]!"
+        className="h-[6vw]! w-[6vw]! md:h-[30px]! md:w-[30px]!"
       />
     </div>
   );

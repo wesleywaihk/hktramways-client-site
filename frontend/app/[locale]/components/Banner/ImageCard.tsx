@@ -32,7 +32,7 @@ export default function ImageCard({
 
   return (
     <div
-      className={`absolute top-0 left-5 lg:left-10 right-5 lg:right-10 bottom-5 lg:bottom-10 rounded-[21px] lg:rounded-[30px] overflow-hidden ${className}`}
+      className={`absolute top-0 right-5 bottom-5 left-5 overflow-hidden rounded-[21px] lg:right-10 lg:bottom-10 lg:left-10 lg:rounded-[30px] ${className}`}
       role="img"
       aria-label={alt}
       style={style}

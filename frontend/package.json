@@ -8,6 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "docker-local-test": "bash scripts/docker-local-test.sh",
     "docker-kill": "bash scripts/docker-kill.sh"
   },
@@ -33,6 +35,8 @@
     "dotenv-cli": "^7.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "sass": "^1.101.3",
     "tailwindcss": "^4",
     "typescript": "^5"
