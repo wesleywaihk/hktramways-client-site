@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
 import IconButton from "@/components/Button/IconButton";
+import FloatingCircle from "@/components/FloatingCircle/FloatingCircle";
+import { useFloatingCircle } from "@/components/FloatingCircle/useFloatingCircle";
 import { useArcCarouselSwipe } from "@/app/[locale]/components/ArcCarousel/useArcCarouselSwipe";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { IMG_URL } from "@/consts";
@@ -51,6 +53,27 @@ function cardDelayRank(off: number, dir: number) {
   return (dir || 1) * off + 1;
 }
 
+function formatCallActionNumber(n: number) {
+  return `#${String(n).padStart(2, "0")}`;
+}
+
+function buildHoverContent(number: string | null, text: string | null | undefined) {
+  return (
+    <>
+      {number && (
+        <span className="font-normal text-[15px] leading-[22px] tracking-[0.02em] text-center uppercase">
+          {number}
+        </span>
+      )}
+      {text && (
+        <span className="w-full max-w-[80%] mx-auto font-semibold text-[20px] leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
+          {text}
+        </span>
+      )}
+    </>
+  );
+}
+
 export interface PartyTramCarouselProps {
   data: PartyTramData;
 }
@@ -70,6 +93,14 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
     wasDragged,
   } = useArcCarouselSwipe(total, SLIDE_TOTAL_MS);
   const { isLg } = useMediaQuery();
+  const {
+    circleRef,
+    visible: circleVisible,
+    content: hoveredContent,
+    onHoverMove,
+    onHoverEnd,
+    hideForTransition,
+  } = useFloatingCircle(trackRef);
   const [renderedActive, setRenderedActive] = useState(active);
   const [prevActive, setPrevActive] = useState(active);
   if (active !== renderedActive) {
@@ -77,13 +108,18 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
     setRenderedActive(active);
   }
 
+  useEffect(() => {
+    hideForTransition(SLIDE_TOTAL_MS);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
+
   if (!total) return null;
 
   const item = items[active];
   const carouselItem = item.carouselItem;
   const callAction =
     item.callActionNumber != null || item.callActionText
-      ? `${item.callActionNumber != null ? `#${item.callActionNumber} ` : ""}${item.callActionText ?? ""}`.trim()
+      ? `${item.callActionNumber != null ? `${formatCallActionNumber(item.callActionNumber)} ` : ""}${item.callActionText ?? ""}`.trim()
       : null;
 
   const CARD_WIDTH_PCT = isLg ? LG_CARD_WIDTH_PCT : MOBILE_CARD_WIDTH_PCT;
@@ -117,7 +153,10 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
       <div
         ref={trackRef}
         className="relative w-full flex-1 min-h-0 mt-6 lg:mt-8 touch-pan-y cursor-grab active:cursor-grabbing"
-        onPointerDown={onPointerDown}
+        onPointerDown={(e) => {
+          onHoverEnd();
+          onPointerDown(e);
+        }}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
       >
@@ -127,6 +166,13 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
             const hidden = Math.abs(off) > 2;
             const img = it.carouselItem?.image;
             const link = it.carouselItem?.hyperlink?.url;
+            const number =
+              it.callActionNumber != null
+                ? formatCallActionNumber(it.callActionNumber)
+                : null;
+            const text = it.callActionText;
+            const trackHover = off === 0 && (number != null || !!text);
+            const hoverContent = buildHoverContent(number, text);
 
             const wrapMax = Math.floor(total / 2);
             const prevOff = loopedOffset(i, prevActive, total);
@@ -187,6 +233,10 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
                   else prev();
                 }}
                 onDragStart={(e) => e.preventDefault()}
+                onMouseMove={
+                  trackHover ? (e) => onHoverMove(e, hoverContent) : undefined
+                }
+                onMouseLeave={trackHover ? onHoverEnd : undefined}
               >
                 {cardContent}
               </div>
@@ -207,6 +257,14 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
             className="grid absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10! h-10! rounded-[14px]! lg:hidden"
           />
         </div>
+
+        <FloatingCircle
+          ref={circleRef}
+          visible={circleVisible}
+          content={hoveredContent}
+          visibleFrom="lg"
+          className="bg-[#703900]! text-white! w-[190px]! h-[190px]!"
+        />
       </div>
 
       {callAction && (

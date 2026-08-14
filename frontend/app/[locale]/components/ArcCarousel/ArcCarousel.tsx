@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import Button from "@/components/Button/Button";
 import IconButton from "@/components/Button/IconButton";
-import ArrowIco from "@/components/icons/ArrowIco";
+import FloatingCircle from "@/components/FloatingCircle/FloatingCircle";
+import { useFloatingCircle } from "@/components/FloatingCircle/useFloatingCircle";
 import type { IconEnum, ArcCarouselData, Media } from "@/types/api";
 import { asImage } from "@/lib/media";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -83,6 +84,9 @@ const mobileGap = (cardWidth: string) => `calc(50vw + (${cardWidth}) / 4)`;
  */
 const smGap = (cardWidth: string) => `calc(44vw + (${cardWidth}) / 5)`;
 
+/** matches the card transform transition duration below, used to know when a slide has settled */
+const CARD_TRANSITION_MS = 550;
+
 /** shortest looped distance from the active card (…-2,-1,0,1,2…) */
 function loopedOffset(index: number, active: number, total: number) {
   let d = index - active;
@@ -138,62 +142,19 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   const visibleRange = isMobile ? MOBILE_VISIBLE_RANGE : DESKTOP_VISIBLE_RANGE;
   const active_ = items[active] ?? items[0];
 
-  const circleRef = useRef<HTMLDivElement>(null);
-  const [circleVisible, setCircleVisible] = useState(false);
-  const [hoveredText, setHoveredText] = useState("");
-  const rafRef = useRef<number | null>(null);
-  const pendingPos = useRef<{ x: number; y: number } | null>(null);
-  const isHoveringRef = useRef(false);
+  const {
+    circleRef,
+    visible: circleVisible,
+    content: hoveredContent,
+    onHoverMove: handleHoverMove,
+    onHoverEnd: handleHoverEnd,
+    hideForTransition,
+  } = useFloatingCircle(trackRef);
 
   useEffect(() => {
-    return () => {
-      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  const handleHoverMove = (
-    e: React.MouseEvent<HTMLDivElement>,
-    text: string,
-  ) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const rect = track.getBoundingClientRect();
-    pendingPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    const isEntering = !isHoveringRef.current;
-    isHoveringRef.current = true;
-    if (rafRef.current == null) {
-      rafRef.current = requestAnimationFrame(() => {
-        rafRef.current = null;
-        const pos = pendingPos.current;
-        const circle = circleRef.current;
-        if (!pos || !circle) return;
-        if (isEntering) {
-          circle.style.transition = "none";
-          circle.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(0.1)`;
-          void circle.offsetWidth;
-          circle.style.transition = "";
-          requestAnimationFrame(() => {
-            if (circleRef.current) {
-              circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(1)`;
-            }
-          });
-        } else {
-          circle.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(1)`;
-        }
-      });
-    }
-    setCircleVisible(true);
-    setHoveredText(text);
-  };
-
-  const handleHoverEnd = () => {
-    isHoveringRef.current = false;
-    const pos = pendingPos.current;
-    if (pos && circleRef.current) {
-      circleRef.current.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%) scale(0.1)`;
-    }
-    setCircleVisible(false);
-  };
+    hideForTransition(CARD_TRANSITION_MS);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
 
   const translateX = (off: number) => {
     const gap = isSmToMd
@@ -276,30 +237,24 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
                   : "transform 550ms cubic-bezier(0.22,0.9,0.3,1), opacity 300ms ease"
               }
               onClick={() => off !== 0 && (off > 0 ? next() : prev())}
-              onHoverMove={handleHoverMove}
+              onHoverMove={(e, text) =>
+                handleHoverMove(
+                  e,
+                  <span className="w-full max-w-[80%] mx-auto font-sans text-current text-[20px] font-semibold leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
+                    {text}
+                  </span>,
+                )
+              }
               onHoverEnd={handleHoverEnd}
             />
           );
         })}
 
-        <div
+        <FloatingCircle
           ref={circleRef}
-          aria-hidden="true"
-          className={`absolute left-0 top-0 flex flex-col items-center justify-center gap-1 w-[150px] h-[150px] rounded-full bg-white pointer-events-none z-20 will-change-transform transition-[opacity,transform] duration-150 ease-out ${
-            circleVisible ? "opacity-100" : "opacity-0"
-          }`}
-          //backdrop-blur-xs
-        >
-          <span className="w-full max-w-[80%] mx-auto font-sans text-green text-[20px] font-semibold leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
-            {hoveredText}
-          </span>
-          <ArrowIco
-            width={20}
-            height={20}
-            aria-hidden="true"
-            className="shrink-0 mx-auto block text-green"
-          />
-        </div>
+          visible={circleVisible}
+          content={hoveredContent}
+        />
       </div>
 
       <div className="relative z-30 shrink-0 mt-6 md:mt-8 px-8 text-center">
