@@ -17,6 +17,7 @@ export function useArcCarouselSwipe(
   const [active, setActive] = useState(0);
   const [dir, setDir] = useState(0); // last navigation direction: 1 = next, -1 = prev
   const dragStart = useRef<number | null>(null);
+  const dragged = useRef(false);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const lastWheelNavAt = useRef(0);
   const navLockedUntil = useRef(0);
@@ -68,11 +69,13 @@ export function useArcCarouselSwipe(
   const onPointerDown = (e: React.PointerEvent) => {
     if ((e.target as HTMLElement).closest("button")) return;
     dragStart.current = e.clientX;
+    dragged.current = false;
     e.currentTarget.setPointerCapture(e.pointerId);
   };
   const onPointerUp = (e: React.PointerEvent) => {
     if (dragStart.current === null) return;
     const dx = e.clientX - dragStart.current;
+    dragged.current = Math.abs(dx) > 5; // ignore jitter: not a real drag
     if (dx > 40) prev();
     else if (dx < -40) next();
     dragStart.current = null;
@@ -80,6 +83,8 @@ export function useArcCarouselSwipe(
   const onPointerLeave = () => {
     dragStart.current = null;
   };
+
+  const wasDragged = useCallback(() => dragged.current, []);
 
   return {
     active,
@@ -90,5 +95,6 @@ export function useArcCarouselSwipe(
     onPointerDown,
     onPointerUp,
     onPointerLeave,
+    wasDragged,
   };
 }

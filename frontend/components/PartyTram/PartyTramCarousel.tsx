@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "@/components/Button/Button";
 import IconButton from "@/components/Button/IconButton";
 import { useArcCarouselSwipe } from "@/app/[locale]/components/ArcCarousel/useArcCarouselSwipe";
@@ -66,6 +67,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
     onPointerDown,
     onPointerUp,
     onPointerLeave,
+    wasDragged,
   } = useArcCarouselSwipe(total, SLIDE_TOTAL_MS);
   const { isLg } = useMediaQuery();
   const [renderedActive, setRenderedActive] = useState(active);
@@ -108,7 +110,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
         />
       </div>
 
-      <p className="text-green font-semibold text-[16px] leading-[163%] tracking-[0.02em] text-center mt-4 lg:px-16 block mx-auto w-full max-w-[710px] block">
+      <p className="text-black font-normal text-[15px] lg:text-[16px] leading-[163%] tracking-[0.02em] text-center mt-4 lg:px-16 block mx-auto w-full max-w-[710px] block">
         {carouselItem?.desc}
       </p>
 
@@ -124,6 +126,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
             const off = loopedOffset(i, active, total);
             const hidden = Math.abs(off) > 2;
             const img = it.carouselItem?.image;
+            const link = it.carouselItem?.hyperlink?.url;
 
             const wrapMax = Math.floor(total / 2);
             const prevOff = loopedOffset(i, prevActive, total);
@@ -149,7 +152,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
             };
             const cardClassName =
               "absolute top-auto bottom-[11.5dvh] lg:bottom-[13dvh] left-1/2 overflow-hidden transition-transform";
-            const cardContent = img && (
+            const imageEl = img && (
               <Image
                 src={mediaSrc(img.url)}
                 alt={img.alternativeText ?? ""}
@@ -159,13 +162,30 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
                 sizes={`${CARD_WIDTH_PCT}vw`}
               />
             );
+            const cardContent =
+              off === 0 && link ? (
+                <Link
+                  href={link}
+                  className="absolute inset-0"
+                  onClick={(e) => wasDragged() && e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                >
+                  {imageEl}
+                </Link>
+              ) : (
+                imageEl
+              );
 
             return (
               <div
                 key={it.id}
                 className={cardClassName}
                 style={cardStyle}
-                onClick={() => off !== 0 && (off > 0 ? next() : prev())}
+                onClick={() => {
+                  if (wasDragged() || off === 0) return;
+                  if (off > 0) next();
+                  else prev();
+                }}
                 onDragStart={(e) => e.preventDefault()}
               >
                 {cardContent}
