@@ -45,7 +45,7 @@ export default function ResponsiveImg({
       <div
         role="img"
         aria-label={alt}
-        className={`flex items-center justify-center bg-earth-light ${className}`}
+        className={`bg-earth-light flex items-center justify-center ${className}`}
       >
         <ImageNotSupportedIcon
           className="text-green-30"
@@ -67,7 +67,7 @@ export default function ResponsiveImg({
 
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden w-full h-full aspect-auto ${className}`}
+      className={`relative flex aspect-auto h-full w-full items-center justify-center overflow-hidden ${className}`}
     >
       <div
         className={`absolute inset-0 z-0 ${thumbnail ? "bg-cover bg-center blur-xl" : "bg-earth-light animate-pulse"}`}
@@ -77,7 +77,7 @@ export default function ResponsiveImg({
         aria-hidden="true"
       />
 
-      <picture className="absolute inset-0 z-10 h-[calc(100%+2px)] w-[calc(100%+2px)] -m-[1px]">
+      <picture className="absolute inset-0 z-10 -m-[1px] h-[calc(100%+2px)] w-[calc(100%+2px)]">
         {imageD && (
           <source media="(min-width: 1024px)" srcSet={srcSetD} sizes={sizes} />
         )}
@@ -87,7 +87,7 @@ export default function ResponsiveImg({
           sizes={sizes}
           alt={alt}
           loading={isHero ? "eager" : "lazy"}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
         />
       </picture>
     </div>

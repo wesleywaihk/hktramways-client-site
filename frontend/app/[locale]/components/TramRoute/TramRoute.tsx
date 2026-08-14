@@ -31,11 +31,11 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
     ROUTES.find((route) => route.id === selected) ?? ROUTES[0];
 
   return (
-    <section className="borderless relative bg-earth-light pt-16 md:pt-20 lg:pt-24 overflow-hidden">
-      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 lg:gap-16 px-5 lg:px-6 max-w-[1360px] mx-auto">
-        <div className="flex flex-col items-center text-center md:items-start md:text-left max-w-[600px]">
+    <section className="borderless bg-earth-light relative overflow-hidden pt-16 md:pt-20 lg:pt-24">
+      <div className="mx-auto flex max-w-[1360px] flex-col gap-10 px-5 md:flex-row md:items-start md:justify-between lg:gap-16 lg:px-6">
+        <div className="flex max-w-[600px] flex-col items-center text-center md:items-start md:text-left">
           <h2 className="title-text text-green">{title}</h2>
-          <p className="mt-4 md:mt-6 text-black text-[15px] md:text-[16px] leading-[163%] tracking-[0.02em]">
+          <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-black md:mt-6 md:text-[16px]">
             {desc}
           </p>
           <Button
@@ -48,7 +48,7 @@ export default function TramRoute({ data = undefined }: TramRouteProps) {
           </Button>
         </div>
 
-        <div className="hidden md:flex flex-col items-start gap-3 shrink-0">
+        <div className="hidden shrink-0 flex-col items-start gap-3 md:flex">
           {ROUTES.map((route) => (
             <RouteOptionButton
               key={route.id}

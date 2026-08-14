@@ -30,7 +30,7 @@ export default function ArcCarouselCard({
 
   return (
     <div
-      className="group absolute left-1/2 top-1/2 will-change-transform"
+      className="group absolute top-1/2 left-1/2 will-change-transform"
       style={{
         width: cardWidth,
         height: cardHeight,
@@ -42,9 +42,9 @@ export default function ArcCarouselCard({
       }}
       onClick={onClick}
     >
-      <figure className="m-0 w-full h-full overflow-hidden shadow-lg transition-transform duration-150 ease-out group-hover:-translate-y-[5%]">
+      <figure className="m-0 h-full w-full overflow-hidden shadow-lg transition-transform duration-150 ease-out group-hover:-translate-y-[5%]">
         <div
-          className="w-full h-full relative flex items-end bg-earth-light"
+          className="bg-earth-light relative flex h-full w-full items-end"
           onMouseMove={
             trackHover
               ? (e) => onHoverMove?.(e, item.callActionText ?? "")

@@ -17,18 +17,25 @@ export type ButtonProps = {
   color?: ButtonColor;
 };
 
-const variantColorClasses: Record<ButtonVariant, Record<ButtonColor, string>> = {
+const variantColorClasses: Record<
+  ButtonVariant,
+  Record<ButtonColor, string>
+> = {
   outline: {
-    green: "border-green text-green bg-transparent hover:bg-green hover:text-white",
-    white: "border-white text-white bg-transparent hover:bg-white hover:text-green",
+    green:
+      "border-green text-green bg-transparent hover:bg-green hover:text-white",
+    white:
+      "border-white text-white bg-transparent hover:bg-white hover:text-green",
   },
   solid: {
     green: "border-green bg-green text-white hover:bg-white hover:text-green",
     white: "border-white bg-white text-green hover:bg-green hover:text-white",
   },
   "solid-light": {
-    green: "border-green bg-green text-white hover:bg-green-light hover:text-white",
-    white: "border-white bg-white text-green hover:bg-green-light hover:text-white",
+    green:
+      "border-green bg-green text-white hover:bg-green-light hover:text-white",
+    white:
+      "border-white bg-white text-green hover:bg-green-light hover:text-white",
   },
 };
 
@@ -40,7 +47,7 @@ const buttonClasses =
   "transition-colors duration-200 ease-out";
 
 const Arrow = () => (
-  <span className="relative shrink-0 translate-y-[1px] w-4 h-4 overflow-hidden">
+  <span className="relative h-4 w-4 shrink-0 translate-y-[1px] overflow-hidden">
     <svg
       className="absolute inset-0 group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
       width="16"
@@ -70,7 +77,11 @@ export default function Button({
   variant = "outline",
   color = "green",
 }: ButtonProps) {
-  const classes = [buttonClasses, variantColorClasses[variant][color], className]
+  const classes = [
+    buttonClasses,
+    variantColorClasses[variant][color],
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 
@@ -88,7 +99,7 @@ export default function Button({
 
   if (href) {
     return (
-      <Link href={href} className={`flex flex-row no-wrap ${classes}`}>
+      <Link href={href} className={`no-wrap flex flex-row ${classes}`}>
         {content}
       </Link>
     );

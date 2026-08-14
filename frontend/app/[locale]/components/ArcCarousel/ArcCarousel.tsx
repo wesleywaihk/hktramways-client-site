@@ -168,29 +168,29 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   };
 
   return (
-    <section className="borderless h-[100dvh] bg-green relative overflow-hidden py-[10dvh] md:py-[6dvh] select-none flex flex-col">
-      <div className="shrink-0 flex items-center justify-center gap-6 md:gap-16 pb-8 md:pb-10">
+    <section className="borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden py-[10dvh] select-none md:py-[6dvh]">
+      <div className="flex shrink-0 items-center justify-center gap-6 pb-8 md:gap-16 md:pb-10">
         <IconButton
           ariaLabel="Previous poster"
           onClick={prev}
           reverse
           useArrow
-          className="hidden md:grid shrink-0 z-10 w-11 h-11 md:rounded-[16px]"
+          className="z-10 hidden h-11 w-11 shrink-0 md:grid md:rounded-[16px]"
         />
 
-        <h2 className="title-text text-white text-center">{heading}</h2>
+        <h2 className="title-text text-center text-white">{heading}</h2>
 
         <IconButton
           ariaLabel="Next poster"
           onClick={next}
           useArrow
-          className="hidden md:grid shrink-0 z-10 w-11 h-11 md:rounded-[16px]"
+          className="z-10 hidden h-11 w-11 shrink-0 md:grid md:rounded-[16px]"
         />
       </div>
 
       <div
         ref={trackRef}
-        className="relative grow min-h-0 touch-pan-y cursor-grab active:cursor-grabbing"
+        className="relative min-h-0 grow cursor-grab touch-pan-y active:cursor-grabbing"
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
@@ -200,13 +200,13 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           onClick={prev}
           reverse
           useArrow
-          className="md:hidden grid absolute left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9"
+          className="absolute top-1/2 left-4 z-30 grid h-9 w-9 -translate-y-1/2 md:hidden"
         />
         <IconButton
           ariaLabel="Next poster"
           onClick={next}
           useArrow
-          className="md:hidden grid absolute right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9"
+          className="absolute top-1/2 right-4 z-30 grid h-9 w-9 -translate-y-1/2 md:hidden"
         />
 
         {items.map((item, i) => {
@@ -240,7 +240,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
               onHoverMove={(e, text) =>
                 handleHoverMove(
                   e,
-                  <span className="w-full max-w-[80%] mx-auto font-sans text-current text-[20px] font-semibold leading-[24px] tracking-[0.02em] text-center uppercase text-wrap break-words">
+                  <span className="mx-auto w-full max-w-[80%] text-center font-sans text-[20px] leading-[24px] font-semibold tracking-[0.02em] text-wrap break-words text-current uppercase">
                     {text}
                   </span>,
                 )
@@ -257,13 +257,13 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
         />
       </div>
 
-      <div className="relative z-30 shrink-0 mt-6 md:mt-8 px-8 text-center">
-        <p className="text-white font-semibold text-[16px] leading-[163%] tracking-[0.02em] whitespace-pre-line max-w-[520px] mx-auto">
+      <div className="relative z-30 mt-6 shrink-0 px-8 text-center md:mt-8">
+        <p className="mx-auto max-w-[520px] text-[16px] leading-[163%] font-semibold tracking-[0.02em] whitespace-pre-line text-white">
           {active_.caption}
         </p>
       </div>
 
-      <div className="shrink-0 mt-6 md:mt-8 flex justify-center">
+      <div className="mt-6 flex shrink-0 justify-center md:mt-8">
         <Button
           href={buttonUrl}
           color="white"

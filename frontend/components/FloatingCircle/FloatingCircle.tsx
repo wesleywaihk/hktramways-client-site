@@ -32,7 +32,7 @@ const FloatingCircle = forwardRef<HTMLDivElement, FloatingCircleProps>(
         aria-hidden="true"
         className={[
           `hidden ${VISIBLE_FROM_CLASSES[visibleFrom]}`,
-          "absolute left-0 top-0 flex-col items-center justify-center gap-1 w-[150px] h-[150px] rounded-full bg-white text-green pointer-events-none z-20 will-change-transform transition-[opacity,transform] duration-150 ease-out",
+          "text-green pointer-events-none absolute top-0 left-0 z-20 h-[150px] w-[150px] flex-col items-center justify-center gap-1 rounded-full bg-white transition-[opacity,transform] duration-150 ease-out will-change-transform",
           visible ? "opacity-100" : "opacity-0",
           className,
         ]
@@ -44,7 +44,7 @@ const FloatingCircle = forwardRef<HTMLDivElement, FloatingCircleProps>(
           width={20}
           height={20}
           aria-hidden="true"
-          className="shrink-0 mx-auto block text-current"
+          className="mx-auto block shrink-0 text-current"
         />
       </div>
     );

@@ -6,7 +6,7 @@ interface ErrorPageProps {
 
 export default function ErrorPage({ message }: ErrorPageProps) {
   return (
-    <section className="flex flex-col items-center justify-center gap-2 w-full h-[calc(100dvh-52px)] lg:h-[calc(100dvh-160px)] bg-white">
+    <section className="flex h-[calc(100dvh-52px)] w-full flex-col items-center justify-center gap-2 bg-white lg:h-[calc(100dvh-160px)]">
       <ErrorOutlineIcon className="text-redDark" sx={{ fontSize: 48 }} />
       <p className="text-redDark">{message}</p>
     </section>

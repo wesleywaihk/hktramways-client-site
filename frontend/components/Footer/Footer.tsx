@@ -9,8 +9,8 @@ const columnHeading =
 export default function Footer() {
   return (
     <footer className="bg-green text-white">
-      <div className="p-5 lg:p-10 pt-0!">
-        <div className="flex flex-col items-center gap-6 p-10 px-5 rounded-[21px] bg-green-light text-center lg:flex-row lg:justify-between lg:items-center lg:text-left lg:gap-10 lg:min-h-[373px] lg:py-0 lg:pl-10 lg:pr-20 lg:rounded-[30px]">
+      <div className="p-5 pt-0! lg:p-10">
+        <div className="bg-green-light flex flex-col items-center gap-6 rounded-[21px] p-10 px-5 text-center lg:min-h-[373px] lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:rounded-[30px] lg:py-0 lg:pr-20 lg:pl-10 lg:text-left">
           <div className="shrink-0">
             <Image
               src="/footer/cat.png"
@@ -18,14 +18,14 @@ export default function Footer() {
               width={476}
               height={426}
               aria-hidden="true"
-              className="w-[180px] h-auto lg:w-[300px]"
+              className="h-auto w-[180px] lg:w-[300px]"
             />
           </div>
-          <div className="flex flex-col items-center lg:items-start lg:max-w-[480px]">
-            <h2 className="font-sans text-[32px] leading-[118%] font-semibold tracking-[0.02em] m-0 lg:text-[42px] lg:leading-[118%]">
+          <div className="flex flex-col items-center lg:max-w-[480px] lg:items-start">
+            <h2 className="m-0 font-sans text-[32px] leading-[118%] font-semibold tracking-[0.02em] lg:text-[42px] lg:leading-[118%]">
               Download HK Tramways App
             </h2>
-            <p className="font-sans text-[15px] leading-[163%] tracking-[0.02em] mt-4 lg:text-[16px] lg:leading-[163%] lg:mt-5">
+            <p className="mt-4 font-sans text-[15px] leading-[163%] tracking-[0.02em] lg:mt-5 lg:text-[16px] lg:leading-[163%]">
               Get our latest news of us, and track the time of next tram coming
               in your location easily!
             </p>
@@ -36,7 +36,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-8 p-5 py-10 lg:grid lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-10 lg:p-10 lg:py-[60px] lg:items-start">
+      <div className="flex flex-col gap-8 p-5 py-10 lg:grid lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:items-start lg:gap-10 lg:p-10 lg:py-[60px]">
         <div className="flex flex-col lg:order-1">
           <div className="flex items-center gap-4">
             <Image
@@ -44,7 +44,7 @@ export default function Footer() {
               alt="HK Tramways"
               width={200}
               height={60}
-              className="w-[167px] h-[50px] lg:w-[200px] lg:h-[60px]"
+              className="h-[50px] w-[167px] lg:h-[60px] lg:w-[200px]"
             />
             <Image
               src="/footer/caringCompany.png"
@@ -55,7 +55,7 @@ export default function Footer() {
             />
           </div>
 
-          <div className="hidden lg:flex lg:items-center lg:gap-2.5 lg:mt-6">
+          <div className="hidden lg:mt-6 lg:flex lg:items-center lg:gap-2.5">
             {socialLinks.map((social) => (
               <a
                 key={social.name}
@@ -63,7 +63,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="flex items-center justify-center w-[26px] h-8 p-0.5 rounded-[21px] hover:opacity-80"
+                className="flex h-8 w-[26px] items-center justify-center rounded-[21px] p-0.5 hover:opacity-80"
               >
                 <Image
                   src={social.icon}
@@ -76,13 +76,13 @@ export default function Footer() {
             ))}
           </div>
 
-          <p className="hidden lg:block font-sans text-[13px] leading-[145%] tracking-[0.02em] mt-6 opacity-[0.85]">
+          <p className="mt-6 hidden font-sans text-[13px] leading-[145%] tracking-[0.02em] opacity-[0.85] lg:block">
             A member of RATP Dev Group
             <br />© Hong Kong Tramways Limited. All rights reserved.
           </p>
           <Link
             href="/disclaimer"
-            className="hidden lg:inline-block font-sans text-[13px] leading-[145%] tracking-[0.02em] mt-2 underline hover:opacity-80"
+            className="mt-2 hidden font-sans text-[13px] leading-[145%] tracking-[0.02em] underline hover:opacity-80 lg:inline-block"
           >
             Disclaimer &amp; Privacy Policy
           </Link>
@@ -90,8 +90,8 @@ export default function Footer() {
 
         <div className="flex flex-col lg:order-4">
           <h3 className={columnHeading}>Fares &amp; Payment Methods</h3>
-          <div className="border-2 border-white rounded-xl p-5">
-            <div className="flex items-center gap-5 mb-4">
+          <div className="rounded-xl border-2 border-white p-5">
+            <div className="mb-4 flex items-center gap-5">
               {paymentIcons.map((icon) => (
                 <Image
                   key={icon}
@@ -99,12 +99,12 @@ export default function Footer() {
                   alt=""
                   width={20}
                   height={20}
-                  className="w-5 h-5"
+                  className="h-5 w-5"
                   aria-hidden="true"
                 />
               ))}
             </div>
-            <ul className="list-none m-0 p-0 flex flex-col gap-3">
+            <ul className="m-0 flex list-none flex-col gap-3 p-0">
               {fares.map((fare) => (
                 <li
                   key={fare.label}
@@ -118,7 +118,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex justify-between gap-5 lg:block lg:order-2">
+        <div className="flex justify-between gap-5 lg:order-2 lg:block">
           <div className="flex-1">
             <h3 className={columnHeading}>Download App</h3>
             <div className="flex flex-col gap-[15px]">
@@ -132,7 +132,7 @@ export default function Footer() {
                   alt="Get it on Google Play"
                   width={140}
                   height={46}
-                  className="w-[140px] h-auto"
+                  className="h-auto w-[140px]"
                 />
               </a>
               <a
@@ -145,7 +145,7 @@ export default function Footer() {
                   alt="Download on the App Store"
                   width={140}
                   height={46}
-                  className="w-[140px] h-auto"
+                  className="h-auto w-[140px]"
                 />
               </a>
             </div>
@@ -153,7 +153,7 @@ export default function Footer() {
 
           <div className="flex-1 lg:hidden">
             <h3 className={columnHeading}>Follow Us</h3>
-            <ul className="list-none m-0 p-0 flex flex-col gap-3">
+            <ul className="m-0 flex list-none flex-col gap-3 p-0">
               {socialLinks.map((social) => (
                 <li key={social.name}>
                   <a
@@ -170,9 +170,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="hidden flex-col items-start lg:flex lg:order-3">
+        <div className="hidden flex-col items-start lg:order-3 lg:flex">
           <h3 className={columnHeading}>Get in Touch</h3>
-          <p className="font-sans text-[15px] leading-[163%] tracking-[0.02em] m-0 mb-6 lg:text-[16px] lg:leading-[163%] lg:mb-7">
+          <p className="m-0 mb-6 font-sans text-[15px] leading-[163%] tracking-[0.02em] lg:mb-7 lg:text-[16px] lg:leading-[163%]">
             Find us for enquiries, lost items, or suggestions
           </p>
           <Button href="/contact-us" useArrow>
@@ -180,8 +180,8 @@ export default function Footer() {
           </Button>
         </div>
 
-        <div className="h-0.5 bg-white/15 w-full lg:hidden" />
-        <p className="block text-center font-sans text-[13px] leading-[145%] tracking-[0.02em] m-0 opacity-[0.85] lg:hidden">
+        <div className="h-0.5 w-full bg-white/15 lg:hidden" />
+        <p className="m-0 block text-center font-sans text-[13px] leading-[145%] tracking-[0.02em] opacity-[0.85] lg:hidden">
           A member of RATP Dev Group
           <br />© Hong Kong Tramways Limited. All rights reserved.
         </p>

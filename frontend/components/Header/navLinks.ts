@@ -26,8 +26,14 @@ export const mobileNavLinks: NavLink[] = [
     children: [
       { label: "Tram Tour", href: "/tram-tour" },
       { label: "TramOramic Tour", href: "/tram-tour/tramoramic-tour" },
-      { label: "Ding Ding Qipao Pass", href: "/tram-tour/ding-ding-qipao-pass" },
-      { label: "Restaurant Tram by Food Studio", href: "/tram-tour/restaurant-tram" },
+      {
+        label: "Ding Ding Qipao Pass",
+        href: "/tram-tour/ding-ding-qipao-pass",
+      },
+      {
+        label: "Restaurant Tram by Food Studio",
+        href: "/tram-tour/restaurant-tram",
+      },
     ],
   },
   { label: "Party Tram", href: "/party-tram" },

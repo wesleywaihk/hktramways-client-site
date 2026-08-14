@@ -51,7 +51,7 @@ export default function VideoCard({
 
   return (
     <div
-      className={`absolute inset-0 rounded-[21px] lg:rounded-[30px] w-[calc(100%-40px)] lg:w-[calc(100%-80px)] left-5 lg:left-10 ${
+      className={`absolute inset-0 left-5 w-[calc(100%-40px)] rounded-[21px] lg:left-10 lg:w-[calc(100%-80px)] lg:rounded-[30px] ${
         isFullScreen
           ? "h-[calc(100dvh-96px)] lg:h-[calc(100dvh-140px)]"
           : "h-[calc(100dvh-148px)] lg:h-[calc(100dvh-200px)]"
@@ -61,7 +61,8 @@ export default function VideoCard({
     >
       {shouldRender && (srcM || srcD) && (
         <video
-          className="absolute inset-0 object-cover max-w-[unset] max-h-[unset] w-full transform-gpu"
+          className="absolute inset-0 max-h-[unset] w-full max-w-[unset] transform-gpu object-cover"
+          aria-label={alt}
           autoPlay
           loop
           muted

@@ -32,7 +32,7 @@ export default function HeaderContent({
     >
       <Link
         href={`/${locale}`}
-        className={`flex items-center shrink-0 mr-5 lg:mr-10 ${logoClassName}`}
+        className={`mr-5 flex shrink-0 items-center lg:mr-10 ${logoClassName}`}
       >
         <Image
           src={logoSrc}
@@ -40,7 +40,7 @@ export default function HeaderContent({
           width={134}
           height={40}
           priority
-          className="w-full h-full"
+          className="h-full w-full"
         />
       </Link>
 
@@ -51,10 +51,10 @@ export default function HeaderContent({
               <Link
                 key={link.href}
                 href={`/${locale}${link.href}`}
-                className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase whitespace-nowrap text-[var(--header-fg)]"
+                className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] whitespace-nowrap text-[var(--header-fg)] uppercase"
               >
                 {link.label}
-                <span className="pointer-events-none absolute left-0 -bottom-1 h-[2px] w-full origin-right scale-x-0 bg-current/30 transition-transform duration-300 ease-out transform-gpu group-hover:origin-left group-hover:scale-x-100" />
+                <span className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-right scale-x-0 transform-gpu bg-current/30 transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100" />
               </Link>
             ))}
           </nav>
@@ -67,10 +67,10 @@ export default function HeaderContent({
         {/* Language toggle + hamburger, both open the slide-in nav overlay. Hamburger stays visible on desktop alongside the horizontal nav */}
         <button
           type="button"
-          className={`flex items-center justify-center w-9 h-9 rounded-xl border-2 border-[var(--header-border)] bg-transparent text-[var(--header-fg)] font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase transition-colors duration-200 ease-out cursor-pointer lg:hidden ${
+          className={`flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl border-2 border-[var(--header-border)] bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-[var(--header-fg)] uppercase transition-colors duration-200 ease-out lg:hidden ${
             invertLangHover
-              ? "hover:bg-green hover:text-white active:bg-green active:text-white"
-              : "hover:bg-white hover:text-green active:bg-white active:text-green"
+              ? "hover:bg-green active:bg-green hover:text-white active:text-white"
+              : "hover:text-green active:text-green hover:bg-white active:bg-white"
           }`}
           onClick={onOpenNav}
           aria-label="Language"
@@ -79,7 +79,7 @@ export default function HeaderContent({
         </button>
         <button
           type="button"
-          className="bg-transparent border-none"
+          className="border-none bg-transparent"
           onClick={onOpenNav}
           aria-label="Open menu"
           aria-expanded={navOpen}

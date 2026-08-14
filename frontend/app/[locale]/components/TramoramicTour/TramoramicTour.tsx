@@ -40,9 +40,9 @@ export default function TramoramicTour({
   const action2StartIcon = data?.action2?.startIcon?.icon ?? "calendar";
 
   return (
-    <section className="borderless h-auto md:h-[100dvh] relative bg-red-dark py-20 lg:py-24 flex overflow-hidden">
-      <div className="flex flex-col md:flex-row items-center gap-12 md:gap-8 lg:gap-16 px-5 lg:px-6 max-w-[1200px] mx-auto">
-        <div className="relative w-[87vmin] md:w-full min-h-[84.5vmin] md:min-h-0 md:flex-1 mt-[12vmin] mb-[6vmin] md:my-0">
+    <section className="borderless bg-red-dark relative flex h-auto overflow-hidden py-20 md:h-[100dvh] lg:py-24">
+      <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-12 px-5 md:flex-row md:gap-8 lg:gap-16 lg:px-6">
+        <div className="relative mt-[12vmin] mb-[6vmin] min-h-[84.5vmin] w-[87vmin] md:my-0 md:min-h-0 md:w-full md:flex-1">
           <CardContainer
             zIndexClass={
               activeSlide === 0 ? "z-0" : activeSlide === 1 ? "z-10" : "z-20"
@@ -72,16 +72,16 @@ export default function TramoramicTour({
           />
         </div>
 
-        <div className="flex flex-col items-center text-center md:items-start md:text-left md:flex-1">
-          <h2 className="text-gold font-semibold uppercase text-[40px] md:text-[44px] lg:text-[56px] leading-[107%] tracking-[0.02em]">
+        <div className="flex flex-col items-center text-center md:flex-1 md:items-start md:text-left">
+          <h2 className="text-gold text-[40px] leading-[107%] font-semibold tracking-[0.02em] uppercase md:text-[44px] lg:text-[56px]">
             {title1}
             <br />
             <span className="text-white">{title2}</span>
           </h2>
-          <p className="mt-4 md:mt-6 text-white text-[15px] md:text-[16px] leading-[163%] tracking-[0.02em]">
+          <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-white md:mt-6 md:text-[16px]">
             {desc}
           </p>
-          <div className="mt-6 md:mt-8 flex flex-wrap justify-center md:justify-start gap-4">
+          <div className="mt-6 flex flex-wrap justify-center gap-4 md:mt-8 md:justify-start">
             <Button
               href={action1Url}
               color="white"

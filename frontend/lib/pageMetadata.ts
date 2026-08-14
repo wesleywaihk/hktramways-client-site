@@ -18,7 +18,9 @@ export const getGlobalData = cache((locale: string) =>
 );
 
 /** Site-wide fallback metadata (title, description, keywords, favicon) shared by every page. */
-export async function generateGlobalMetadata(locale: string): Promise<Metadata> {
+export async function generateGlobalMetadata(
+  locale: string,
+): Promise<Metadata> {
   try {
     const globalRes = await getGlobalData(locale);
     const seo = globalRes.data?.seo;

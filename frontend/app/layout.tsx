@@ -8,7 +8,11 @@ const outfit = Outfit({
   variable: "--font-outfit",
 });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html className={outfit.variable}>
       <body>

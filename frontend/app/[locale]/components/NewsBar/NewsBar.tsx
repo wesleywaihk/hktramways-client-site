@@ -57,13 +57,13 @@ export default function NewsBar({ items = [], speed = 120 }: NewsBarProps) {
   if (!items.length) return null;
 
   return (
-    <section className="borderless h-[52px] lg:h-[60px] bg-white relative overflow-visible pl-[53px] lg:pl-[92px] flex">
+    <section className="borderless relative flex h-[52px] overflow-visible bg-white pl-[53px] lg:h-[60px] lg:pl-[92px]">
       <Image
         src="/home/newsBar/dingDingCat.svg"
         alt=""
         width={108}
         height={85}
-        className="absolute left-[10px] lg:left-[20px] bottom-0 z-10 w-[85px] h-[67px] lg:w-[108px] lg:h-[85px]"
+        className="absolute bottom-0 left-[10px] z-10 h-[67px] w-[85px] lg:left-[20px] lg:h-[85px] lg:w-[108px]"
         aria-hidden="true"
       />
       <div
