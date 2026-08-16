@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-FILE="sync-from-dev-$(date +%s)"
+FILE="sync-dev-to-local-$(date +%s)"
 
 echo "==> Exporting dev data (Postgres + S3)..."
 npx dotenv -e .env.dev -- npx strapi export --no-encrypt --only content,files -f "$FILE"

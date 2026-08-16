@@ -32,9 +32,8 @@ All sync scripts live in `backend/scripts/` and are exposed as npm scripts (prox
 
 | Script                                    | Direction                  | Root-level alias         |
 | ------------------------------------------ | --------------------------- | -------------------------- |
-| `npm run sync-from-dev` (in `backend/`)    | dev → local SQLite          | `npm run sync-from-dev`    |
-| `npm run sync-from-uat` (in `backend/`)    | UAT → local SQLite          | `npm run sync-from-uat`    |
-| `npm run sync-to-uat` (in `backend/` only) | local SQLite → UAT          | —                           |
+| `npm run sync-dev-to-local` (in `backend/`) | dev → local SQLite          | `npm run sync-dev-to-local` |
+| `npm run sync-local-to-dev`                | local SQLite → dev          | `npm run sync-local-to-dev` |
 | `npm run sync-dev-to-uat`                  | dev → UAT                   | `npm run sync-dev-to-uat`  |
 | `npm run sync-uat-to-dev`                  | UAT → dev                   | `npm run sync-uat-to-dev`  |
 
@@ -43,7 +42,7 @@ All sync scripts live in `backend/scripts/` and are exposed as npm scripts (prox
 - **Content Manager layout config** — the "Configure the view" field widths/columns/grouping per content type and single type, cached in the `strapi_core_store_settings` DB table, not in code.
 - **Admin menu/auth logos** (Settings → Overview → Customization) — including copying the actual logo files between the dev/UAT S3 buckets and rewriting their URLs, since dev and UAT use separate buckets.
 
-There's no local ↔ dev direction other than `sync-from-dev` (dev → local); pushing local SQLite content into dev isn't wired up (only `sync-to-uat` exists for pushing local → remote, and it targets UAT).
+There's no local ↔ UAT direction — only `sync-local-to-dev`/`sync-dev-to-local` bridge local SQLite, and only with dev (UAT is only reachable from local by going through dev first).
 
 All of these run a real export/import against Postgres and S3, so they can take a while for larger datasets and will overwrite the target's content — check with whoever else might be using that environment before running one.
 

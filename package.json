@@ -24,9 +24,9 @@
     "kill-port": "bash scripts/kill-port.sh",
     "docker-clean": "bash scripts/docker-clean.sh",
     "docker-close-all": "npm run docker-stop && npm run docker-clean",
-    "sync-from-uat": "npm run sync-from-uat --workspace=backend",
     "sync-uat-to-dev": "npm run sync-uat-to-dev --workspace=backend",
-    "sync-from-dev": "npm run sync-from-dev --workspace=backend",
+    "sync-local-to-dev": "npm run sync-local-to-dev --workspace=backend",
+    "sync-dev-to-local": "npm run sync-dev-to-local --workspace=backend",
     "sync-dev-to-uat": "npm run sync-dev-to-uat --workspace=backend"
   },
   "devDependencies": {
