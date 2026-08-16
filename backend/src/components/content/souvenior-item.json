@@ -20,7 +20,8 @@
     "icon": {
       "type": "component",
       "component": "shared.icon-enum",
-      "repeatable": false
+      "repeatable": false,
+      "required": true
     },
     "name": {
       "type": "string",

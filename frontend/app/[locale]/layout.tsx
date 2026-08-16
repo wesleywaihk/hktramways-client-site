@@ -8,6 +8,7 @@ import MetaUpdater from "@/components/MetaUpdater";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { generateGlobalMetadata, getGlobalData } from "@/lib/pageMetadata";
+import type { GlobalFooter } from "@/types/api";
 import "@/app/globals.scss";
 
 export function generateStaticParams() {
@@ -37,9 +38,11 @@ export default async function LocaleLayout({
   }
 
   let metaTitle = "";
+  let footer: GlobalFooter | null = null;
   try {
     const globalRes = await getGlobalData(locale);
     metaTitle = globalRes.data?.seo?.metaTitle ?? "";
+    footer = globalRes.data?.footer ?? null;
   } catch {
     metaTitle = "";
   }
@@ -53,7 +56,7 @@ export default async function LocaleLayout({
           <main className="flex min-h-[calc(100dvh-76px)] flex-col lg:min-h-[calc(100dvh-100px)]">
             {children}
           </main>
-          <Footer />
+          <Footer data={footer} />
         </HeaderStyleProvider>
       </MuiThemeProvider>
     </I18nProvider>

@@ -1,8 +1,7 @@
 {
-  "collectionName": "components_page_home_tram_routes",
+  "collectionName": "components_content_get_in_touches",
   "info": {
-    "displayName": "tramRoutes",
-    "icon": "code"
+    "displayName": "getInTouch"
   },
   "options": {},
   "attributes": {
@@ -14,10 +13,8 @@
       "type": "text",
       "required": true
     },
-    "actionButton": {
-      "type": "component",
-      "component": "content.action-button",
-      "repeatable": false,
+    "ButtonLabel": {
+      "type": "string",
       "required": true
     }
   },

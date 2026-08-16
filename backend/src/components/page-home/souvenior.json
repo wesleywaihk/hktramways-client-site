@@ -13,7 +13,8 @@
     "actionButton": {
       "type": "component",
       "component": "content.action-button",
-      "repeatable": false
+      "repeatable": false,
+      "required": true
     },
     "item": {
       "type": "component",

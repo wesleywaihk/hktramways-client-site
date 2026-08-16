@@ -6,7 +6,8 @@ export async function fetchGlobal(
   locale: string,
   options?: { cache?: RequestCache },
 ) {
-  const url = `${API_URL}/api/global?populate=*&locale=${locale}`;
+  const populate = buildPopulate(["favicon", "seo", "footer.getInTouch"]);
+  const url = `${API_URL}/api/global?${populate}&locale=${locale}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, {

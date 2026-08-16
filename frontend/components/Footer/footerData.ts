@@ -1,32 +1,33 @@
-export type SocialLink = {
+export type SocialPlatform = {
   name: string;
   icon: string;
-  href: string;
+  href: string | null;
 };
 
-export const socialLinks: SocialLink[] = [
-  { name: "Facebook", icon: "/footer/fb.svg", href: "https://facebook.com" },
-  { name: "Instagram", icon: "/footer/ig.svg", href: "https://instagram.com" },
-  { name: "Youtube", icon: "/footer/yt.svg", href: "https://youtube.com" },
-  { name: "Weibo", icon: "/footer/wb.svg", href: "https://weibo.com" },
-  {
-    name: "Tripadvisor",
-    icon: "/footer/ta.svg",
-    href: "https://tripadvisor.com",
-  },
-];
-
-export type FareRow = {
-  label: string;
-  value: string;
-};
-
-export const fares: FareRow[] = [
-  { label: "Adult", value: "HK$3.3" },
-  { label: "Child", value: "HK$1.6" },
-  { label: "Senior Citizen", value: "HK$1.5" },
-  { label: "Monthly Ticket", value: "HK$260" },
-];
+/** Icon + display name per footer social link field. Hrefs come from CMS global.footer. */
+export function socialPlatforms(footer: {
+  fbLink: string | null;
+  igLink: string | null;
+  youtubeLink: string | null;
+  redBookLink: string | null;
+  weChatLink: string | null;
+  weiBoLink: string | null;
+  tripAdvLink: string | null;
+}): SocialPlatform[] {
+  return [
+    { name: "Facebook", icon: "/footer/fb.svg", href: footer.fbLink },
+    { name: "Instagram", icon: "/footer/ig.svg", href: footer.igLink },
+    { name: "Youtube", icon: "/footer/yt.svg", href: footer.youtubeLink },
+    { name: "Weibo", icon: "/footer/wb.svg", href: footer.weiBoLink },
+    {
+      name: "Tripadvisor",
+      icon: "/footer/ta.svg",
+      href: footer.tripAdvLink,
+    },
+    { name: "RedBook", icon: "/footer/redbook.svg", href: footer.redBookLink },
+    { name: "WeChat", icon: "/footer/wechat.svg", href: footer.weChatLink },
+  ].filter((social) => social.href);
+}
 
 export const paymentIcons = [
   "/footer/PayOctopus.svg",

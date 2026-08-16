@@ -21,7 +21,8 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "bannerImage": {
       "type": "component",
@@ -31,7 +32,8 @@
         }
       },
       "component": "content.banner-image-unit",
-      "repeatable": true
+      "repeatable": true,
+      "required": true
     },
     "newsBar": {
       "type": "component",

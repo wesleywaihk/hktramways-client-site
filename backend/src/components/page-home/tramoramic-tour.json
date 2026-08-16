@@ -9,31 +9,38 @@
     "tramoramicTourItem1": {
       "type": "component",
       "component": "content.tramoramic-tour-item",
-      "repeatable": false
+      "repeatable": false,
+      "required": true
     },
     "tramoramicTourItem2": {
       "type": "component",
       "component": "content.tramoramic-tour-item",
-      "repeatable": false
+      "repeatable": false,
+      "required": true
     },
     "tramoramicTourItem3": {
       "type": "component",
       "component": "content.tramoramic-tour-item",
-      "repeatable": false
+      "repeatable": false,
+      "required": true
     },
     "title1": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "title2": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "desc": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "action1": {
       "type": "component",
       "component": "content.action-button",
-      "repeatable": false
+      "repeatable": false,
+      "required": true
     },
     "action2": {
       "type": "component",
