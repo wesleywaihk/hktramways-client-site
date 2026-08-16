@@ -8,35 +8,8 @@ const columnHeading =
 
 export default function Footer() {
   return (
-    <footer className="bg-green text-white">
-      <div className="p-5 pt-0! lg:p-10">
-        <div className="bg-green-light flex flex-col items-center gap-6 rounded-[21px] p-10 px-5 text-center lg:min-h-[373px] lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:rounded-[30px] lg:py-0 lg:pr-20 lg:pl-10 lg:text-left">
-          <div className="shrink-0">
-            <Image
-              src="/footer/cat.png"
-              alt=""
-              width={476}
-              height={426}
-              aria-hidden="true"
-              className="h-auto w-[180px] lg:w-[300px]"
-            />
-          </div>
-          <div className="flex flex-col items-center lg:max-w-[480px] lg:items-start">
-            <h2 className="m-0 font-sans text-[32px] leading-[118%] font-semibold tracking-[0.02em] lg:text-[42px] lg:leading-[118%]">
-              Download HK Tramways App
-            </h2>
-            <p className="mt-4 font-sans text-[15px] leading-[163%] tracking-[0.02em] lg:mt-5 lg:text-[16px] lg:leading-[163%]">
-              Get our latest news of us, and track the time of next tram coming
-              in your location easily!
-            </p>
-            <Button href="/app" color="white" className="mt-6 lg:mt-8" useArrow>
-              Learn More
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-8 p-5 py-10 lg:grid lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:items-start lg:gap-10 lg:p-10 lg:py-[60px]">
+    <footer className="bg-green pt-[60px] pb-[32px] text-white lg:pt-[80px] lg:pb-[50px]">
+      <div className="flex flex-col gap-8 px-5 lg:grid lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:items-start lg:gap-10 lg:px-10">
         <div className="flex flex-col lg:order-1">
           <div className="flex items-center gap-4">
             <Image

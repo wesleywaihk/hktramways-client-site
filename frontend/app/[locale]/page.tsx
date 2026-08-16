@@ -9,6 +9,7 @@ import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
 import TramRoute from "./components/TramRoute/TramRoute";
 import TramoramicTour from "./components/TramoramicTour/TramoramicTour";
 import Souvenior from "./components/Souvenior/Souvenior";
+import DownloadAppArea from "./components/DownloadAppArea/DownloadAppArea";
 import PartyTram from "@/components/PartyTram/PartyTram";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 // import SetHeaderStyle from "@/components/Header/HeaderStyle/SetHeaderStyle";
@@ -75,6 +76,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
       <PartyTram data={partyTram} />
       <TramoramicTour data={home.tramoramicTour} />
       <Souvenior data={home.souvenior} />
+      <DownloadAppArea data={home.downloadAppArea} />
     </div>
   );
 }
