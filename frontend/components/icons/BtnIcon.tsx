@@ -3,6 +3,7 @@ import MapIco from "@/components/icons/MapIco";
 import CalendarIco from "@/components/icons/CalendarIco";
 import BusketIco from "@/components/icons/BusketIco";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
+import FaqIco from "@/components/icons/FaqIco";
 import type { IconEnum } from "@/types/api";
 
 const IconComponents: Record<
@@ -13,6 +14,7 @@ const IconComponents: Record<
   calendar: CalendarIco,
   busket: BusketIco,
   upRightArrow: UprightArrowIco,
+  faq: FaqIco,
 };
 
 export interface BtnIconProps extends SVGProps<SVGSVGElement> {

@@ -58,11 +58,13 @@ export interface ContentDownloadAppArea extends Struct.ComponentSchema {
     displayName: 'DownloadAppArea';
   };
   attributes: {
-    actionButton1: Schema.Attribute.Component<'content.action-button', false>;
+    actionButton1: Schema.Attribute.Component<'content.action-button', false> &
+      Schema.Attribute.Required;
     actionButton2: Schema.Attribute.Component<'content.action-button', false>;
-    desc: Schema.Attribute.Text;
-    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    title: Schema.Attribute.String;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -275,7 +277,7 @@ export interface SharedIconEnum extends Struct.ComponentSchema {
   };
   attributes: {
     icon: Schema.Attribute.Enumeration<
-      ['map', 'calendar', 'busket', 'upRightArrow']
+      ['map', 'calendar', 'busket', 'upRightArrow', 'faq']
     >;
   };
 }

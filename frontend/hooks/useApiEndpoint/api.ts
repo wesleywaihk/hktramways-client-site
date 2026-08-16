@@ -39,6 +39,9 @@ export const fetchHome = cache(async function fetchHome(
     "souvenior",
     "souvenior.actionButton",
     "souvenior.item",
+    "downloadAppArea",
+    "downloadAppArea.actionButton1",
+    "downloadAppArea.actionButton2",
   ]);
   const url = previewMode
     ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`

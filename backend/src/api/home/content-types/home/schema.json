@@ -82,6 +82,16 @@
       },
       "component": "page-home.souvenior",
       "repeatable": false
+    },
+    "downloadAppArea": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.download-app-area",
+      "repeatable": false
     }
   }
 }

@@ -49,7 +49,7 @@ export interface ArcCarouselItem {
   callActionText: string | null;
 }
 
-export type IconEnum = "map" | "calendar" | "busket" | "upRightArrow";
+export type IconEnum = "map" | "calendar" | "busket" | "upRightArrow" | "faq";
 
 export interface IconComponent {
   id: number;
@@ -112,6 +112,15 @@ export interface SouveniorData {
   item: SouveniorItem[];
 }
 
+export interface DownloadAppAreaData {
+  id: number;
+  Image: Media | null;
+  title: string;
+  desc: string;
+  actionButton1: ActionButton | null;
+  actionButton2: ActionButton | null;
+}
+
 export interface TramDetailsItem {
   id: number;
   title: string;
@@ -146,6 +155,7 @@ export interface Home {
   tramRoute: TramRouteData | null;
   tramoramicTour: TramoramicTourData | null;
   souvenior: SouveniorData | null;
+  downloadAppArea: DownloadAppAreaData | null;
 }
 
 export interface HomeResponse {
