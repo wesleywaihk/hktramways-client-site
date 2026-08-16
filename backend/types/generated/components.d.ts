@@ -52,6 +52,20 @@ export interface ContentCarouselItem extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentDownloadAppArea extends Struct.ComponentSchema {
+  collectionName: 'components_content_download_app_areas';
+  info: {
+    displayName: 'DownloadAppArea';
+  };
+  attributes: {
+    actionButton1: Schema.Attribute.Component<'content.action-button', false>;
+    actionButton2: Schema.Attribute.Component<'content.action-button', false>;
+    desc: Schema.Attribute.Text;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface ContentHyperlink extends Struct.ComponentSchema {
   collectionName: 'components_content_hyperlinks';
   info: {
@@ -273,6 +287,7 @@ declare module '@strapi/strapi' {
       'content.arc-carousel-item': ContentArcCarouselItem;
       'content.banner-image-unit': ContentBannerImageUnit;
       'content.carousel-item': ContentCarouselItem;
+      'content.download-app-area': ContentDownloadAppArea;
       'content.hyperlink': ContentHyperlink;
       'content.icon-list': ContentIconList;
       'content.news-items': ContentNewsItems;

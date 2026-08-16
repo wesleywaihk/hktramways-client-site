@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_content_download_app_areas",
+  "info": {
+    "displayName": "DownloadAppArea"
+  },
+  "options": {},
+  "attributes": {
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "text"
+    },
+    "actionButton1": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    },
+    "actionButton2": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

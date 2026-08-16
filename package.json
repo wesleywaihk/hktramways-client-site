@@ -14,6 +14,9 @@
     "frontend:local-uat": "npm run local-uat --workspace=frontend",
     "backend:local-uat": "npm run local-uat --workspace=backend",
     "local-uat": "npm-run-all --parallel frontend:local-uat backend:local-uat",
+    "frontend:local-dev": "npm run local-dev --workspace=frontend",
+    "backend:local-dev": "npm run local-dev --workspace=backend",
+    "local-dev": "npm-run-all --parallel frontend:local-dev backend:local-dev",
     "frontend:docker-local-test": "npm run docker-local-test --workspace=frontend",
     "backend:docker-local-test": "npm run docker-local-test --workspace=backend",
     "docker-local-test": "npm-run-all --parallel frontend:docker-local-test backend:docker-local-test",
@@ -21,7 +24,10 @@
     "kill-port": "bash scripts/kill-port.sh",
     "docker-clean": "bash scripts/docker-clean.sh",
     "docker-close-all": "npm run docker-stop && npm run docker-clean",
-    "sync-from-uat": "npm run sync-from-uat --workspace=backend"
+    "sync-from-uat": "npm run sync-from-uat --workspace=backend",
+    "sync-uat-to-dev": "npm run sync-uat-to-dev --workspace=backend",
+    "sync-from-dev": "npm run sync-from-dev --workspace=backend",
+    "sync-dev-to-uat": "npm run sync-dev-to-uat --workspace=backend"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5"
