@@ -14,4 +14,7 @@ npx dotenv -e .env.dev -- npx strapi import -f "${FILE}.tar.gz" --only content,f
 echo "==> Cleaning up..."
 rm -f "${FILE}.tar.gz"
 
+echo "==> Syncing Content Manager layout config + menu/auth logos..."
+node scripts/sync-layout.js .env.uat .env.dev
+
 echo "Done. UAT data has been synced to dev."
