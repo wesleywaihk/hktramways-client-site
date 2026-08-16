@@ -56,7 +56,7 @@ export default function Footer({ data = undefined }: FooterProps) {
 
   return (
     <footer className="bg-green pt-[60px] pb-[32px] text-white xl:pt-[80px] xl:pb-[50px]">
-      <div className="pageBorder grid grid-cols-2 gap-x-5 gap-y-10 xl:flex xl:items-start xl:gap-[65px]">
+      <div className="pageBorder grid grid-cols-2 gap-x-5 gap-y-10 xl:flex xl:items-start xl:gap-[55px]">
         {/* Logo column */}
 
         <Logo className="xl:hidden" />
