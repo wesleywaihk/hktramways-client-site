@@ -557,12 +557,6 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    tramRoute: Schema.Attribute.Component<'page-home.tram-routes', false> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -607,6 +601,68 @@ export interface ApiPartyTramPartyTram extends Struct.SingleTypeSchema {
           localized: true;
         };
       }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPlanYourRidePlanYourRide
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'plan_your_rides';
+  info: {
+    displayName: 'plan your ride';
+    pluralName: 'plan-your-rides';
+    singularName: 'plan-your-ride';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    bannerImage: Schema.Attribute.Component<'content.banner-image-unit', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::plan-your-ride.plan-your-ride'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTramRouteTramRoute extends Struct.SingleTypeSchema {
+  collectionName: 'tram_routes';
+  info: {
+    displayName: 'tramRoute';
+    pluralName: 'tram-routes';
+    singularName: 'tram-route';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tram-route.tram-route'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1127,6 +1183,8 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::home.home': ApiHomeHome;
       'api::party-tram.party-tram': ApiPartyTramPartyTram;
+      'api::plan-your-ride.plan-your-ride': ApiPlanYourRidePlanYourRide;
+      'api::tram-route.tram-route': ApiTramRouteTramRoute;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

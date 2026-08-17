@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plan_your_rides",
+  "info": {
+    "singularName": "plan-your-ride",
+    "pluralName": "plan-your-rides",
+    "displayName": "plan your ride"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "type": "text",
+      "required": true
+    },
+    "actionButton": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    },
+    "bannerImage": {
+      "type": "component",
+      "component": "content.banner-image-unit",
+      "repeatable": true
+    }
+  }
+}

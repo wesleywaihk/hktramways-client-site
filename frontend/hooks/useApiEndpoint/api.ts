@@ -29,8 +29,6 @@ export const fetchHome = cache(async function fetchHome(
     "arcCarousel",
     "arcCarousel.item.carouselItem",
     "arcCarousel.actionButton",
-    "tramRoute",
-    "tramRoute.actionButton",
     "tramoramicTour",
     "tramoramicTour.tramoramicTourItem1",
     "tramoramicTour.tramoramicTourItem2",
@@ -54,6 +52,39 @@ export const fetchHome = cache(async function fetchHome(
   const json = await res.json();
   // The single-document (preview) endpoint returns `data` as an object, not an array.
   return previewMode ? { data: json.data ? [json.data] : [] } : json;
+});
+
+export const fetchTramRoute = cache(async function fetchTramRoute(
+  locale: string,
+  options?: { cache?: RequestCache },
+) {
+  const populate = buildPopulate(["actionButton"]);
+  const url = `${API_URL}/api/tram-route?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, {
+    cache: options?.cache ?? "no-store",
+  });
+  if (!res.ok) throw new Error(`Failed to fetch tram route: ${res.status}`);
+
+  return res.json();
+});
+
+export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
+  locale: string,
+  options?: { cache?: RequestCache },
+) {
+  const populate = buildPopulate(["actionButton", "bannerImage"]);
+  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, {
+    cache: options?.cache ?? "no-store",
+  });
+  if (!res.ok)
+    throw new Error(`Failed to fetch plan your ride: ${res.status}`);
+
+  return res.json();
 });
 
 export const fetchPartyTram = cache(async function fetchPartyTram(

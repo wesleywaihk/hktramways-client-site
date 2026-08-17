@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "tram_routes",
+  "info": {
+    "singularName": "tram-route",
+    "pluralName": "tram-routes",
+    "displayName": "tramRoute"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "type": "text",
+      "required": true
+    },
+    "actionButton": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    }
+  }
+}

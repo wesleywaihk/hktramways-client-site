@@ -1,11 +1,20 @@
-export default function Loading() {
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+
+interface LoadingProps {
+  fullPage?: boolean;
+}
+
+export default function Loading({ fullPage = false }: LoadingProps) {
   return (
-    <section className="flex h-[calc(100dvh-52px)] w-full items-center justify-center bg-white lg:h-[calc(100dvh-160px)]">
-      <div
-        className="border-green/20 border-t-green h-12 w-12 animate-spin rounded-full border-4"
-        role="status"
-        aria-label="Loading"
-      />
-    </section>
+    <Box
+      className={`bg-green flex w-full items-center justify-center ${
+        fullPage ? "h-dvh" : "h-[calc(100dvh-76px)] lg:h-[calc(100dvh-100px)]"
+      }`}
+      role="status"
+      aria-label="Loading"
+    >
+      <CircularProgress size={70} className="text-white/70!" />
+    </Box>
   );
 }

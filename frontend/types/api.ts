@@ -152,7 +152,6 @@ export interface Home {
   bannerImage: ResponsiveImage[] | null;
   newsBar: HomeNewsBarItem[];
   arcCarousel: ArcCarouselData | null;
-  tramRoute: TramRouteData | null;
   tramoramicTour: TramoramicTourData | null;
   souvenior: SouveniorData | null;
   downloadAppArea: DownloadAppAreaData | null;
@@ -160,6 +159,10 @@ export interface Home {
 
 export interface HomeResponse {
   data: Home[];
+}
+
+export interface TramRouteResponse {
+  data: TramRouteData | null;
 }
 
 export interface GlobalFaviconFormat {
