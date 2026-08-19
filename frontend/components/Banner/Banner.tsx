@@ -13,6 +13,7 @@ export interface BannerProps {
   bannerImage?: ResponsiveImage[] | null;
   className?: string;
   isFullScreen?: boolean;
+  useBorder?: boolean;
 }
 
 const SLIDE_INTERVAL_MS = 10000;
@@ -30,6 +31,7 @@ export default function Banner({
   bannerImage,
   className = "",
   isFullScreen = false,
+  useBorder = false,
 }: BannerProps) {
   const banners = bannerImage?.filter(isValidBanner) ?? [];
   const [activeIndex, setActiveIndex] = useState(0);
@@ -77,6 +79,7 @@ export default function Banner({
             isActive={index === activeIndex}
             transY={transY}
             style={cardStyle}
+            useBorder={useBorder}
           />
         ) : (
           <ImageCard
@@ -86,6 +89,7 @@ export default function Banner({
             className={cardClassName}
             transY={transY}
             style={cardStyle}
+            useBorder={useBorder}
           />
         );
       })}

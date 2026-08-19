@@ -7,6 +7,7 @@ export interface ImageCardProps {
   className?: string;
   transY?: number;
   style?: React.CSSProperties;
+  useBorder?: boolean;
 }
 
 export default function ImageCard({
@@ -15,6 +16,7 @@ export default function ImageCard({
   className = "",
   transY = 0,
   style = {},
+  useBorder = true,
 }: ImageCardProps) {
   const imageD = bannerImage?.imageD;
   const imageM = bannerImage?.imageM;
@@ -32,7 +34,11 @@ export default function ImageCard({
 
   return (
     <div
-      className={`absolute top-0 right-5 bottom-5 left-5 overflow-hidden rounded-[21px] lg:right-10 lg:bottom-10 lg:left-10 lg:rounded-[30px] ${className}`}
+      className={`absolute top-0 overflow-hidden ${
+        useBorder
+          ? "right-5 bottom-5 left-5 rounded-[21px] lg:right-10 lg:bottom-10 lg:left-10 lg:rounded-[30px]"
+          : "right-0 bottom-0 left-0"
+      } ${className}`}
       role="img"
       aria-label={alt}
       style={style}

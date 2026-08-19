@@ -12,6 +12,7 @@ export interface VideoCardProps {
   isActive?: boolean;
   transY?: number;
   style?: React.CSSProperties;
+  useBorder?: boolean;
 }
 
 export default function VideoCard({
@@ -22,6 +23,7 @@ export default function VideoCard({
   isActive = false,
   transY = 0,
   style = {},
+  useBorder = true,
 }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [shouldRender, setShouldRender] = useState(isActive);
@@ -51,7 +53,11 @@ export default function VideoCard({
 
   return (
     <div
-      className={`absolute inset-0 left-5 w-[calc(100%-40px)] rounded-[21px] lg:left-10 lg:w-[calc(100%-80px)] lg:rounded-[30px] ${
+      className={`absolute inset-0 ${
+        useBorder
+          ? "left-5 w-[calc(100%-40px)] rounded-[21px] lg:left-10 lg:w-[calc(100%-80px)] lg:rounded-[30px]"
+          : "w-full"
+      } ${
         isFullScreen
           ? "h-[calc(100dvh-96px)] lg:h-[calc(100dvh-140px)]"
           : "h-[calc(100dvh-148px)] lg:h-[calc(100dvh-200px)]"

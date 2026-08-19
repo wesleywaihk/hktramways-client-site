@@ -7,7 +7,7 @@ import {
 } from "@/hooks/useApiEndpoint/api";
 import { generatePageMetadata, getPreviewDocumentId } from "@/lib/pageMetadata";
 import type { Home, PartyTramData, TramRouteData } from "@/types/api";
-import Banner from "./components/Banner/Banner";
+import Banner from "@/components/Banner/Banner";
 import NewsBar from "./components/NewsBar/NewsBar";
 import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
 import TramRoute from "./components/TramRoute/TramRoute";
