@@ -7,7 +7,7 @@ export interface ContentActionButton extends Struct.ComponentSchema {
     icon: 'code';
   };
   attributes: {
-    label: Schema.Attribute.String;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
     link: Schema.Attribute.Component<'content.hyperlink', false>;
     startIcon: Schema.Attribute.Component<'shared.icon-enum', false>;
     useArrow: Schema.Attribute.Boolean;
@@ -49,6 +49,61 @@ export interface ContentCarouselItem extends Struct.ComponentSchema {
     desc: Schema.Attribute.Text;
     hyperlink: Schema.Attribute.Component<'content.hyperlink', false>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+  };
+}
+
+export interface ContentDownloadAppArea extends Struct.ComponentSchema {
+  collectionName: 'components_content_download_app_areas';
+  info: {
+    displayName: 'DownloadAppArea';
+  };
+  attributes: {
+    actionButton1: Schema.Attribute.Component<'content.action-button', false> &
+      Schema.Attribute.Required;
+    actionButton2: Schema.Attribute.Component<'content.action-button', false>;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ContentFooter extends Struct.ComponentSchema {
+  collectionName: 'components_content_footers';
+  info: {
+    displayName: 'footer';
+  };
+  attributes: {
+    adultPrice: Schema.Attribute.Decimal;
+    appStoreLink: Schema.Attribute.String;
+    childPrice: Schema.Attribute.Decimal;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    faresPaymentUrl: Schema.Attribute.String & Schema.Attribute.Required;
+    fbLink: Schema.Attribute.String;
+    getInTouch: Schema.Attribute.Component<'content.get-in-touch', false> &
+      Schema.Attribute.Required;
+    googlePlayLink: Schema.Attribute.String;
+    igLink: Schema.Attribute.String;
+    monthlyTicket: Schema.Attribute.Decimal;
+    redBookLink: Schema.Attribute.String;
+    seniorPrice: Schema.Attribute.Decimal;
+    tncLink: Schema.Attribute.String & Schema.Attribute.Required;
+    tripAdvLink: Schema.Attribute.String;
+    weChatLink: Schema.Attribute.String;
+    weiBoLink: Schema.Attribute.String;
+    youtubeLink: Schema.Attribute.String;
+  };
+}
+
+export interface ContentGetInTouch extends Struct.ComponentSchema {
+  collectionName: 'components_content_get_in_touches';
+  info: {
+    displayName: 'getInTouch';
+  };
+  attributes: {
+    ButtonLabel: Schema.Attribute.String & Schema.Attribute.Required;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -113,6 +168,109 @@ export interface ContentPartyTramItem extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentScheduleBasicUnit extends Struct.ComponentSchema {
+  collectionName: 'components_content_schedule_basic_units';
+  info: {
+    displayName: 'scheduleBasicUnit';
+  };
+  attributes: {
+    monToFri: Schema.Attribute.Time & Schema.Attribute.Required;
+    sat: Schema.Attribute.Time & Schema.Attribute.Required;
+    sun: Schema.Attribute.Time & Schema.Attribute.Required;
+  };
+}
+
+export interface ContentScheduleDay extends Struct.ComponentSchema {
+  collectionName: 'components_content_schedule_days';
+  info: {
+    displayName: 'ScheduleDay';
+  };
+  attributes: {
+    first: Schema.Attribute.Component<'content.schedule-basic-unit', false> &
+      Schema.Attribute.Required;
+    last: Schema.Attribute.Component<'content.schedule-basic-unit', false> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface ContentScheduleEastBound extends Struct.ComponentSchema {
+  collectionName: 'components_content_schedule_east_bounds';
+  info: {
+    displayName: 'scheduleEastBound';
+  };
+  attributes: {
+    happyValley_shauKeiWan: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    kennedyTown_happyValley: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    kennedyTown_shauKeiWan: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shekTongTsui_causewayBay: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shekTongTsui_northPoint: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    westernMarket_shauKeiWan: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface ContentScheduleWestbound extends Struct.ComponentSchema {
+  collectionName: 'components_content_schedule_westbounds';
+  info: {
+    displayName: 'ScheduleWestbound';
+  };
+  attributes: {
+    causewayBay_shekTongTsui: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    happyValley_kennedyTown: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    northPoint_shekTongTsui: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shauKeiWan_happyValley: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shauKeiWan_kennedyTown: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shauKeiWan_westernMarket: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface ContentSouveniorItem extends Struct.ComponentSchema {
   collectionName: 'components_content_souvenior_items';
   info: {
@@ -120,7 +278,8 @@ export interface ContentSouveniorItem extends Struct.ComponentSchema {
     icon: 'gift';
   };
   attributes: {
-    icon: Schema.Attribute.Component<'shared.icon-enum', false>;
+    icon: Schema.Attribute.Component<'shared.icon-enum', false> &
+      Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;
     link: Schema.Attribute.Component<'content.hyperlink', false>;
@@ -171,9 +330,10 @@ export interface PageHomeArcCarousel extends Struct.ComponentSchema {
     icon: 'landscape';
   };
   attributes: {
-    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    actionButton: Schema.Attribute.Component<'content.action-button', false> &
+      Schema.Attribute.Required;
     item: Schema.Attribute.Component<'content.arc-carousel-item', true>;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -184,7 +344,8 @@ export interface PageHomeSouvenior extends Struct.ComponentSchema {
     icon: 'gift';
   };
   attributes: {
-    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    actionButton: Schema.Attribute.Component<'content.action-button', false> &
+      Schema.Attribute.Required;
     item: Schema.Attribute.Component<'content.souvenior-item', true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -197,9 +358,10 @@ export interface PageHomeTramRoutes extends Struct.ComponentSchema {
     icon: 'code';
   };
   attributes: {
-    actionButton: Schema.Attribute.Component<'content.action-button', false>;
-    desc: Schema.Attribute.Text;
-    title: Schema.Attribute.String;
+    actionButton: Schema.Attribute.Component<'content.action-button', false> &
+      Schema.Attribute.Required;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -210,23 +372,46 @@ export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
     icon: 'code';
   };
   attributes: {
-    action1: Schema.Attribute.Component<'content.action-button', false>;
+    action1: Schema.Attribute.Component<'content.action-button', false> &
+      Schema.Attribute.Required;
     action2: Schema.Attribute.Component<'content.action-button', false>;
-    desc: Schema.Attribute.Text;
-    title1: Schema.Attribute.String;
-    title2: Schema.Attribute.String;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    title1: Schema.Attribute.String & Schema.Attribute.Required;
+    title2: Schema.Attribute.String & Schema.Attribute.Required;
     tramoramicTourItem1: Schema.Attribute.Component<
       'content.tramoramic-tour-item',
       false
-    >;
+    > &
+      Schema.Attribute.Required;
     tramoramicTourItem2: Schema.Attribute.Component<
       'content.tramoramic-tour-item',
       false
-    >;
+    > &
+      Schema.Attribute.Required;
     tramoramicTourItem3: Schema.Attribute.Component<
       'content.tramoramic-tour-item',
       false
-    >;
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface PagePlayYourRideSchedule extends Struct.ComponentSchema {
+  collectionName: 'components_page_play_your_ride_schedules';
+  info: {
+    displayName: 'Schedule';
+  };
+  attributes: {
+    ScheduleWestBound: Schema.Attribute.Component<
+      'content.schedule-westbound',
+      false
+    > &
+      Schema.Attribute.Required;
+    seheduleEastBound: Schema.Attribute.Component<
+      'content.schedule-east-bound',
+      false
+    > &
+      Schema.Attribute.Required;
   };
 }
 
@@ -261,7 +446,7 @@ export interface SharedIconEnum extends Struct.ComponentSchema {
   };
   attributes: {
     icon: Schema.Attribute.Enumeration<
-      ['map', 'calendar', 'busket', 'upRightArrow']
+      ['map', 'calendar', 'busket', 'upRightArrow', 'faq']
     >;
   };
 }
@@ -273,10 +458,17 @@ declare module '@strapi/strapi' {
       'content.arc-carousel-item': ContentArcCarouselItem;
       'content.banner-image-unit': ContentBannerImageUnit;
       'content.carousel-item': ContentCarouselItem;
+      'content.download-app-area': ContentDownloadAppArea;
+      'content.footer': ContentFooter;
+      'content.get-in-touch': ContentGetInTouch;
       'content.hyperlink': ContentHyperlink;
       'content.icon-list': ContentIconList;
       'content.news-items': ContentNewsItems;
       'content.party-tram-item': ContentPartyTramItem;
+      'content.schedule-basic-unit': ContentScheduleBasicUnit;
+      'content.schedule-day': ContentScheduleDay;
+      'content.schedule-east-bound': ContentScheduleEastBound;
+      'content.schedule-westbound': ContentScheduleWestbound;
       'content.souvenior-item': ContentSouveniorItem;
       'content.tram-details-item': ContentTramDetailsItem;
       'content.tramoramic-tour-item': ContentTramoramicTourItem;
@@ -285,6 +477,7 @@ declare module '@strapi/strapi' {
       'page-home.souvenior': PageHomeSouvenior;
       'page-home.tram-routes': PageHomeTramRoutes;
       'page-home.tramoramic-tour': PageHomeTramoramicTour;
+      'page-play-your-ride.schedule': PagePlayYourRideSchedule;
       'seo.seo': SeoSeo;
       'shared.icon-enum': SharedIconEnum;
     }

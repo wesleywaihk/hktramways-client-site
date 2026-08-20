@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plan_your_rides",
+  "info": {
+    "singularName": "plan-your-ride",
+    "pluralName": "plan-your-rides",
+    "displayName": "plan your ride"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "desc": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "actionButton": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.action-button",
+      "repeatable": false
+    },
+    "bannerImage": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.banner-image-unit",
+      "repeatable": true
+    },
+    "schedule": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "page-play-your-ride.schedule",
+      "repeatable": false
+    },
+    "interactiveRouteMap": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.download-app-area",
+      "repeatable": false
+    },
+    "downloadAppArea": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.download-app-area",
+      "repeatable": false
+    }
+  }
+}

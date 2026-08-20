@@ -7,15 +7,18 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "desc": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "actionButton": {
       "type": "component",
       "component": "content.action-button",
-      "repeatable": false
+      "repeatable": false,
+      "required": true
     }
   },
   "config": {}

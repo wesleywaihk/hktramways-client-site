@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 import { IMG_URL } from "@/consts";
 import { Media, ResponsiveImage } from "@/types/api";
@@ -34,6 +37,7 @@ export default function ResponsiveImg({
   useMultiImg = true,
   isHero = false,
 }: ResponsiveImgProps) {
+  const [loaded, setLoaded] = useState(false);
   const imageD = asImage(bannerImage?.imageD);
   const imageM = asImage(bannerImage?.imageM);
   const alt = bannerImage?.altText ?? "";
@@ -69,13 +73,17 @@ export default function ResponsiveImg({
     <div
       className={`relative flex aspect-auto h-full w-full items-center justify-center overflow-hidden ${className}`}
     >
-      <div
-        className={`absolute inset-0 z-0 ${thumbnail ? "bg-cover bg-center blur-xl" : "bg-earth-light animate-pulse"}`}
-        style={
-          thumbnail ? { backgroundImage: `url(${url}${thumbnail})` } : undefined
-        }
-        aria-hidden="true"
-      />
+      {!loaded && (
+        <div
+          className={`absolute inset-0 z-0 ${thumbnail ? "bg-cover bg-center blur-xl" : "bg-earth-light animate-pulse"}`}
+          style={
+            thumbnail
+              ? { backgroundImage: `url(${url}${thumbnail})` }
+              : undefined
+          }
+          aria-hidden="true"
+        />
+      )}
 
       <picture className="absolute inset-0 z-10 -m-[1px] h-[calc(100%+2px)] w-[calc(100%+2px)]">
         {imageD && (
@@ -87,6 +95,10 @@ export default function ResponsiveImg({
           sizes={sizes}
           alt={alt}
           loading={isHero ? "eager" : "lazy"}
+          onLoad={() => setLoaded(true)}
+          ref={(node) => {
+            if (node?.complete) setLoaded(true);
+          }}
           className="absolute inset-0 h-full w-full object-cover"
         />
       </picture>

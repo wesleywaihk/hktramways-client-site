@@ -1,69 +1,166 @@
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button/Button";
-import { socialLinks, fares, paymentIcons } from "./footerData";
+import ChevronIcon from "@/components/Header/ChevronIcon";
+import type { GlobalFooter } from "@/types/api";
+import { socialPlatforms } from "./footerData";
 
 const columnHeading =
-  "font-sans text-[18px] leading-[152%] font-semibold tracking-[0.02em] m-0 mb-4 lg:text-[21px] lg:leading-[152%] lg:mb-5";
+  "font-sans text-[18px] leading-[152%] font-semibold tracking-[0.02em] m-0 mb-4 xl:text-[21px] xl:leading-[152%] xl:mb-5";
 
-export default function Footer() {
+function formatPrice(price: number) {
+  return Number.isInteger(price) ? String(price) : price.toFixed(2);
+}
+
+export interface FooterProps {
+  data?: GlobalFooter | null;
+}
+
+const Logo = ({ className = "" }: { className?: string }) => (
+  <div className={`col-span-2 flex flex-col ${className}`}>
+    <div className="grid grid-cols-4 items-center xl:flex xl:justify-start xl:gap-4">
+      <Image
+        src="/logo-white.svg"
+        alt="HK Tramways"
+        width={200}
+        height={60}
+        className="col-span-2 h-auto w-full max-w-[260px] xl:h-[60px] xl:w-[200px]"
+      />
+      <Image
+        src="/footer/caringCompany.png"
+        alt="15+ Years Caring Company"
+        width={124}
+        height={55}
+        className="col-span-1 col-start-4 h-auto w-full max-w-[200px] justify-self-end xl:w-[124px]"
+      />
+    </div>
+  </div>
+);
+
+export default function Footer({ data = undefined }: FooterProps) {
+  if (!data) return null;
+
+  const socialLinks = socialPlatforms(data);
+  const fares = [
+    data.adultPrice != null && { label: "Adult", value: data.adultPrice },
+    data.childPrice != null && { label: "Child", value: data.childPrice },
+    data.seniorPrice != null && {
+      label: "Senior Citizen",
+      value: data.seniorPrice,
+    },
+    data.monthlyTicket != null && {
+      label: "Monthly Ticket",
+      value: data.monthlyTicket,
+    },
+  ].filter((fare): fare is { label: string; value: number } => !!fare);
+
   return (
-    <footer className="bg-green text-white">
-      <div className="p-5 pt-0! lg:p-10">
-        <div className="bg-green-light flex flex-col items-center gap-6 rounded-[21px] p-10 px-5 text-center lg:min-h-[373px] lg:flex-row lg:items-center lg:justify-between lg:gap-10 lg:rounded-[30px] lg:py-0 lg:pr-20 lg:pl-10 lg:text-left">
-          <div className="shrink-0">
-            <Image
-              src="/footer/cat.png"
-              alt=""
-              width={476}
-              height={426}
-              aria-hidden="true"
-              className="h-auto w-[180px] lg:w-[300px]"
-            />
-          </div>
-          <div className="flex flex-col items-center lg:max-w-[480px] lg:items-start">
-            <h2 className="m-0 font-sans text-[32px] leading-[118%] font-semibold tracking-[0.02em] lg:text-[42px] lg:leading-[118%]">
-              Download HK Tramways App
-            </h2>
-            <p className="mt-4 font-sans text-[15px] leading-[163%] tracking-[0.02em] lg:mt-5 lg:text-[16px] lg:leading-[163%]">
-              Get our latest news of us, and track the time of next tram coming
-              in your location easily!
-            </p>
-            <Button href="/app" color="white" className="mt-6 lg:mt-8" useArrow>
-              Learn More
-            </Button>
+    <footer className="bg-green pt-[60px] pb-[32px] text-white xl:pt-[80px] xl:pb-[50px]">
+      <div className="pageBorder grid grid-cols-2 gap-x-5 gap-y-10 xl:flex xl:items-start xl:gap-[55px]">
+        {/* Logo column */}
+
+        <Logo className="xl:hidden" />
+
+        {/* Fares & Payment Methods column */}
+        <div className="col-span-2 flex flex-col xl:order-4 xl:flex-none">
+          <h3 className={columnHeading}>
+            <Link
+              href={data.faresPaymentUrl ?? "#"}
+              className="flex w-full items-center justify-between gap-1.5 hover:opacity-80"
+            >
+              Fares &amp; Payment Methods
+              <ChevronIcon desktop className="h-4 w-4 shrink-0" />
+            </Link>
+          </h3>
+          <ul className="m-0 flex list-none flex-col divide-y divide-white/15 p-0">
+            {fares.map((fare) => (
+              <li
+                key={fare.label}
+                className="flex items-center justify-between py-3.5 font-sans text-[15px] leading-[162.5%] tracking-[0.02em] first:pt-0 xl:py-2.5 xl:text-[16px] xl:leading-[163%]"
+              >
+                <span>{fare.label}</span>
+                <span>HK${formatPrice(fare.value)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Download App column */}
+        <div className="xl:order-2 xl:flex-none">
+          <h3 className={columnHeading}>Download App</h3>
+          <div className="flex flex-col gap-[15px]">
+            {data.googlePlayLink && (
+              <a
+                href={data.googlePlayLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/footer/googlePlay.png"
+                  alt="Get it on Google Play"
+                  width={140}
+                  height={46}
+                  className="h-auto w-full max-w-[180px]"
+                />
+              </a>
+            )}
+            {data.appStoreLink && (
+              <a
+                href={data.appStoreLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src="/footer/appStore.png"
+                  alt="Download on the App Store"
+                  width={140}
+                  height={46}
+                  className="h-auto w-full max-w-[180px]"
+                />
+              </a>
+            )}
           </div>
         </div>
-      </div>
 
-      <div className="flex flex-col gap-8 p-5 py-10 lg:grid lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:items-start lg:gap-10 lg:p-10 lg:py-[60px]">
-        <div className="flex flex-col lg:order-1">
-          <div className="flex items-center gap-4">
-            <Image
-              src="/logo-white.svg"
-              alt="HK Tramways"
-              width={200}
-              height={60}
-              className="h-[50px] w-[167px] lg:h-[60px] lg:w-[200px]"
-            />
-            <Image
-              src="/footer/caringCompany.png"
-              alt="15+ Years Caring Company"
-              width={94}
-              height={50}
-              className="h-10 w-auto lg:h-[50px]"
-            />
+        {/* Get in Touch column */}
+        {data.getInTouch && (
+          <div className="flex flex-col items-start xl:order-3 xl:max-w-[220px] xl:flex-none">
+            <h3 className={columnHeading}>{data.getInTouch.title}</h3>
+            <p className="m-0 mb-6 font-sans text-[15px] leading-[162.5%] tracking-[0.02em] whitespace-pre-line xl:mb-7 xl:text-[16px] xl:leading-[163%]">
+              {data.getInTouch.desc}
+            </p>
+            <Button
+              href="/contact-us"
+              color="white"
+              useArrow
+              className="xl:px-7!"
+            >
+              {data.getInTouch.ButtonLabel}
+            </Button>
           </div>
+        )}
 
-          <div className="hidden lg:mt-6 lg:flex lg:items-center lg:gap-2.5">
+        {/* Copyright, disclaimer, social icons — reordered per breakpoint via `order`, repositioned under the logo column at desktop via col/row-start */}
+        <div className="col-span-2 flex flex-col items-center xl:order-1 xl:grow xl:items-start">
+          <Logo className="hidden xl:flex" />
+          <p className="order-1 m-0 text-center font-sans text-[13px] leading-[145%] tracking-[0.02em] whitespace-pre-line opacity-[0.85] xl:order-2 xl:mt-6 xl:text-left">
+            {data.desc}
+          </p>
+          <Link
+            href={data.tncLink ?? "#"}
+            className="order-2 mt-3 font-sans text-[13px] leading-[145%] tracking-[0.02em] underline hover:opacity-80 xl:order-3 xl:mt-2"
+          >
+            Disclaimer &amp; Privacy Policy
+          </Link>
+          <div className="order-3 mt-11 flex items-center gap-2.5 xl:order-1 xl:mt-6">
             {socialLinks.map((social) => (
               <a
                 key={social.name}
-                href={social.href}
+                href={social.href ?? "#"}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="flex h-8 w-[26px] items-center justify-center rounded-[21px] p-0.5 hover:opacity-80"
+                className="flex h-8 w-8 items-center justify-center rounded-full hover:opacity-80 xl:h-8 xl:w-[26px] xl:rounded-[21px] xl:p-0.5"
               >
                 <Image
                   src={social.icon}
@@ -75,122 +172,7 @@ export default function Footer() {
               </a>
             ))}
           </div>
-
-          <p className="mt-6 hidden font-sans text-[13px] leading-[145%] tracking-[0.02em] opacity-[0.85] lg:block">
-            A member of RATP Dev Group
-            <br />© Hong Kong Tramways Limited. All rights reserved.
-          </p>
-          <Link
-            href="/disclaimer"
-            className="mt-2 hidden font-sans text-[13px] leading-[145%] tracking-[0.02em] underline hover:opacity-80 lg:inline-block"
-          >
-            Disclaimer &amp; Privacy Policy
-          </Link>
         </div>
-
-        <div className="flex flex-col lg:order-4">
-          <h3 className={columnHeading}>Fares &amp; Payment Methods</h3>
-          <div className="rounded-xl border-2 border-white p-5">
-            <div className="mb-4 flex items-center gap-5">
-              {paymentIcons.map((icon) => (
-                <Image
-                  key={icon}
-                  src={icon}
-                  alt=""
-                  width={20}
-                  height={20}
-                  className="h-5 w-5"
-                  aria-hidden="true"
-                />
-              ))}
-            </div>
-            <ul className="m-0 flex list-none flex-col gap-3 p-0">
-              {fares.map((fare) => (
-                <li
-                  key={fare.label}
-                  className="flex items-center justify-between font-sans text-[15px] leading-[163%] tracking-[0.02em] lg:text-[16px] lg:leading-[163%]"
-                >
-                  <span>{fare.label}</span>
-                  <span>{fare.value}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="flex justify-between gap-5 lg:order-2 lg:block">
-          <div className="flex-1">
-            <h3 className={columnHeading}>Download App</h3>
-            <div className="flex flex-col gap-[15px]">
-              <a
-                href="https://play.google.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/footer/googlePlay.png"
-                  alt="Get it on Google Play"
-                  width={140}
-                  height={46}
-                  className="h-auto w-[140px]"
-                />
-              </a>
-              <a
-                href="https://apps.apple.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/footer/appStore.png"
-                  alt="Download on the App Store"
-                  width={140}
-                  height={46}
-                  className="h-auto w-[140px]"
-                />
-              </a>
-            </div>
-          </div>
-
-          <div className="flex-1 lg:hidden">
-            <h3 className={columnHeading}>Follow Us</h3>
-            <ul className="m-0 flex list-none flex-col gap-3 p-0">
-              {socialLinks.map((social) => (
-                <li key={social.name}>
-                  <a
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-sans text-[15px] leading-[163%] tracking-[0.02em] hover:opacity-80"
-                  >
-                    {social.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <div className="hidden flex-col items-start lg:order-3 lg:flex">
-          <h3 className={columnHeading}>Get in Touch</h3>
-          <p className="m-0 mb-6 font-sans text-[15px] leading-[163%] tracking-[0.02em] lg:mb-7 lg:text-[16px] lg:leading-[163%]">
-            Find us for enquiries, lost items, or suggestions
-          </p>
-          <Button href="/contact-us" useArrow>
-            Contact Us
-          </Button>
-        </div>
-
-        <div className="h-0.5 w-full bg-white/15 lg:hidden" />
-        <p className="m-0 block text-center font-sans text-[13px] leading-[145%] tracking-[0.02em] opacity-[0.85] lg:hidden">
-          A member of RATP Dev Group
-          <br />© Hong Kong Tramways Limited. All rights reserved.
-        </p>
-        <Link
-          href="/disclaimer"
-          className="block text-center font-sans text-[13px] leading-[145%] tracking-[0.02em] underline hover:opacity-80 lg:hidden"
-        >
-          Disclaimer &amp; Privacy Policy
-        </Link>
       </div>
     </footer>
   );

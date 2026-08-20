@@ -1,0 +1,80 @@
+{
+  "collectionName": "components_content_footers",
+  "info": {
+    "displayName": "footer"
+  },
+  "options": {},
+  "attributes": {
+    "faresPaymentUrl": {
+      "type": "string",
+      "required": true
+    },
+    "adultPrice": {
+      "type": "decimal",
+      "required": false
+    },
+    "childPrice": {
+      "type": "decimal",
+      "required": false
+    },
+    "seniorPrice": {
+      "type": "decimal",
+      "required": false
+    },
+    "monthlyTicket": {
+      "type": "decimal",
+      "required": false
+    },
+    "googlePlayLink": {
+      "type": "string",
+      "required": false
+    },
+    "appStoreLink": {
+      "type": "string",
+      "required": false
+    },
+    "getInTouch": {
+      "type": "component",
+      "component": "content.get-in-touch",
+      "repeatable": false,
+      "required": true
+    },
+    "desc": {
+      "type": "text",
+      "required": true
+    },
+    "fbLink": {
+      "type": "string",
+      "required": false
+    },
+    "igLink": {
+      "type": "string",
+      "required": false
+    },
+    "youtubeLink": {
+      "type": "string",
+      "required": false
+    },
+    "redBookLink": {
+      "type": "string",
+      "required": false
+    },
+    "weChatLink": {
+      "type": "string",
+      "required": false
+    },
+    "weiBoLink": {
+      "type": "string",
+      "required": false
+    },
+    "tripAdvLink": {
+      "type": "string",
+      "required": false
+    },
+    "tncLink": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "config": {}
+}

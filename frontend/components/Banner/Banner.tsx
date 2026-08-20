@@ -12,7 +12,7 @@ export interface BannerProps {
   url?: string | null;
   bannerImage?: ResponsiveImage[] | null;
   className?: string;
-  isFullScreen?: boolean;
+  useBorder?: boolean;
 }
 
 const SLIDE_INTERVAL_MS = 10000;
@@ -29,7 +29,7 @@ export default function Banner({
   url = IMG_URL,
   bannerImage,
   className = "",
-  isFullScreen = false,
+  useBorder = false,
 }: BannerProps) {
   const banners = bannerImage?.filter(isValidBanner) ?? [];
   const [activeIndex, setActiveIndex] = useState(0);
@@ -54,13 +54,7 @@ export default function Banner({
   return (
     <section
       ref={sectionRef}
-      // isFullScreen false: news bar is rendered, so header + banner + newsBar = 100dvh
-      // isFullScreen true: no news bar, so header + banner = 100dvh
-      className={`bg-green borderless relative overflow-hidden ${
-        !isFullScreen
-          ? "h-[calc(100dvh-128px)] lg:h-[calc(100dvh-160px)]"
-          : "h-[calc(100dvh-76px)] lg:h-[calc(100dvh-100px)]"
-      } ${className}`}
+      className={`bg-green borderless relative overflow-hidden ${className}`}
     >
       {banners.map((banner, index) => {
         const cardClassName = `transition-opacity duration-1000 ease-in-out ${
@@ -73,10 +67,10 @@ export default function Banner({
             bannerImage={banner}
             url={url}
             className={cardClassName}
-            isFullScreen={isFullScreen}
             isActive={index === activeIndex}
             transY={transY}
             style={cardStyle}
+            useBorder={useBorder}
           />
         ) : (
           <ImageCard
@@ -86,6 +80,7 @@ export default function Banner({
             className={cardClassName}
             transY={transY}
             style={cardStyle}
+            useBorder={useBorder}
           />
         );
       })}

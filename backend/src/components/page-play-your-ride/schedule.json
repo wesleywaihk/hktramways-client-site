@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_page_play_your_ride_schedules",
+  "info": {
+    "displayName": "Schedule"
+  },
+  "options": {},
+  "attributes": {
+    "ScheduleWestBound": {
+      "type": "component",
+      "component": "content.schedule-westbound",
+      "repeatable": false,
+      "required": true
+    },
+    "seheduleEastBound": {
+      "type": "component",
+      "component": "content.schedule-east-bound",
+      "repeatable": false,
+      "required": true
+    }
+  },
+  "config": {}
+}

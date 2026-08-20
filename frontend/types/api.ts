@@ -49,7 +49,7 @@ export interface ArcCarouselItem {
   callActionText: string | null;
 }
 
-export type IconEnum = "map" | "calendar" | "busket" | "upRightArrow";
+export type IconEnum = "map" | "calendar" | "busket" | "upRightArrow" | "faq";
 
 export interface IconComponent {
   id: number;
@@ -112,6 +112,15 @@ export interface SouveniorData {
   item: SouveniorItem[];
 }
 
+export interface DownloadAppAreaData {
+  id: number;
+  Image: Media | null;
+  title: string;
+  desc: string;
+  actionButton1: ActionButton | null;
+  actionButton2: ActionButton | null;
+}
+
 export interface TramDetailsItem {
   id: number;
   title: string;
@@ -143,13 +152,32 @@ export interface Home {
   bannerImage: ResponsiveImage[] | null;
   newsBar: HomeNewsBarItem[];
   arcCarousel: ArcCarouselData | null;
-  tramRoute: TramRouteData | null;
   tramoramicTour: TramoramicTourData | null;
   souvenior: SouveniorData | null;
+  downloadAppArea: DownloadAppAreaData | null;
 }
 
 export interface HomeResponse {
   data: Home[];
+}
+
+export interface TramRouteResponse {
+  data: TramRouteData | null;
+}
+
+export interface PlanYourRideData {
+  id: number;
+  documentId: string;
+  title: string;
+  desc: string;
+  actionButton: ActionButton | null;
+  bannerImage: ResponsiveImage[] | null;
+  downloadAppArea: DownloadAppAreaData | null;
+  interactiveRouteMap: DownloadAppAreaData | null;
+}
+
+export interface PlanYourRideResponse {
+  data: PlanYourRideData[];
 }
 
 export interface GlobalFaviconFormat {
@@ -179,12 +207,41 @@ export interface GlobalSeo {
   structuredData: unknown | null;
 }
 
+export interface GlobalGetInTouch {
+  id: number;
+  title: string;
+  desc: string;
+  ButtonLabel: string;
+}
+
+export interface GlobalFooter {
+  id: number;
+  faresPaymentUrl: string | null;
+  adultPrice: number | null;
+  childPrice: number | null;
+  seniorPrice: number | null;
+  monthlyTicket: number | null;
+  googlePlayLink: string | null;
+  appStoreLink: string | null;
+  getInTouch: GlobalGetInTouch | null;
+  desc: string;
+  fbLink: string | null;
+  igLink: string | null;
+  youtubeLink: string | null;
+  redBookLink: string | null;
+  weChatLink: string | null;
+  weiBoLink: string | null;
+  tripAdvLink: string | null;
+  tncLink: string | null;
+}
+
 export interface GlobalData {
   id: number;
   documentId: string;
   locale: string;
   favicon: GlobalFavicon | null;
   seo: GlobalSeo | null;
+  footer: GlobalFooter | null;
 }
 
 export interface GlobalResponse {

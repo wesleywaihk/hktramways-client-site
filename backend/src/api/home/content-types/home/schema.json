@@ -21,7 +21,8 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "bannerImage": {
       "type": "component",
@@ -31,7 +32,8 @@
         }
       },
       "component": "content.banner-image-unit",
-      "repeatable": true
+      "repeatable": true,
+      "required": true
     },
     "newsBar": {
       "type": "component",
@@ -53,16 +55,6 @@
       "component": "page-home.arc-carousel",
       "repeatable": false
     },
-    "tramRoute": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "page-home.tram-routes",
-      "repeatable": false
-    },
     "tramoramicTour": {
       "type": "component",
       "pluginOptions": {
@@ -81,6 +73,16 @@
         }
       },
       "component": "page-home.souvenior",
+      "repeatable": false
+    },
+    "downloadAppArea": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.download-app-area",
       "repeatable": false
     }
   }
