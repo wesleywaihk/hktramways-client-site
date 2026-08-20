@@ -452,7 +452,7 @@ export interface SharedIconEnum extends Struct.ComponentSchema {
 }
 
 declare module '@strapi/strapi' {
-  export module Public {
+  export namespace Public {
     export interface ComponentSchemas {
       'content.action-button': ContentActionButton;
       'content.arc-carousel-item': ContentArcCarouselItem;

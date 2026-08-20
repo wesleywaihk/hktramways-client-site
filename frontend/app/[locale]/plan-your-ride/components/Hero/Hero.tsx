@@ -47,7 +47,7 @@ export default function Hero({
       </div>
       <Banner
         bannerImage={bannerImage}
-        className="h-[calc(calc(100dvh-76px)*0.43)] lg:h-[calc(calc(100dvh-100px)*0.66)]"
+        className="h-[calc((100dvh-76px)*0.43)] w-[calc(100%+20px)] lg:h-[calc((100dvh-100px)*0.66)] lg:w-[calc(100%+40px)]"
         useBorder={false}
       />
     </section>
