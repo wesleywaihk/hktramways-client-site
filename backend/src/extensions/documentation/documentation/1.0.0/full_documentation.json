@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-20T06:11:34.182Z"
+    "x-generation-date": "2026-08-20T08:10:36.329Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6255,6 +6255,9 @@
                   "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
                 }
               },
+              "schedule": {
+                "$ref": "#/components/schemas/PagePlayYourRideScheduleComponent"
+              },
               "interactiveRouteMap": {
                 "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
               },
@@ -6352,6 +6355,9 @@
               "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
             }
           },
+          "schedule": {
+            "$ref": "#/components/schemas/PagePlayYourRideScheduleComponent"
+          },
           "interactiveRouteMap": {
             "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
           },
@@ -6441,6 +6447,9 @@
                   "items": {
                     "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
                   }
+                },
+                "schedule": {
+                  "$ref": "#/components/schemas/PagePlayYourRideScheduleComponent"
                 },
                 "interactiveRouteMap": {
                   "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
@@ -6533,6 +6542,144 @@
           },
           "meta": {
             "type": "object"
+          }
+        }
+      },
+      "ContentScheduleBasicUnitComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "monToFri": {
+            "type": "string",
+            "format": "time",
+            "example": "12:54.000"
+          },
+          "sat": {
+            "type": "string",
+            "format": "time",
+            "example": "12:54.000"
+          },
+          "sun": {
+            "type": "string",
+            "format": "time",
+            "example": "12:54.000"
+          }
+        }
+      },
+      "ContentScheduleDayComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "first": {
+            "$ref": "#/components/schemas/ContentScheduleBasicUnitComponent"
+          },
+          "last": {
+            "$ref": "#/components/schemas/ContentScheduleBasicUnitComponent"
+          }
+        }
+      },
+      "ContentScheduleWestboundComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "shauKeiWan_westernMarket": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "shauKeiWan_happyValley": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "northPoint_shekTongTsui": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "causewayBay_shekTongTsui": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "happyValley_kennedyTown": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "shauKeiWan_kennedyTown": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          }
+        }
+      },
+      "ContentScheduleEastBoundComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "westernMarket_shauKeiWan": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "happyValley_shauKeiWan": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "shekTongTsui_northPoint": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "shekTongTsui_causewayBay": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "kennedyTown_happyValley": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          },
+          "kennedyTown_shauKeiWan": {
+            "$ref": "#/components/schemas/ContentScheduleDayComponent"
+          }
+        }
+      },
+      "PagePlayYourRideScheduleComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "ScheduleWestBound": {
+            "$ref": "#/components/schemas/ContentScheduleWestboundComponent"
+          },
+          "seheduleEastBound": {
+            "$ref": "#/components/schemas/ContentScheduleEastBoundComponent"
           }
         }
       },

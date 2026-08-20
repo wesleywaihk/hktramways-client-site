@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_content_schedule_days",
+  "info": {
+    "displayName": "ScheduleDay"
+  },
+  "options": {},
+  "attributes": {
+    "first": {
+      "type": "component",
+      "component": "content.schedule-basic-unit",
+      "repeatable": false,
+      "required": true
+    },
+    "last": {
+      "type": "component",
+      "component": "content.schedule-basic-unit",
+      "repeatable": false,
+      "required": true
+    }
+  },
+  "config": {}
+}

@@ -670,6 +670,15 @@ export interface ApiPlanYourRidePlanYourRide
       'api::plan-your-ride.plan-your-ride'
     >;
     publishedAt: Schema.Attribute.DateTime;
+    schedule: Schema.Attribute.Component<
+      'page-play-your-ride.schedule',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{

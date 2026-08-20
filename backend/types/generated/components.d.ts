@@ -168,6 +168,109 @@ export interface ContentPartyTramItem extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentScheduleBasicUnit extends Struct.ComponentSchema {
+  collectionName: 'components_content_schedule_basic_units';
+  info: {
+    displayName: 'scheduleBasicUnit';
+  };
+  attributes: {
+    monToFri: Schema.Attribute.Time & Schema.Attribute.Required;
+    sat: Schema.Attribute.Time & Schema.Attribute.Required;
+    sun: Schema.Attribute.Time & Schema.Attribute.Required;
+  };
+}
+
+export interface ContentScheduleDay extends Struct.ComponentSchema {
+  collectionName: 'components_content_schedule_days';
+  info: {
+    displayName: 'ScheduleDay';
+  };
+  attributes: {
+    first: Schema.Attribute.Component<'content.schedule-basic-unit', false> &
+      Schema.Attribute.Required;
+    last: Schema.Attribute.Component<'content.schedule-basic-unit', false> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface ContentScheduleEastBound extends Struct.ComponentSchema {
+  collectionName: 'components_content_schedule_east_bounds';
+  info: {
+    displayName: 'scheduleEastBound';
+  };
+  attributes: {
+    happyValley_shauKeiWan: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    kennedyTown_happyValley: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    kennedyTown_shauKeiWan: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shekTongTsui_causewayBay: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shekTongTsui_northPoint: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    westernMarket_shauKeiWan: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface ContentScheduleWestbound extends Struct.ComponentSchema {
+  collectionName: 'components_content_schedule_westbounds';
+  info: {
+    displayName: 'ScheduleWestbound';
+  };
+  attributes: {
+    causewayBay_shekTongTsui: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    happyValley_kennedyTown: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    northPoint_shekTongTsui: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shauKeiWan_happyValley: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shauKeiWan_kennedyTown: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+    shauKeiWan_westernMarket: Schema.Attribute.Component<
+      'content.schedule-day',
+      false
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface ContentSouveniorItem extends Struct.ComponentSchema {
   collectionName: 'components_content_souvenior_items';
   info: {
@@ -293,6 +396,25 @@ export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
   };
 }
 
+export interface PagePlayYourRideSchedule extends Struct.ComponentSchema {
+  collectionName: 'components_page_play_your_ride_schedules';
+  info: {
+    displayName: 'Schedule';
+  };
+  attributes: {
+    ScheduleWestBound: Schema.Attribute.Component<
+      'content.schedule-westbound',
+      false
+    > &
+      Schema.Attribute.Required;
+    seheduleEastBound: Schema.Attribute.Component<
+      'content.schedule-east-bound',
+      false
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface SeoSeo extends Struct.ComponentSchema {
   collectionName: 'components_seo_seos';
   info: {
@@ -343,6 +465,10 @@ declare module '@strapi/strapi' {
       'content.icon-list': ContentIconList;
       'content.news-items': ContentNewsItems;
       'content.party-tram-item': ContentPartyTramItem;
+      'content.schedule-basic-unit': ContentScheduleBasicUnit;
+      'content.schedule-day': ContentScheduleDay;
+      'content.schedule-east-bound': ContentScheduleEastBound;
+      'content.schedule-westbound': ContentScheduleWestbound;
       'content.souvenior-item': ContentSouveniorItem;
       'content.tram-details-item': ContentTramDetailsItem;
       'content.tramoramic-tour-item': ContentTramoramicTourItem;
@@ -351,6 +477,7 @@ declare module '@strapi/strapi' {
       'page-home.souvenior': PageHomeSouvenior;
       'page-home.tram-routes': PageHomeTramRoutes;
       'page-home.tramoramic-tour': PageHomeTramoramicTour;
+      'page-play-your-ride.schedule': PagePlayYourRideSchedule;
       'seo.seo': SeoSeo;
       'shared.icon-enum': SharedIconEnum;
     }

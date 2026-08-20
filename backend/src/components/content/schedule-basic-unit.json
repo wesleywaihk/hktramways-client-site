@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_content_schedule_basic_units",
+  "info": {
+    "displayName": "scheduleBasicUnit"
+  },
+  "options": {},
+  "attributes": {
+    "monToFri": {
+      "type": "time",
+      "required": true
+    },
+    "sat": {
+      "type": "time",
+      "required": true
+    },
+    "sun": {
+      "type": "time",
+      "required": true
+    }
+  },
+  "config": {}
+}

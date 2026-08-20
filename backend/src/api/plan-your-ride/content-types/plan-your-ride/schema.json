@@ -53,6 +53,16 @@
       "component": "content.banner-image-unit",
       "repeatable": true
     },
+    "schedule": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "page-play-your-ride.schedule",
+      "repeatable": false
+    },
     "interactiveRouteMap": {
       "type": "component",
       "pluginOptions": {

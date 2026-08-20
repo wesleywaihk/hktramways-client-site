@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_content_schedule_east_bounds",
+  "info": {
+    "displayName": "scheduleEastBound"
+  },
+  "options": {},
+  "attributes": {
+    "westernMarket_shauKeiWan": {
+      "type": "component",
+      "component": "content.schedule-day",
+      "repeatable": false,
+      "required": true
+    },
+    "happyValley_shauKeiWan": {
+      "type": "component",
+      "component": "content.schedule-day",
+      "repeatable": false,
+      "required": true
+    },
+    "shekTongTsui_northPoint": {
+      "type": "component",
+      "component": "content.schedule-day",
+      "repeatable": false,
+      "required": true
+    },
+    "shekTongTsui_causewayBay": {
+      "type": "component",
+      "component": "content.schedule-day",
+      "repeatable": false,
+      "required": true
+    },
+    "kennedyTown_happyValley": {
+      "type": "component",
+      "component": "content.schedule-day",
+      "repeatable": false,
+      "required": true
+    },
+    "kennedyTown_shauKeiWan": {
+      "type": "component",
+      "component": "content.schedule-day",
+      "repeatable": false,
+      "required": true
+    }
+  },
+  "config": {}
+}
