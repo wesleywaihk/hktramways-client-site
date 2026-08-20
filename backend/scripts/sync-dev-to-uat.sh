@@ -3,6 +3,12 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+echo "==> Checking AWS login (needed for cross-bucket S3 sync)..."
+if ! aws sts get-caller-identity --profile default >/dev/null 2>&1; then
+  echo "==> AWS session expired or missing, launching login..."
+  aws login --profile default
+fi
+
 FILE="sync-dev-to-uat-$(date +%s)"
 
 echo "==> Exporting dev data (Postgres)..."
