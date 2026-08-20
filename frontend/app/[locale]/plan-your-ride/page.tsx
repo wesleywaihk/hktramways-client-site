@@ -1,6 +1,8 @@
 import { fetchPlanYourRide, fetchTramRoute } from "@/hooks/useApiEndpoint/api";
 import Hero from "./components/Hero/Hero";
 import TramRoute from "../components/TramRoute/TramRoute";
+import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
+import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import type { PlanYourRideResponse } from "@/types/api";
 
 interface PlanYourRidePageProps {
@@ -35,6 +37,8 @@ export default async function PlanYourRidePage({
         />
       )}
       <TramRoute data={tramRoute?.data} />
+      <InteractiveRouteMap data={heroData?.interactiveRouteMap} />
+      <DownloadAppArea data={heroData?.downloadAppArea} />
       {/* <pre>{JSON.stringify({ planYourRide, tramRoute }, null, 2)}</pre> */}
     </div>
   );

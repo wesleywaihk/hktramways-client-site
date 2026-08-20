@@ -74,7 +74,16 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
   locale: string,
   options?: { cache?: RequestCache },
 ) {
-  const populate = buildPopulate(["actionButton", "bannerImage"]);
+  const populate = buildPopulate([
+    "actionButton",
+    "bannerImage",
+    "downloadAppArea.Image",
+    "downloadAppArea.actionButton1",
+    "downloadAppArea.actionButton2",
+    "interactiveRouteMap.Image",
+    "interactiveRouteMap.actionButton1",
+    "interactiveRouteMap.actionButton2",
+  ]);
   const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);

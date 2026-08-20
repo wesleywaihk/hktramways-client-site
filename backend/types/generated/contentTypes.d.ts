@@ -655,6 +655,15 @@ export interface ApiPlanYourRidePlanYourRide
           localized: true;
         };
       }>;
+    interactiveRouteMap: Schema.Attribute.Component<
+      'content.download-app-area',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

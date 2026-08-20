@@ -1,16 +1,23 @@
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
-import Button from "@/components/Button/Button";
+import Button, {
+  type ButtonColor,
+  type ButtonVariant,
+} from "@/components/Button/Button";
 import type { DownloadAppAreaData } from "@/types/api";
 import { asImage } from "@/lib/media";
 
 export interface DownloadAppAreaProps {
   data?: DownloadAppAreaData | null;
   className?: string;
+  buttonColor?: ButtonColor;
+  buttonVariant?: ButtonVariant;
 }
 
 export default function DownloadAppArea({
   data = undefined,
   className = "",
+  buttonColor = "white",
+  buttonVariant = "outline",
 }: DownloadAppAreaProps) {
   if (!data) return null;
 
@@ -49,7 +56,8 @@ export default function DownloadAppArea({
               {data.actionButton1 && (
                 <Button
                   href={data.actionButton1.link?.url ?? "#"}
-                  color="white"
+                  color={buttonColor}
+                  variant={buttonVariant}
                   useArrow={data.actionButton1.useArrow ?? false}
                   startIcon={data.actionButton1.startIcon?.icon}
                 >
@@ -59,7 +67,8 @@ export default function DownloadAppArea({
               {data.actionButton2 && (
                 <Button
                   href={data.actionButton2.link?.url ?? "#"}
-                  color="white"
+                  color={buttonColor}
+                  variant={buttonVariant}
                   useArrow={data.actionButton2.useArrow ?? false}
                   startIcon={data.actionButton2.startIcon?.icon}
                 >

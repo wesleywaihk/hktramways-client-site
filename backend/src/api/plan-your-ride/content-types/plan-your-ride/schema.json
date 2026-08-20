@@ -53,6 +53,16 @@
       "component": "content.banner-image-unit",
       "repeatable": true
     },
+    "interactiveRouteMap": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.download-app-area",
+      "repeatable": false
+    },
     "downloadAppArea": {
       "type": "component",
       "pluginOptions": {

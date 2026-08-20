@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-20T06:04:08.998Z"
+    "x-generation-date": "2026-08-20T06:11:34.182Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6255,6 +6255,9 @@
                   "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
                 }
               },
+              "interactiveRouteMap": {
+                "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
+              },
               "downloadAppArea": {
                 "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
               },
@@ -6349,6 +6352,9 @@
               "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
             }
           },
+          "interactiveRouteMap": {
+            "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
+          },
           "downloadAppArea": {
             "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
           },
@@ -6435,6 +6441,9 @@
                   "items": {
                     "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
                   }
+                },
+                "interactiveRouteMap": {
+                  "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
                 },
                 "downloadAppArea": {
                   "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"

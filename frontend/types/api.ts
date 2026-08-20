@@ -172,6 +172,8 @@ export interface PlanYourRideData {
   desc: string;
   actionButton: ActionButton | null;
   bannerImage: ResponsiveImage[] | null;
+  downloadAppArea: DownloadAppAreaData | null;
+  interactiveRouteMap: DownloadAppAreaData | null;
 }
 
 export interface PlanYourRideResponse {
