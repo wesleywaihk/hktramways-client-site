@@ -77,9 +77,13 @@ export default async function LandingPage({ params }: LandingPageProps) {
       {/* <SetHeaderStyle style="transparent" /> */}
       <Banner
         bannerImage={home.bannerImage}
-        // isFullScreen false: news bar is rendered, so header + banner + newsBar = 100dvh
-        // isFullScreen true: no news bar, so header + banner = 100dvh
-        isFullScreen={!home.newsBar.length}
+        // newsBar rendered: header + banner + newsBar = 100dvh
+        // no newsBar: header + banner = 100dvh
+        className={
+          home.newsBar.length
+            ? "h-[calc(100dvh-128px)] lg:h-[calc(100dvh-160px)]"
+            : "h-[calc(100dvh-76px)] lg:h-[calc(100dvh-100px)]"
+        }
       />
       <NewsBar items={home.newsBar} />
       <ArcCarousel data={home.arcCarousel} />

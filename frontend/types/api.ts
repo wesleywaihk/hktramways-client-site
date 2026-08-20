@@ -165,6 +165,19 @@ export interface TramRouteResponse {
   data: TramRouteData | null;
 }
 
+export interface PlanYourRideData {
+  id: number;
+  documentId: string;
+  title: string;
+  desc: string;
+  actionButton: ActionButton | null;
+  bannerImage: ResponsiveImage[] | null;
+}
+
+export interface PlanYourRideResponse {
+  data: PlanYourRideData[];
+}
+
 export interface GlobalFaviconFormat {
   url: string;
   width: number;
