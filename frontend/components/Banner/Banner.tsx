@@ -29,7 +29,7 @@ export default function Banner({
   url = IMG_URL,
   bannerImage,
   className = "",
-  useBorder = false,
+  useBorder = true,
 }: BannerProps) {
   const banners = bannerImage?.filter(isValidBanner) ?? [];
   const [activeIndex, setActiveIndex] = useState(0);
