@@ -48,6 +48,7 @@ export default function Hero({
       <Banner
         bannerImage={bannerImage}
         className="h-[calc(calc(100dvh-76px)*0.43)] lg:h-[calc(calc(100dvh-100px)*0.66)]"
+        useBorder={false}
       />
     </section>
   );
