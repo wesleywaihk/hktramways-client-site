@@ -23,13 +23,7 @@ export const fetchHome = cache(async function fetchHome(
   previewMode: boolean,
   locale: string,
 ) {
-  const populate = buildPopulate([
-    "bannerImage",
-    "newsBar",
-    "downloadAppArea.Image",
-    "downloadAppArea.actionButton1",
-    "downloadAppArea.actionButton2",
-  ]);
+  const populate = buildPopulate(["bannerImage", "newsBar"]);
   const url = previewMode
     ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`
     : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
@@ -41,6 +35,24 @@ export const fetchHome = cache(async function fetchHome(
   // The single-document (preview) endpoint returns `data` as an object, not an array.
   return previewMode ? { data: json.data ? [json.data] : [] } : json;
 });
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side Home DownloadAppArea component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchDownloadAppArea(locale: string) {
+  const populate = buildPopulate([
+    "downloadAppArea.Image",
+    "downloadAppArea.actionButton1",
+    "downloadAppArea.actionButton2",
+  ]);
+  const url = `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch download app area: ${res.status}`);
+
+  return res.json();
+}
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side Souvenior component, directly against NEXT_PUBLIC_API_URL.

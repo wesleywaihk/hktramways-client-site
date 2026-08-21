@@ -151,7 +151,6 @@ export interface Home {
   Title: string;
   bannerImage: ResponsiveImage[] | null;
   newsBar: HomeNewsBarItem[];
-  downloadAppArea: DownloadAppAreaData | null;
 }
 
 export interface HomeResponse {
@@ -160,6 +159,10 @@ export interface HomeResponse {
 
 export interface HomeArcCarouselResponse {
   data: { arcCarousel: ArcCarouselData | null }[];
+}
+
+export interface HomeDownloadAppAreaResponse {
+  data: { downloadAppArea: DownloadAppAreaData | null }[];
 }
 
 export interface HomeSouveniorResponse {

@@ -1,4 +1,4 @@
-import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
+import DownloadAppAreaUI from "@/components/DownloadAppArea/DownloadAppAreaUI";
 import type { DownloadAppAreaData } from "@/types/api";
 
 export interface InteractiveRouteMapProps {
@@ -7,11 +7,11 @@ export interface InteractiveRouteMapProps {
 }
 
 export default function InteractiveRouteMap({
-  data = undefined,
+  data = null,
   className = "",
 }: InteractiveRouteMapProps) {
   return (
-    <DownloadAppArea
+    <DownloadAppAreaUI
       data={data}
       className={`[&>div]:bg-green-fresh [&>div>div>div>h2]:text-green [&>div>div>div>p]:text-green py-[45px] lg:py-[60px] [&>div]:bg-cover [&>div]:lg:bg-[url('/partyTram/InteractiveRouteMap/bg.png')] ${className}`}
       buttonColor="green"

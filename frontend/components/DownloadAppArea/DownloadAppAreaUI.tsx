@@ -3,22 +3,32 @@ import Button, {
   type ButtonColor,
   type ButtonVariant,
 } from "@/components/Button/Button";
+import Loading from "@/components/Loading/Loading";
 import type { DownloadAppAreaData } from "@/types/api";
 import { asImage } from "@/lib/media";
 
-export interface DownloadAppAreaProps {
+export interface DownloadAppAreaUIProps {
+  // `undefined` = still loading, `null` = loaded but nothing to show.
   data?: DownloadAppAreaData | null;
   className?: string;
   buttonColor?: ButtonColor;
   buttonVariant?: ButtonVariant;
 }
 
-export default function DownloadAppArea({
-  data = undefined,
+export default function DownloadAppAreaUI({
+  data,
   className = "",
   buttonColor = "white",
   buttonVariant = "outline",
-}: DownloadAppAreaProps) {
+}: DownloadAppAreaUIProps) {
+  if (data === undefined) {
+    return (
+      <section className={`borderless bg-green ${className}`}>
+        <Loading />
+      </section>
+    );
+  }
+
   if (!data) return null;
 
   const image = asImage(data.Image);

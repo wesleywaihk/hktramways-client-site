@@ -2,7 +2,7 @@ import { fetchPlanYourRide } from "@/hooks/useApiEndpoint/api";
 import Hero from "./components/Hero/Hero";
 import Schedule from "./components/Schedule/Schedule";
 import TramRoute from "@/components/TramRoute/TramRoute";
-import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
+import DownloadAppAreaUI from "@/components/DownloadAppArea/DownloadAppAreaUI";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import type { PlanYourRideResponse } from "@/types/api";
 
@@ -35,8 +35,8 @@ export default async function PlanYourRidePage({
       )}
       <TramRoute locale={locale} />
       <Schedule locale={locale} />
-      <InteractiveRouteMap data={heroData?.interactiveRouteMap} />
-      <DownloadAppArea data={heroData?.downloadAppArea} />
+      <InteractiveRouteMap data={heroData?.interactiveRouteMap ?? null} />
+      <DownloadAppAreaUI data={heroData?.downloadAppArea ?? null} />
       {/* <pre>{JSON.stringify({ planYourRide, tramRoute }, null, 2)}</pre> */}
     </div>
   );
