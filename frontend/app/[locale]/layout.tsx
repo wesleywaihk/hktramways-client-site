@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import I18nProvider from "@/components/I18nProvider";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
@@ -37,6 +38,8 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }
+
+  setRequestLocale(locale);
 
   let metaTitle = "";
   let footer: GlobalFooter | null = null;

@@ -43,6 +43,12 @@
     "stationNorthPoint": "北角",
     "stationShekTongTsui": "石塘咀",
     "stationCausewayBay": "铜锣湾",
-    "stationKennedyTown": "坚尼地城"
+    "stationKennedyTown": "坚尼地城",
+    "footerFaresPaymentMethods": "车费及付款方式",
+    "footerAdult": "成人",
+    "footerChild": "小童",
+    "footerSeniorCitizen": "长者",
+    "footerMonthlyTicket": "月票",
+    "footerDownloadApp": "下载应用程序"
   }
 }

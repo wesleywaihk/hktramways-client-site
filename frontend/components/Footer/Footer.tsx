@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import Button from "@/components/Button/Button";
 import ChevronIcon from "@/components/Header/ChevronIcon";
 import type { GlobalFooter } from "@/types/api";
@@ -37,19 +38,27 @@ const Logo = ({ className = "" }: { className?: string }) => (
   </div>
 );
 
-export default function Footer({ data = undefined }: FooterProps) {
+export default async function Footer({ data = undefined }: FooterProps) {
   if (!data) return null;
+
+  const t = await getTranslations("common");
 
   const socialLinks = socialPlatforms(data);
   const fares = [
-    data.adultPrice != null && { label: "Adult", value: data.adultPrice },
-    data.childPrice != null && { label: "Child", value: data.childPrice },
+    data.adultPrice != null && {
+      label: t("footerAdult"),
+      value: data.adultPrice,
+    },
+    data.childPrice != null && {
+      label: t("footerChild"),
+      value: data.childPrice,
+    },
     data.seniorPrice != null && {
-      label: "Senior Citizen",
+      label: t("footerSeniorCitizen"),
       value: data.seniorPrice,
     },
     data.monthlyTicket != null && {
-      label: "Monthly Ticket",
+      label: t("footerMonthlyTicket"),
       value: data.monthlyTicket,
     },
   ].filter((fare): fare is { label: string; value: number } => !!fare);
@@ -68,7 +77,7 @@ export default function Footer({ data = undefined }: FooterProps) {
               href={data.faresPaymentUrl ?? "#"}
               className="flex w-full items-center justify-between gap-1.5 hover:opacity-80"
             >
-              Fares &amp; Payment Methods
+              {t("footerFaresPaymentMethods")}
               <ChevronIcon desktop className="h-4 w-4 shrink-0" />
             </Link>
           </h3>
@@ -87,7 +96,7 @@ export default function Footer({ data = undefined }: FooterProps) {
 
         {/* Download App column */}
         <div className="xl:order-2 xl:flex-none">
-          <h3 className={columnHeading}>Download App</h3>
+          <h3 className={columnHeading}>{t("footerDownloadApp")}</h3>
           <div className="flex flex-col gap-[15px]">
             {data.googlePlayLink && (
               <a
@@ -150,7 +159,7 @@ export default function Footer({ data = undefined }: FooterProps) {
             href={data.tncLink ?? "#"}
             className="order-2 mt-3 font-sans text-[13px] leading-[145%] tracking-[0.02em] underline hover:opacity-80 xl:order-3 xl:mt-2"
           >
-            Disclaimer &amp; Privacy Policy
+            {t("navDisclaimerPrivacy")}
           </Link>
           <div className="order-3 mt-11 flex items-center gap-2.5 xl:order-1 xl:mt-6">
             {socialLinks.map((social) => (

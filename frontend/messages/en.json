@@ -43,6 +43,12 @@
     "stationNorthPoint": "North Point",
     "stationShekTongTsui": "Shek Tong Tsui",
     "stationCausewayBay": "Causeway Bay",
-    "stationKennedyTown": "Kennedy Town"
+    "stationKennedyTown": "Kennedy Town",
+    "footerFaresPaymentMethods": "Fares & Payment Methods",
+    "footerAdult": "Adult",
+    "footerChild": "Child",
+    "footerSeniorCitizen": "Senior Citizen",
+    "footerMonthlyTicket": "Monthly Ticket",
+    "footerDownloadApp": "Download App"
   }
 }
