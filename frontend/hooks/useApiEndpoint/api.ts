@@ -24,7 +24,7 @@ export const fetchHome = cache(async function fetchHome(
   previewMode: boolean,
   locale: string,
 ) {
-  const populate = buildPopulate(["bannerImage", "newsBar"]);
+  const populate = buildPopulate(["bannerImage"]);
   const url = previewMode
     ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`
     : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
@@ -219,6 +219,22 @@ export async function fetchSchedule(locale: string) {
 
   return res.json();
 }
+
+export const fetchNewsFeed = cache(async function fetchNewsFeed(
+  locale: string,
+  options?: { cache?: RequestCache },
+) {
+  const populate = buildPopulate(["newsItem.hyperlink"]);
+  const url = `${API_URL}/api/newsfeed?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, {
+    cache: options?.cache ?? "no-store",
+  });
+  if (!res.ok) throw new Error(`Failed to fetch news feed: ${res.status}`);
+
+  return res.json();
+});
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side PartyTram component, directly against NEXT_PUBLIC_API_URL.

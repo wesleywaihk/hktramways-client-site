@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "newsfeeds",
+  "info": {
+    "singularName": "newsfeed",
+    "pluralName": "newsfeeds",
+    "displayName": "newsfeed"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "newsItem": {
+      "type": "component",
+      "component": "content.news-items",
+      "repeatable": true
+    }
+  }
+}

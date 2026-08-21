@@ -531,12 +531,6 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
       }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::home.home'>;
-    newsBar: Schema.Attribute.Component<'content.news-items', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     publishedAt: Schema.Attribute.DateTime;
     souvenior: Schema.Attribute.Component<'page-home.souvenior', false> &
       Schema.Attribute.SetPluginOptions<{
@@ -560,6 +554,34 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNewsfeedNewsfeed extends Struct.SingleTypeSchema {
+  collectionName: 'newsfeeds';
+  info: {
+    displayName: 'newsfeed';
+    pluralName: 'newsfeeds';
+    singularName: 'newsfeed';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::newsfeed.newsfeed'
+    > &
+      Schema.Attribute.Private;
+    newsItem: Schema.Attribute.Component<'content.news-items', true>;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1238,6 +1260,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::global.global': ApiGlobalGlobal;
       'api::home.home': ApiHomeHome;
+      'api::newsfeed.newsfeed': ApiNewsfeedNewsfeed;
       'api::party-tram.party-tram': ApiPartyTramPartyTram;
       'api::plan-your-ride.plan-your-ride': ApiPlanYourRidePlanYourRide;
       'api::tram-route.tram-route': ApiTramRouteTramRoute;

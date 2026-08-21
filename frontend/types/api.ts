@@ -156,11 +156,20 @@ export interface Home {
   documentId: string;
   Title: string;
   bannerImage: ResponsiveImage[] | null;
-  newsBar: HomeNewsBarItem[];
 }
 
 export interface HomeResponse {
   data: Home[];
+}
+
+export interface NewsFeedData {
+  id: number;
+  documentId: string;
+  newsItem: HomeNewsBarItem[];
+}
+
+export interface NewsFeedResponse {
+  data: NewsFeedData | null;
 }
 
 export interface HomeArcCarouselResponse {

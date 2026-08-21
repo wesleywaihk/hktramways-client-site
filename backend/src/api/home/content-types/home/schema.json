@@ -35,16 +35,6 @@
       "repeatable": true,
       "required": true
     },
-    "newsBar": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "content.news-items",
-      "repeatable": true
-    },
     "arcCarousel": {
       "type": "component",
       "pluginOptions": {

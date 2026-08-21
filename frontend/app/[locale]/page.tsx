@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { fetchHome } from "@/hooks/useApiEndpoint/api";
+import { fetchHome, fetchNewsFeed } from "@/hooks/useApiEndpoint/api";
 import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
 import { generatePageMetadata, getPreviewDocumentId } from "@/lib/pageMetadata";
-import type { Home } from "@/types/api";
+import type { Home, NewsFeedResponse } from "@/types/api";
 import Banner from "@/components/Banner/Banner";
 import NewsBar from "./components/NewsBar/NewsBar";
 import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
@@ -39,10 +39,14 @@ export default async function LandingPage({ params }: LandingPageProps) {
   const t = await getTranslations({ locale, namespace: "common" });
   const documentId = await getPreviewDocumentId();
 
-  const { data: res, error } = await fetchWithErrorHandling(() =>
-    fetchHome(documentId ?? "", documentId !== null, locale),
-  );
+  const [{ data: res, error }, newsFeedRes] = await Promise.all([
+    fetchWithErrorHandling(() =>
+      fetchHome(documentId ?? "", documentId !== null, locale),
+    ),
+    fetchWithErrorHandling<NewsFeedResponse>(() => fetchNewsFeed(locale)),
+  ]);
   const home: Home | null = res?.data[0] ?? null;
+  const newsItems = newsFeedRes.data?.data?.newsItem ?? [];
 
   if (error || !home) {
     return <ErrorPage message={t("noContent")} />;
@@ -56,12 +60,12 @@ export default async function LandingPage({ params }: LandingPageProps) {
         // newsBar rendered: header + banner + newsBar = 100dvh
         // no newsBar: header + banner = 100dvh
         className={
-          home.newsBar.length
+          newsItems.length
             ? "h-[calc(100dvh-128px)] lg:h-[calc(100dvh-160px)]"
             : "h-[calc(100dvh-76px)] lg:h-[calc(100dvh-100px)]"
         }
       />
-      <NewsBar items={home.newsBar} />
+      <NewsBar items={newsItems} />
       <ArcCarousel locale={locale} />
       <TramRoute locale={locale} />
       <PartyTram locale={locale} />
