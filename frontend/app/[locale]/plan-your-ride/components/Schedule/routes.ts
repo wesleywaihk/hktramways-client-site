@@ -1,39 +1,89 @@
 import type { ScheduleEastBound, ScheduleWestBound } from "@/types/api";
 
+export type StationKey =
+  | "stationShauKeiWan"
+  | "stationWesternMarket"
+  | "stationHappyValley"
+  | "stationNorthPoint"
+  | "stationShekTongTsui"
+  | "stationCausewayBay"
+  | "stationKennedyTown";
+
 export interface ScheduleRoute {
   key: keyof ScheduleWestBound | keyof ScheduleEastBound;
-  from: string;
-  to: string;
+  from: StationKey;
+  to: StationKey;
   note?: boolean;
 }
 
 // Route stops are static (not CMS-driven) — the backend only stores the
 // schedule times, keyed by these same field names. Mirrors the precedent in
-// @/components/TramRoute/routes.ts.
+// @/components/TramRoute/routes.ts. `from`/`to` are i18n message keys,
+// translated by the consuming component.
 export const WESTBOUND_ROUTES: ScheduleRoute[] = [
-  { key: "shauKeiWan_westernMarket", from: "Shau Kei Wan", to: "Western Market" },
-  { key: "shauKeiWan_happyValley", from: "Shau Kei Wan", to: "Happy Valley" },
-  { key: "northPoint_shekTongTsui", from: "North Point", to: "Shek Tong Tsui" },
-  { key: "causewayBay_shekTongTsui", from: "Causeway Bay", to: "Shek Tong Tsui" },
-  { key: "happyValley_kennedyTown", from: "Happy Valley", to: "Kennedy Town" },
+  {
+    key: "shauKeiWan_westernMarket",
+    from: "stationShauKeiWan",
+    to: "stationWesternMarket",
+  },
+  {
+    key: "shauKeiWan_happyValley",
+    from: "stationShauKeiWan",
+    to: "stationHappyValley",
+  },
+  {
+    key: "northPoint_shekTongTsui",
+    from: "stationNorthPoint",
+    to: "stationShekTongTsui",
+  },
+  {
+    key: "causewayBay_shekTongTsui",
+    from: "stationCausewayBay",
+    to: "stationShekTongTsui",
+  },
+  {
+    key: "happyValley_kennedyTown",
+    from: "stationHappyValley",
+    to: "stationKennedyTown",
+  },
   {
     key: "shauKeiWan_kennedyTown",
-    from: "Shau Kei Wan",
-    to: "Kennedy Town",
+    from: "stationShauKeiWan",
+    to: "stationKennedyTown",
     note: true,
   },
 ];
 
 export const EASTBOUND_ROUTES: ScheduleRoute[] = [
-  { key: "westernMarket_shauKeiWan", from: "Western Market", to: "Shau Kei Wan" },
-  { key: "happyValley_shauKeiWan", from: "Happy Valley", to: "Shau Kei Wan" },
-  { key: "shekTongTsui_northPoint", from: "Shek Tong Tsui", to: "North Point" },
-  { key: "shekTongTsui_causewayBay", from: "Shek Tong Tsui", to: "Causeway Bay" },
-  { key: "kennedyTown_happyValley", from: "Kennedy Town", to: "Happy Valley" },
+  {
+    key: "westernMarket_shauKeiWan",
+    from: "stationWesternMarket",
+    to: "stationShauKeiWan",
+  },
+  {
+    key: "happyValley_shauKeiWan",
+    from: "stationHappyValley",
+    to: "stationShauKeiWan",
+  },
+  {
+    key: "shekTongTsui_northPoint",
+    from: "stationShekTongTsui",
+    to: "stationNorthPoint",
+  },
+  {
+    key: "shekTongTsui_causewayBay",
+    from: "stationShekTongTsui",
+    to: "stationCausewayBay",
+  },
+  {
+    key: "kennedyTown_happyValley",
+    from: "stationKennedyTown",
+    to: "stationHappyValley",
+  },
   {
     key: "kennedyTown_shauKeiWan",
-    from: "Kennedy Town",
-    to: "Shau Kei Wan",
+    from: "stationKennedyTown",
+    to: "stationShauKeiWan",
     note: true,
   },
 ];

@@ -16,6 +16,13 @@
     "scheduleColumnSunPh": "星期日及公众假期",
     "scheduleFirstTram": "首班车",
     "scheduleLastTram": "尾班车",
-    "scheduleFootnote": "*坚尼地城至筲箕湾：服务时间内每小时2班\n此时间表仅作一般服务水平的参考"
+    "scheduleFootnote": "*坚尼地城至筲箕湾：服务时间内每小时2班\n此时间表仅作一般服务水平的参考",
+    "stationShauKeiWan": "筲箕湾",
+    "stationWesternMarket": "西港城",
+    "stationHappyValley": "跑马地",
+    "stationNorthPoint": "北角",
+    "stationShekTongTsui": "石塘咀",
+    "stationCausewayBay": "铜锣湾",
+    "stationKennedyTown": "坚尼地城"
   }
 }

@@ -5,6 +5,7 @@ import I18nProvider from "@/components/I18nProvider";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
 import { HeaderStyleProvider } from "@/components/Header/HeaderStyle/HeaderStyleProvider";
 import MetaUpdater from "@/components/MetaUpdater";
+import ScrollToTop from "@/components/ScrollToTop";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { generateGlobalMetadata, getGlobalData } from "@/lib/pageMetadata";
@@ -52,6 +53,7 @@ export default async function LocaleLayout({
       <MuiThemeProvider>
         <HeaderStyleProvider>
           <MetaUpdater metaTitle={metaTitle} />
+          <ScrollToTop />
           <Header />
           <main className="flex min-h-[calc(100dvh-76px)] flex-col lg:min-h-[calc(100dvh-100px)]">
             {children}

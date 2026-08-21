@@ -119,10 +119,10 @@ export default function Schedule({ locale }: ScheduleProps) {
               return (
                 <div key={route.key} className="schedule-row py-5 text-white">
                   <div className="schedule-cell-route text-yellow flex items-center gap-2 pb-2 text-[18px] leading-[152%] font-semibold tracking-[0.02em] lg:text-[21px] lg:text-white">
-                    <span>{route.from}</span>
+                    <span>{t(route.from)}</span>
                     <RouteArrow />
                     <span>
-                      {route.to}
+                      {t(route.to)}
                       {route.note && <sup>*</sup>}
                     </span>
                   </div>
