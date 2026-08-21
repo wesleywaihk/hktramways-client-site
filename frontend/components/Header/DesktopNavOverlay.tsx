@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useLocaleSwitcher, LOCALE_LABELS } from "@/i18n/useLocaleSwitcher";
 import { mobileNavLinks } from "./navLinks";
 import ChevronIcon from "./ChevronIcon";
@@ -15,6 +16,7 @@ export default function DesktopNavOverlay({
   open: boolean;
   onClose: () => void;
 }) {
+  const t = useTranslations("common");
   const { locale, locales, switchLocale } = useLocaleSwitcher();
   const [activeParent, setActiveParent] = useState<string | null>(null);
 
@@ -63,7 +65,7 @@ export default function DesktopNavOverlay({
             type="button"
             className="flex h-[26px] w-[26px] cursor-pointer items-center justify-center border-none bg-transparent text-white transition-transform duration-200 ease-out hover:scale-90"
             onClick={handleClose}
-            aria-label="Close menu"
+            aria-label={t("navCloseMenu")}
           >
             <CloseIcon />
           </button>
@@ -81,7 +83,7 @@ export default function DesktopNavOverlay({
 
               const content = (
                 <>
-                  {link.label}
+                  {t(link.labelKey)}
                   {hasChildren && (
                     <ChevronIcon desktop className="h-[26px] w-[26px]" />
                   )}
@@ -120,7 +122,7 @@ export default function DesktopNavOverlay({
                   className="font-sans text-[21px] leading-[152.4%] font-normal tracking-[0.42px] text-white"
                   onClick={handleClose}
                 >
-                  {child.label}
+                  {t(child.labelKey)}
                 </Link>
               ))}
             </div>
@@ -128,7 +130,7 @@ export default function DesktopNavOverlay({
         </nav>
 
         <div className="mt-auto pt-5 font-sans text-[13px] leading-[145%] font-normal tracking-[0.26px] text-white">
-          Disclaimer &amp; Privacy Policy
+          {t("navDisclaimerPrivacy")}
         </div>
       </div>
     </>

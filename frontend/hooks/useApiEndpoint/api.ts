@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { API_URL } from "@/consts";
 import { buildPopulate } from "@/lib/buildPopulate";
+import { routing } from "@/i18n/routing";
 import type { DownloadAppAreaData } from "@/types/api";
 
 export async function fetchGlobal(
@@ -138,10 +139,19 @@ export async function fetchTramoramicTour(locale: string) {
 // client-side TramRoute component, directly against NEXT_PUBLIC_API_URL.
 export async function fetchTramRoute(locale: string) {
   const populate = buildPopulate(["actionButton"]);
-  const url = `${API_URL}/api/tram-route?locale=${locale}&${populate}`;
-  if (process.env.NODE_ENV === "development")
-    console.log("[endpoint fetched]", url);
-  const res = await fetch(url, { cache: "no-store" });
+  const fetchLocale = async (loc: string) => {
+    const url = `${API_URL}/api/tram-route?locale=${loc}&${populate}`;
+    if (process.env.NODE_ENV === "development")
+      console.log("[endpoint fetched]", url);
+    return fetch(url, { cache: "no-store" });
+  };
+
+  let res = await fetchLocale(locale);
+  // Translation may not exist yet for this locale — fall back to the
+  // default locale rather than hiding the section entirely.
+  if (res.status === 404 && locale !== routing.defaultLocale) {
+    res = await fetchLocale(routing.defaultLocale);
+  }
   if (!res.ok) throw new Error(`Failed to fetch tram route: ${res.status}`);
 
   return res.json();
@@ -225,12 +235,25 @@ export const fetchNewsFeed = cache(async function fetchNewsFeed(
   options?: { cache?: RequestCache },
 ) {
   const populate = buildPopulate(["newsItem.hyperlink"]);
-  const url = `${API_URL}/api/newsfeed?locale=${locale}&${populate}`;
-  if (process.env.NODE_ENV === "development")
-    console.log("[endpoint fetched]", url);
-  const res = await fetch(url, {
-    cache: options?.cache ?? "no-store",
-  });
+  const fetchWith = async (query: string) => {
+    const url = `${API_URL}/api/newsfeed?${query}${query ? "&" : ""}${populate}`;
+    if (process.env.NODE_ENV === "development")
+      console.log("[endpoint fetched]", url);
+    return fetch(url, { cache: options?.cache ?? "no-store" });
+  };
+
+  let res = await fetchWith(`locale=${locale}`);
+  // Translation may not exist yet for this locale — fall back to the
+  // default locale rather than hiding the news bar entirely.
+  if (res.status === 404 && locale !== routing.defaultLocale) {
+    res = await fetchWith(`locale=${routing.defaultLocale}`);
+  }
+  // Entries created before i18n was enabled have no locale assigned, so
+  // they're only reachable with no `locale` filter at all — fall back to
+  // that as a last resort until content is retagged in Strapi.
+  if (res.status === 404) {
+    res = await fetchWith("");
+  }
   if (!res.ok) throw new Error(`Failed to fetch news feed: ${res.status}`);
 
   return res.json();

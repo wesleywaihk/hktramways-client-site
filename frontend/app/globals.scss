@@ -24,7 +24,9 @@
   --color-gold: var(--color-gold);
   --color-yellow: var(--color-yellow);
   --color-accent-brown: var(--color-accent-brown);
-  --font-sans: var(--font-outfit);
+  --font-sans:
+    var(--font-outfit), var(--font-noto-sans-hk), var(--font-noto-sans-sc),
+    sans-serif;
 }
 
 body {

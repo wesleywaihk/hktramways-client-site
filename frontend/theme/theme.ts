@@ -13,6 +13,9 @@ declare module "@mui/material/styles" {
 // Aligned to Tailwind CSS's default screen breakpoints
 // https://tailwindcss.com/docs/responsive-design
 const theme = createTheme({
+  typography: {
+    fontFamily: "var(--font-sans)",
+  },
   breakpoints: {
     values: {
       xs: 0,

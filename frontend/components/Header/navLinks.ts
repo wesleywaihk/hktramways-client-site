@@ -1,5 +1,5 @@
 export type NavLink = {
-  label: string;
+  labelKey: string;
   href: string;
   external?: boolean;
   hasChevron?: boolean;
@@ -7,50 +7,51 @@ export type NavLink = {
 };
 
 // Desktop bar: subset of links shown inline (see Figma "00-Nav" frame)
+// `labelKey` values are keys in the "common" i18n namespace.
 export const desktopNavLinks: NavLink[] = [
-  { label: "Plan Your Ride", href: "/plan-your-ride" },
-  { label: "Tram Tour", href: "/tram-tour" },
-  { label: "Party Tram", href: "/party-tram" },
-  { label: "Store", href: "/store" },
-  { label: "Careers", href: "/careers", external: true },
-  { label: "About Us", href: "/about-us" },
+  { labelKey: "navPlanYourRide", href: "/plan-your-ride" },
+  { labelKey: "navTramTour", href: "/tram-tour" },
+  { labelKey: "navPartyTram", href: "/party-tram" },
+  { labelKey: "navStore", href: "/store" },
+  { labelKey: "navCareers", href: "/careers", external: true },
+  { labelKey: "navAboutUs", href: "/about-us" },
 ];
 
 // Mobile / slide-in overlay: full nav list
 export const mobileNavLinks: NavLink[] = [
-  { label: "Plan Your Ride", href: "/plan-your-ride" },
+  { labelKey: "navPlanYourRide", href: "/plan-your-ride" },
   {
-    label: "Tram Tour",
+    labelKey: "navTramTour",
     href: "/tram-tour",
     hasChevron: true,
     children: [
-      { label: "Tram Tour", href: "/tram-tour" },
-      { label: "TramOramic Tour", href: "/tram-tour/tramoramic-tour" },
+      { labelKey: "navTramTour", href: "/tram-tour" },
+      { labelKey: "navTramoramicTour", href: "/tram-tour/tramoramic-tour" },
       {
-        label: "Ding Ding Qipao Pass",
+        labelKey: "navDingDingQipaoPass",
         href: "/tram-tour/ding-ding-qipao-pass",
       },
       {
-        label: "Restaurant Tram by Food Studio",
+        labelKey: "navRestaurantTram",
         href: "/tram-tour/restaurant-tram",
       },
     ],
   },
-  { label: "Party Tram", href: "/party-tram" },
-  { label: "Store", href: "/store" },
-  { label: "Explore The Track", href: "/explore-the-track" },
-  { label: "Careers", href: "/careers", external: true },
+  { labelKey: "navPartyTram", href: "/party-tram" },
+  { labelKey: "navStore", href: "/store" },
+  { labelKey: "navExploreTheTrack", href: "/explore-the-track" },
+  { labelKey: "navCareers", href: "/careers", external: true },
   {
-    label: "About Us",
+    labelKey: "navAboutUs",
     href: "/about-us",
     hasChevron: true,
     children: [
-      { label: "About Us", href: "/about-us" },
-      { label: "Our Story", href: "/about-us/our-story" },
-      { label: "News & Events", href: "/about-us/news-events" },
-      { label: "Mobile App", href: "/about-us/mobile-app" },
-      { label: "Contact Us", href: "/about-us/contact-us" },
+      { labelKey: "navAboutUs", href: "/about-us" },
+      { labelKey: "navOurStory", href: "/about-us/our-story" },
+      { labelKey: "navNewsEvents", href: "/about-us/news-events" },
+      { labelKey: "navMobileApp", href: "/about-us/mobile-app" },
+      { labelKey: "navContactUs", href: "/about-us/contact-us" },
     ],
   },
-  { label: "Tram Advertising", href: "/tram-advertising" },
+  { labelKey: "navTramAdvertising", href: "/tram-advertising" },
 ];
