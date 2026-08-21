@@ -26,12 +26,6 @@ export const fetchHome = cache(async function fetchHome(
   const populate = buildPopulate([
     "bannerImage",
     "newsBar",
-    "tramoramicTour",
-    "tramoramicTour.tramoramicTourItem1",
-    "tramoramicTour.tramoramicTourItem2",
-    "tramoramicTour.tramoramicTourItem3",
-    "tramoramicTour.action1",
-    "tramoramicTour.action2",
     "souvenior",
     "souvenior.actionButton",
     "souvenior.item",
@@ -64,6 +58,27 @@ export async function fetchArcCarousel(locale: string) {
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch arc carousel: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side TramoramicTour component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchTramoramicTour(locale: string) {
+  const populate = buildPopulate([
+    "tramoramicTour",
+    "tramoramicTour.tramoramicTourItem1",
+    "tramoramicTour.tramoramicTourItem2",
+    "tramoramicTour.tramoramicTourItem3",
+    "tramoramicTour.action1",
+    "tramoramicTour.action2",
+  ]);
+  const url = `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch tramoramic tour: ${res.status}`);
 
   return res.json();
 }

@@ -69,7 +69,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
       <ArcCarousel locale={locale} />
       <TramRoute locale={locale} />
       <PartyTram locale={locale} />
-      <TramoramicTour data={home.tramoramicTour} />
+      <TramoramicTour locale={locale} />
       <Souvenior data={home.souvenior} />
       <DownloadAppArea data={home.downloadAppArea} />
     </div>

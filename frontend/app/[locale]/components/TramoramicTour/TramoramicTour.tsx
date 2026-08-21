@@ -1,21 +1,54 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Button from "@/components/Button/Button";
+import Loading from "@/components/Loading/Loading";
+import { fetchTramoramicTour } from "@/hooks/useApiEndpoint/api";
 import CardContainer from "./CardContainer";
-import type { TramoramicTourData } from "@/types/api";
+import type {
+  HomeTramoramicTourResponse,
+  TramoramicTourData,
+} from "@/types/api";
 import { asImage } from "@/lib/media";
 import useSlideShow from "./useSlideShow";
 
 export interface TramoramicTourProps {
-  data?: TramoramicTourData | null;
+  locale: string;
 }
 
-export default function TramoramicTour({
-  data = undefined,
-}: TramoramicTourProps) {
+export default function TramoramicTour({ locale }: TramoramicTourProps) {
   const t = useTranslations("common");
   const { activeSlide, nextSlide } = useSlideShow();
+  const [data, setData] = useState<TramoramicTourData | null | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale` changes before the refetch resolves
+    setData(undefined);
+
+    fetchTramoramicTour(locale)
+      .then((res: HomeTramoramicTourResponse) => {
+        if (!cancelled) setData(res.data?.[0]?.tramoramicTour ?? null);
+      })
+      .catch(() => {
+        if (!cancelled) setData(null);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [locale]);
+
+  if (data === undefined) {
+    return (
+      <section className="borderless bg-red-dark">
+        <Loading />
+      </section>
+    );
+  }
 
   if (!data) return null;
 
