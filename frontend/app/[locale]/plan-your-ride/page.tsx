@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { fetchPlanYourRide } from "@/hooks/useApiEndpoint/api";
 import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
+import { generateEntityPageMetadata } from "@/lib/pageMetadata";
 import Hero from "./components/Hero/Hero";
 import Schedule from "./components/Schedule/Schedule";
 import TramRoute from "@/components/TramRoute/TramRoute";
@@ -11,6 +13,17 @@ import type { PlanYourRideResponse } from "@/types/api";
 
 interface PlanYourRidePageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: PlanYourRidePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  return generateEntityPageMetadata<PlanYourRideResponse["data"][number]>(
+    locale,
+    fetchPlanYourRide,
+    (entity) => entity.title,
+  );
 }
 
 export default async function PlanYourRidePage({

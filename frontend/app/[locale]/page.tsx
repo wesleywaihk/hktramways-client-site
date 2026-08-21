@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { fetchHome, fetchNewsFeed } from "@/hooks/useApiEndpoint/api";
 import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
-import { generatePageMetadata, getPreviewDocumentId } from "@/lib/pageMetadata";
+import {
+  generateEntityPageMetadata,
+  getPreviewDocumentId,
+} from "@/lib/pageMetadata";
 import type { Home, NewsFeedResponse } from "@/types/api";
 import Banner from "@/components/Banner/Banner";
 import NewsBar from "./components/NewsBar/NewsBar";
@@ -25,13 +28,11 @@ export async function generateMetadata({
   const { locale } = await params;
   const documentId = await getPreviewDocumentId();
 
-  try {
-    const res = await fetchHome(documentId ?? "", documentId !== null, locale);
-    const home = res.data[0] ?? null;
-    return generatePageMetadata(locale, home?.Title);
-  } catch {
-    return {};
-  }
+  return generateEntityPageMetadata<Home>(
+    locale,
+    (locale) => fetchHome(documentId ?? "", documentId !== null, locale),
+    (entity) => entity.Title,
+  );
 }
 
 export default async function LandingPage({ params }: LandingPageProps) {
