@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import ChevronIcon from "@/components/Header/ChevronIcon";
 import CloseIcon from "@/components/Header/CloseIcon";
 import ExchangeArrow from "./ExchangeArrow";
@@ -22,6 +23,7 @@ export default function RouteMobilePicker({
   onSelect,
   selectLabel,
 }: RouteMobilePickerProps) {
+  const t = useTranslations("common");
   return (
     <>
       <div className="absolute right-5 bottom-5 left-5 m-0 w-auto md:hidden">
@@ -34,9 +36,9 @@ export default function RouteMobilePicker({
             <span className="bg-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white">
               {activeRoute.id}
             </span>
-            <span className="text-center">{activeRoute.from}</span>
+            <span className="text-center">{t(activeRoute.from)}</span>
             <ExchangeArrow className="text-green/40 mx-auto h-5 w-5" />
-            <span className="text-center">{activeRoute.to}</span>
+            <span className="text-center">{t(activeRoute.to)}</span>
           </span>
           <ChevronIcon className="h-4 w-4 shrink-0" />
         </button>
@@ -66,7 +68,7 @@ export default function RouteMobilePicker({
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close"
+            aria-label={t("close")}
             className="text-green cursor-pointer"
           >
             <CloseIcon className="h-5 w-5" />

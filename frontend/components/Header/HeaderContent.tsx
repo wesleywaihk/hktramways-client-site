@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { desktopNavLinks } from "./navLinks";
 import LocaleDropdown from "./LocaleDropdown";
 import HamburgerIcon from "./HamburgerIcon";
@@ -26,6 +27,7 @@ export default function HeaderContent({
   paddingClassName = "p-5 lg:py-[30px] lg:px-10",
   invertLangHover = false,
 }: HeaderContentProps) {
+  const t = useTranslations("common");
   return (
     <div
       className={`flex ${alignClassName} justify-between ${paddingClassName}`}
@@ -53,7 +55,7 @@ export default function HeaderContent({
                 href={`/${locale}${link.href}`}
                 className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] whitespace-nowrap text-[var(--header-fg)] uppercase"
               >
-                {link.label}
+                {t(link.labelKey)}
                 <span className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-right scale-x-0 transform-gpu bg-current/30 transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100" />
               </Link>
             ))}
@@ -73,7 +75,7 @@ export default function HeaderContent({
               : "hover:text-green active:text-green hover:bg-white active:bg-white"
           }`}
           onClick={onOpenNav}
-          aria-label="Language"
+          aria-label={t("navLanguage")}
         >
           {locale === "en" ? "EN" : locale === "zh-HK" ? "繁" : "简"}
         </button>
@@ -81,7 +83,7 @@ export default function HeaderContent({
           type="button"
           className="border-none bg-transparent"
           onClick={onOpenNav}
-          aria-label="Open menu"
+          aria-label={t("navOpenMenu")}
           aria-expanded={navOpen}
         >
           <HamburgerIcon open={navOpen} />

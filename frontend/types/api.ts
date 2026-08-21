@@ -49,7 +49,13 @@ export interface ArcCarouselItem {
   callActionText: string | null;
 }
 
-export type IconEnum = "map" | "calendar" | "busket" | "upRightArrow" | "faq";
+export type IconEnum =
+  | "map"
+  | "calendar"
+  | "busket"
+  | "upRightArrow"
+  | "faq"
+  | "speaker";
 
 export interface IconComponent {
   id: number;
@@ -150,19 +156,71 @@ export interface Home {
   documentId: string;
   Title: string;
   bannerImage: ResponsiveImage[] | null;
-  newsBar: HomeNewsBarItem[];
-  arcCarousel: ArcCarouselData | null;
-  tramoramicTour: TramoramicTourData | null;
-  souvenior: SouveniorData | null;
-  downloadAppArea: DownloadAppAreaData | null;
 }
 
 export interface HomeResponse {
   data: Home[];
 }
 
+export interface NewsFeedData {
+  id: number;
+  documentId: string;
+  newsItem: HomeNewsBarItem[];
+}
+
+export interface NewsFeedResponse {
+  data: NewsFeedData | null;
+}
+
+export interface HomeArcCarouselResponse {
+  data: { arcCarousel: ArcCarouselData | null }[];
+}
+
+export interface HomeSouveniorResponse {
+  data: { souvenior: SouveniorData | null }[];
+}
+
+export interface HomeTramoramicTourResponse {
+  data: { tramoramicTour: TramoramicTourData | null }[];
+}
+
 export interface TramRouteResponse {
   data: TramRouteData | null;
+}
+
+export interface ScheduleBasicUnit {
+  monToFri: string;
+  sat: string;
+  sun: string;
+}
+
+export interface ScheduleDay {
+  first: ScheduleBasicUnit;
+  last: ScheduleBasicUnit;
+}
+
+export interface ScheduleWestBound {
+  shauKeiWan_westernMarket: ScheduleDay;
+  shauKeiWan_happyValley: ScheduleDay;
+  northPoint_shekTongTsui: ScheduleDay;
+  causewayBay_shekTongTsui: ScheduleDay;
+  happyValley_kennedyTown: ScheduleDay;
+  shauKeiWan_kennedyTown: ScheduleDay;
+}
+
+export interface ScheduleEastBound {
+  westernMarket_shauKeiWan: ScheduleDay;
+  happyValley_shauKeiWan: ScheduleDay;
+  shekTongTsui_northPoint: ScheduleDay;
+  shekTongTsui_causewayBay: ScheduleDay;
+  kennedyTown_happyValley: ScheduleDay;
+  kennedyTown_shauKeiWan: ScheduleDay;
+}
+
+export interface ScheduleData {
+  ScheduleWestBound: ScheduleWestBound;
+  // NOTE: "sehedule" (missing the "d") matches a typo in the backend schema field name.
+  seheduleEastBound: ScheduleEastBound;
 }
 
 export interface PlanYourRideData {
@@ -172,12 +230,18 @@ export interface PlanYourRideData {
   desc: string;
   actionButton: ActionButton | null;
   bannerImage: ResponsiveImage[] | null;
-  downloadAppArea: DownloadAppAreaData | null;
-  interactiveRouteMap: DownloadAppAreaData | null;
 }
 
 export interface PlanYourRideResponse {
   data: PlanYourRideData[];
+}
+
+export interface PlanYourRideScheduleResponse {
+  data: { schedule: ScheduleData | null }[];
+}
+
+export interface PlanYourRideInteractiveRouteMapResponse {
+  data: { interactiveRouteMap: DownloadAppAreaData | null }[];
 }
 
 export interface GlobalFaviconFormat {

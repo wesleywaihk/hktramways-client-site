@@ -446,7 +446,7 @@ export interface SharedIconEnum extends Struct.ComponentSchema {
   };
   attributes: {
     icon: Schema.Attribute.Enumeration<
-      ['map', 'calendar', 'busket', 'upRightArrow', 'faq']
+      ['map', 'calendar', 'busket', 'upRightArrow', 'faq', 'speaker']
     >;
   };
 }

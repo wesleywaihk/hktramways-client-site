@@ -1,8 +1,12 @@
-import { fetchPlanYourRide, fetchTramRoute } from "@/hooks/useApiEndpoint/api";
+import { getTranslations } from "next-intl/server";
+import { fetchPlanYourRide } from "@/hooks/useApiEndpoint/api";
+import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
 import Hero from "./components/Hero/Hero";
-import TramRoute from "../components/TramRoute/TramRoute";
+import Schedule from "./components/Schedule/Schedule";
+import TramRoute from "@/components/TramRoute/TramRoute";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
+import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import type { PlanYourRideResponse } from "@/types/api";
 
 interface PlanYourRidePageProps {
@@ -13,33 +17,31 @@ export default async function PlanYourRidePage({
   params,
 }: PlanYourRidePageProps) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "common" });
 
-  const [planYourRideResult, tramRouteResult] = await Promise.allSettled([
-    fetchPlanYourRide(locale),
-    fetchTramRoute(locale),
-  ]);
+  const { data: planYourRide, loaded } =
+    await fetchWithErrorHandling<PlanYourRideResponse>(() =>
+      fetchPlanYourRide(locale),
+    );
 
-  const planYourRide: PlanYourRideResponse | null =
-    planYourRideResult.status === "fulfilled" ? planYourRideResult.value : null;
-  const tramRoute =
-    tramRouteResult.status === "fulfilled" ? tramRouteResult.value : null;
+  const heroData = planYourRide?.data?.[0] ?? null;
 
-  const heroData = planYourRide?.data?.[0];
+  if (!loaded || !heroData) {
+    return <ErrorPage message={t("noContent")} />;
+  }
 
   return (
     <div className="pageWrapper mt-0">
-      {heroData && (
-        <Hero
-          title={heroData.title}
-          desc={heroData.desc}
-          actionButton={heroData.actionButton}
-          bannerImage={heroData.bannerImage}
-        />
-      )}
-      <TramRoute data={tramRoute?.data} />
-      <InteractiveRouteMap data={heroData?.interactiveRouteMap} />
-      <DownloadAppArea data={heroData?.downloadAppArea} />
-      {/* <pre>{JSON.stringify({ planYourRide, tramRoute }, null, 2)}</pre> */}
+      <Hero
+        title={heroData.title}
+        desc={heroData.desc}
+        actionButton={heroData.actionButton}
+        bannerImage={heroData.bannerImage}
+      />
+      <TramRoute locale={locale} />
+      <Schedule locale={locale} />
+      <InteractiveRouteMap locale={locale} />
+      <DownloadAppArea locale={locale} source="planYourRide" />
     </div>
   );
 }

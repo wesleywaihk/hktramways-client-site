@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import ExchangeArrow from "./ExchangeArrow";
 import type { RouteStop } from "./routes";
 
@@ -14,6 +15,7 @@ export default function RouteOptionButton({
   onClick,
   fullWidth = false,
 }: RouteOptionButtonProps) {
+  const t = useTranslations("common");
   const gridClasses =
     `grid items-center gap-x-3 px-4 py-3.5 ${
       fullWidth
@@ -33,9 +35,9 @@ export default function RouteOptionButton({
         <span className="text-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-[12px] font-bold transition-colors duration-200 ease-out">
           {route.id}
         </span>
-        <span className="text-center">{route.from}</span>
+        <span className="text-center">{t(route.from)}</span>
         <ExchangeArrow className="mx-auto h-5 w-5 transition-colors duration-200 ease-out" />
-        <span className="text-center">{route.to}</span>
+        <span className="text-center">{t(route.to)}</span>
       </button>
     );
   }
@@ -50,9 +52,9 @@ export default function RouteOptionButton({
       <span className="bg-green group-hover:text-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white transition-colors duration-200 ease-out group-hover:bg-white">
         {route.id}
       </span>
-      <span>{route.from}</span>
+      <span>{t(route.from)}</span>
       <ExchangeArrow className="text-green/40 mx-auto h-5 w-5 transition-colors duration-200 ease-out group-hover:text-white" />
-      <span>{route.to}</span>
+      <span>{t(route.to)}</span>
     </button>
   );
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { ROUTES, routeImage } from "./routes";
 
 export interface RouteMapImageProps {
@@ -6,10 +7,11 @@ export interface RouteMapImageProps {
 }
 
 export default function RouteMapImage({ selectedId }: RouteMapImageProps) {
+  const t = useTranslations("common");
   return (
     <div className="relative mt-10 aspect-[1179/672] w-full md:mt-14 md:aspect-[4320/1170]">
       {ROUTES.map((route) => {
-        const alt = `${route.from} - ${route.to}`;
+        const alt = `${t(route.from)} - ${t(route.to)}`;
         const active = route.id === selectedId;
 
         return (

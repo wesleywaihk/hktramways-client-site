@@ -4,6 +4,7 @@ import CalendarIco from "@/components/icons/CalendarIco";
 import BusketIco from "@/components/icons/BusketIco";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
 import FaqIco from "@/components/icons/FaqIco";
+import SpeakerIco from "@/components/icons/SpeakerIco";
 import type { IconEnum } from "@/types/api";
 
 const IconComponents: Record<
@@ -15,6 +16,7 @@ const IconComponents: Record<
   busket: BusketIco,
   upRightArrow: UprightArrowIco,
   faq: FaqIco,
+  speaker: SpeakerIco,
 };
 
 export interface BtnIconProps extends SVGProps<SVGSVGElement> {

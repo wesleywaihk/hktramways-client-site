@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "newsfeeds",
+  "info": {
+    "singularName": "newsfeed",
+    "pluralName": "newsfeeds",
+    "displayName": "newsfeed"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "newsItem": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.news-items",
+      "repeatable": true
+    }
+  }
+}

@@ -1,15 +1,40 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import Loading from "@/components/Loading/Loading";
+import { fetchSouvenior } from "@/hooks/useApiEndpoint/api";
 import SouveniorCard from "./SouveniorCard";
 import ActionButton from "./ActionButton";
 import { useSouveniorDragScroll } from "./useSouveniorDragScroll";
-import type { SouveniorData } from "@/types/api";
+import type { HomeSouveniorResponse, SouveniorData } from "@/types/api";
 
 export interface SouveniorProps {
-  data?: SouveniorData | null;
+  locale: string;
 }
 
-export default function Souvenior({ data = undefined }: SouveniorProps) {
+export default function Souvenior({ locale }: SouveniorProps) {
+  const [data, setData] = useState<SouveniorData | null | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale` changes before the refetch resolves
+    setData(undefined);
+
+    fetchSouvenior(locale)
+      .then((res: HomeSouveniorResponse) => {
+        if (!cancelled) setData(res.data?.[0]?.souvenior ?? null);
+      })
+      .catch(() => {
+        if (!cancelled) setData(null);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [locale]);
+
   const {
     containerRef,
     rowRef,
@@ -19,6 +44,14 @@ export default function Souvenior({ data = undefined }: SouveniorProps) {
     onPointerLeave,
     onClickCapture,
   } = useSouveniorDragScroll(data);
+
+  if (data === undefined) {
+    return (
+      <section className="borderless bg-green">
+        <Loading />
+      </section>
+    );
+  }
 
   if (!data) return null;
 

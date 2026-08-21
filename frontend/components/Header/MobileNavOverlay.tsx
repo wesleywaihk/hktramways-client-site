@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useLocaleSwitcher, LOCALE_LABELS } from "@/i18n/useLocaleSwitcher";
 import { mobileNavLinks } from "./navLinks";
 import ChevronIcon from "./ChevronIcon";
@@ -15,6 +16,7 @@ export default function MobileNavOverlay({
   open: boolean;
   onClose: () => void;
 }) {
+  const t = useTranslations("common");
   const { locale, locales, switchLocale } = useLocaleSwitcher();
   const [activeParent, setActiveParent] = useState<string | null>(null);
 
@@ -61,7 +63,7 @@ export default function MobileNavOverlay({
             type="button"
             className="flex h-[26px] w-[26px] cursor-pointer items-center justify-center border-none bg-transparent text-white transition-transform duration-200 ease-out hover:scale-90"
             onClick={handleClose}
-            aria-label="Close menu"
+            aria-label={t("navCloseMenu")}
           >
             <CloseIcon />
           </button>
@@ -76,7 +78,7 @@ export default function MobileNavOverlay({
 
               const content = (
                 <>
-                  {link.label}
+                  {t(link.labelKey)}
                   {hasChildren && (
                     <ChevronIcon
                       active={isActive}
@@ -127,7 +129,7 @@ export default function MobileNavOverlay({
                           className="font-sans text-[18px] leading-[152.4%] font-normal tracking-[0.36px] text-white"
                           onClick={handleClose}
                         >
-                          {child.label}
+                          {t(child.labelKey)}
                         </Link>
                       ))}
                     </div>
@@ -139,7 +141,7 @@ export default function MobileNavOverlay({
         </nav>
 
         <div className="mt-auto pt-5 font-sans text-[13px] leading-[145%] font-normal tracking-[0.26px] text-white">
-          Disclaimer &amp; Privacy Policy
+          {t("navDisclaimerPrivacy")}
         </div>
       </div>
     </>
