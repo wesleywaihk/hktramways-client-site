@@ -9,7 +9,7 @@ export interface ScheduleRoute {
 
 // Route stops are static (not CMS-driven) — the backend only stores the
 // schedule times, keyed by these same field names. Mirrors the precedent in
-// ../../../components/TramRoute/routes.ts.
+// @/components/TramRoute/routes.ts.
 export const WESTBOUND_ROUTES: ScheduleRoute[] = [
   { key: "shauKeiWan_westernMarket", from: "Shau Kei Wan", to: "Western Market" },
   { key: "shauKeiWan_happyValley", from: "Shau Kei Wan", to: "Happy Valley" },

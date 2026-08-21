@@ -1,7 +1,7 @@
-import { fetchPlanYourRide, fetchTramRoute } from "@/hooks/useApiEndpoint/api";
+import { fetchPlanYourRide } from "@/hooks/useApiEndpoint/api";
 import Hero from "./components/Hero/Hero";
 import Schedule from "./components/Schedule/Schedule";
-import TramRoute from "../components/TramRoute/TramRoute";
+import TramRoute from "@/components/TramRoute/TramRoute";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import type { PlanYourRideResponse } from "@/types/api";
@@ -15,15 +15,11 @@ export default async function PlanYourRidePage({
 }: PlanYourRidePageProps) {
   const { locale } = await params;
 
-  const [planYourRideResult, tramRouteResult] = await Promise.allSettled([
-    fetchPlanYourRide(locale),
-    fetchTramRoute(locale),
-  ]);
+  const planYourRideResult = await fetchPlanYourRide(locale).catch(
+    () => null,
+  );
 
-  const planYourRide: PlanYourRideResponse | null =
-    planYourRideResult.status === "fulfilled" ? planYourRideResult.value : null;
-  const tramRoute =
-    tramRouteResult.status === "fulfilled" ? tramRouteResult.value : null;
+  const planYourRide: PlanYourRideResponse | null = planYourRideResult;
 
   const heroData = planYourRide?.data?.[0];
 
@@ -37,7 +33,7 @@ export default async function PlanYourRidePage({
           bannerImage={heroData.bannerImage}
         />
       )}
-      <TramRoute data={tramRoute?.data} />
+      <TramRoute locale={locale} />
       <Schedule locale={locale} />
       <InteractiveRouteMap data={heroData?.interactiveRouteMap} />
       <DownloadAppArea data={heroData?.downloadAppArea} />

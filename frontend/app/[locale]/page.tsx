@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import {
-  fetchHome,
-  fetchPartyTram,
-  fetchTramRoute,
-} from "@/hooks/useApiEndpoint/api";
+import { fetchHome, fetchPartyTram } from "@/hooks/useApiEndpoint/api";
 import { generatePageMetadata, getPreviewDocumentId } from "@/lib/pageMetadata";
-import type { Home, PartyTramData, TramRouteData } from "@/types/api";
+import type { Home, PartyTramData } from "@/types/api";
 import Banner from "@/components/Banner/Banner";
 import NewsBar from "./components/NewsBar/NewsBar";
 import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
-import TramRoute from "./components/TramRoute/TramRoute";
+import TramRoute from "@/components/TramRoute/TramRoute";
 import TramoramicTour from "./components/TramoramicTour/TramoramicTour";
 import Souvenior from "./components/Souvenior/Souvenior";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
@@ -45,14 +41,11 @@ export default async function LandingPage({ params }: LandingPageProps) {
   let home: Home | null = null;
   let error: string | null = null;
   let partyTram: PartyTramData | null = null;
-  let tramRoute: TramRouteData | null = null;
 
-  const [homeResult, partyTramResult, tramRouteResult] =
-    await Promise.allSettled([
-      fetchHome(documentId ?? "", documentId !== null, locale),
-      fetchPartyTram(locale),
-      fetchTramRoute(locale),
-    ]);
+  const [homeResult, partyTramResult] = await Promise.allSettled([
+    fetchHome(documentId ?? "", documentId !== null, locale),
+    fetchPartyTram(locale),
+  ]);
 
   if (homeResult.status === "fulfilled") {
     home = homeResult.value.data[0] ?? null;
@@ -66,10 +59,6 @@ export default async function LandingPage({ params }: LandingPageProps) {
 
   if (partyTramResult.status === "fulfilled") {
     partyTram = partyTramResult.value.data ?? null;
-  }
-
-  if (tramRouteResult.status === "fulfilled") {
-    tramRoute = tramRouteResult.value.data ?? null;
   }
 
   return (
@@ -87,7 +76,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
       />
       <NewsBar items={home.newsBar} />
       <ArcCarousel data={home.arcCarousel} />
-      <TramRoute data={tramRoute} />
+      <TramRoute locale={locale} />
       <PartyTram data={partyTram} />
       <TramoramicTour data={home.tramoramicTour} />
       <Souvenior data={home.souvenior} />

@@ -54,21 +54,18 @@ export const fetchHome = cache(async function fetchHome(
   return previewMode ? { data: json.data ? [json.data] : [] } : json;
 });
 
-export const fetchTramRoute = cache(async function fetchTramRoute(
-  locale: string,
-  options?: { cache?: RequestCache },
-) {
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side TramRoute component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchTramRoute(locale: string) {
   const populate = buildPopulate(["actionButton"]);
   const url = `${API_URL}/api/tram-route?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
-  const res = await fetch(url, {
-    cache: options?.cache ?? "no-store",
-  });
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch tram route: ${res.status}`);
 
   return res.json();
-});
+}
 
 export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
   locale: string,
