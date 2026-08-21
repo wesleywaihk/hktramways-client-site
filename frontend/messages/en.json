@@ -7,7 +7,6 @@
     "tramRouteSelectFallback": "SELECT ROUTE",
     "tramoramicTourAction1Fallback": "TRAM TOURS",
     "tramoramicTourAction2Fallback": "BOOK NOW",
-    "scheduleEyebrow": "Schedule",
     "scheduleTitle": "TRAM SCHEDULE",
     "scheduleWestbound": "Westbound Route Schedule",
     "scheduleEastbound": "Eastbound Route Schedule",

@@ -3,13 +3,37 @@
 // One shared grid per route row: only the grid-template-areas (and which
 // cells are visible) change between mobile and desktop — the DOM/data are
 // identical at every size.
+// Desktop tracks are shared verbatim between the header and every row so
+// their columns line up exactly: route | label | Mon-Fri | Sat | Sun & P.H.
+$desktop-columns: 1fr auto repeat(3, 140px);
+
 .schedule-header {
   display: none;
 
   @include breakpoints.screen(lg) {
     display: grid;
-    grid-template-columns: 1fr repeat(3, 140px);
+    grid-template-columns: $desktop-columns;
   }
+}
+
+// Explicit column placement — deliberately not reusing schedule-row's
+// grid-area names here, since those are only meaningful inside
+// schedule-row's own grid-template-areas and would otherwise collide.
+// Column 2 (the row's "First/Last Tram" label) is intentionally skipped.
+.schedule-header-route {
+  grid-column: 1;
+}
+.schedule-header-mf {
+  grid-column: 3;
+  text-align: center;
+}
+.schedule-header-sat {
+  grid-column: 4;
+  text-align: center;
+}
+.schedule-header-sun {
+  grid-column: 5;
+  text-align: center;
 }
 
 .schedule-row {
@@ -23,7 +47,7 @@
   column-gap: 8px;
 
   @include breakpoints.screen(lg) {
-    grid-template-columns: 1fr repeat(3, 140px);
+    grid-template-columns: $desktop-columns;
     grid-template-areas:
       "route lfirst mf1 sat1 sun1"
       "route llast mf2 sat2 sun2";
@@ -55,9 +79,34 @@
 
 .schedule-cell-label-first {
   grid-area: lfirst;
+
+  @include breakpoints.screen(lg) {
+    padding-right: 16px;
+  }
 }
 .schedule-cell-label-last {
   grid-area: llast;
+
+  @include breakpoints.screen(lg) {
+    padding-right: 16px;
+  }
+}
+
+.schedule-cell-mf-first,
+.schedule-cell-sat-first,
+.schedule-cell-sun-first,
+.schedule-cell-mf-last,
+.schedule-cell-sat-last,
+.schedule-cell-sun-last {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 163%;
+  letter-spacing: 0.02em;
+
+  @include breakpoints.screen(lg) {
+    font-size: 16px;
+  }
 }
 
 .schedule-cell-mf-first {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { fetchHome } from "@/hooks/useApiEndpoint/api";
+import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
 import { generatePageMetadata, getPreviewDocumentId } from "@/lib/pageMetadata";
 import type { Home } from "@/types/api";
 import Banner from "@/components/Banner/Banner";
@@ -38,15 +39,10 @@ export default async function LandingPage({ params }: LandingPageProps) {
   const t = await getTranslations({ locale, namespace: "common" });
   const documentId = await getPreviewDocumentId();
 
-  let home: Home | null = null;
-  let error: string | null = null;
-
-  try {
-    const res = await fetchHome(documentId ?? "", documentId !== null, locale);
-    home = res.data[0] ?? null;
-  } catch (e) {
-    error = (e as Error).message;
-  }
+  const { data: res, error } = await fetchWithErrorHandling(() =>
+    fetchHome(documentId ?? "", documentId !== null, locale),
+  );
+  const home: Home | null = res?.data[0] ?? null;
 
   if (error || !home) {
     return <ErrorPage message={t("noContent")} />;

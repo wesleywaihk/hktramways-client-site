@@ -9,6 +9,7 @@ export const colors = {
   earthLight: "#edebda",
   redDark: "#5a1716",
   gold: "#c8a96f",
+  yellow: "#fff03b",
   accentBrown: "#703900",
   black: "#222",
 } as const;
