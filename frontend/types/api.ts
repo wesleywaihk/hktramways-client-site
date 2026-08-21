@@ -161,10 +161,6 @@ export interface HomeArcCarouselResponse {
   data: { arcCarousel: ArcCarouselData | null }[];
 }
 
-export interface HomeDownloadAppAreaResponse {
-  data: { downloadAppArea: DownloadAppAreaData | null }[];
-}
-
 export interface HomeSouveniorResponse {
   data: { souvenior: SouveniorData | null }[];
 }
@@ -219,7 +215,6 @@ export interface PlanYourRideData {
   desc: string;
   actionButton: ActionButton | null;
   bannerImage: ResponsiveImage[] | null;
-  downloadAppArea: DownloadAppAreaData | null;
 }
 
 export interface PlanYourRideResponse {

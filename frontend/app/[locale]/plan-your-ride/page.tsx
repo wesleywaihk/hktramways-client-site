@@ -2,7 +2,7 @@ import { fetchPlanYourRide } from "@/hooks/useApiEndpoint/api";
 import Hero from "./components/Hero/Hero";
 import Schedule from "./components/Schedule/Schedule";
 import TramRoute from "@/components/TramRoute/TramRoute";
-import DownloadAppAreaUI from "@/components/DownloadAppArea/DownloadAppAreaUI";
+import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import type { PlanYourRideResponse } from "@/types/api";
 
@@ -15,9 +15,7 @@ export default async function PlanYourRidePage({
 }: PlanYourRidePageProps) {
   const { locale } = await params;
 
-  const planYourRideResult = await fetchPlanYourRide(locale).catch(
-    () => null,
-  );
+  const planYourRideResult = await fetchPlanYourRide(locale).catch(() => null);
 
   const planYourRide: PlanYourRideResponse | null = planYourRideResult;
 
@@ -36,8 +34,7 @@ export default async function PlanYourRidePage({
       <TramRoute locale={locale} />
       <Schedule locale={locale} />
       <InteractiveRouteMap locale={locale} />
-      <DownloadAppAreaUI data={heroData?.downloadAppArea ?? null} />
-      {/* <pre>{JSON.stringify({ planYourRide, tramRoute }, null, 2)}</pre> */}
+      <DownloadAppArea locale={locale} source="planYourRide" />
     </div>
   );
 }
