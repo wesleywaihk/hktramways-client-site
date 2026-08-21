@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { fetchHome, fetchPartyTram } from "@/hooks/useApiEndpoint/api";
+import { fetchHome } from "@/hooks/useApiEndpoint/api";
 import { generatePageMetadata, getPreviewDocumentId } from "@/lib/pageMetadata";
-import type { Home, PartyTramData } from "@/types/api";
+import type { Home } from "@/types/api";
 import Banner from "@/components/Banner/Banner";
 import NewsBar from "./components/NewsBar/NewsBar";
 import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
@@ -40,25 +40,16 @@ export default async function LandingPage({ params }: LandingPageProps) {
 
   let home: Home | null = null;
   let error: string | null = null;
-  let partyTram: PartyTramData | null = null;
 
-  const [homeResult, partyTramResult] = await Promise.allSettled([
-    fetchHome(documentId ?? "", documentId !== null, locale),
-    fetchPartyTram(locale),
-  ]);
-
-  if (homeResult.status === "fulfilled") {
-    home = homeResult.value.data[0] ?? null;
-  } else {
-    error = (homeResult.reason as Error).message;
+  try {
+    const res = await fetchHome(documentId ?? "", documentId !== null, locale);
+    home = res.data[0] ?? null;
+  } catch (e) {
+    error = (e as Error).message;
   }
 
   if (error || !home) {
     return <ErrorPage message={t("noContent")} />;
-  }
-
-  if (partyTramResult.status === "fulfilled") {
-    partyTram = partyTramResult.value.data ?? null;
   }
 
   return (
@@ -77,7 +68,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
       <NewsBar items={home.newsBar} />
       <ArcCarousel locale={locale} />
       <TramRoute locale={locale} />
-      <PartyTram data={partyTram} />
+      <PartyTram locale={locale} />
       <TramoramicTour data={home.tramoramicTour} />
       <Souvenior data={home.souvenior} />
       <DownloadAppArea data={home.downloadAppArea} />

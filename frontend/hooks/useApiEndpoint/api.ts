@@ -145,18 +145,15 @@ export async function fetchSchedule(locale: string) {
   return res.json();
 }
 
-export const fetchPartyTram = cache(async function fetchPartyTram(
-  locale: string,
-  options?: { cache?: RequestCache },
-) {
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side PartyTram component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchPartyTram(locale: string) {
   const populate = buildPopulate(["item.carouselItem", "item.tramDetailsItem"]);
   const url = `${API_URL}/api/party-tram?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
-  const res = await fetch(url, {
-    cache: options?.cache ?? "no-store",
-  });
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch party tram: ${res.status}`);
 
   return res.json();
-});
+}
