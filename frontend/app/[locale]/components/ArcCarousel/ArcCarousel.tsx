@@ -1,11 +1,18 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/Button/Button";
 import IconButton from "@/components/Button/IconButton";
 import FloatingCircle from "@/components/FloatingCircle/FloatingCircle";
 import { useFloatingCircle } from "@/components/FloatingCircle/useFloatingCircle";
-import type { IconEnum, ArcCarouselData, Media } from "@/types/api";
+import Loading from "@/components/Loading/Loading";
+import { fetchArcCarousel } from "@/hooks/useApiEndpoint/api";
+import type {
+  IconEnum,
+  ArcCarouselData,
+  HomeArcCarouselResponse,
+  Media,
+} from "@/types/api";
 import { asImage } from "@/lib/media";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useArcCarouselSwipe } from "./useArcCarouselSwipe";
@@ -96,10 +103,40 @@ function loopedOffset(index: number, active: number, total: number) {
 }
 
 export interface ArcCarouselProps {
-  data?: ArcCarouselData | null;
+  locale: string;
 }
 
-export default function ArcCarousel({ data }: ArcCarouselProps) {
+export default function ArcCarousel({ locale }: ArcCarouselProps) {
+  const [data, setData] = useState<ArcCarouselData | null | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale` changes before the refetch resolves
+    setData(undefined);
+
+    fetchArcCarousel(locale)
+      .then((res: HomeArcCarouselResponse) => {
+        if (!cancelled) setData(res.data?.[0]?.arcCarousel ?? null);
+      })
+      .catch(() => {
+        if (!cancelled) setData(null);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [locale]);
+
+  if (data === undefined) {
+    return (
+      <section className="borderless bg-green">
+        <Loading />
+      </section>
+    );
+  }
+
   const mapped = mapCarouselData(data);
 
   return mapped ? <ArcCarouselView mapped={mapped} /> : null;

@@ -75,7 +75,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
         }
       />
       <NewsBar items={home.newsBar} />
-      <ArcCarousel data={home.arcCarousel} />
+      <ArcCarousel locale={locale} />
       <TramRoute locale={locale} />
       <PartyTram data={partyTram} />
       <TramoramicTour data={home.tramoramicTour} />

@@ -151,7 +151,6 @@ export interface Home {
   Title: string;
   bannerImage: ResponsiveImage[] | null;
   newsBar: HomeNewsBarItem[];
-  arcCarousel: ArcCarouselData | null;
   tramoramicTour: TramoramicTourData | null;
   souvenior: SouveniorData | null;
   downloadAppArea: DownloadAppAreaData | null;
@@ -159,6 +158,10 @@ export interface Home {
 
 export interface HomeResponse {
   data: Home[];
+}
+
+export interface HomeArcCarouselResponse {
+  data: { arcCarousel: ArcCarouselData | null }[];
 }
 
 export interface TramRouteResponse {
