@@ -1,0 +1,81 @@
+@use "../../../../../styles/breakpoints" as breakpoints;
+
+// One shared grid per route row: only the grid-template-areas (and which
+// cells are visible) change between mobile and desktop — the DOM/data are
+// identical at every size.
+.schedule-header {
+  display: none;
+
+  @include breakpoints.screen(lg) {
+    display: grid;
+    grid-template-columns: 1fr repeat(3, 140px);
+  }
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas:
+    "route route route route"
+    ". hmf1 hsat hsun"
+    "lfirst mf1 sat1 sun1"
+    "llast mf2 sat2 sun2";
+  column-gap: 8px;
+
+  @include breakpoints.screen(lg) {
+    grid-template-columns: 1fr repeat(3, 140px);
+    grid-template-areas:
+      "route lfirst mf1 sat1 sun1"
+      "route llast mf2 sat2 sun2";
+    column-gap: 0;
+  }
+}
+
+.schedule-cell-route {
+  grid-area: route;
+}
+
+.schedule-cell-header {
+  display: contents;
+
+  @include breakpoints.screen(lg) {
+    display: none;
+  }
+}
+
+.schedule-cell-header-mf {
+  grid-area: hmf1;
+}
+.schedule-cell-header-sat {
+  grid-area: hsat;
+}
+.schedule-cell-header-sun {
+  grid-area: hsun;
+}
+
+.schedule-cell-label-first {
+  grid-area: lfirst;
+}
+.schedule-cell-label-last {
+  grid-area: llast;
+}
+
+.schedule-cell-mf-first {
+  grid-area: mf1;
+}
+.schedule-cell-sat-first {
+  grid-area: sat1;
+}
+.schedule-cell-sun-first {
+  grid-area: sun1;
+}
+
+.schedule-cell-mf-last {
+  grid-area: mf2;
+}
+.schedule-cell-sat-last {
+  grid-area: sat2;
+}
+.schedule-cell-sun-last {
+  grid-area: sun2;
+}

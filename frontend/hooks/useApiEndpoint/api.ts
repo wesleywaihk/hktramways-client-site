@@ -96,6 +96,44 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
   return res.json();
 });
 
+// Not wrapped in React's `cache` (server-only) — this is called from a
+// client component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchSchedule(locale: string) {
+  const populate = buildPopulate([
+    "schedule.ScheduleWestBound.shauKeiWan_westernMarket.first",
+    "schedule.ScheduleWestBound.shauKeiWan_westernMarket.last",
+    "schedule.ScheduleWestBound.shauKeiWan_happyValley.first",
+    "schedule.ScheduleWestBound.shauKeiWan_happyValley.last",
+    "schedule.ScheduleWestBound.northPoint_shekTongTsui.first",
+    "schedule.ScheduleWestBound.northPoint_shekTongTsui.last",
+    "schedule.ScheduleWestBound.causewayBay_shekTongTsui.first",
+    "schedule.ScheduleWestBound.causewayBay_shekTongTsui.last",
+    "schedule.ScheduleWestBound.happyValley_kennedyTown.first",
+    "schedule.ScheduleWestBound.happyValley_kennedyTown.last",
+    "schedule.ScheduleWestBound.shauKeiWan_kennedyTown.first",
+    "schedule.ScheduleWestBound.shauKeiWan_kennedyTown.last",
+    "schedule.seheduleEastBound.westernMarket_shauKeiWan.first",
+    "schedule.seheduleEastBound.westernMarket_shauKeiWan.last",
+    "schedule.seheduleEastBound.happyValley_shauKeiWan.first",
+    "schedule.seheduleEastBound.happyValley_shauKeiWan.last",
+    "schedule.seheduleEastBound.shekTongTsui_northPoint.first",
+    "schedule.seheduleEastBound.shekTongTsui_northPoint.last",
+    "schedule.seheduleEastBound.shekTongTsui_causewayBay.first",
+    "schedule.seheduleEastBound.shekTongTsui_causewayBay.last",
+    "schedule.seheduleEastBound.kennedyTown_happyValley.first",
+    "schedule.seheduleEastBound.kennedyTown_happyValley.last",
+    "schedule.seheduleEastBound.kennedyTown_shauKeiWan.first",
+    "schedule.seheduleEastBound.kennedyTown_shauKeiWan.last",
+  ]);
+  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch schedule: ${res.status}`);
+
+  return res.json();
+}
+
 export const fetchPartyTram = cache(async function fetchPartyTram(
   locale: string,
   options?: { cache?: RequestCache },

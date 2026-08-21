@@ -6,6 +6,17 @@
     "tramRouteButtonFallback": "INTERACTIVE ROUTE MAP",
     "tramRouteSelectFallback": "SELECT ROUTE",
     "tramoramicTourAction1Fallback": "TRAM TOURS",
-    "tramoramicTourAction2Fallback": "BOOK NOW"
+    "tramoramicTourAction2Fallback": "BOOK NOW",
+    "scheduleEyebrow": "Schedule",
+    "scheduleTitle": "TRAM SCHEDULE",
+    "scheduleWestbound": "Westbound Route Schedule",
+    "scheduleEastbound": "Eastbound Route Schedule",
+    "scheduleColumnRoute": "Route",
+    "scheduleColumnMonFri": "Mon - Fri",
+    "scheduleColumnSat": "Sat",
+    "scheduleColumnSunPh": "Sun & P.H.",
+    "scheduleFirstTram": "First Tram",
+    "scheduleLastTram": "Last Tram",
+    "scheduleFootnote": "*From Shau Kei Wan to Kennedy Town: 2 Departures per hour within the service schedule\nThis timetable is published as a guide to the general level of service"
   }
 }

@@ -6,6 +6,17 @@
     "tramRouteButtonFallback": "互動路線圖",
     "tramRouteSelectFallback": "選擇路線",
     "tramoramicTourAction1Fallback": "電車遊",
-    "tramoramicTourAction2Fallback": "立即預訂"
+    "tramoramicTourAction2Fallback": "立即預訂",
+    "scheduleEyebrow": "時間表",
+    "scheduleTitle": "電車時間表",
+    "scheduleWestbound": "西行路線時間表",
+    "scheduleEastbound": "東行路線時間表",
+    "scheduleColumnRoute": "路線",
+    "scheduleColumnMonFri": "星期一至五",
+    "scheduleColumnSat": "星期六",
+    "scheduleColumnSunPh": "星期日及公眾假期",
+    "scheduleFirstTram": "首班車",
+    "scheduleLastTram": "尾班車",
+    "scheduleFootnote": "*堅尼地城至筲箕灣：服務時間內每小時2班\n此時間表僅作一般服務水平的參考"
   }
 }

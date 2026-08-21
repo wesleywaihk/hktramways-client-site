@@ -6,6 +6,17 @@
     "tramRouteButtonFallback": "互动路线图",
     "tramRouteSelectFallback": "选择路线",
     "tramoramicTourAction1Fallback": "电车游",
-    "tramoramicTourAction2Fallback": "立即预订"
+    "tramoramicTourAction2Fallback": "立即预订",
+    "scheduleEyebrow": "时间表",
+    "scheduleTitle": "电车时间表",
+    "scheduleWestbound": "西行路线时间表",
+    "scheduleEastbound": "东行路线时间表",
+    "scheduleColumnRoute": "路线",
+    "scheduleColumnMonFri": "星期一至五",
+    "scheduleColumnSat": "星期六",
+    "scheduleColumnSunPh": "星期日及公众假期",
+    "scheduleFirstTram": "首班车",
+    "scheduleLastTram": "尾班车",
+    "scheduleFootnote": "*坚尼地城至筲箕湾：服务时间内每小时2班\n此时间表仅作一般服务水平的参考"
   }
 }
