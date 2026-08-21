@@ -39,7 +39,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
   const t = await getTranslations({ locale, namespace: "common" });
   const documentId = await getPreviewDocumentId();
 
-  const [{ data: res, error }, newsFeedRes] = await Promise.all([
+  const [{ data: res, loaded }, newsFeedRes] = await Promise.all([
     fetchWithErrorHandling(() =>
       fetchHome(documentId ?? "", documentId !== null, locale),
     ),
@@ -48,7 +48,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
   const home: Home | null = res?.data[0] ?? null;
   const newsItems = newsFeedRes.data?.data?.newsItem ?? [];
 
-  if (error || !home) {
+  if (!loaded || !home) {
     return <ErrorPage message={t("noContent")} />;
   }
 

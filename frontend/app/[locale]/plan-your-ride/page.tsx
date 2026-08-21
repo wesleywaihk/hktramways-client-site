@@ -6,8 +6,8 @@ import Schedule from "./components/Schedule/Schedule";
 import TramRoute from "@/components/TramRoute/TramRoute";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
-import Loading from "@/components/Loading/Loading";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
+import type { PlanYourRideResponse } from "@/types/api";
 
 interface PlanYourRidePageProps {
   params: Promise<{ locale: string }>;
@@ -19,22 +19,15 @@ export default async function PlanYourRidePage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "common" });
 
-  const { data: planYourRide, error } = await fetchWithErrorHandling(() =>
-    fetchPlanYourRide(locale),
-  );
-
-  if (error) {
-    return <ErrorPage message={t("noContent")} />;
-  }
-
-  const heroData = planYourRide?.data?.[0];
-
-  if (!heroData) {
-    return (
-      <div className="pageWrapper mt-0">
-        <Loading />
-      </div>
+  const { data: planYourRide, loaded } =
+    await fetchWithErrorHandling<PlanYourRideResponse>(() =>
+      fetchPlanYourRide(locale),
     );
+
+  const heroData = planYourRide?.data?.[0] ?? null;
+
+  if (!loaded || !heroData) {
+    return <ErrorPage message={t("noContent")} />;
   }
 
   return (

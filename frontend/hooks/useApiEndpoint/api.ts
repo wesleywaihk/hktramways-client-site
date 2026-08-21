@@ -168,8 +168,7 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
   const res = await fetch(url, {
     cache: options?.cache ?? "no-store",
   });
-  if (!res.ok)
-    throw new Error(`Failed to fetch plan your ride: ${res.status}`);
+  if (!res.ok) throw new Error(`Failed to fetch plan your ride: ${res.status}`);
 
   return res.json();
 });
