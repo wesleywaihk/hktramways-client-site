@@ -49,7 +49,13 @@ export interface ArcCarouselItem {
   callActionText: string | null;
 }
 
-export type IconEnum = "map" | "calendar" | "busket" | "upRightArrow" | "faq";
+export type IconEnum =
+  | "map"
+  | "calendar"
+  | "busket"
+  | "upRightArrow"
+  | "faq"
+  | "speaker";
 
 export interface IconComponent {
   id: number;
