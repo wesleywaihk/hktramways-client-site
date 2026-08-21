@@ -9,7 +9,7 @@ import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
 import TramRoute from "@/components/TramRoute/TramRoute";
 import TramoramicTour from "./components/TramoramicTour/TramoramicTour";
 import Souvenior from "./components/Souvenior/Souvenior";
-import DownloadAppArea from "./components/Home/components/DownloadAppArea/DownloadAppArea";
+import DownloadAppArea from "./components/DownloadAppArea/DownloadAppArea";
 import PartyTram from "@/components/PartyTram/PartyTram";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 // import SetHeaderStyle from "@/components/Header/HeaderStyle/SetHeaderStyle";

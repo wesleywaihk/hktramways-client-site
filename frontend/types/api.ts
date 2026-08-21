@@ -220,7 +220,6 @@ export interface PlanYourRideData {
   actionButton: ActionButton | null;
   bannerImage: ResponsiveImage[] | null;
   downloadAppArea: DownloadAppAreaData | null;
-  interactiveRouteMap: DownloadAppAreaData | null;
 }
 
 export interface PlanYourRideResponse {
@@ -229,6 +228,10 @@ export interface PlanYourRideResponse {
 
 export interface PlanYourRideScheduleResponse {
   data: { schedule: ScheduleData | null }[];
+}
+
+export interface PlanYourRideInteractiveRouteMapResponse {
+  data: { interactiveRouteMap: DownloadAppAreaData | null }[];
 }
 
 export interface GlobalFaviconFormat {

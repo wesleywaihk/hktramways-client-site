@@ -1,15 +1,44 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import DownloadAppAreaUI from "@/components/DownloadAppArea/DownloadAppAreaUI";
-import type { DownloadAppAreaData } from "@/types/api";
+import { fetchInteractiveRouteMap } from "@/hooks/useApiEndpoint/api";
+import type {
+  DownloadAppAreaData,
+  PlanYourRideInteractiveRouteMapResponse,
+} from "@/types/api";
 
 export interface InteractiveRouteMapProps {
-  data?: DownloadAppAreaData | null;
+  locale: string;
   className?: string;
 }
 
 export default function InteractiveRouteMap({
-  data = null,
+  locale,
   className = "",
 }: InteractiveRouteMapProps) {
+  const [data, setData] = useState<DownloadAppAreaData | null | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale` changes before the refetch resolves
+    setData(undefined);
+
+    fetchInteractiveRouteMap(locale)
+      .then((res: PlanYourRideInteractiveRouteMapResponse) => {
+        if (!cancelled) setData(res.data?.[0]?.interactiveRouteMap ?? null);
+      })
+      .catch(() => {
+        if (!cancelled) setData(null);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [locale]);
+
   return (
     <DownloadAppAreaUI
       data={data}

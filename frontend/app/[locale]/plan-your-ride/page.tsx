@@ -35,7 +35,7 @@ export default async function PlanYourRidePage({
       )}
       <TramRoute locale={locale} />
       <Schedule locale={locale} />
-      <InteractiveRouteMap data={heroData?.interactiveRouteMap ?? null} />
+      <InteractiveRouteMap locale={locale} />
       <DownloadAppAreaUI data={heroData?.downloadAppArea ?? null} />
       {/* <pre>{JSON.stringify({ planYourRide, tramRoute }, null, 2)}</pre> */}
     </div>

@@ -132,9 +132,6 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
     "downloadAppArea.Image",
     "downloadAppArea.actionButton1",
     "downloadAppArea.actionButton2",
-    "interactiveRouteMap.Image",
-    "interactiveRouteMap.actionButton1",
-    "interactiveRouteMap.actionButton2",
   ]);
   const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
@@ -147,6 +144,24 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
 
   return res.json();
 });
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side InteractiveRouteMap component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchInteractiveRouteMap(locale: string) {
+  const populate = buildPopulate([
+    "interactiveRouteMap.Image",
+    "interactiveRouteMap.actionButton1",
+    "interactiveRouteMap.actionButton2",
+  ]);
+  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch interactive route map: ${res.status}`);
+
+  return res.json();
+}
 
 // Not wrapped in React's `cache` (server-only) — this is called from a
 // client component, directly against NEXT_PUBLIC_API_URL.
