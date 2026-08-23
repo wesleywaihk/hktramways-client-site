@@ -133,25 +133,6 @@ export interface ContentIconList extends Struct.ComponentSchema {
   };
 }
 
-export interface ContentNewsItems extends Struct.ComponentSchema {
-  collectionName: 'components_content_news_items';
-  info: {
-    displayName: 'newsItems';
-    icon: 'television';
-  };
-  attributes: {
-    dateTime: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    hyperlink: Schema.Attribute.Component<'content.hyperlink', false>;
-    text: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
-    type: Schema.Attribute.Enumeration<['event', 'discount', 'news']> &
-      Schema.Attribute.Required;
-  };
-}
-
 export interface ContentPartyTramItem extends Struct.ComponentSchema {
   collectionName: 'components_content_party_tram_items';
   info: {
@@ -463,7 +444,6 @@ declare module '@strapi/strapi' {
       'content.get-in-touch': ContentGetInTouch;
       'content.hyperlink': ContentHyperlink;
       'content.icon-list': ContentIconList;
-      'content.news-items': ContentNewsItems;
       'content.party-tram-item': ContentPartyTramItem;
       'content.schedule-basic-unit': ContentScheduleBasicUnit;
       'content.schedule-day': ContentScheduleDay;

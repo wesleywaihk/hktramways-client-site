@@ -1,15 +1,16 @@
-import type { HomeNewsBarItem } from "@/types/api";
+import type { AnnouncementItemData } from "@/types/api";
 import { formatDate } from "@/lib/formatDate";
 
 export default function NewsBarEntry({
   dateTime,
-  type,
+  announcementType,
   text,
-  hyperlink,
-}: HomeNewsBarItem) {
-  const url = hyperlink?.url ?? null;
-  const openNewWindow = hyperlink?.openNewWindow ?? false;
-  const noRefer = hyperlink?.noRefer ?? false;
+  link,
+}: AnnouncementItemData) {
+  const type = announcementType?.label ?? "";
+  const url = link?.url ?? null;
+  const openNewWindow = link?.openNewWindow ?? false;
+  const noRefer = link?.noRefer ?? false;
 
   return (
     <div className="mr-10 flex items-center gap-4">

@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "announceme_items",
+  "info": {
+    "singularName": "announceme-item",
+    "pluralName": "announceme-items",
+    "displayName": "AnnouncementItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "dateTime": {
+      "type": "datetime"
+    },
+    "announcementType": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::announcement-type.announcement-type"
+    },
+    "text": {
+      "type": "string"
+    },
+    "link": {
+      "type": "component",
+      "component": "content.hyperlink",
+      "repeatable": false
+    }
+  }
+}

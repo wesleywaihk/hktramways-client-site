@@ -29,12 +29,21 @@ export interface Hyperlink {
   noRefer: boolean | null;
 }
 
-export interface HomeNewsBarItem {
+export interface AnnouncementType {
+  id: number;
+  label: string | null;
+}
+
+export interface AnnouncementItemData {
   id: number;
   dateTime: string;
-  type: string;
   text: string;
-  hyperlink: Hyperlink | null;
+  announcementType: AnnouncementType | null;
+  link: Hyperlink | null;
+}
+
+export interface AnnouncementItemsResponse {
+  data: AnnouncementItemData[];
 }
 
 export interface CarouselItem {
@@ -160,16 +169,6 @@ export interface Home {
 
 export interface HomeResponse {
   data: Home[];
-}
-
-export interface NewsFeedData {
-  id: number;
-  documentId: string;
-  newsItem: HomeNewsBarItem[];
-}
-
-export interface NewsFeedResponse {
-  data: NewsFeedData | null;
 }
 
 export interface HomeArcCarouselResponse {

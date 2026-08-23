@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import type { HomeNewsBarItem } from "@/types/api";
+import type { AnnouncementItemData } from "@/types/api";
 import NewsBarEntry from "./NewsBarEntry";
 
 export interface NewsBarProps {
-  items?: HomeNewsBarItem[];
+  items?: AnnouncementItemData[];
   /** Scroll speed in pixels per second. */
   speed?: number;
 }
@@ -14,11 +14,11 @@ export interface NewsBarProps {
 const MIN_ITEMS = 10;
 
 function repeatToMinimum(
-  items: HomeNewsBarItem[],
+  items: AnnouncementItemData[],
   minLength: number = MIN_ITEMS,
 ) {
   if (items.length === 0) return items;
-  const repeated: HomeNewsBarItem[] = [];
+  const repeated: AnnouncementItemData[] = [];
   while (repeated.length < minLength) repeated.push(...items);
   return repeated;
 }

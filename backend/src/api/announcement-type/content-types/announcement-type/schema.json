@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "announcement_types",
+  "info": {
+    "singularName": "announcement-type",
+    "pluralName": "announcement-types",
+    "displayName": "AnnouncementType"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    }
+  }
+}

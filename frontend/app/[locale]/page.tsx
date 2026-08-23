@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { fetchHome, fetchNewsFeed } from "@/hooks/useApiEndpoint/api";
+import { fetchHome, fetchAnnouncements } from "@/hooks/useApiEndpoint/api";
 import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
 import {
   generateEntityPageMetadata,
   getPreviewDocumentId,
 } from "@/lib/pageMetadata";
-import type { Home, NewsFeedResponse } from "@/types/api";
+import type { Home, AnnouncementItemsResponse } from "@/types/api";
 import Banner from "@/components/Banner/Banner";
 import NewsBar from "./components/NewsBar/NewsBar";
 import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
@@ -40,14 +40,16 @@ export default async function LandingPage({ params }: LandingPageProps) {
   const t = await getTranslations({ locale, namespace: "common" });
   const documentId = await getPreviewDocumentId();
 
-  const [{ data: res, loaded }, newsFeedRes] = await Promise.all([
+  const [{ data: res, loaded }, announcementsRes] = await Promise.all([
     fetchWithErrorHandling(() =>
       fetchHome(documentId ?? "", documentId !== null, locale),
     ),
-    fetchWithErrorHandling<NewsFeedResponse>(() => fetchNewsFeed(locale)),
+    fetchWithErrorHandling<AnnouncementItemsResponse>(() =>
+      fetchAnnouncements(),
+    ),
   ]);
   const home: Home | null = res?.data[0] ?? null;
-  const newsItems = newsFeedRes.data?.data?.newsItem ?? [];
+  const newsItems = announcementsRes.data?.data ?? [];
 
   if (!loaded || !home) {
     return <ErrorPage message={t("noContent")} />;

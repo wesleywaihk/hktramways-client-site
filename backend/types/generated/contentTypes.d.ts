@@ -443,6 +443,101 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAnnouncemeItemAnnouncemeItem
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'announceme_items';
+  info: {
+    displayName: 'AnnouncementItem';
+    pluralName: 'announceme-items';
+    singularName: 'announceme-item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    announcementType: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::announcement-type.announcement-type'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dateTime: Schema.Attribute.DateTime;
+    link: Schema.Attribute.Component<'content.hyperlink', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::announceme-item.announceme-item'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiAnnouncementTypeAnnouncementType
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'announcement_types';
+  info: {
+    displayName: 'AnnouncementType';
+    pluralName: 'announcement-types';
+    singularName: 'announcement-type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    label: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::announcement-type.announcement-type'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiAnnouncementAnnouncement extends Struct.SingleTypeSchema {
+  collectionName: 'announcements';
+  info: {
+    displayName: 'Announcement';
+    pluralName: 'announcements';
+    singularName: 'announcement';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    announcementItem: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::announceme-item.announceme-item'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::announcement.announcement'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -554,43 +649,6 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiNewsfeedNewsfeed extends Struct.SingleTypeSchema {
-  collectionName: 'newsfeeds';
-  info: {
-    displayName: 'newsfeed';
-    pluralName: 'newsfeeds';
-    singularName: 'newsfeed';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::newsfeed.newsfeed'
-    >;
-    newsItem: Schema.Attribute.Component<'content.news-items', true> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1288,9 +1346,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::announceme-item.announceme-item': ApiAnnouncemeItemAnnouncemeItem;
+      'api::announcement-type.announcement-type': ApiAnnouncementTypeAnnouncementType;
+      'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::global.global': ApiGlobalGlobal;
       'api::home.home': ApiHomeHome;
-      'api::newsfeed.newsfeed': ApiNewsfeedNewsfeed;
       'api::party-tram.party-tram': ApiPartyTramPartyTram;
       'api::plan-your-ride.plan-your-ride': ApiPlanYourRidePlanYourRide;
       'api::tram-route.tram-route': ApiTramRouteTramRoute;

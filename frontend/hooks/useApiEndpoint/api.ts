@@ -229,31 +229,15 @@ export async function fetchSchedule(locale: string) {
   return res.json();
 }
 
-export const fetchNewsFeed = cache(async function fetchNewsFeed(
-  locale: string,
+export const fetchAnnouncements = cache(async function fetchAnnouncements(
   options?: { cache?: RequestCache },
 ) {
-  const populate = buildPopulate(["newsItem.hyperlink"]);
-  const fetchWith = async (query: string) => {
-    const url = `${API_URL}/api/newsfeed?${query}${query ? "&" : ""}${populate}`;
-    if (process.env.NODE_ENV === "development")
-      console.log("[endpoint fetched]", url);
-    return fetch(url, { cache: options?.cache ?? "no-store" });
-  };
-
-  let res = await fetchWith(`locale=${locale}`);
-  // Translation may not exist yet for this locale — fall back to the
-  // default locale rather than hiding the news bar entirely.
-  if (res.status === 404 && locale !== routing.defaultLocale) {
-    res = await fetchWith(`locale=${routing.defaultLocale}`);
-  }
-  // Entries created before i18n was enabled have no locale assigned, so
-  // they're only reachable with no `locale` filter at all — fall back to
-  // that as a last resort until content is retagged in Strapi.
-  if (res.status === 404) {
-    res = await fetchWith("");
-  }
-  if (!res.ok) throw new Error(`Failed to fetch news feed: ${res.status}`);
+  const populate = buildPopulate(["announcementType", "link"]);
+  const url = `${API_URL}/api/announceme-items?sort=dateTime:desc&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: options?.cache ?? "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch announcements: ${res.status}`);
 
   return res.json();
 });
