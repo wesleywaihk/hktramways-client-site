@@ -771,6 +771,15 @@ export interface ApiPlanYourRidePlanYourRide
           localized: true;
         };
       }>;
+    ServiceUpdates: Schema.Attribute.Component<
+      'content.service-updates',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{

@@ -222,6 +222,12 @@ export interface ScheduleData {
   seheduleEastBound: ScheduleEastBound;
 }
 
+export interface ServiceUpdatesData {
+  id: number;
+  title: string;
+  actionButton: ActionButton | null;
+}
+
 export interface PlanYourRideData {
   id: number;
   documentId: string;
@@ -229,6 +235,7 @@ export interface PlanYourRideData {
   desc: string;
   actionButton: ActionButton | null;
   bannerImage: ResponsiveImage[] | null;
+  ServiceUpdates: ServiceUpdatesData | null;
 }
 
 export interface PlanYourRideResponse {

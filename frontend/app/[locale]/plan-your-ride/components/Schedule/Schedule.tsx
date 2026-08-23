@@ -168,10 +168,6 @@ export default function Schedule({ locale }: ScheduleProps) {
               );
             })}
           </div>
-
-          <p className="mt-4 text-[13px] leading-[145%] tracking-[0.02em] whitespace-pre-line text-white">
-            {t("scheduleFootnote")}
-          </p>
         </div>
       </div>
     </section>

@@ -174,6 +174,20 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
 });
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side ServiceUpdates component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchServiceUpdates(locale: string) {
+  const populate = buildPopulate(["ServiceUpdates.actionButton"]);
+  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch service updates: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side InteractiveRouteMap component, directly against NEXT_PUBLIC_API_URL.
 export async function fetchInteractiveRouteMap(locale: string) {
   const populate = buildPopulate([
@@ -230,10 +244,16 @@ export async function fetchSchedule(locale: string) {
 }
 
 export const fetchAnnouncements = cache(async function fetchAnnouncements(
-  options?: { cache?: RequestCache },
+  options?: { cache?: RequestCache; type?: string; limit?: number },
 ) {
   const populate = buildPopulate(["announcementType", "link"]);
-  const url = `${API_URL}/api/announceme-items?sort=dateTime:desc&${populate}`;
+  const filter = options?.type
+    ? `&filters[announcementType][label][$eq]=${options.type}`
+    : "";
+  const pagination = options?.limit
+    ? `&pagination[page]=1&pagination[pageSize]=${options.limit}`
+    : "";
+  const url = `${API_URL}/api/announceme-items?sort=dateTime:desc&${populate}${filter}${pagination}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: options?.cache ?? "no-store" });

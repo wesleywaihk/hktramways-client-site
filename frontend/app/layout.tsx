@@ -29,7 +29,7 @@ export default function RootLayout({
     <html
       className={`${outfit.variable} ${notoSansHK.variable} ${notoSansSC.variable}`}
     >
-      <body>
+      <body suppressHydrationWarning>
         <AppRouterCacheProvider>
           <StoreProvider>{children}</StoreProvider>
         </AppRouterCacheProvider>

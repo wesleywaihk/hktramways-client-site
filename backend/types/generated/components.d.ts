@@ -252,6 +252,18 @@ export interface ContentScheduleWestbound extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentServiceUpdates extends Struct.ComponentSchema {
+  collectionName: 'components_content_service_updates';
+  info: {
+    displayName: 'ServiceUpdates';
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ContentSouveniorItem extends Struct.ComponentSchema {
   collectionName: 'components_content_souvenior_items';
   info: {
@@ -449,6 +461,7 @@ declare module '@strapi/strapi' {
       'content.schedule-day': ContentScheduleDay;
       'content.schedule-east-bound': ContentScheduleEastBound;
       'content.schedule-westbound': ContentScheduleWestbound;
+      'content.service-updates': ContentServiceUpdates;
       'content.souvenior-item': ContentSouveniorItem;
       'content.tram-details-item': ContentTramDetailsItem;
       'content.tramoramic-tour-item': ContentTramoramicTourItem;
