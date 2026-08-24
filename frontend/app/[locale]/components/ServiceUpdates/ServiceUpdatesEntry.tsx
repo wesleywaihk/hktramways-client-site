@@ -1,18 +1,6 @@
-import Link from "next/link";
+import IconButton from "@/components/Button/IconButton";
 import type { AnnouncementItemData } from "@/types/api";
 import { formatDate } from "@/lib/formatDate";
-
-const Arrow = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path
-      d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
 
 export default function ServiceUpdatesEntry({
   dateTime,
@@ -33,20 +21,15 @@ export default function ServiceUpdatesEntry({
           {text}
         </p>
       </div>
-      {url ? (
-        <Link
-          href={url}
-          target={openNewWindow ? "_blank" : "_self"}
-          {...(openNewWindow && noRefer ? { rel: "nofollow noreferrer" } : {})}
-          className="bg-yellow text-green flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] transition-transform hover:scale-105 lg:h-12 lg:w-12 lg:rounded-[12px]"
-        >
-          <Arrow />
-        </Link>
-      ) : (
-        <span className="bg-yellow text-green flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] lg:h-12 lg:w-12 lg:rounded-[12px]">
-          <Arrow />
-        </span>
-      )}
+      <IconButton
+        ariaLabel={text}
+        useArrow
+        shape="square"
+        href={url ?? undefined}
+        target={openNewWindow ? "_blank" : undefined}
+        rel={openNewWindow && noRefer ? "nofollow noreferrer" : undefined}
+        className="hover:text-green! hover:border-green! grid shrink-0 border-transparent! !bg-[#fdd021] text-white! hover:bg-white!"
+      />
     </div>
   );
 }
