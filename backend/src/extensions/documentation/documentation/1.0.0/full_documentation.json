@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-23T10:52:02.978Z"
+    "x-generation-date": "2026-08-24T07:06:47.552Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -10686,6 +10686,9 @@
               "downloadAppArea": {
                 "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
               },
+              "Fares": {
+                "$ref": "#/components/schemas/PagePlayYourRideFaresComponent"
+              },
               "locale": {
                 "type": "string"
               },
@@ -10789,6 +10792,9 @@
           "downloadAppArea": {
             "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
           },
+          "Fares": {
+            "$ref": "#/components/schemas/PagePlayYourRideFaresComponent"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -10884,6 +10890,9 @@
                 },
                 "downloadAppArea": {
                   "$ref": "#/components/schemas/ContentDownloadAppAreaComponent"
+                },
+                "Fares": {
+                  "$ref": "#/components/schemas/PagePlayYourRideFaresComponent"
                 },
                 "createdAt": {
                   "type": "string",
@@ -11129,6 +11138,247 @@
           },
           "seheduleEastBound": {
             "$ref": "#/components/schemas/ContentScheduleEastBoundComponent"
+          }
+        }
+      },
+      "ContentFareItemComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "icon": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "documentId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "focalPoint": {},
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {},
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number",
+                "format": "float"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {},
+              "related": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "folder": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "folderPath": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "publishedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "updatedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ]
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "title": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "PagePlayYourRideFaresComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "Title": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "fareItem": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentFareItemComponent"
+            }
+          },
+          "priceAdult": {
+            "type": "number",
+            "format": "float"
+          },
+          "priceChild": {
+            "type": "number",
+            "format": "float"
+          },
+          "priceSenior": {
+            "type": "number",
+            "format": "float"
+          },
+          "monthlyTicketActionButton": {
+            "$ref": "#/components/schemas/ContentActionButtonComponent"
+          },
+          "actionButton": {
+            "$ref": "#/components/schemas/ContentActionButtonComponent"
           }
         }
       },

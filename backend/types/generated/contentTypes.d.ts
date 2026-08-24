@@ -747,6 +747,12 @@ export interface ApiPlanYourRidePlanYourRide
           localized: true;
         };
       }>;
+    Fares: Schema.Attribute.Component<'page-play-your-ride.fares', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     interactiveRouteMap: Schema.Attribute.Component<
       'content.download-app-area',
       false

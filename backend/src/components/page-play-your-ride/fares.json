@@ -1,0 +1,45 @@
+{
+  "collectionName": "components_page_play_your_ride_fares",
+  "info": {
+    "displayName": "Fares"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "type": "text",
+      "required": true
+    },
+    "fareItem": {
+      "type": "component",
+      "component": "content.fare-item",
+      "repeatable": true
+    },
+    "priceAdult": {
+      "type": "decimal",
+      "required": true
+    },
+    "priceChild": {
+      "type": "decimal",
+      "required": true
+    },
+    "priceSenior": {
+      "type": "decimal",
+      "required": true
+    },
+    "monthlyTicketActionButton": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    },
+    "actionButton": {
+      "type": "component",
+      "component": "content.action-button",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

@@ -68,6 +68,20 @@ export interface ContentDownloadAppArea extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentFareItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_fare_items';
+  info: {
+    displayName: 'fareItem';
+  };
+  attributes: {
+    desc: Schema.Attribute.RichText & Schema.Attribute.Required;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    note: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ContentFooter extends Struct.ComponentSchema {
   collectionName: 'components_content_footers';
   info: {
@@ -389,6 +403,26 @@ export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
   };
 }
 
+export interface PagePlayYourRideFares extends Struct.ComponentSchema {
+  collectionName: 'components_page_play_your_ride_fares';
+  info: {
+    displayName: 'Fares';
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    fareItem: Schema.Attribute.Component<'content.fare-item', true>;
+    monthlyTicketActionButton: Schema.Attribute.Component<
+      'content.action-button',
+      false
+    >;
+    priceAdult: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    priceChild: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    priceSenior: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    Title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface PagePlayYourRideSchedule extends Struct.ComponentSchema {
   collectionName: 'components_page_play_your_ride_schedules';
   info: {
@@ -452,6 +486,7 @@ declare module '@strapi/strapi' {
       'content.banner-image-unit': ContentBannerImageUnit;
       'content.carousel-item': ContentCarouselItem;
       'content.download-app-area': ContentDownloadAppArea;
+      'content.fare-item': ContentFareItem;
       'content.footer': ContentFooter;
       'content.get-in-touch': ContentGetInTouch;
       'content.hyperlink': ContentHyperlink;
@@ -470,6 +505,7 @@ declare module '@strapi/strapi' {
       'page-home.souvenior': PageHomeSouvenior;
       'page-home.tram-routes': PageHomeTramRoutes;
       'page-home.tramoramic-tour': PageHomeTramoramicTour;
+      'page-play-your-ride.fares': PagePlayYourRideFares;
       'page-play-your-ride.schedule': PagePlayYourRideSchedule;
       'seo.seo': SeoSeo;
       'shared.icon-enum': SharedIconEnum;

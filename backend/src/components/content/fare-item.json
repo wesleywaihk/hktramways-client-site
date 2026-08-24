@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_content_fare_items",
+  "info": {
+    "displayName": "fareItem"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "type": "richtext",
+      "required": true
+    },
+    "note": {
+      "type": "text",
+      "required": false
+    }
+  },
+  "config": {}
+}

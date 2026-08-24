@@ -5,6 +5,7 @@ import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
 import { generateEntityPageMetadata } from "@/lib/pageMetadata";
 import Hero from "./components/Hero/Hero";
 import Schedule from "./components/Schedule/Schedule";
+import Fares from "./components/Fares/Fares";
 import TramRoute from "@/components/TramRoute/TramRoute";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
@@ -56,6 +57,7 @@ export default async function PlanYourRidePage({
       <TramRoute locale={locale} />
       <Schedule locale={locale} />
       <InteractiveRouteMap locale={locale} />
+      <Fares locale={locale} />
       <DownloadAppArea locale={locale} source="planYourRide" />
     </div>
   );

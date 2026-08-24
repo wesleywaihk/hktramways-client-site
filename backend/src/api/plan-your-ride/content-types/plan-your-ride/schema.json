@@ -92,6 +92,16 @@
       },
       "component": "content.download-app-area",
       "repeatable": false
+    },
+    "Fares": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "page-play-your-ride.fares",
+      "repeatable": false
     }
   }
 }

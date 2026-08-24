@@ -228,6 +228,26 @@ export interface ServiceUpdatesData {
   actionButton: ActionButton | null;
 }
 
+export interface FareItemData {
+  id: number;
+  icon: Media | null;
+  title: string;
+  desc: string;
+  note: string | null;
+}
+
+export interface FaresData {
+  id: number;
+  Title: string;
+  desc: string;
+  fareItem: FareItemData[];
+  priceAdult: number;
+  priceChild: number;
+  priceSenior: number;
+  monthlyTicketActionButton: ActionButton | null;
+  actionButton: ActionButton | null;
+}
+
 export interface PlanYourRideData {
   id: number;
   documentId: string;
@@ -236,6 +256,7 @@ export interface PlanYourRideData {
   actionButton: ActionButton | null;
   bannerImage: ResponsiveImage[] | null;
   ServiceUpdates: ServiceUpdatesData | null;
+  Fares: FaresData | null;
 }
 
 export interface PlanYourRideResponse {

@@ -188,6 +188,23 @@ export async function fetchServiceUpdates(locale: string) {
 }
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side Fares component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchFares(locale: string) {
+  const populate = buildPopulate([
+    "Fares.fareItem.icon",
+    "Fares.monthlyTicketActionButton",
+    "Fares.actionButton",
+  ]);
+  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch fares: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side InteractiveRouteMap component, directly against NEXT_PUBLIC_API_URL.
 export async function fetchInteractiveRouteMap(locale: string) {
   const populate = buildPopulate([
