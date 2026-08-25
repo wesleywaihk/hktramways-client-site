@@ -23,9 +23,11 @@ export default function NewsBarEntry({
       <span className="text-green text-[14px] leading-none font-normal tracking-[0.02em] whitespace-nowrap uppercase lg:text-[15px] lg:font-semibold">
         {formatDate(dateTime)}
       </span>
-      <span className="lg:bg-green inline-block rounded-[8px] bg-[#FDD021] px-2.5 py-1 text-[11px] leading-none font-semibold tracking-[0.02em] tracking-wide whitespace-nowrap text-white uppercase lg:rounded-[10px] lg:text-[12px]">
-        {type}
-      </span>
+      {type ? (
+        <span className="lg:bg-green inline-block rounded-[8px] bg-[#FDD021] px-2.5 py-1 text-[11px] leading-none font-semibold tracking-[0.02em] tracking-wide whitespace-nowrap text-white uppercase lg:rounded-[10px] lg:text-[12px]">
+          {type}
+        </span>
+      ) : null}
       {url ? (
         <a
           href={url}
