@@ -529,41 +529,6 @@ export interface ApiAnnouncementTypeAnnouncementType
   };
 }
 
-export interface ApiAnnouncementAnnouncement extends Struct.SingleTypeSchema {
-  collectionName: 'announcements';
-  info: {
-    displayName: 'Announcement';
-    pluralName: 'announcements';
-    singularName: 'announcement';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    announcementItem: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::announceme-item.announceme-item'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::announcement.announcement'
-    >;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -1389,7 +1354,6 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::announceme-item.announceme-item': ApiAnnouncemeItemAnnouncemeItem;
       'api::announcement-type.announcement-type': ApiAnnouncementTypeAnnouncementType;
-      'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::global.global': ApiGlobalGlobal;
       'api::home.home': ApiHomeHome;
       'api::party-tram.party-tram': ApiPartyTramPartyTram;
