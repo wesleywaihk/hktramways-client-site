@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-24T08:16:14.765Z"
+    "x-generation-date": "2026-08-25T06:34:53.671Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -3887,7 +3887,16 @@
               "documentId": {
                 "type": "string"
               },
-              "label": {
+              "key": {
+                "type": "string"
+              },
+              "labelEn": {
+                "type": "string"
+              },
+              "labelZhHk": {
+                "type": "string"
+              },
+              "labelZhCn": {
                 "type": "string"
               },
               "createdAt": {
@@ -4958,7 +4967,16 @@
                   "documentId": {
                     "type": "string"
                   },
-                  "label": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "labelEn": {
+                    "type": "string"
+                  },
+                  "labelZhHk": {
+                    "type": "string"
+                  },
+                  "labelZhCn": {
                     "type": "string"
                   },
                   "createdAt": {
@@ -5948,9 +5966,24 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "key",
+              "labelEn",
+              "labelZhHk",
+              "labelZhCn"
+            ],
             "type": "object",
             "properties": {
-              "label": {
+              "key": {
+                "type": "string"
+              },
+              "labelEn": {
+                "type": "string"
+              },
+              "labelZhHk": {
+                "type": "string"
+              },
+              "labelZhCn": {
                 "type": "string"
               },
               "locale": {
@@ -6011,6 +6044,12 @@
       },
       "AnnouncementType": {
         "type": "object",
+        "required": [
+          "key",
+          "labelEn",
+          "labelZhHk",
+          "labelZhCn"
+        ],
         "properties": {
           "id": {
             "oneOf": [
@@ -6025,7 +6064,16 @@
           "documentId": {
             "type": "string"
           },
-          "label": {
+          "key": {
+            "type": "string"
+          },
+          "labelEn": {
+            "type": "string"
+          },
+          "labelZhHk": {
+            "type": "string"
+          },
+          "labelZhCn": {
             "type": "string"
           },
           "createdAt": {
@@ -6748,7 +6796,16 @@
                 "documentId": {
                   "type": "string"
                 },
-                "label": {
+                "key": {
+                  "type": "string"
+                },
+                "labelEn": {
+                  "type": "string"
+                },
+                "labelZhHk": {
+                  "type": "string"
+                },
+                "labelZhCn": {
                   "type": "string"
                 },
                 "createdAt": {

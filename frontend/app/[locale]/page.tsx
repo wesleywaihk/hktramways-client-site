@@ -68,7 +68,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
             : "h-[calc(100dvh-76px)] lg:h-[calc(100dvh-100px)]"
         }
       />
-      <NewsBar items={newsItems} />
+      <NewsBar items={newsItems} locale={locale} />
       <ArcCarousel locale={locale} />
       <TramRoute locale={locale} />
       <PartyTram locale={locale} />

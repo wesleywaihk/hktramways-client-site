@@ -265,7 +265,7 @@ export const fetchAnnouncements = cache(async function fetchAnnouncements(
 ) {
   const populate = buildPopulate(["announcementType", "link"]);
   const filter = options?.type
-    ? `&filters[announcementType][label][$eq]=${options.type}`
+    ? `&filters[announcementType][key][$eq]=${options.type}`
     : "";
   const pagination = options?.limit
     ? `&pagination[page]=1&pagination[pageSize]=${options.limit}`

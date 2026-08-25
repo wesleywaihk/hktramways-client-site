@@ -31,7 +31,10 @@ export interface Hyperlink {
 
 export interface AnnouncementType {
   id: number;
-  label: string | null;
+  key: string;
+  labelEn: string | null;
+  labelZhHk: string | null;
+  labelZhCn: string | null;
 }
 
 export interface AnnouncementItemData {

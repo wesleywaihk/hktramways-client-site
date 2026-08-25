@@ -1,13 +1,19 @@
 import type { AnnouncementItemData } from "@/types/api";
 import { formatDate } from "@/lib/formatDate";
+import { getLocalizedLabel } from "@/lib/getLocalizedLabel";
+
+export interface NewsBarEntryProps extends AnnouncementItemData {
+  locale: string;
+}
 
 export default function NewsBarEntry({
   dateTime,
   announcementType,
   text,
   link,
-}: AnnouncementItemData) {
-  const type = announcementType?.label ?? "";
+  locale,
+}: NewsBarEntryProps) {
+  const type = getLocalizedLabel(announcementType, locale);
   const url = link?.url ?? null;
   const openNewWindow = link?.openNewWindow ?? false;
   const noRefer = link?.noRefer ?? false;

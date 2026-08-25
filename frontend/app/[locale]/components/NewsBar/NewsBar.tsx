@@ -7,6 +7,7 @@ import NewsBarEntry from "./NewsBarEntry";
 
 export interface NewsBarProps {
   items?: AnnouncementItemData[];
+  locale: string;
   /** Scroll speed in pixels per second. */
   speed?: number;
 }
@@ -23,7 +24,11 @@ function repeatToMinimum(
   return repeated;
 }
 
-export default function NewsBar({ items = [], speed = 120 }: NewsBarProps) {
+export default function NewsBar({
+  items = [],
+  locale,
+  speed = 120,
+}: NewsBarProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
@@ -77,7 +82,7 @@ export default function NewsBar({ items = [], speed = 120 }: NewsBarProps) {
       >
         <div ref={trackRef} className="flex items-center will-change-transform">
           {repeatToMinimum(items).map((item, index) => (
-            <NewsBarEntry key={index} {...item} />
+            <NewsBarEntry key={index} {...item} locale={locale} />
           ))}
         </div>
       </div>

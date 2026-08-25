@@ -11,8 +11,21 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "label": {
-      "type": "string"
+    "key": {
+      "type": "string",
+      "required": true
+    },
+    "labelEn": {
+      "type": "string",
+      "required": true
+    },
+    "labelZhHk": {
+      "type": "string",
+      "required": true
+    },
+    "labelZhCn": {
+      "type": "string",
+      "required": true
     }
   }
 }
