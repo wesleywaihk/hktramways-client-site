@@ -53,6 +53,16 @@
       "component": "content.banner-image-unit",
       "repeatable": true
     },
+    "ServiceUpdates": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.service-updates",
+      "repeatable": false
+    },
     "schedule": {
       "type": "component",
       "pluginOptions": {
@@ -81,6 +91,16 @@
         }
       },
       "component": "content.download-app-area",
+      "repeatable": false
+    },
+    "Fares": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "page-play-your-ride.fares",
       "repeatable": false
     }
   }

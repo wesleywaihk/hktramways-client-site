@@ -13,9 +13,7 @@ export interface SouveniorProps {
 }
 
 export default function Souvenior({ locale }: SouveniorProps) {
-  const [data, setData] = useState<SouveniorData | null | undefined>(
-    undefined,
-  );
+  const [data, setData] = useState<SouveniorData | null | undefined>(undefined);
 
   useEffect(() => {
     let cancelled = false;

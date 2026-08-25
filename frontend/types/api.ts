@@ -29,12 +29,24 @@ export interface Hyperlink {
   noRefer: boolean | null;
 }
 
-export interface HomeNewsBarItem {
+export interface AnnouncementType {
+  id: number;
+  key: string;
+  labelEn: string | null;
+  labelZhHk: string | null;
+  labelZhCn: string | null;
+}
+
+export interface AnnouncementItemData {
   id: number;
   dateTime: string;
-  type: string;
   text: string;
-  hyperlink: Hyperlink | null;
+  announcementType: AnnouncementType | null;
+  link: Hyperlink | null;
+}
+
+export interface AnnouncementItemsResponse {
+  data: AnnouncementItemData[];
 }
 
 export interface CarouselItem {
@@ -50,12 +62,7 @@ export interface ArcCarouselItem {
 }
 
 export type IconEnum =
-  | "map"
-  | "calendar"
-  | "busket"
-  | "upRightArrow"
-  | "faq"
-  | "speaker";
+  "map" | "calendar" | "busket" | "upRightArrow" | "faq" | "speaker";
 
 export interface IconComponent {
   id: number;
@@ -162,16 +169,6 @@ export interface HomeResponse {
   data: Home[];
 }
 
-export interface NewsFeedData {
-  id: number;
-  documentId: string;
-  newsItem: HomeNewsBarItem[];
-}
-
-export interface NewsFeedResponse {
-  data: NewsFeedData | null;
-}
-
 export interface HomeArcCarouselResponse {
   data: { arcCarousel: ArcCarouselData | null }[];
 }
@@ -223,6 +220,32 @@ export interface ScheduleData {
   seheduleEastBound: ScheduleEastBound;
 }
 
+export interface ServiceUpdatesData {
+  id: number;
+  title: string;
+  actionButton: ActionButton | null;
+}
+
+export interface FareItemData {
+  id: number;
+  icon: Media | null;
+  title: string;
+  desc: string;
+  note: string | null;
+}
+
+export interface FaresData {
+  id: number;
+  Title: string;
+  desc: string;
+  fareItem: FareItemData[];
+  priceAdult: number;
+  priceChild: number;
+  priceSenior: number;
+  monthlyTicketActionButton: ActionButton | null;
+  actionButton: ActionButton | null;
+}
+
 export interface PlanYourRideData {
   id: number;
   documentId: string;
@@ -230,6 +253,8 @@ export interface PlanYourRideData {
   desc: string;
   actionButton: ActionButton | null;
   bannerImage: ResponsiveImage[] | null;
+  ServiceUpdates: ServiceUpdatesData | null;
+  Fares: FaresData | null;
 }
 
 export interface PlanYourRideResponse {

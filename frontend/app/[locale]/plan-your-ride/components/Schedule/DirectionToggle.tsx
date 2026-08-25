@@ -37,7 +37,7 @@ export default function DirectionToggle({
         className={`flex cursor-pointer items-center gap-[15px] rounded-[21px] px-[25px] py-[15px] text-[13px] font-semibold uppercase transition-colors duration-200 ${
           direction === "west"
             ? "text-green bg-yellow"
-            : "text-white hover:text-yellow"
+            : "hover:text-yellow text-white"
         }`}
       >
         <ArrowIcon flip />
@@ -49,7 +49,7 @@ export default function DirectionToggle({
         className={`flex cursor-pointer items-center gap-[15px] rounded-[21px] px-[25px] py-[15px] text-[13px] font-semibold uppercase transition-colors duration-200 ${
           direction === "east"
             ? "text-green bg-yellow"
-            : "text-white hover:text-yellow"
+            : "hover:text-yellow text-white"
         }`}
       >
         {eastLabel}

@@ -36,7 +36,6 @@
     "scheduleColumnSunPh": "星期日及公众假期",
     "scheduleFirstTram": "首班车",
     "scheduleLastTram": "尾班车",
-    "scheduleFootnote": "*坚尼地城至筲箕湾：服务时间内每小时2班\n此时间表仅作一般服务水平的参考",
     "stationShauKeiWan": "筲箕湾",
     "stationWesternMarket": "西港城",
     "stationHappyValley": "跑马地",
@@ -48,6 +47,7 @@
     "footerAdult": "成人",
     "footerChild": "小童",
     "footerSeniorCitizen": "长者",
+    "faresSenior": "长者",
     "footerMonthlyTicket": "月票",
     "footerDownloadApp": "下载应用程序"
   }

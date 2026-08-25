@@ -36,7 +36,6 @@
     "scheduleColumnSunPh": "Sun & P.H.",
     "scheduleFirstTram": "First Tram",
     "scheduleLastTram": "Last Tram",
-    "scheduleFootnote": "*From Shau Kei Wan to Kennedy Town: 2 Departures per hour within the service schedule\nThis timetable is published as a guide to the general level of service",
     "stationShauKeiWan": "Shau Kei Wan",
     "stationWesternMarket": "Western Market",
     "stationHappyValley": "Happy Valley",
@@ -48,6 +47,7 @@
     "footerAdult": "Adult",
     "footerChild": "Child",
     "footerSeniorCitizen": "Senior Citizen",
+    "faresSenior": "Senior",
     "footerMonthlyTicket": "Monthly Ticket",
     "footerDownloadApp": "Download App"
   }

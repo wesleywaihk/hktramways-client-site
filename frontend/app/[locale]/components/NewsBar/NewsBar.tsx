@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import type { HomeNewsBarItem } from "@/types/api";
+import type { AnnouncementItemData } from "@/types/api";
 import NewsBarEntry from "./NewsBarEntry";
 
 export interface NewsBarProps {
-  items?: HomeNewsBarItem[];
+  items?: AnnouncementItemData[];
+  locale: string;
   /** Scroll speed in pixels per second. */
   speed?: number;
 }
@@ -14,16 +15,20 @@ export interface NewsBarProps {
 const MIN_ITEMS = 10;
 
 function repeatToMinimum(
-  items: HomeNewsBarItem[],
+  items: AnnouncementItemData[],
   minLength: number = MIN_ITEMS,
 ) {
   if (items.length === 0) return items;
-  const repeated: HomeNewsBarItem[] = [];
+  const repeated: AnnouncementItemData[] = [];
   while (repeated.length < minLength) repeated.push(...items);
   return repeated;
 }
 
-export default function NewsBar({ items = [], speed = 120 }: NewsBarProps) {
+export default function NewsBar({
+  items = [],
+  locale,
+  speed = 120,
+}: NewsBarProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
@@ -77,7 +82,7 @@ export default function NewsBar({ items = [], speed = 120 }: NewsBarProps) {
       >
         <div ref={trackRef} className="flex items-center will-change-transform">
           {repeatToMinimum(items).map((item, index) => (
-            <NewsBarEntry key={index} {...item} />
+            <NewsBarEntry key={index} {...item} locale={locale} />
           ))}
         </div>
       </div>

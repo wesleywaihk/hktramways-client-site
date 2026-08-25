@@ -174,6 +174,37 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
 });
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side ServiceUpdates component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchServiceUpdates(locale: string) {
+  const populate = buildPopulate(["ServiceUpdates.actionButton"]);
+  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch service updates: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side Fares component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchFares(locale: string) {
+  const populate = buildPopulate([
+    "Fares.fareItem.icon",
+    "Fares.monthlyTicketActionButton",
+    "Fares.actionButton",
+  ]);
+  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch fares: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side InteractiveRouteMap component, directly against NEXT_PUBLIC_API_URL.
 export async function fetchInteractiveRouteMap(locale: string) {
   const populate = buildPopulate([
@@ -229,34 +260,29 @@ export async function fetchSchedule(locale: string) {
   return res.json();
 }
 
-export const fetchNewsFeed = cache(async function fetchNewsFeed(
-  locale: string,
-  options?: { cache?: RequestCache },
-) {
-  const populate = buildPopulate(["newsItem.hyperlink"]);
-  const fetchWith = async (query: string) => {
-    const url = `${API_URL}/api/newsfeed?${query}${query ? "&" : ""}${populate}`;
+export const fetchAnnouncements = cache(
+  async function fetchAnnouncements(options?: {
+    cache?: RequestCache;
+    type?: string;
+    limit?: number;
+  }) {
+    const populate = buildPopulate(["announcementType", "link"]);
+    const filter = options?.type
+      ? `&filters[announcementType][key][$eq]=${options.type}`
+      : "";
+    const pagination = options?.limit
+      ? `&pagination[page]=1&pagination[pageSize]=${options.limit}`
+      : "";
+    const url = `${API_URL}/api/announceme-items?sort=dateTime:desc&${populate}${filter}${pagination}`;
     if (process.env.NODE_ENV === "development")
       console.log("[endpoint fetched]", url);
-    return fetch(url, { cache: options?.cache ?? "no-store" });
-  };
+    const res = await fetch(url, { cache: options?.cache ?? "no-store" });
+    if (!res.ok)
+      throw new Error(`Failed to fetch announcements: ${res.status}`);
 
-  let res = await fetchWith(`locale=${locale}`);
-  // Translation may not exist yet for this locale — fall back to the
-  // default locale rather than hiding the news bar entirely.
-  if (res.status === 404 && locale !== routing.defaultLocale) {
-    res = await fetchWith(`locale=${routing.defaultLocale}`);
-  }
-  // Entries created before i18n was enabled have no locale assigned, so
-  // they're only reachable with no `locale` filter at all — fall back to
-  // that as a last resort until content is retagged in Strapi.
-  if (res.status === 404) {
-    res = await fetchWith("");
-  }
-  if (!res.ok) throw new Error(`Failed to fetch news feed: ${res.status}`);
-
-  return res.json();
-});
+    return res.json();
+  },
+);
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side PartyTram component, directly against NEXT_PUBLIC_API_URL.

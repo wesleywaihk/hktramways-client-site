@@ -18,8 +18,10 @@ const FETCHERS = {
   planYourRide: fetchPlanYourRideDownloadAppArea,
 } as const;
 
-export interface DownloadAppAreaProps
-  extends Omit<DownloadAppAreaUIProps, "data"> {
+export interface DownloadAppAreaProps extends Omit<
+  DownloadAppAreaUIProps,
+  "data"
+> {
   locale: string;
   source: keyof typeof FETCHERS;
 }

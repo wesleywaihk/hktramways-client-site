@@ -1,16 +1,31 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { fetchPlanYourRide } from "@/hooks/useApiEndpoint/api";
 import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
+import { generateEntityPageMetadata } from "@/lib/pageMetadata";
 import Hero from "./components/Hero/Hero";
 import Schedule from "./components/Schedule/Schedule";
+import Fares from "./components/Fares/Fares";
 import TramRoute from "@/components/TramRoute/TramRoute";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
+import ServiceUpdates from "./components/ServiceUpdates/ServiceUpdates";
 import type { PlanYourRideResponse } from "@/types/api";
 
 interface PlanYourRidePageProps {
   params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: PlanYourRidePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  return generateEntityPageMetadata<PlanYourRideResponse["data"][number]>(
+    locale,
+    fetchPlanYourRide,
+    (entity) => entity.title,
+  );
 }
 
 export default async function PlanYourRidePage({
@@ -38,9 +53,11 @@ export default async function PlanYourRidePage({
         actionButton={heroData.actionButton}
         bannerImage={heroData.bannerImage}
       />
+      <ServiceUpdates locale={locale} type="news" limit={3} />
       <TramRoute locale={locale} />
       <Schedule locale={locale} />
       <InteractiveRouteMap locale={locale} />
+      <Fares locale={locale} />
       <DownloadAppArea locale={locale} source="planYourRide" />
     </div>
   );

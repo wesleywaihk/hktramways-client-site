@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "announceme_items",
+  "info": {
+    "singularName": "announceme-item",
+    "pluralName": "announceme-items",
+    "displayName": "AnnouncementItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "dateTime": {
+      "type": "datetime",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "announcementType": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::announcement-type.announcement-type"
+    },
+    "text": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "link": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.hyperlink",
+      "repeatable": false
+    }
+  }
+}

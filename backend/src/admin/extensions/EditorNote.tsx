@@ -7,6 +7,9 @@ const NOTES: Record<string, string[]> = {
   "api::home.home": [
     "Souvenior: \n- Only the first 5 souvenior items will be displayed.",
   ],
+  "api::plan-your-ride.plan-your-ride": [
+    'Service Updates: \n- The latest 3 announcements of type "news" will be rendered in the "Service Updates" section.',
+  ],
 };
 
 const NoteList = ({ notes }: { notes: string[] }) => (

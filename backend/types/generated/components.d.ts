@@ -68,6 +68,20 @@ export interface ContentDownloadAppArea extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentFareItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_fare_items';
+  info: {
+    displayName: 'fareItem';
+  };
+  attributes: {
+    desc: Schema.Attribute.RichText & Schema.Attribute.Required;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    note: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ContentFooter extends Struct.ComponentSchema {
   collectionName: 'components_content_footers';
   info: {
@@ -130,25 +144,6 @@ export interface ContentIconList extends Struct.ComponentSchema {
     icon: Schema.Attribute.Enumeration<
       ['map', 'calendar', 'busket', 'upRightArrow']
     >;
-  };
-}
-
-export interface ContentNewsItems extends Struct.ComponentSchema {
-  collectionName: 'components_content_news_items';
-  info: {
-    displayName: 'newsItems';
-    icon: 'television';
-  };
-  attributes: {
-    dateTime: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    hyperlink: Schema.Attribute.Component<'content.hyperlink', false>;
-    text: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
-    type: Schema.Attribute.Enumeration<['event', 'discount', 'news']> &
-      Schema.Attribute.Required;
   };
 }
 
@@ -268,6 +263,18 @@ export interface ContentScheduleWestbound extends Struct.ComponentSchema {
       false
     > &
       Schema.Attribute.Required;
+  };
+}
+
+export interface ContentServiceUpdates extends Struct.ComponentSchema {
+  collectionName: 'components_content_service_updates';
+  info: {
+    displayName: 'ServiceUpdates';
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -396,6 +403,26 @@ export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
   };
 }
 
+export interface PagePlayYourRideFares extends Struct.ComponentSchema {
+  collectionName: 'components_page_play_your_ride_fares';
+  info: {
+    displayName: 'Fares';
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false>;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    fareItem: Schema.Attribute.Component<'content.fare-item', true>;
+    monthlyTicketActionButton: Schema.Attribute.Component<
+      'content.action-button',
+      false
+    >;
+    priceAdult: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    priceChild: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    priceSenior: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    Title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface PagePlayYourRideSchedule extends Struct.ComponentSchema {
   collectionName: 'components_page_play_your_ride_schedules';
   info: {
@@ -459,16 +486,17 @@ declare module '@strapi/strapi' {
       'content.banner-image-unit': ContentBannerImageUnit;
       'content.carousel-item': ContentCarouselItem;
       'content.download-app-area': ContentDownloadAppArea;
+      'content.fare-item': ContentFareItem;
       'content.footer': ContentFooter;
       'content.get-in-touch': ContentGetInTouch;
       'content.hyperlink': ContentHyperlink;
       'content.icon-list': ContentIconList;
-      'content.news-items': ContentNewsItems;
       'content.party-tram-item': ContentPartyTramItem;
       'content.schedule-basic-unit': ContentScheduleBasicUnit;
       'content.schedule-day': ContentScheduleDay;
       'content.schedule-east-bound': ContentScheduleEastBound;
       'content.schedule-westbound': ContentScheduleWestbound;
+      'content.service-updates': ContentServiceUpdates;
       'content.souvenior-item': ContentSouveniorItem;
       'content.tram-details-item': ContentTramDetailsItem;
       'content.tramoramic-tour-item': ContentTramoramicTourItem;
@@ -477,6 +505,7 @@ declare module '@strapi/strapi' {
       'page-home.souvenior': PageHomeSouvenior;
       'page-home.tram-routes': PageHomeTramRoutes;
       'page-home.tramoramic-tour': PageHomeTramoramicTour;
+      'page-play-your-ride.fares': PagePlayYourRideFares;
       'page-play-your-ride.schedule': PagePlayYourRideSchedule;
       'seo.seo': SeoSeo;
       'shared.icon-enum': SharedIconEnum;

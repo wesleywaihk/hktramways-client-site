@@ -212,7 +212,8 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           onClick={prev}
           reverse
           useArrow
-          className="z-10 hidden h-11 w-11 shrink-0 md:grid md:rounded-[16px]"
+          shape="square"
+          className="z-10 hidden shrink-0 md:grid"
         />
 
         <h2 className="title-text text-center text-white">{heading}</h2>
@@ -221,7 +222,8 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           ariaLabel="Next poster"
           onClick={next}
           useArrow
-          className="z-10 hidden h-11 w-11 shrink-0 md:grid md:rounded-[16px]"
+          shape="square"
+          className="z-10 hidden shrink-0 md:grid"
         />
       </div>
 

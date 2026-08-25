@@ -59,3 +59,18 @@ export async function generatePageMetadata(
     return {};
   }
 }
+
+/** Fetches a page's entry, extracts its title via `getTitle`, and delegates to `generatePageMetadata`; swallows fetch errors into `{}`. */
+export async function generateEntityPageMetadata<T>(
+  locale: string,
+  fetchEntity: (locale: string) => Promise<{ data?: T[] }>,
+  getTitle: (entity: T) => string | null | undefined,
+): Promise<Metadata> {
+  try {
+    const res = await fetchEntity(locale);
+    const entity = res.data?.[0] ?? null;
+    return generatePageMetadata(locale, entity ? getTitle(entity) : null);
+  } catch {
+    return {};
+  }
+}

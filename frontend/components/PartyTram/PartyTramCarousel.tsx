@@ -132,7 +132,8 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
           onClick={prev}
           reverse
           useArrow
-          className="border-green! hover:bg-green! z-10 hidden h-11! w-11! shrink-0 rounded-[16px]! bg-transparent! hover:border-transparent! lg:grid"
+          shape="square"
+          className="border-green! hover:bg-green! z-10 hidden shrink-0 bg-transparent! hover:border-transparent! lg:grid"
         />
 
         <h2 className="title-text text-green text-center">{data.title}</h2>
@@ -141,7 +142,8 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
           ariaLabel="Next tram"
           onClick={next}
           useArrow
-          className="border-green! hover:bg-green! z-10 hidden h-11! w-11! shrink-0 rounded-[16px]! bg-transparent! hover:border-transparent! lg:grid"
+          shape="square"
+          className="border-green! hover:bg-green! z-10 hidden shrink-0 bg-transparent! hover:border-transparent! lg:grid"
         />
       </div>
 
@@ -252,13 +254,15 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
             onClick={prev}
             reverse
             useArrow
-            className="absolute top-1/2 left-2 z-20 grid h-10! w-10! -translate-y-1/2 rounded-[14px]! lg:hidden"
+            shape="square"
+            className="absolute top-1/2 left-2 z-20 grid h-10! w-10! -translate-y-1/2 lg:hidden"
           />
           <IconButton
             ariaLabel="Next tram"
             onClick={next}
             useArrow
-            className="absolute top-1/2 right-2 z-20 grid h-10! w-10! -translate-y-1/2 rounded-[14px]! lg:hidden"
+            shape="square"
+            className="absolute top-1/2 right-2 z-20 grid h-10! w-10! -translate-y-1/2 lg:hidden"
           />
         </div>
 

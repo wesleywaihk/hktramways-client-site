@@ -12,9 +12,7 @@ export interface PartyTramProps {
 }
 
 export default function PartyTram({ locale }: PartyTramProps) {
-  const [data, setData] = useState<PartyTramData | null | undefined>(
-    undefined,
-  );
+  const [data, setData] = useState<PartyTramData | null | undefined>(undefined);
 
   useEffect(() => {
     let cancelled = false;
