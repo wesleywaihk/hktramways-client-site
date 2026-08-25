@@ -33,9 +33,11 @@ export default function NewsBar({
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
 
+  const visibleItems = items.filter((item) => item.text.trim().length > 0);
+
   useEffect(() => {
     const track = trackRef.current;
-    if (!track || items.length === 0) return;
+    if (!track || visibleItems.length === 0) return;
 
     const halfWidth = track.scrollWidth / 2;
     let frameId: number;
@@ -57,9 +59,9 @@ export default function NewsBar({
 
     frameId = requestAnimationFrame(step);
     return () => cancelAnimationFrame(frameId);
-  }, [speed, items]);
+  }, [speed, visibleItems]);
 
-  if (!items.length) return null;
+  if (!visibleItems.length) return null;
 
   return (
     <section className="borderless relative flex h-[52px] overflow-visible bg-white pl-[53px] lg:h-[60px] lg:pl-[92px]">
@@ -81,7 +83,7 @@ export default function NewsBar({
         }}
       >
         <div ref={trackRef} className="flex items-center will-change-transform">
-          {repeatToMinimum(items).map((item, index) => (
+          {repeatToMinimum(visibleItems).map((item, index) => (
             <NewsBarEntry key={index} {...item} locale={locale} />
           ))}
         </div>
