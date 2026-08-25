@@ -17,6 +17,7 @@ export default function FareGfx({ adult, child, senior }: FareGfxProps) {
       viewBox="0 0 530 344"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="mx-auto h-auto w-full max-w-[600px]"
     >
       <g clipPath="url(#clip0_193_6895)">
         <path
@@ -1465,8 +1466,9 @@ export default function FareGfx({ adult, child, senior }: FareGfxProps) {
         x="120"
         y="47.6152"
         textAnchor="middle"
-        fontSize="13"
-        fontWeight="700"
+        fontSize="18"
+        fontWeight="600"
+        letterSpacing="0.36"
         fill="#009A5A"
       >
         {adult.label}
@@ -1475,8 +1477,9 @@ export default function FareGfx({ adult, child, senior }: FareGfxProps) {
         x="120"
         y="67.6152"
         textAnchor="middle"
-        fontSize="11"
-        fontWeight="700"
+        fontSize="15"
+        fontWeight="600"
+        letterSpacing="0.3"
         fill="#007549"
       >
         {adult.fare}
@@ -1485,8 +1488,9 @@ export default function FareGfx({ adult, child, senior }: FareGfxProps) {
         x="475"
         y="49.6152"
         textAnchor="middle"
-        fontSize="13"
-        fontWeight="700"
+        fontSize="18"
+        fontWeight="600"
+        letterSpacing="0.36"
         fill="#009A5A"
       >
         {senior.label}
@@ -1495,8 +1499,9 @@ export default function FareGfx({ adult, child, senior }: FareGfxProps) {
         x="475"
         y="69.6152"
         textAnchor="middle"
-        fontSize="11"
-        fontWeight="700"
+        fontSize="15"
+        fontWeight="600"
+        letterSpacing="0.3"
         fill="#007549"
       >
         {senior.fare}
@@ -1505,8 +1510,9 @@ export default function FareGfx({ adult, child, senior }: FareGfxProps) {
         x="293"
         y="53.6152"
         textAnchor="middle"
-        fontSize="13"
-        fontWeight="700"
+        fontSize="18"
+        fontWeight="600"
+        letterSpacing="0.36"
         fill="#009A5A"
       >
         {child.label}
@@ -1515,8 +1521,9 @@ export default function FareGfx({ adult, child, senior }: FareGfxProps) {
         x="293"
         y="73.6152"
         textAnchor="middle"
-        fontSize="11"
-        fontWeight="700"
+        fontSize="15"
+        fontWeight="600"
+        letterSpacing="0.3"
         fill="#007549"
       >
         {child.fare}

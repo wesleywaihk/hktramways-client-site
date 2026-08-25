@@ -36,7 +36,7 @@ function FareAccordionItem({
         type="button"
         onClick={onToggle}
         aria-expanded={open}
-        className="flex w-full items-center gap-3 py-5 text-left text-white"
+        className="flex w-full items-center gap-[25px] py-5 text-left text-white"
       >
         {iconSrc && (
           <Image
@@ -47,7 +47,7 @@ function FareAccordionItem({
             className="h-5 w-5 shrink-0 object-contain"
           />
         )}
-        <span className="grow text-[16px] font-semibold tracking-[0.02em]">
+        <span className="grow text-[18px] leading-[152.4%] font-semibold tracking-[0.02em]">
           {item.title}
         </span>
         <svg
@@ -71,9 +71,7 @@ function FareAccordionItem({
       <Collapse in={open}>
         <div className="pb-5 text-[14px] leading-[152%] font-normal text-white/90">
           <p>{item.desc}</p>
-          {item.note && (
-            <p className="mt-2 text-white/70 italic">{item.note}</p>
-          )}
+          {item.note && <p className="mt-2 text-white/70">{item.note}</p>}
         </div>
       </Collapse>
     </div>
@@ -126,19 +124,19 @@ export default function Fares({ locale }: FaresProps) {
   } = fares;
 
   return (
-    <section className="borderless bg-green flex h-auto flex-col justify-center py-[90px] lg:py-[120px]">
+    <section className="borderless bg-green flex h-auto flex-col justify-center pt-[45px] pb-[90px] lg:pt-[60px] lg:pb-[120px]">
       <div className="sectionContainer max-w-screen-xl flex-col gap-10">
         <div className="flex flex-col items-center gap-4 text-center">
           <h2 className="title-text text-white">{Title}</h2>
           {desc && (
-            <p className="max-w-screen-sm text-[16px] leading-[152%] font-normal text-white/90">
+            <p className="max-w-[582px] text-[16px] leading-[162.5%] font-normal tracking-[0.02em] text-white">
               {desc}
             </p>
           )}
         </div>
 
-        <div className="flex flex-col items-start gap-10 lg:flex-row lg:justify-between">
-          <div className="w-full lg:max-w-[420px]">
+        <div className="flex flex-col items-start gap-6 lg:flex-row lg:justify-between lg:gap-20">
+          <div className="w-full lg:w-[50%]">
             {fareItem.map((item, index) => (
               <FareAccordionItem
                 key={item.id}
@@ -151,12 +149,12 @@ export default function Fares({ locale }: FaresProps) {
             ))}
           </div>
 
-          <div className="flex w-full flex-col items-center gap-4 lg:w-auto">
+          <div className="flex w-full flex-col items-center gap-4 lg:w-[50%]">
             <FareGfx
               adult={{ label: t("footerAdult"), fare: `HK$${priceAdult}` }}
               child={{ label: t("footerChild"), fare: `HK$${priceChild}` }}
               senior={{
-                label: t("footerSeniorCitizen"),
+                label: t("faresSenior"),
                 fare: `HK$${priceSenior}`,
               }}
             />
@@ -166,7 +164,7 @@ export default function Fares({ locale }: FaresProps) {
                 color="white"
                 useArrow={monthlyTicketActionButton.useArrow ?? true}
                 startIcon={monthlyTicketActionButton.startIcon?.icon}
-                className="!border-yellow !bg-yellow !text-green hover:!bg-yellow hover:!text-green !w-full !justify-between !rounded-[18px] !px-6 !py-4 !text-[14px] !normal-case"
+                className="!border-yellow !bg-yellow !text-accent-brown hover:!bg-yellow hover:!text-accent-brown mt-[-20px] !w-full !justify-between !gap-[10px] !rounded-[21px] !py-[15px] !pr-5 !pl-[30px] !text-[16px] !leading-[162.5%] !normal-case"
               >
                 {monthlyTicketActionButton.label}
               </Button>
@@ -181,6 +179,7 @@ export default function Fares({ locale }: FaresProps) {
               color="white"
               useArrow={actionButton.useArrow ?? false}
               startIcon={actionButton.startIcon?.icon}
+              className="!h-[62px] !w-[400px] !justify-center !gap-[15px] !rounded-[21px] !px-6 !text-[21px] !leading-[152.4%] !normal-case"
             >
               {actionButton.label}
             </Button>
