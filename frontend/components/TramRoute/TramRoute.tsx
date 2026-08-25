@@ -19,9 +19,7 @@ export default function TramRoute({ locale }: TramRouteProps) {
   const t = useTranslations("common");
   const [selected, setSelected] = useState(ROUTES[0].id);
   const [sheetOpen, setSheetOpen] = useState(false);
-  const [data, setData] = useState<TramRouteData | null | undefined>(
-    undefined,
-  );
+  const [data, setData] = useState<TramRouteData | null | undefined>(undefined);
 
   useEffect(() => {
     let cancelled = false;

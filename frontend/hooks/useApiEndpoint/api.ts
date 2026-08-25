@@ -260,24 +260,29 @@ export async function fetchSchedule(locale: string) {
   return res.json();
 }
 
-export const fetchAnnouncements = cache(async function fetchAnnouncements(
-  options?: { cache?: RequestCache; type?: string; limit?: number },
-) {
-  const populate = buildPopulate(["announcementType", "link"]);
-  const filter = options?.type
-    ? `&filters[announcementType][key][$eq]=${options.type}`
-    : "";
-  const pagination = options?.limit
-    ? `&pagination[page]=1&pagination[pageSize]=${options.limit}`
-    : "";
-  const url = `${API_URL}/api/announceme-items?sort=dateTime:desc&${populate}${filter}${pagination}`;
-  if (process.env.NODE_ENV === "development")
-    console.log("[endpoint fetched]", url);
-  const res = await fetch(url, { cache: options?.cache ?? "no-store" });
-  if (!res.ok) throw new Error(`Failed to fetch announcements: ${res.status}`);
+export const fetchAnnouncements = cache(
+  async function fetchAnnouncements(options?: {
+    cache?: RequestCache;
+    type?: string;
+    limit?: number;
+  }) {
+    const populate = buildPopulate(["announcementType", "link"]);
+    const filter = options?.type
+      ? `&filters[announcementType][key][$eq]=${options.type}`
+      : "";
+    const pagination = options?.limit
+      ? `&pagination[page]=1&pagination[pageSize]=${options.limit}`
+      : "";
+    const url = `${API_URL}/api/announceme-items?sort=dateTime:desc&${populate}${filter}${pagination}`;
+    if (process.env.NODE_ENV === "development")
+      console.log("[endpoint fetched]", url);
+    const res = await fetch(url, { cache: options?.cache ?? "no-store" });
+    if (!res.ok)
+      throw new Error(`Failed to fetch announcements: ${res.status}`);
 
-  return res.json();
-});
+    return res.json();
+  },
+);
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side PartyTram component, directly against NEXT_PUBLIC_API_URL.
