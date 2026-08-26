@@ -121,6 +121,64 @@ async function syncContentManagerLayouts({ srcPg, destPg }) {
   console.log(`Synced ${rows.length} Content Manager layout config row(s).`);
 }
 
+const SIMPLE_SETTING_KEYS = [
+  "core_admin_auth",
+  "plugin_upload_settings",
+  "plugin_upload_view_configuration",
+  "plugin_users-permissions_advanced",
+  "plugin_users-permissions_email",
+  "plugin_users-permissions_grant",
+  "plugin_documentation_config",
+];
+
+async function syncSimpleSettings({ srcPg, destPg }) {
+  let synced = 0;
+  for (const key of SIMPLE_SETTING_KEYS) {
+    const { rows } = await srcPg.query(
+      "SELECT key, value, type, environment, tag FROM strapi_core_store_settings WHERE key = $1",
+      [key]
+    );
+    if (rows.length === 0) {
+      console.log(`No "${key}" settings row found on source, skipping.`);
+      continue;
+    }
+    await upsertCoreStoreRow(destPg, rows[0]);
+    synced += 1;
+  }
+  console.log(`Synced ${synced} settings row(s) (admin auth, media library, users-permissions, documentation).`);
+}
+
+async function syncI18nLocales({ srcPg, destPg }) {
+  const { rows: srcLocales } = await srcPg.query("SELECT * FROM i18n_locale");
+  const { rows: destLocales } = await destPg.query("SELECT id, code FROM i18n_locale");
+  const srcCodes = new Set(srcLocales.map((r) => r.code));
+
+  for (const l of destLocales) {
+    if (!srcCodes.has(l.code)) {
+      console.log(`Removing destination-only locale "${l.code}".`);
+      await destPg.query("DELETE FROM i18n_locale WHERE id = $1", [l.id]);
+    }
+  }
+
+  for (const row of srcLocales) {
+    const existing = await destPg.query("SELECT id FROM i18n_locale WHERE code = $1", [row.code]);
+    if (existing.rows.length > 0) {
+      await destPg.query(
+        "UPDATE i18n_locale SET name = $1, updated_at = $2, published_at = $3 WHERE id = $4",
+        [row.name, row.updated_at, row.published_at, existing.rows[0].id]
+      );
+    } else {
+      await destPg.query(
+        `INSERT INTO i18n_locale (document_id, name, code, created_at, updated_at, published_at, locale)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        [row.document_id, row.name, row.code, row.created_at, row.updated_at, row.published_at, row.locale]
+      );
+    }
+  }
+
+  console.log(`Synced ${srcLocales.length} locale(s).`);
+}
+
 // -- Admin panel: roles, users, permissions -------------------------------
 //
 // admin_users can only be upserted, never deleted: content tables across the
@@ -317,10 +375,10 @@ async function syncAdminPermissions({ srcPg, destPg, codeToDestRoleId, emailToDe
         [
           p.document_id,
           p.action,
-          p.action_parameters,
+          JSON.stringify(p.action_parameters ?? {}),
           p.subject,
-          p.properties,
-          p.conditions,
+          JSON.stringify(p.properties ?? {}),
+          JSON.stringify(p.conditions ?? []),
           p.created_at,
           p.updated_at,
           p.published_at,
@@ -527,6 +585,9 @@ async function main() {
       const upEmailToDestUserId = await syncUpUsers({ srcPg, destPg });
       await syncUpUserRoleLinks({ srcPg, destPg, typeToDestRoleId, emailToDestUserId: upEmailToDestUserId });
       await syncUpPermissions({ srcPg, destPg, typeToDestRoleId });
+
+      await syncSimpleSettings({ srcPg, destPg });
+      await syncI18nLocales({ srcPg, destPg });
 
       await destPg.query("COMMIT");
     } catch (err) {
