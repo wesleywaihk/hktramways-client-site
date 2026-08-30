@@ -53,5 +53,6 @@ body {
 
 @utility title-text {
   @apply leading-[107%] font-semibold tracking-[0.02em] uppercase;
-  font-size: clamp(40px, 24.73px + 4.07vw, 56px);
+  font-size: clamp(44.8px, 3.8888888889vw, 84px);
+  //font-size: clamp(40px, 24.73px + 4.07vw, 56px);
 }

@@ -10,9 +10,10 @@ import type { HomeSouveniorResponse, SouveniorData } from "@/types/api";
 
 export interface SouveniorProps {
   locale: string;
+  documentId?: string | null;
 }
 
-export default function Souvenior({ locale }: SouveniorProps) {
+export default function Souvenior({ locale, documentId }: SouveniorProps) {
   const [data, setData] = useState<SouveniorData | null | undefined>(undefined);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function Souvenior({ locale }: SouveniorProps) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale` changes before the refetch resolves
     setData(undefined);
 
-    fetchSouvenior(locale)
+    fetchSouvenior(locale, documentId)
       .then((res: HomeSouveniorResponse) => {
         if (!cancelled) setData(res.data?.[0]?.souvenior ?? null);
       })
@@ -31,7 +32,7 @@ export default function Souvenior({ locale }: SouveniorProps) {
     return () => {
       cancelled = true;
     };
-  }, [locale]);
+  }, [locale, documentId]);
 
   const {
     containerRef,

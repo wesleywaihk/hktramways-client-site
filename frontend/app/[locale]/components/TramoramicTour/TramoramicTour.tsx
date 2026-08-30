@@ -15,9 +15,13 @@ import useSlideShow from "./useSlideShow";
 
 export interface TramoramicTourProps {
   locale: string;
+  documentId?: string | null;
 }
 
-export default function TramoramicTour({ locale }: TramoramicTourProps) {
+export default function TramoramicTour({
+  locale,
+  documentId,
+}: TramoramicTourProps) {
   const t = useTranslations("common");
   const { activeSlide, nextSlide } = useSlideShow();
   const [data, setData] = useState<TramoramicTourData | null | undefined>(
@@ -29,7 +33,7 @@ export default function TramoramicTour({ locale }: TramoramicTourProps) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale` changes before the refetch resolves
     setData(undefined);
 
-    fetchTramoramicTour(locale)
+    fetchTramoramicTour(locale, documentId)
       .then((res: HomeTramoramicTourResponse) => {
         if (!cancelled) setData(res.data?.[0]?.tramoramicTour ?? null);
       })
@@ -40,7 +44,7 @@ export default function TramoramicTour({ locale }: TramoramicTourProps) {
     return () => {
       cancelled = true;
     };
-  }, [locale]);
+  }, [locale, documentId]);
 
   if (data === undefined) {
     return (

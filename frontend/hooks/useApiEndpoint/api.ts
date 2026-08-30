@@ -27,7 +27,7 @@ export const fetchHome = cache(async function fetchHome(
 ) {
   const populate = buildPopulate(["bannerImage"]);
   const url = previewMode
-    ? `${API_URL}/api/homes/${documentId}?status=draft&${populate}`
+    ? `${API_URL}/api/homes/${documentId}?status=draft&locale=${locale}&${populate}`
     : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
@@ -42,18 +42,26 @@ export const fetchHome = cache(async function fetchHome(
 // client-side DownloadAppArea component, directly against NEXT_PUBLIC_API_URL.
 export async function fetchHomeDownloadAppArea(
   locale: string,
+  documentId?: string | null,
 ): Promise<DownloadAppAreaData | null> {
   const populate = buildPopulate([
     "downloadAppArea.Image",
     "downloadAppArea.actionButton1",
     "downloadAppArea.actionButton2",
   ]);
-  const url = `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
+  const url = documentId
+    ? `${API_URL}/api/homes/${documentId}?status=draft&locale=${locale}&${populate}`
+    : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok)
     throw new Error(`Failed to fetch download app area: ${res.status}`);
+  if (documentId) {
+    const json: { data: { downloadAppArea: DownloadAppAreaData | null } | null } =
+      await res.json();
+    return json.data?.downloadAppArea ?? null;
+  }
   const json: { data: { downloadAppArea: DownloadAppAreaData | null }[] } =
     await res.json();
   return json.data?.[0]?.downloadAppArea ?? null;
@@ -82,41 +90,50 @@ export async function fetchPlanYourRideDownloadAppArea(
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side Souvenior component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchSouvenior(locale: string) {
+export async function fetchSouvenior(locale: string, documentId?: string | null) {
   const populate = buildPopulate([
     "souvenior",
     "souvenior.actionButton",
     "souvenior.item",
   ]);
-  const url = `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
+  const url = documentId
+    ? `${API_URL}/api/homes/${documentId}?status=draft&locale=${locale}&${populate}`
+    : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch souvenior: ${res.status}`);
-
-  return res.json();
+  const json = await res.json();
+  // The single-document (preview) endpoint returns `data` as an object, not an array.
+  return documentId ? { data: json.data ? [json.data] : [] } : json;
 }
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side ArcCarousel component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchArcCarousel(locale: string) {
+export async function fetchArcCarousel(locale: string, documentId?: string | null) {
   const populate = buildPopulate([
     "arcCarousel",
     "arcCarousel.item.carouselItem",
     "arcCarousel.actionButton",
   ]);
-  const url = `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
+  const url = documentId
+    ? `${API_URL}/api/homes/${documentId}?status=draft&locale=${locale}&${populate}`
+    : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch arc carousel: ${res.status}`);
-
-  return res.json();
+  const json = await res.json();
+  // The single-document (preview) endpoint returns `data` as an object, not an array.
+  return documentId ? { data: json.data ? [json.data] : [] } : json;
 }
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side TramoramicTour component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchTramoramicTour(locale: string) {
+export async function fetchTramoramicTour(
+  locale: string,
+  documentId?: string | null,
+) {
   const populate = buildPopulate([
     "tramoramicTour",
     "tramoramicTour.tramoramicTourItem1",
@@ -125,14 +142,17 @@ export async function fetchTramoramicTour(locale: string) {
     "tramoramicTour.action1",
     "tramoramicTour.action2",
   ]);
-  const url = `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
+  const url = documentId
+    ? `${API_URL}/api/homes/${documentId}?status=draft&locale=${locale}&${populate}`
+    : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok)
     throw new Error(`Failed to fetch tramoramic tour: ${res.status}`);
-
-  return res.json();
+  const json = await res.json();
+  // The single-document (preview) endpoint returns `data` as an object, not an array.
+  return documentId ? { data: json.data ? [json.data] : [] } : json;
 }
 
 // Not wrapped in React's `cache` (server-only) — this is called from the

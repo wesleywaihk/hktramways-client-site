@@ -69,12 +69,12 @@ export default async function LandingPage({ params }: LandingPageProps) {
         }
       />
       <NewsBar items={newsItems} locale={locale} />
-      <ArcCarousel locale={locale} />
+      <ArcCarousel locale={locale} documentId={documentId} />
       <TramRoute locale={locale} />
       <PartyTram locale={locale} />
-      <TramoramicTour locale={locale} />
-      <Souvenior locale={locale} />
-      <DownloadAppArea locale={locale} source="home" />
+      <TramoramicTour locale={locale} documentId={documentId} />
+      <Souvenior locale={locale} documentId={documentId} />
+      <DownloadAppArea locale={locale} source="home" documentId={documentId} />
     </div>
   );
 }
