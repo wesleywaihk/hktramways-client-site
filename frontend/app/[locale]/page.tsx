@@ -32,6 +32,7 @@ export async function generateMetadata({
     locale,
     (locale) => fetchHome(documentId ?? "", documentId !== null, locale),
     (entity) => entity.Title,
+    (entity) => entity.seo,
   );
 }
 

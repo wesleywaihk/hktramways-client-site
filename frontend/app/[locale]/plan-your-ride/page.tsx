@@ -25,6 +25,7 @@ export async function generateMetadata({
     locale,
     fetchPlanYourRide,
     (entity) => entity.title,
+    (entity) => entity.seo,
   );
 }
 

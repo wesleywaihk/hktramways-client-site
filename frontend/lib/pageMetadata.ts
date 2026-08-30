@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { cookies, draftMode } from "next/headers";
 import { fetchGlobal } from "@/hooks/useApiEndpoint/api";
 import { IMG_URL } from "@/consts";
+import type { Seo } from "@/types/api";
 
 /** Preview mode document id, read from the draft-mode cookie set by the CMS preview link. */
 export async function getPreviewDocumentId() {
@@ -60,16 +61,41 @@ export async function generatePageMetadata(
   }
 }
 
-/** Fetches a page's entry, extracts its title via `getTitle`, and delegates to `generatePageMetadata`; swallows fetch errors into `{}`. */
+/**
+ * Fetches a page's entry and extracts its title via `getTitle`.
+ * If `getSeo` yields the entity's own seo component, it overrides the
+ * site-wide seo (title/description/robots) — except `keywords`, which is
+ * merged with the global keywords instead of replaced. Otherwise falls
+ * back to `generatePageMetadata`'s title-only behavior.
+ * Swallows fetch errors into `{}`.
+ */
 export async function generateEntityPageMetadata<T>(
   locale: string,
   fetchEntity: (locale: string) => Promise<{ data?: T[] }>,
   getTitle: (entity: T) => string | null | undefined,
+  getSeo?: (entity: T) => Seo | null | undefined,
 ): Promise<Metadata> {
   try {
     const res = await fetchEntity(locale);
     const entity = res.data?.[0] ?? null;
-    return generatePageMetadata(locale, entity ? getTitle(entity) : null);
+    const pageSeo = entity && getSeo ? getSeo(entity) : null;
+
+    if (!pageSeo) {
+      return generatePageMetadata(locale, entity ? getTitle(entity) : null);
+    }
+
+    const globalRes = await getGlobalData(locale);
+    const globalSeo = globalRes.data?.seo;
+    const keywords = [globalSeo?.keywords, pageSeo.keywords]
+      .filter(Boolean)
+      .join(", ");
+
+    return {
+      title: pageSeo.metaTitle,
+      description: pageSeo.metaDescription,
+      keywords: keywords || undefined,
+      robots: pageSeo.metaRobots ?? undefined,
+    };
   } catch {
     return {};
   }

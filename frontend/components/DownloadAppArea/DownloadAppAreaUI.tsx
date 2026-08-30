@@ -38,7 +38,10 @@ export default function DownloadAppAreaUI({
     <section
       className={`borderless sectionContainer bg-green flex h-auto flex-col justify-center ${className}`}
     >
-      <div className="bg-green-light mx-auto w-full rounded-[21px] px-5 py-15 lg:rounded-[30px] lg:px-8 lg:py-20">
+      <div
+        className="bg-green-light mx-auto w-full rounded-[21px] px-5 py-15 lg:rounded-[30px] lg:px-8 lg:py-20"
+        style={data.bgColor ? { backgroundColor: data.bgColor } : undefined}
+      >
         <div className="mx-auto flex max-w-screen-lg flex-col items-center gap-8 md:flex-row md:gap-10 lg:gap-16">
           <div
             className="w-[220px] shrink-0 md:w-[260px] lg:w-[300px]"

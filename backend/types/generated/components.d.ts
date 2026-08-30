@@ -61,6 +61,7 @@ export interface ContentDownloadAppArea extends Struct.ComponentSchema {
     actionButton1: Schema.Attribute.Component<'content.action-button', false> &
       Schema.Attribute.Required;
     actionButton2: Schema.Attribute.Component<'content.action-button', false>;
+    bgColor: Schema.Attribute.String;
     desc: Schema.Attribute.Text & Schema.Attribute.Required;
     Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
       Schema.Attribute.Required;

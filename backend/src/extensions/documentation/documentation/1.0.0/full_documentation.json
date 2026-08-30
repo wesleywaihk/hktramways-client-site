@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-08-30T13:26:18.334Z"
+    "x-generation-date": "2026-08-30T22:40:14.943Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -7323,6 +7323,9 @@
             ],
             "type": "object",
             "properties": {
+              "seo": {
+                "$ref": "#/components/schemas/SeoSeoComponent"
+              },
               "Title": {
                 "type": "string"
               },
@@ -7420,6 +7423,9 @@
           "documentId": {
             "type": "string"
           },
+          "seo": {
+            "$ref": "#/components/schemas/SeoSeoComponent"
+          },
           "Title": {
             "type": "string"
           },
@@ -7509,6 +7515,9 @@
                 },
                 "documentId": {
                   "type": "string"
+                },
+                "seo": {
+                  "$ref": "#/components/schemas/SeoSeoComponent"
                 },
                 "Title": {
                   "type": "string"
@@ -8931,6 +8940,9 @@
           },
           "actionButton2": {
             "$ref": "#/components/schemas/ContentActionButtonComponent"
+          },
+          "bgColor": {
+            "type": "string"
           }
         }
       },
@@ -9263,6 +9275,9 @@
             ],
             "type": "object",
             "properties": {
+              "seo": {
+                "$ref": "#/components/schemas/SeoSeoComponent"
+              },
               "title": {
                 "type": "string"
               },
@@ -9369,6 +9384,9 @@
           "documentId": {
             "type": "string"
           },
+          "seo": {
+            "$ref": "#/components/schemas/SeoSeoComponent"
+          },
           "title": {
             "type": "string"
           },
@@ -9467,6 +9485,9 @@
                 },
                 "documentId": {
                   "type": "string"
+                },
+                "seo": {
+                  "$ref": "#/components/schemas/SeoSeoComponent"
                 },
                 "title": {
                   "type": "string"
