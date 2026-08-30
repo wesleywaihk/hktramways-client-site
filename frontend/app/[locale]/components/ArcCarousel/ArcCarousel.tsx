@@ -104,9 +104,10 @@ function loopedOffset(index: number, active: number, total: number) {
 
 export interface ArcCarouselProps {
   locale: string;
+  documentId?: string | null;
 }
 
-export default function ArcCarousel({ locale }: ArcCarouselProps) {
+export default function ArcCarousel({ locale, documentId }: ArcCarouselProps) {
   const [data, setData] = useState<ArcCarouselData | null | undefined>(
     undefined,
   );
@@ -116,7 +117,7 @@ export default function ArcCarousel({ locale }: ArcCarouselProps) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale` changes before the refetch resolves
     setData(undefined);
 
-    fetchArcCarousel(locale)
+    fetchArcCarousel(locale, documentId)
       .then((res: HomeArcCarouselResponse) => {
         if (!cancelled) setData(res.data?.[0]?.arcCarousel ?? null);
       })
@@ -127,7 +128,7 @@ export default function ArcCarousel({ locale }: ArcCarouselProps) {
     return () => {
       cancelled = true;
     };
-  }, [locale]);
+  }, [locale, documentId]);
 
   if (data === undefined) {
     return (

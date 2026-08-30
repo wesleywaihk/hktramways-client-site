@@ -181,11 +181,14 @@ async function syncI18nLocales({ srcPg, destPg }) {
 
 // -- Admin panel: roles, users, permissions -------------------------------
 //
-// admin_users can only be upserted, never deleted: content tables across the
-// schema (globals, homes, tram_routes, files, ...) reference admin_users via
-// created_by_id/updated_by_id with ON DELETE RESTRICT, so removing a user
-// that authored any content would fail. Roles and permissions have no such
-// restriction (their FKs cascade), so those are fully mirrored.
+// admin_users are fully mirrored (including deletes) so destination never
+// drifts from source. Content tables across the schema (globals, homes,
+// tram_routes, files, ...) reference admin_users via created_by_id/
+// updated_by_id with ON DELETE RESTRICT, so a destination-only user can't
+// simply be deleted: reassignAndDeleteDestOnlyAdminUsers() first repoints
+// every such FK (found via information_schema, so it stays correct as the
+// schema evolves) to a fallback admin user that was synced from source
+// (or to NULL where the column allows it), then deletes the user row.
 
 async function syncAdminRoles({ srcPg, destPg }) {
   const { rows: srcRoles } = await srcPg.query("SELECT * FROM admin_roles");
@@ -220,6 +223,53 @@ async function syncAdminRoles({ srcPg, destPg }) {
 
   console.log(`Synced ${srcRoles.length} admin role(s).`);
   return codeToDestId;
+}
+
+async function reassignAndDeleteDestOnlyAdminUsers({ destPg, destOnly, emailToDestUserId }) {
+  if (destOnly.length === 0) return;
+
+  const fallbackId = [...emailToDestUserId.values()][0] ?? null;
+  if (fallbackId == null) {
+    console.log(
+      `NOTE: cannot delete ${destOnly.length} destination-only admin user(s) ` +
+        `(no synced admin user available as a fallback for FK reassignment): ${destOnly.map((u) => u.email).join(", ")}`
+    );
+    return;
+  }
+
+  const { rows: fkRows } = await destPg.query(
+    `SELECT tc.table_name, kcu.column_name, col.is_nullable
+     FROM information_schema.table_constraints tc
+     JOIN information_schema.key_column_usage kcu
+       ON tc.constraint_name = kcu.constraint_name AND tc.table_schema = kcu.table_schema
+     JOIN information_schema.constraint_column_usage ccu
+       ON tc.constraint_name = ccu.constraint_name AND tc.table_schema = ccu.table_schema
+     JOIN information_schema.columns col
+       ON col.table_name = tc.table_name AND col.column_name = kcu.column_name AND col.table_schema = tc.table_schema
+     WHERE tc.constraint_type = 'FOREIGN KEY' AND ccu.table_name = 'admin_users' AND tc.table_name != 'admin_users'`
+  );
+
+  for (const row of destOnly) {
+    for (const fk of fkRows) {
+      const newVal = fk.is_nullable === "YES" ? null : fallbackId;
+      await destPg.query(
+        `UPDATE "${fk.table_name}" SET "${fk.column_name}" = $1 WHERE "${fk.column_name}" = $2`,
+        [newVal, row.id]
+      );
+    }
+    // self-referential created_by_id/updated_by_id on admin_users itself
+    await destPg.query(
+      "UPDATE admin_users SET created_by_id = $1 WHERE created_by_id = $2",
+      [fallbackId, row.id]
+    );
+    await destPg.query(
+      "UPDATE admin_users SET updated_by_id = $1 WHERE updated_by_id = $2",
+      [fallbackId, row.id]
+    );
+    await destPg.query("DELETE FROM admin_users_roles_lnk WHERE user_id = $1", [row.id]);
+    await destPg.query("DELETE FROM admin_users WHERE id = $1", [row.id]);
+    console.log(`Reassigned FK references from and deleted destination-only admin user "${row.email}".`);
+  }
 }
 
 async function syncAdminUsers({ srcPg, destPg }) {
@@ -291,9 +341,10 @@ async function syncAdminUsers({ srcPg, destPg }) {
   const destOnly = destUsers.filter((r) => !srcEmails.has(r.email));
   if (destOnly.length > 0) {
     console.log(
-      `NOTE: ${destOnly.length} admin user(s) exist only on destination and were kept as-is (deleting them ` +
-        `would violate FK constraints from content authored by them): ${destOnly.map((u) => u.email).join(", ")}`
+      `${destOnly.length} admin user(s) exist only on destination, reassigning their authored content and ` +
+        `removing them: ${destOnly.map((u) => u.email).join(", ")}`
     );
+    await reassignAndDeleteDestOnlyAdminUsers({ destPg, destOnly, emailToDestUserId: emailToDestId });
   }
 
   console.log(`Synced ${srcUsers.length} admin user(s).`);
