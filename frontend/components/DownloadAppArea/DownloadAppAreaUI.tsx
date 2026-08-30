@@ -65,7 +65,7 @@ export default function DownloadAppAreaUI({
             <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-white/90 md:text-[16px]">
               {data.desc}
             </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-4 md:mt-8 md:justify-start">
+            <div className="mt-6 flex flex-wrap justify-center gap-[15px] md:mt-8 md:justify-start lg:gap-5">
               {data.actionButton1 && (
                 <Button
                   href={data.actionButton1.link?.url ?? "#"}
