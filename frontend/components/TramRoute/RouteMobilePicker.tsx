@@ -26,7 +26,7 @@ export default function RouteMobilePicker({
   const t = useTranslations("common");
   return (
     <>
-      <div className="absolute right-5 bottom-5 left-5 m-0 w-auto md:hidden">
+      <div className="absolute right-5 bottom-5 left-5 m-0 w-auto lg:hidden">
         <button
           type="button"
           onClick={onOpen}
@@ -45,7 +45,7 @@ export default function RouteMobilePicker({
       </div>
 
       <div
-        className={`fixed inset-0 z-[1010] bg-black/40 transition-opacity duration-300 ease-in-out md:hidden ${
+        className={`fixed inset-0 z-[1010] bg-black/40 transition-opacity duration-300 ease-in-out lg:hidden ${
           sheetOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -54,7 +54,7 @@ export default function RouteMobilePicker({
         aria-hidden="true"
       />
       <div
-        className={`fixed right-0 bottom-0 left-0 z-[1011] max-h-[80dvh] overflow-y-auto rounded-t-[24px] bg-white px-5 pt-5 pb-8 transition-transform duration-500 ease-in-out md:hidden ${
+        className={`fixed right-0 bottom-0 left-0 z-[1011] max-h-[80dvh] overflow-y-auto rounded-t-[24px] bg-white px-5 pt-5 pb-8 transition-transform duration-500 ease-in-out lg:hidden ${
           sheetOpen ? "translate-y-0" : "translate-y-full"
         }`}
         role="dialog"

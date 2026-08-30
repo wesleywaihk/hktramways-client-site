@@ -61,15 +61,15 @@ export default function TramRoute({ locale }: TramRouteProps) {
 
   return (
     <section className="borderless bg-earth-light relative overflow-hidden pt-16 md:pt-20 lg:pt-24">
-      <div className="mx-auto flex max-w-[1360px] flex-col gap-10 px-5 md:flex-row md:items-start md:justify-between lg:gap-16 lg:px-6">
-        <div className="flex max-w-[600px] flex-col items-center text-center md:items-start md:text-left">
+      <div className="content-max-w mx-auto flex flex-col gap-10 px-5 lg:flex-row lg:items-start lg:justify-between lg:gap-16 lg:px-6">
+        <div className="mx-auto flex max-w-[583px] flex-col items-center text-center lg:ml-0 lg:items-start lg:text-left">
           <h2 className="title-text text-green">{title}</h2>
-          <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-black md:mt-6 md:text-[16px]">
+          <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-black lg:mt-6 lg:text-[16px]">
             {desc}
           </p>
           <Button
             href={buttonUrl}
-            className="mt-6 md:mt-8"
+            className="mt-6 lg:mt-8"
             useArrow={buttonUseArrow}
             startIcon={buttonStartIcon}
           >
@@ -77,7 +77,7 @@ export default function TramRoute({ locale }: TramRouteProps) {
           </Button>
         </div>
 
-        <div className="hidden shrink-0 flex-col items-start gap-3 md:flex">
+        <div className="hidden shrink-0 flex-col items-start gap-3 lg:flex lg:w-[30vw] lg:max-w-[437px]">
           {ROUTES.map((route) => (
             <RouteOptionButton
               key={route.id}

@@ -9,7 +9,7 @@ export interface RouteMapImageProps {
 export default function RouteMapImage({ selectedId }: RouteMapImageProps) {
   const t = useTranslations("common");
   return (
-    <div className="relative mt-10 aspect-[1179/672] w-full md:mt-14 md:aspect-[4320/1170]">
+    <div className="relative mt-10 aspect-[1179/672] w-full lg:mt-14 lg:aspect-[4320/1170]">
       {ROUTES.map((route) => {
         const alt = `${t(route.from)} - ${t(route.to)}`;
         const active = route.id === selectedId;
@@ -27,7 +27,7 @@ export default function RouteMapImage({ selectedId }: RouteMapImageProps) {
               alt={alt}
               fill
               priority
-              className="hidden object-cover md:block"
+              className="hidden object-cover lg:block"
               sizes="100vw"
             />
             <Image
@@ -35,7 +35,7 @@ export default function RouteMapImage({ selectedId }: RouteMapImageProps) {
               alt={alt}
               fill
               priority
-              className="block object-cover md:hidden"
+              className="block object-cover lg:hidden"
               sizes="100vw"
             />
           </div>
