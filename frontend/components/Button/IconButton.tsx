@@ -58,7 +58,7 @@ export default function IconButton({
     <span className="relative h-5 w-5 shrink-0 overflow-hidden">
       {useArrow ? (
         <ArrowIco
-          className="absolute inset-0 m-auto group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
+          className="absolute inset-0 m-auto h-5 w-5 group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
           aria-hidden="true"
         />
       ) : (

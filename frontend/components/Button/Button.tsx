@@ -1,5 +1,6 @@
 import Link from "next/link";
 import BtnIcon from "@/components/icons/BtnIcon";
+import ArrowIco from "@/components/icons/ArrowIco";
 import type { IconEnum } from "@/types/api";
 import "./Button.scss";
 
@@ -47,23 +48,11 @@ const buttonClasses =
   "transition-colors duration-200 ease-out";
 
 const Arrow = () => (
-  <span className="relative h-4 w-4 shrink-0 translate-y-[1px] overflow-hidden">
-    <svg
-      className="absolute inset-0 group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
+  <span className="relative h-5 w-5 shrink-0 overflow-hidden">
+    <ArrowIco
+      className="absolute inset-0 h-5 w-5 group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
       aria-hidden="true"
-    >
-      <path
-        d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    />
   </span>
 );
 

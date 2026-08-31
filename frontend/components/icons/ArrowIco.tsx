@@ -3,19 +3,16 @@ import type { SVGProps } from "react";
 export default function ArrowIco(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <path
-        d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        d="M10.25 4.41663C10.5833 4.08329 11.0833 4.08329 11.4166 4.41663L16.4166 9.41663C16.75 9.74996 16.75 10.25 16.4166 10.5833L11.4166 15.5833C11.0833 15.9166 10.5833 15.9166 10.25 15.5833C9.91665 15.25 9.91665 14.75 10.25 14.4166L13.8333 10.8333H4.16665C3.66665 10.8333 3.33331 10.5 3.33331 9.99996C3.33331 9.49996 3.66665 9.16663 4.16665 9.16663H13.8333L10.25 5.58329C9.91665 5.24996 9.91665 4.74996 10.25 4.41663Z"
+        fill="currentColor"
       />
     </svg>
   );

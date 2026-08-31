@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import ArrowIco from "@/components/icons/ArrowIco";
+import LongArrowIco from "@/components/icons/LongArrowIco";
 
 export type FloatingCircleBreakpoint = "sm" | "md" | "lg" | "xl" | "2xl";
 
@@ -40,11 +40,11 @@ const FloatingCircle = forwardRef<HTMLDivElement, FloatingCircleProps>(
           .join(" ")}
       >
         {content}
-        <ArrowIco
+        <LongArrowIco
           width={20}
           height={20}
           aria-hidden="true"
-          className="mx-auto block shrink-0 text-current"
+          className="mx-auto mt-2 block shrink-0 text-current"
         />
       </div>
     );

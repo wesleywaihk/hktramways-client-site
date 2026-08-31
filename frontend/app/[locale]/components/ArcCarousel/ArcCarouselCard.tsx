@@ -42,7 +42,7 @@ export default function ArcCarouselCard({
       }}
       onClick={onClick}
     >
-      <figure className="m-0 h-full w-full overflow-hidden shadow-lg transition-transform duration-150 ease-out group-hover:-translate-y-[5%]">
+      <figure className="m-0 h-full w-full overflow-hidden transition-transform duration-150 ease-out group-hover:-translate-y-[5%]">
         <div
           className="bg-earth-light relative flex h-full w-full items-end"
           onMouseMove={

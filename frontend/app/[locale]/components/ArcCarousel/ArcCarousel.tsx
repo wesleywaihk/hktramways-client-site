@@ -206,7 +206,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   };
 
   return (
-    <section className="borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden py-[10dvh] select-none md:py-[6dvh]">
+    <section className="borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden pt-[14.6dvh] pb-[11.5dvh] select-none md:pt-[18dvh] md:pb-[12.7dvh]">
       <div className="flex shrink-0 items-center justify-center gap-6 pb-8 md:gap-16 md:pb-10">
         <IconButton
           ariaLabel="Previous poster"
@@ -240,12 +240,14 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           onClick={prev}
           reverse
           useArrow
+          shape="square"
           className="absolute top-1/2 left-4 z-30 grid h-9 w-9 -translate-y-1/2 md:hidden"
         />
         <IconButton
           ariaLabel="Next poster"
           onClick={next}
           useArrow
+          shape="square"
           className="absolute top-1/2 right-4 z-30 grid h-9 w-9 -translate-y-1/2 md:hidden"
         />
 
@@ -294,11 +296,12 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           ref={circleRef}
           visible={circleVisible}
           content={hoveredContent}
+          className="pt-4"
         />
       </div>
 
       <div className="relative z-30 mt-6 shrink-0 px-8 text-center md:mt-8">
-        <p className="mx-auto max-w-[520px] text-[16px] leading-[163%] font-semibold tracking-[0.02em] whitespace-pre-line text-white">
+        <p className="mx-auto max-w-[340px] text-[16px] leading-[163%] font-semibold tracking-[0.02em] whitespace-pre-line text-white">
           {active_.caption}
         </p>
       </div>
