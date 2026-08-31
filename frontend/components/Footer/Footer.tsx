@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import Button from "@/components/Button/Button";
-import ChevronIcon from "@/components/Header/ChevronIcon";
+import ChevronIcon from "@/components/icons/ChevronIcon";
 import type { GlobalFooter } from "@/types/api";
 import { socialPlatforms } from "./footerData";
 

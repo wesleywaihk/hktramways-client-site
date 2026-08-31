@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
-import ChevronIcon from "@/components/Header/ChevronIcon";
-import CloseIcon from "@/components/Header/CloseIcon";
+import ChevronIcon from "@/components/icons/ChevronIcon";
+import CloseIcon from "@/components/icons/CloseIcon";
 import ExchangeArrow from "./ExchangeArrow";
 import RouteOptionButton from "./RouteOptionButton";
 import { ROUTES } from "./routes";

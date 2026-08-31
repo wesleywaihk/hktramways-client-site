@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useLocaleSwitcher, LOCALE_LABELS } from "@/i18n/useLocaleSwitcher";
 import { mobileNavLinks } from "./navLinks";
-import ChevronIcon from "./ChevronIcon";
-import CloseIcon from "./CloseIcon";
+import ChevronIcon from "@/components/icons/ChevronIcon";
+import CloseIcon from "@/components/icons/CloseIcon";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
 
 export default function MobileNavOverlay({
