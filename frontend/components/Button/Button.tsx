@@ -41,10 +41,9 @@ const variantColorClasses: Record<
 };
 
 const buttonClasses =
-  "group inline-flex items-center justify-center gap-2.5 lg:gap-3.5 " +
-  "px-5 py-3.5 lg:px-6.5 lg:py-[19px] " +
+  "group inline-flex items-center justify-center gap-[10px] lg:gap-[14px] " +
+  "p-[15px] lg:px-[28px] lg:py-[19px] " +
   "rounded-[18px] lg:rounded-[21px] border-2 cursor-pointer " +
-  "font-sans text-[14px] leading-[157%] font-semibold uppercase tracking-[0.02em] whitespace-nowrap " +
   "transition-colors duration-200 ease-out";
 
 const Arrow = () => (
@@ -81,7 +80,9 @@ export default function Button({
           <BtnIcon icon={startIcon} />
         </span>
       )}
-      <span className="translate-y-[1px]">{children}</span>
+      <span className="translate-y-[1px] text-center font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] whitespace-nowrap uppercase">
+        {children}
+      </span>
       {useArrow && <Arrow />}
     </>
   );

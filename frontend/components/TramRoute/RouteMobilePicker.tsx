@@ -30,15 +30,19 @@ export default function RouteMobilePicker({
         <button
           type="button"
           onClick={onOpen}
-          className="text-green flex w-full cursor-pointer items-center justify-between gap-2 rounded-[21px] bg-white px-5 py-4 font-sans text-[13px] font-bold tracking-[0.02em] uppercase shadow-md"
+          className="text-green flex w-full cursor-pointer items-center justify-between gap-2 rounded-[21px] bg-white px-5 py-4 font-sans text-[13px] font-bold tracking-[0.02em] uppercase"
         >
           <span className="grid flex-1 grid-cols-[24px_1fr_20px_1fr] items-center gap-x-3">
-            <span className="bg-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white">
+            <span className="bg-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-sans text-[14px] leading-[100%] font-semibold tracking-[0.02em] text-center text-white">
               {activeRoute.id}
             </span>
-            <span className="text-center">{t(activeRoute.from)}</span>
-            <ExchangeArrow className="text-green/40 mx-auto h-5 w-5" />
-            <span className="text-center">{t(activeRoute.to)}</span>
+            <span className="font-sans text-[18px] leading-[178%] font-semibold tracking-[0.02em] text-center">
+              {t(activeRoute.from)}
+            </span>
+            <ExchangeArrow className="text-green mx-auto h-5 w-5" />
+            <span className="font-sans text-[18px] leading-[178%] font-semibold tracking-[0.02em] text-center">
+              {t(activeRoute.to)}
+            </span>
           </span>
           <ChevronIcon className="h-4 w-4 shrink-0" />
         </button>
