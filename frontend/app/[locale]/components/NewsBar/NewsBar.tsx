@@ -5,6 +5,8 @@ import { useEffect, useRef } from "react";
 import type { AnnouncementItemData } from "@/types/api";
 import NewsBarEntry from "./NewsBarEntry";
 
+const DEF_SPEED = 40;
+
 export interface NewsBarProps {
   items?: AnnouncementItemData[];
   locale: string;
@@ -27,7 +29,7 @@ function repeatToMinimum(
 export default function NewsBar({
   items = [],
   locale,
-  speed = 120,
+  speed = DEF_SPEED,
 }: NewsBarProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);

@@ -31,7 +31,7 @@ export default function NewsBarEntry({
       {url ? (
         <a
           href={url}
-          className="text-green cursor-pointer text-sm font-semibold tracking-[0.02em] whitespace-nowrap transition-colors duration-300 hover:underline lg:text-[15px] lg:text-black"
+          className="text-green lg:hover:text-green cursor-pointer text-sm font-semibold tracking-[0.02em] whitespace-nowrap transition-colors duration-300 lg:text-[15px] lg:text-black"
           target={openNewWindow ? "_blank" : "_self"}
           {...(openNewWindow && noRefer ? { rel: "nofollow noreferrer" } : {})}
         >
