@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`text-green fixed top-0 z-[1002] w-full rounded-br-[25px] rounded-bl-[25px] bg-white shadow-md transition-transform duration-300 ease-in-out ${atTop ? "-translate-y-full" : "translate-y-0"}`}
+        className={`text-green fixed top-0 z-[1002] w-full rounded-br-[25px] rounded-bl-[25px] bg-white shadow-[0_3px_20px_0_rgba(0,0,0,0.1)] transition-transform duration-300 ease-in-out ${atTop ? "-translate-y-full" : "translate-y-0"}`}
       >
         <HeaderContent
           locale={locale}

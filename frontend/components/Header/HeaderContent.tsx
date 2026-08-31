@@ -46,8 +46,8 @@ export default function HeaderContent({
         />
       </Link>
 
-      <div className="flex items-center gap-5 lg:gap-10">
-        <div className="hidden lg:flex lg:items-center lg:gap-10">
+      <div className="flex items-center gap-4 lg:gap-5">
+        <div className="hidden lg:flex lg:items-center lg:gap-[30px]">
           <nav className="flex items-center gap-[30px]">
             {desktopNavLinks.map((link) => (
               <Link

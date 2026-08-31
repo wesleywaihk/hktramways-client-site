@@ -9,7 +9,7 @@ const bar =
 export default function HamburgerIcon({ open, className }: HamburgerIconProps) {
   return (
     <span
-      className={`relative block h-9 w-[22px] transform-gpu cursor-pointer transition-transform duration-300 ease-out hover:scale-90 ${className ?? ""}`}
+      className={`relative block h-9 w-[22px] transform-gpu cursor-pointer transition-transform duration-300 ease-out hover:scale-90 lg:w-[26px] ${className ?? ""}`}
     >
       <span className={`${bar} top-[7px]`} />
       <span
