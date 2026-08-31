@@ -64,7 +64,7 @@ export default function TramRoute({ locale }: TramRouteProps) {
       <div className="content-max-w mx-auto flex flex-col gap-10 px-5 lg:flex-row lg:items-start lg:justify-between lg:gap-16 lg:px-6">
         <div className="mx-auto flex max-w-[583px] flex-col items-center text-center lg:ml-0 lg:items-start lg:text-left">
           <h2 className="title-text text-green">{title}</h2>
-          <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-black lg:mt-6 lg:text-[16px]">
+          <p className="text-body mt-4 text-black lg:mt-6">
             {desc}
           </p>
           <Button

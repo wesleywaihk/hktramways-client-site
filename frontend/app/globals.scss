@@ -62,3 +62,7 @@ body {
   font-size: clamp(44.8px, 3.8888888889vw, 84px);
   //font-size: clamp(40px, 24.73px + 4.07vw, 56px);
 }
+
+@utility text-body {
+  @apply text-[15px] leading-[163%] tracking-[0.02em] lg:text-[16px];
+}

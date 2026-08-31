@@ -14,7 +14,8 @@ export default function PolaroidCard({
 }: PolaroidCardProps) {
   return (
     <div
-      className={`[container-type:inline-size] absolute top-1/2 right-0 w-[78vmin] bg-white px-[5vmin] pt-[5vmin] pb-[14vmin] md:w-[86%] md:px-[2.8vmin] md:pt-[2.8vmin] md:pb-[8.3vmin] lg:px-[40px] lg:pt-[40px] lg:pb-[100px] ${className}`}
+      className={`[container-type:inline-size] absolute top-1/2 right-0 w-full bg-white px-[5vmin] pt-[5vmin] pb-[14vmin] lg:px-[2.8vmin] lg:px-[40px] lg:pt-[2.8vmin] lg:pt-[40px] lg:pb-[8.3vmin] lg:pb-[100px] ${className}`}
+      style={{ boxShadow: "-5px 0px 20px 0px #00000026" }}
     >
       <ResponsiveImg
         bannerImage={{
