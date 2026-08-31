@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { SCROLL_DISTANCE } from "./Banner";
 import { FADE_DURATION_MS } from "./Banner";
 
@@ -13,6 +14,7 @@ export interface VideoCardProps {
   transY?: number;
   style?: React.CSSProperties;
   useBorder?: boolean;
+  onEnded?: () => void;
 }
 
 export default function VideoCard({
@@ -24,14 +26,17 @@ export default function VideoCard({
   transY = 0,
   style = {},
   useBorder = true,
+  onEnded,
 }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [shouldRender, setShouldRender] = useState(isActive);
+  const { isLg } = useMediaQuery();
   const imageD = bannerImage?.imageD;
   const imageM = bannerImage?.imageM;
   const alt = bannerImage?.altText ?? "";
   const srcD = imageD?.url ? `${url}${imageD.url}` : undefined;
   const srcM = imageM?.url ? `${url}${imageM.url}` : srcD;
+  const src = isLg ? (srcD ?? srcM) : (srcM ?? srcD);
 
   // keep the <video> mounted through the fade-out instead of popping it out mid-transition
   if (isActive && !shouldRender) setShouldRender(true);
@@ -44,6 +49,12 @@ export default function VideoCard({
     }, FADE_DURATION_MS);
     return () => clearTimeout(timer);
   }, [isActive]);
+
+  // switching `src` across the lg breakpoint reloads the element, so resume playback
+  useEffect(() => {
+    if (!isActive) return;
+    videoRef.current?.play().catch(() => {});
+  }, [src, isActive]);
 
   const videoStyle = {
     top: `${0 - SCROLL_DISTANCE}px`,
@@ -65,21 +76,20 @@ export default function VideoCard({
       style={style}
       data-full-screen={isFullScreen}
     >
-      {shouldRender && (srcM || srcD) && (
+      {shouldRender && src && (
         <video
+          ref={videoRef}
+          src={src}
           className="absolute inset-0 max-h-[unset] w-full max-w-[unset] transform-gpu object-cover"
           aria-label={alt}
           autoPlay
-          loop
           muted
           playsInline
           controls={false}
           disablePictureInPicture
+          onEnded={isActive ? onEnded : undefined}
           style={videoStyle}
-        >
-          {srcD && <source src={srcD} media="(min-width: 1024px)" />}
-          {srcM && <source src={srcM} />}
-        </video>
+        />
       )}
     </div>
   );

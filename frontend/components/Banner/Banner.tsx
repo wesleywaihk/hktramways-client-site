@@ -15,7 +15,7 @@ export interface BannerProps {
   useBorder?: boolean;
 }
 
-const SLIDE_INTERVAL_MS = 10000;
+const SLIDE_INTERVAL_MS = 4000;
 export const SCROLL_DISTANCE = 200;
 export const FADE_DURATION_MS = 1000;
 
@@ -36,15 +36,22 @@ export default function Banner({
   const sectionRef = useRef<HTMLElement>(null);
   const scrollProgress = useElementScrollProgress(sectionRef, "pageTop");
 
+  const activeBanner = banners[activeIndex];
+  const isActiveVideo = activeBanner ? isVideoMedia(activeBanner.imageD) : false;
+
   useEffect(() => {
-    if (banners.length < 2) return;
+    if (banners.length < 2 || isActiveVideo) return;
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % banners.length);
     }, SLIDE_INTERVAL_MS);
     return () => clearInterval(timer);
-  }, [banners.length]);
+  }, [banners.length, activeIndex, isActiveVideo]);
 
   if (banners.length === 0) return null;
+
+  const goToNextSlide = () => {
+    setActiveIndex((prev) => (prev + 1) % banners.length);
+  };
 
   const transY = Math.min(
     Math.max(0, scrollProgress * SCROLL_DISTANCE),
@@ -71,6 +78,7 @@ export default function Banner({
             transY={transY}
             style={cardStyle}
             useBorder={useBorder}
+            onEnded={index === activeIndex ? goToNextSlide : undefined}
           />
         ) : (
           <ImageCard
