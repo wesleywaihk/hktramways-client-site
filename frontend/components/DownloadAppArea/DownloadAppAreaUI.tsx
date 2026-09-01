@@ -42,9 +42,9 @@ export default function DownloadAppAreaUI({
         className="bg-green-light mx-auto w-full rounded-[21px] px-5 py-15 lg:rounded-[30px] lg:px-8 lg:py-20"
         style={data.bgColor ? { backgroundColor: data.bgColor } : undefined}
       >
-        <div className="mx-auto flex max-w-screen-lg flex-col items-center gap-8 md:flex-row md:gap-10 lg:gap-16">
+        <div className="mx-auto flex max-w-[869px] flex-col items-center gap-y-5 lg:flex-row lg:gap-x-[60px]">
           <div
-            className="w-[220px] shrink-0 md:w-[260px] lg:w-[300px]"
+            className="w-[201px] shrink-0 lg:w-[238px]"
             style={{ aspectRatio }}
           >
             <ResponsiveImg
@@ -58,14 +58,14 @@ export default function DownloadAppAreaUI({
             />
           </div>
 
-          <div className="flex flex-col items-center text-center md:items-start md:text-left">
-            <h2 className="text-[28px] leading-[120%] font-semibold tracking-[0.02em] text-white md:text-[32px] lg:text-[40px]">
+          <div className="mx-auto flex max-w-[500px] flex-col items-center text-center lg:mx-0 lg:max-w-full lg:items-start lg:text-left">
+            <h2 className="text-[28px] leading-[120%] font-semibold tracking-[0.02em] text-white lg:text-[32px] lg:text-[40px]">
               {data.title}
             </h2>
-            <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-white/90 md:text-[16px]">
+            <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-white/90 lg:text-[16px]">
               {data.desc}
             </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-[15px] md:mt-8 md:justify-start lg:gap-5">
+            <div className="mt-6 flex flex-wrap justify-center gap-[15px] lg:mt-8 lg:justify-start lg:gap-5">
               {data.actionButton1 && (
                 <Button
                   href={data.actionButton1.link?.url ?? "#"}
