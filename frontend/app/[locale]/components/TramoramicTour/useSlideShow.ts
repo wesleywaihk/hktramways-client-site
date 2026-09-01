@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const SLIDE_INTERVAL_MS = 5000;
-export const SLIDE_DURATION_MS = 250;
+const SLIDE_INTERVAL_MS = 3000;
+export const SLIDE_DURATION_MS = 500;
 
 export type ActiveSlide = 0 | 1 | 2;
 

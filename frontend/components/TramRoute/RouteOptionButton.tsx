@@ -8,10 +8,10 @@ export interface RouteOptionButtonProps {
   onClick: () => void;
 }
 
-const gridClasses = `grid items-center p-[15px] lg:px-4 lg:py-3.5 w-full grid-cols-[24px_1fr_20px_1fr] w-full justify-between rounded-[21px] transition-colors duration-200 ease-out`;
+const gridClasses = `grid items-center p-[15px] lg:px-4 lg:py-3.5 w-full grid-cols-[24px_1fr_20px_1fr] w-full justify-between rounded-[21px] transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]`;
 
 const idClass =
-  "flex h-6 w-6 items-center justify-center rounded-full text-center text-[12px] leading-[100%] font-semibold tracking-[0.02em] md:text-[14px] transition-colors duration-200 ease-out";
+  "flex h-6 w-6 items-center justify-center rounded-full text-center text-[12px] leading-[100%] font-semibold tracking-[0.02em] md:text-[14px] transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]";
 const txtClass =
   "text-center text-[14px] leading-[120%] font-semibold tracking-[0.02em] normal-case! md:text-[18px] md:leading-[178%]";
 
@@ -32,7 +32,7 @@ export default function RouteOptionButton({
       >
         <span className={`${idClass} text-green bg-white`}>{route.id}</span>
         <span className={txtClass}>{t(route.from)}</span>
-        <ExchangeArrow className="mx-auto h-5 w-5 transition-colors duration-200 ease-out" />
+        <ExchangeArrow className="mx-auto h-5 w-5 transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]" />
         <span className={txtClass}>{t(route.to)}</span>
       </button>
     );
@@ -51,7 +51,7 @@ export default function RouteOptionButton({
         {route.id}
       </span>
       <span className={txtClass}>{t(route.from)}</span>
-      <ExchangeArrow className="text-green mx-auto h-5 w-5 transition-colors duration-200 ease-out group-hover:text-white" />
+      <ExchangeArrow className="text-green mx-auto h-5 w-5 transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)] group-hover:text-white" />
       <span className={txtClass}>{t(route.to)}</span>
     </button>
   );

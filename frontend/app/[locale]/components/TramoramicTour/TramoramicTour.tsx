@@ -79,7 +79,7 @@ export default function TramoramicTour({
   return (
     <section className="borderless bg-red-dark relative flex h-auto overflow-hidden pt-20 pb-20 lg:h-[100dvh] lg:py-24">
       <div className="content-max-w pageBorder mx-auto flex w-full flex-col items-center gap-12 lg:flex-row lg:gap-8 lg:gap-16">
-        <div className="relative mx-auto mt-[12vmin] mb-[6vmin] min-h-[600px] w-[1px] overflow-visible lg:mx-0 lg:my-0 lg:min-h-0 lg:w-[min(42vw,612px)]">
+        <div className="relative mx-auto mt-[12vmin] mb-[6vmin] min-h-[min(80vmin,600px)] w-[1px] overflow-visible lg:mx-0 lg:my-0 lg:min-h-0 lg:w-[min(42vw,612px)]">
           {/* min-h-[84.5vmin]*/}
           <CardContainer
             rootClass={
@@ -88,14 +88,14 @@ export default function TramoramicTour({
             animate={activeSlide === 2 && nextSlide === 0}
             image={image3}
             hashTag={data?.tramoramicTourItem3?.hashTag}
-            cardClassName="translate-x-[0] -translate-y-[58%] lg:translate-x-[2.77vw] lg:-translate-y-[60%]"
+            cardClassName="translate-x-[0] -translate-y-[59%] lg:translate-x-[2.77vw] lg:-translate-y-[60%]"
           />
           <CardContainer
             rootClass={` ${activeSlide === 0 ? "z-10" : activeSlide === 1 ? "z-20" : "z-0"}`}
             animate={activeSlide === 1 && nextSlide === 2}
             image={image2}
             hashTag={data?.tramoramicTourItem2?.hashTag}
-            cardClassName="-translate-x-[6vw] -translate-y-[42%] lg:translate-x-0"
+            cardClassName="-translate-x-[6vw] -translate-y-[46%] lg:-translate-y-[43%] lg:translate-x-0"
           />
           <CardContainer
             rootClass={
