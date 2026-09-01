@@ -73,8 +73,8 @@ const lgGap = (cardWidth: string) => `calc(25vw + (${cardWidth}) / 8)`;
 /** tighter than lgGap: less space between cards at xl (1280px) and above */
 const xlGap = (cardWidth: string) => `calc(22vw + (${cardWidth}) / 8)`;
 
-const MOBILE_CARD_WIDTH = "30.34dvmax";
-const MOBILE_CARD_HEIGHT = "38dvmax";
+const MOBILE_CARD_WIDTH = "34dvmax"; //"30.34dvmax";
+const MOBILE_CARD_HEIGHT = "42.5dvmax"; //"38dvmax";
 const MOBILE_TILT = 8;
 const MOBILE_DROPS = [0, 32];
 const MOBILE_VISIBLE_RANGE = 1;
@@ -206,8 +206,8 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   };
 
   return (
-    <section className="borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden pt-[14.6dvh] pb-[11.5dvh] select-none md:pt-[18dvh] md:pb-[12.7dvh]">
-      <div className="flex shrink-0 items-center justify-center gap-6 pb-8 md:gap-16 md:pb-10">
+    <section className="borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden pt-[16.6dvh] pb-[11.5dvh] select-none md:pt-[18dvh] md:pb-[12.7dvh]">
+      <div className="-mb-12 flex shrink-0 items-center justify-center gap-6 md:mb-10 md:gap-16">
         <IconButton
           ariaLabel="Previous poster"
           onClick={prev}
@@ -300,11 +300,22 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
         />
       </div>
 
-      <div className="relative z-30 mt-6 shrink-0 px-8 text-center md:mt-8">
-        <p className="mx-auto max-w-[340px] text-[16px] leading-[163%] font-semibold tracking-[0.02em] whitespace-pre-line text-white">
+      <div className="relative z-30 -mt-4 shrink-0 px-8 text-center md:mt-8">
+        <p className="mx-auto w-[76vw] max-w-[400px] text-[15px] leading-[163%] font-semibold tracking-[0.02em] whitespace-pre-line text-white md:w-full md:max-w-[340px] md:text-[16px]">
           {active_.caption}
         </p>
       </div>
+
+      {active_.linkUrl && active_.callActionText && (
+        <div className="relative z-30 mt-[10px] mb-4 shrink-0 text-center md:hidden">
+          <a
+            href={active_.linkUrl}
+            className="border-b-2 border-white/20 pb-[3px] font-sans text-[15px] leading-[163%] font-normal tracking-[0.02em] text-white transition-colors duration-100 hover:border-white/60"
+          >
+            {active_.callActionText}
+          </a>
+        </div>
+      )}
 
       <div className="mt-6 flex shrink-0 justify-center md:mt-8">
         <Button

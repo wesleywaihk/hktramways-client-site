@@ -37,7 +37,7 @@ export default function MobileNavOverlay({
         aria-hidden="true"
       />
       <div
-        className={`bg-green fixed top-0 right-0 bottom-0 z-[1011] flex w-full max-w-[393px] flex-col p-5 px-[30px] text-white transition-transform duration-500 ease-in-out ${
+        className={`bg-green fixed top-0 right-0 bottom-0 z-[1011] flex w-full max-w-[393px] flex-col p-7.5 px-[30px] text-white transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"
@@ -50,8 +50,10 @@ export default function MobileNavOverlay({
               <button
                 key={loc}
                 type="button"
-                className={`border-none bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-white uppercase ${
-                  loc === locale ? "opacity-100" : "opacity-60"
+                className={`border-none bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-white uppercase transition-opacity duration-100 ${
+                  loc === locale
+                    ? "opacity-100"
+                    : "cursor-pointer opacity-30 hover:opacity-100"
                 }`}
                 onClick={() => switchLocale(loc)}
               >
@@ -61,7 +63,7 @@ export default function MobileNavOverlay({
           </div>
           <button
             type="button"
-            className="flex h-[26px] w-[26px] cursor-pointer items-center justify-center border-none bg-transparent text-white transition-transform duration-200 ease-out hover:scale-90"
+            className="flex h-[26px] w-[26px] translate-x-2.5 -translate-y-[3px] cursor-pointer items-center justify-center border-none bg-transparent text-white transition-transform duration-200 ease-out hover:scale-110"
             onClick={handleClose}
             aria-label={t("navCloseMenu")}
           >
@@ -91,7 +93,7 @@ export default function MobileNavOverlay({
                 </>
               );
 
-              const sharedClassName = `flex items-center justify-between gap-2 font-sans text-[24px] leading-[118%] font-semibold tracking-[0.48px] text-white bg-transparent border-none text-left transition-opacity duration-200 ease-out cursor-pointer ${
+              const sharedClassName = `flex items-center justify-start gap-[3px] font-sans text-[24px] leading-[118%] font-semibold tracking-[0.48px] text-white bg-transparent border-none text-left transition-opacity duration-200 ease-out cursor-pointer ${
                 dimmed ? "opacity-30" : "opacity-100"
               }`;
 
@@ -120,18 +122,24 @@ export default function MobileNavOverlay({
                     </Link>
                   )}
 
-                  {hasChildren && isActive && (
-                    <div className="mt-3 flex flex-col gap-[10px]">
-                      {link.children!.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={`/${locale}${child.href}`}
-                          className="font-sans text-[18px] leading-[152.4%] font-normal tracking-[0.36px] text-white"
-                          onClick={handleClose}
-                        >
-                          {t(child.labelKey)}
-                        </Link>
-                      ))}
+                  {hasChildren && (
+                    <div
+                      className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                        isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                      }`}
+                    >
+                      <div className="flex flex-col gap-[10px] overflow-hidden pt-3">
+                        {link.children!.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={`/${locale}${child.href}`}
+                            className="font-sans text-[18px] leading-[152.4%] font-normal tracking-[0.36px] text-white"
+                            onClick={handleClose}
+                          >
+                            {t(child.labelKey)}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>

@@ -84,7 +84,7 @@ export default async function Footer({ data = undefined }: FooterProps) {
             {fares.map((fare) => (
               <li
                 key={fare.label}
-                className="flex items-center justify-between py-3.5 font-sans text-[15px] leading-[162.5%] tracking-[0.02em] first:pt-0 xl:py-2.5 xl:text-[16px] xl:leading-[163%]"
+                className="flex items-center justify-between py-2.5 font-sans text-[15px] leading-[162.5%] tracking-[0.02em] first:pt-0 xl:text-[16px] xl:leading-[163%]"
               >
                 <span>{fare.label}</span>
                 <span>HK${formatPrice(fare.value)}</span>

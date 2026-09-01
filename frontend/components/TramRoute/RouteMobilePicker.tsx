@@ -14,6 +14,8 @@ export interface RouteMobilePickerProps {
   onSelect: (id: number) => void;
   selectLabel: string;
 }
+const txtClass =
+  "text-center font-sans text-[15px] leading-[130%] font-semibold tracking-[0.02em]"; //whitespace-nowrap  ?
 
 export default function RouteMobilePicker({
   activeRoute,
@@ -30,19 +32,15 @@ export default function RouteMobilePicker({
         <button
           type="button"
           onClick={onOpen}
-          className="text-green flex w-full cursor-pointer items-center justify-between gap-2 rounded-[21px] bg-white px-5 py-4 font-sans text-[13px] font-bold tracking-[0.02em] uppercase"
+          className="text-green flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-[21px] bg-white p-4 font-sans text-[13px] font-bold tracking-[0.02em]"
         >
-          <span className="grid flex-1 grid-cols-[24px_1fr_20px_1fr] items-center gap-x-3">
+          <span className="grid flex-1 grid-cols-[24px_1fr_20px_1fr] items-center gap-2.5">
             <span className="bg-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-center font-sans text-[14px] leading-[100%] font-semibold tracking-[0.02em] text-white">
               {activeRoute.id}
             </span>
-            <span className="text-center font-sans text-[18px] leading-[178%] font-semibold tracking-[0.02em]">
-              {t(activeRoute.from)}
-            </span>
+            <span className={txtClass}>{t(activeRoute.from)}</span>
             <ExchangeArrow className="text-green mx-auto h-5 w-5" />
-            <span className="text-center font-sans text-[18px] leading-[178%] font-semibold tracking-[0.02em]">
-              {t(activeRoute.to)}
-            </span>
+            <span className={txtClass}>{t(activeRoute.to)}</span>
           </span>
           <ChevronIcon className="h-4 w-4 shrink-0" />
         </button>
