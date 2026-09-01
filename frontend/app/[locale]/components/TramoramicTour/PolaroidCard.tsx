@@ -27,7 +27,7 @@ export default function PolaroidCard({
         className="!aspect-square"
       />
       {hashTag && (
-        <p className="text-gold absolute right-0 bottom-[5vmin] left-0 truncate px-[40px] text-center font-sans [font-size:clamp(18px,7.5cqw,32px)] leading-[1.25em] font-semibold tracking-[0.02em] md:bottom-[2.9vmin] lg:bottom-[40px]">
+        <p className="text-gold absolute right-0 bottom-[5vmin] left-0 truncate px-[40px] text-center font-sans [font-size:clamp(18px,7.3cqw,32px)] leading-[1.25em] font-semibold tracking-[0.02em] md:bottom-[2.9vmin] lg:bottom-[40px]">
           {hashTag}
         </p>
       )}

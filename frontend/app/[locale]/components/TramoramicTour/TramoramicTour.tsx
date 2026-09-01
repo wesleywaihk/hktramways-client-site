@@ -88,7 +88,7 @@ export default function TramoramicTour({
             animate={activeSlide === 2 && nextSlide === 0}
             image={image3}
             hashTag={data?.tramoramicTourItem3?.hashTag}
-            cardClassName="translate-x-[0] -translate-y-[59%] lg:translate-x-[2.77vw] lg:-translate-y-[60%]"
+            cardClassName="translate-x-[-1.7vw] -translate-y-[59%] lg:translate-x-[2.77vw] lg:-translate-y-[60%]"
           />
           <CardContainer
             rootClass={` ${activeSlide === 0 ? "z-10" : activeSlide === 1 ? "z-20" : "z-0"}`}
@@ -104,7 +104,7 @@ export default function TramoramicTour({
             animate={activeSlide === 0 && nextSlide === 1}
             image={image1}
             hashTag={data?.tramoramicTourItem1?.hashTag}
-            cardClassName="translate-x-[6vw] -translate-y-1/2 lg:translate-x-[6.38vw]"
+            cardClassName="translate-x-[6vw] -translate-y-1/2 lg:translate-x-[6.55vw]"
           />
         </div>
 

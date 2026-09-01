@@ -42,7 +42,7 @@ export default function RouteMobilePicker({
             <ExchangeArrow className="text-green mx-auto h-5 w-5" />
             <span className={txtClass}>{t(activeRoute.to)}</span>
           </span>
-          <ChevronIcon className="h-4 w-4 shrink-0" />
+          <ChevronIcon className="h-5 w-5 shrink-0" />
         </button>
       </div>
 

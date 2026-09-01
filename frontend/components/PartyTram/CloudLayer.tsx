@@ -9,7 +9,7 @@ const Cloud = () => (
 export default function CloudLayer() {
   return (
     <div
-      className="absolute inset-x-0 top-0 bottom-0 flex aspect-[2892/436] h-[66.5dvh] w-auto [animation:cloud-drift_linear_infinite] lg:aspect-[6168/1156] lg:h-[78.5dvh]"
+      className="absolute inset-x-0 top-0 flex aspect-[2892/436] h-[36dvh] w-auto [animation:cloud-drift_linear_infinite] lg:aspect-[6168/1156] lg:h-[52dvh]"
       style={{ animationDuration: `${CLOUD_DRIFT_DURATION_S}s` }}
       aria-hidden="true"
     >

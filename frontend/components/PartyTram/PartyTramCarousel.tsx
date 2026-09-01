@@ -125,7 +125,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
   const CARD_GAP_VW = isLg ? LG_CARD_GAP_VW : MOBILE_CARD_GAP_VW;
 
   return (
-    <div className="relative z-10 flex h-full flex-col items-center pt-[calc(76px+8dvh)] lg:items-start lg:pt-[calc(76px+8dvh)]">
+    <div className="relative z-10 flex h-full flex-col items-center pt-[13dvh] lg:items-start">
       <div className="max-screen-lg mx-auto flex w-full items-center justify-center gap-6 lg:gap-16 lg:px-16">
         <IconButton
           ariaLabel="Previous tram"
@@ -136,7 +136,9 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
           className="border-green! hover:bg-green! z-10 hidden shrink-0 bg-transparent! hover:border-transparent! lg:grid"
         />
 
-        <h2 className="title-text text-green text-center">{data.title}</h2>
+        <h2 className="title-text text-green px-5 text-center lg:px-0">
+          {data.title}
+        </h2>
 
         <IconButton
           ariaLabel="Next tram"
@@ -147,7 +149,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
         />
       </div>
 
-      <p className="mx-auto mt-4 block w-full max-w-[710px] text-center text-[15px] leading-[163%] font-normal tracking-[0.02em] text-black lg:px-16 lg:text-[16px]">
+      <p className="mx-auto mt-4 block w-full max-w-[600px] px-5 text-center text-[15px] leading-[163%] font-normal tracking-[0.02em] text-black lg:max-w-[710px] lg:px-0 lg:px-16 lg:text-[16px]">
         {carouselItem?.desc}
       </p>
 
@@ -275,18 +277,18 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
         />
       </div>
 
-      {callAction && (
-        <div className="mt-6 mb-8 lg:hidden">
+      <div className="relative h-[10.55dvh] lg:hidden">
+        {callAction && (
           <Button
             href={carouselItem?.hyperlink?.url ?? undefined}
-            color="green"
             variant="solid"
             useArrow
+            className="translate-y-[-6dvh] border-[var(--color-accent-brown)]! bg-[var(--color-accent-brown)]! hover:bg-white! hover:text-[var(--color-accent-brown)]!"
           >
             {callAction}
           </Button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
