@@ -7,6 +7,8 @@ const MOMENTUM_FRICTION = 0.95;
 const MOMENTUM_MIN_VELOCITY = 0.05;
 const MAX_CONTAINER_WIDTH = 1280;
 const GUTTER = 24;
+const LG_BREAKPOINT = 1024;
+const MOBILE_END_GUTTER = 20;
 
 function getStartX(viewportWidth: number) {
   return Math.max(0, (viewportWidth - MAX_CONTAINER_WIDTH) / 2) + GUTTER;
@@ -20,6 +22,7 @@ function getStartX(viewportWidth: number) {
 export function useSouveniorDragScroll(data?: SouveniorData | null) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rowRef = useRef<HTMLDivElement | null>(null);
+  const actionButtonRef = useRef<HTMLElement | null>(null);
   const xRef = useRef(0);
   const boundsRef = useRef({ min: 0, max: 0 });
   const dragState = useRef<{
@@ -44,10 +47,29 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
 
   const recomputeBounds = () => {
     const viewportWidth = window.innerWidth;
-    const containerWidth = containerRef.current?.clientWidth ?? viewportWidth;
     const rowWidth = rowRef.current?.scrollWidth ?? 0;
     const startX = getStartX(viewportWidth);
-    const minX = Math.min(startX, containerWidth - GUTTER - rowWidth);
+
+    // The row sits in normal flow after the container's left padding, so
+    // translateX(0) renders its left edge at containerLeft + paddingLeft,
+    // not at containerLeft. Bounds must be computed from that content edge.
+    let contentLeft = 0;
+    if (containerRef.current) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const paddingLeft = parseFloat(
+        getComputedStyle(containerRef.current).paddingLeft,
+      );
+      contentLeft = containerRect.left + (Number.isNaN(paddingLeft) ? 0 : paddingLeft);
+    }
+
+    let minX: number;
+    if (viewportWidth >= LG_BREAKPOINT && actionButtonRef.current) {
+      const buttonRight = actionButtonRef.current.getBoundingClientRect().right;
+      minX = Math.min(startX, buttonRight - contentLeft - rowWidth);
+    } else {
+      minX = Math.min(startX, viewportWidth - MOBILE_END_GUTTER - contentLeft - rowWidth);
+    }
+
     boundsRef.current = { min: minX, max: startX };
     return startX;
   };
@@ -163,6 +185,7 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
   return {
     containerRef,
     rowRef,
+    actionButtonRef,
     onPointerDown,
     onPointerMove,
     onPointerUp,

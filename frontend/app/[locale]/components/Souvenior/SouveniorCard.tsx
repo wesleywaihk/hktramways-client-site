@@ -72,7 +72,7 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
 
         <SouveniorIcon
           icon={item.icon?.icon}
-          className="absolute right-5 bottom-5 z-10 group-hover:scale-120"
+          className="absolute right-5 bottom-5 z-10 group-hover:scale-110"
         />
       </div>
 

@@ -37,6 +37,7 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
   const {
     containerRef,
     rowRef,
+    actionButtonRef,
     onPointerDown,
     onPointerMove,
     onPointerUp,
@@ -66,10 +67,12 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
           {title}
         </h2>
         {data.actionButton && (
-          <ActionButton
-            {...data.actionButton}
-            className="hidden! px-[28px]! py-[19px]! lg:inline-flex! lg:shrink-0"
-          />
+          <div
+            ref={actionButtonRef as React.RefObject<HTMLDivElement>}
+            className="hidden! lg:inline-flex! lg:shrink-0"
+          >
+            <ActionButton {...data.actionButton} />
+          </div>
         )}
       </div>
 
@@ -88,12 +91,11 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
           ))}
         </div>
       </div>
-
-      <div className="sectionContainer content-max-w mt-10 block items-center justify-center lg:hidden">
-        {data.actionButton && (
-          <ActionButton {...data.actionButton} className="!px-6 !py-[14px]" />
-        )}
-      </div>
+      {data.actionButton && (
+        <div className="sectionContainer content-max-w mt-10 flex items-center justify-center lg:hidden">
+          <ActionButton {...data.actionButton} />
+        </div>
+      )}
     </section>
   );
 }
