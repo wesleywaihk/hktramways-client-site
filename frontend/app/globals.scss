@@ -33,6 +33,7 @@ body {
   background: var(--color-white);
   color: #171717;
   font-family: var(--font-sans);
+  overflow-x: hidden;
 }
 
 @utility pageWrapper {
@@ -46,7 +47,7 @@ body {
 }
 
 @utility borderless {
-  @apply -mx-5 w-[calc(100%+20px)] lg:-mx-10 lg:w-[calc(100%+80px)]; //100% + page gutter x2
+  @apply -mx-5 w-[calc(100%+40px)] lg:-mx-10 lg:w-[calc(100%+80px)]; //100% + page gutter x2
 }
 
 @utility content-max-w {

@@ -67,7 +67,7 @@ export default function DesktopNavOverlay({
           </div>
           <button
             type="button"
-            className="flex h-[26px] w-[26px] translate-x-5 -translate-y-[3px] cursor-pointer items-center justify-center border-none bg-transparent text-white transition-transform duration-100 ease-in-out hover:scale-110"
+            className="flex h-[26px] w-[26px] translate-x-5 -translate-y-[3px] cursor-pointer items-center justify-center border-none bg-transparent text-white transition-transform duration-200 ease-in-out hover:scale-110"
             onClick={handleClose}
             aria-label={t("navCloseMenu")}
           >

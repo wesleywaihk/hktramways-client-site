@@ -17,7 +17,7 @@ export default function CloseIcon({ className }: CloseIconProps) {
         y1="1"
         x2="27"
         y2="25.5858"
-        stroke="white"
+        stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
       />
@@ -27,7 +27,7 @@ export default function CloseIcon({ className }: CloseIconProps) {
         x2="35.7696"
         y2="-1"
         transform="matrix(-0.707107 0.707107 0.707107 0.707107 27 1)"
-        stroke="white"
+        stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
       />
