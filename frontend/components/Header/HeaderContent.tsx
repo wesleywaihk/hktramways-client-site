@@ -69,19 +69,19 @@ export default function HeaderContent({
         {/* Language toggle + hamburger, both open the slide-in nav overlay. Hamburger stays visible on desktop alongside the horizontal nav */}
         <button
           type="button"
-          className={`flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl border-2 border-[var(--header-border)] bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-[var(--header-fg)] uppercase transition-colors duration-200 ease-out lg:hidden ${
+          className={`flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl border-2 bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-[var(--header-fg)] uppercase transition-colors duration-200 ease-out lg:hidden ${
             invertLangHover
-              ? "hover:bg-green active:bg-green hover:text-white active:text-white"
-              : "hover:text-green active:text-green hover:bg-white active:bg-white"
+              ? "border-green hover:border-green active:border-green hover:bg-green active:bg-green hover:text-white active:text-white"
+              : "hover:text-green active:text-green border-white hover:border-white hover:bg-white active:border-white active:bg-white"
           }`}
           onClick={onOpenNav}
           aria-label={t("navLanguage")}
         >
-          {locale === "en" ? "EN" : locale === "zh-HK" ? "繁" : "简"}
+          {locale === "en" ? "EN" : locale === "zh-HK" ? "繁" : "简"}{" "}
         </button>
         <button
           type="button"
-          className="border-none bg-transparent"
+          className="transform-gpu cursor-pointer border-none bg-transparent transition-transform duration-300 ease-out hover:scale-90 lg:w-[26px]"
           onClick={onOpenNav}
           aria-label={t("navOpenMenu")}
           aria-expanded={navOpen}

@@ -53,10 +53,10 @@ export default function LocaleDropdown({
     <div className="relative" ref={wrapperRef}>
       <button
         type="button"
-        className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-[14px] border-2 border-[var(--header-border)] border-white bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-[var(--header-fg)] uppercase transition-colors duration-200 ease-out ${
+        className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-[14px] border-2 bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-[var(--header-fg)] uppercase transition-colors duration-200 ease-out ${
           invertHover
-            ? "hover:bg-green active:bg-green hover:text-white active:text-white"
-            : "hover:text-green active:text-green hover:bg-white active:bg-white"
+            ? "border-green hover:bg-green active:bg-green hover:text-white active:text-white"
+            : "hover:text-green active:text-green border-white hover:bg-white active:bg-white"
         }`}
         onClick={() => {
           if (!open) setMounted(true);
