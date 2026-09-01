@@ -7,7 +7,7 @@ import type { GlobalFooter } from "@/types/api";
 import { socialPlatforms } from "./footerData";
 
 const columnHeading =
-  "font-sans text-[18px] leading-[152%] font-semibold tracking-[0.02em] m-0 mb-4 xl:text-[21px] xl:leading-[152%] xl:mb-5";
+  "font-sans text-[18px] leading-[152%] font-semibold tracking-[0.02em] m-0 xl:text-[21px] xl:leading-[152%] mb-[15px]!";
 
 function formatPrice(price: number) {
   return Number.isInteger(price) ? String(price) : price.toFixed(2);
@@ -18,21 +18,21 @@ export interface FooterProps {
 }
 
 const Logo = ({ className = "" }: { className?: string }) => (
-  <div className={`col-span-2 flex flex-col ${className}`}>
-    <div className="grid grid-cols-4 items-center xl:flex xl:justify-start xl:gap-4">
+  <div className={`flex flex-col ${className}`}>
+    <div className="flex items-center justify-between gap-5 xl:justify-start xl:gap-[30.45px]">
       <Image
         src="/logo-white.svg"
         alt="HK Tramways"
         width={200}
         height={60}
-        className="col-span-2 h-auto w-full max-w-[260px] xl:h-[60px] xl:w-[200px]"
+        className="h-auto w-full max-w-[167.13px] xl:h-[60px] xl:w-[200.55px]"
       />
       <Image
         src="/footer/caringCompany.png"
         alt="15+ Years Caring Company"
         width={124}
         height={55}
-        className="col-span-1 col-start-4 h-auto w-full max-w-[200px] justify-self-end xl:w-[124px]"
+        className="h-auto w-full max-w-[94px] xl:w-[124px]"
       />
     </div>
   </div>
@@ -65,23 +65,22 @@ export default async function Footer({ data = undefined }: FooterProps) {
 
   return (
     <footer className="bg-green pt-[60px] pb-[32px] text-white xl:pt-[80px] xl:pb-[50px]">
-      <div className="pageBorder grid grid-cols-2 gap-x-5 gap-y-10 xl:flex xl:items-start xl:gap-[55px]">
+      <div className="pageBorder flex flex-col items-start gap-y-[30px] xl:flex-row xl:gap-x-[65px]">
         {/* Logo column */}
-
-        <Logo className="xl:hidden" />
+        <Logo className="order-1 w-full xl:flex xl:hidden" />
 
         {/* Fares & Payment Methods column */}
-        <div className="col-span-2 flex flex-col xl:order-4 xl:flex-none">
+        <div className="order-2 mb-5 flex w-full flex-col xl:order-4 xl:mb-0 xl:w-[300px] xl:flex-none">
           <h3 className={columnHeading}>
             <Link
               href={data.faresPaymentUrl ?? "#"}
               className="flex w-full items-center justify-between gap-1.5 hover:opacity-80"
             >
               {t("footerFaresPaymentMethods")}
-              <ChevronIcon desktop className="h-4 w-4 shrink-0" />
+              <ChevronIcon desktop className="h-5 w-5 shrink-0" />
             </Link>
           </h3>
-          <ul className="m-0 flex list-none flex-col divide-y divide-white/15 p-0">
+          <ul className="m-0 flex list-none flex-col divide-y-2 divide-white/15 p-0">
             {fares.map((fare) => (
               <li
                 key={fare.label}
@@ -94,74 +93,74 @@ export default async function Footer({ data = undefined }: FooterProps) {
           </ul>
         </div>
 
-        {/* Download App column */}
-        <div className="xl:order-2 xl:flex-none">
-          <h3 className={columnHeading}>{t("footerDownloadApp")}</h3>
-          <div className="flex flex-col gap-[15px]">
-            {data.googlePlayLink && (
-              <a
-                href={data.googlePlayLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/footer/googlePlay.png"
-                  alt="Get it on Google Play"
-                  width={140}
-                  height={46}
-                  className="h-auto w-full max-w-[180px]"
-                />
-              </a>
-            )}
-            {data.appStoreLink && (
-              <a
-                href={data.appStoreLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/footer/appStore.png"
-                  alt="Download on the App Store"
-                  width={140}
-                  height={46}
-                  className="h-auto w-full max-w-[180px]"
-                />
-              </a>
-            )}
+        {/* Download App + Get in Touch sit side by side on mobile; `xl:contents` dissolves this wrapper on desktop so both columns take their own place in the row via `xl:order` */}
+        <div className="order-3 mb-5 flex w-full gap-x-9 xl:order-2 xl:mb-0 xl:w-auto xl:gap-x-[70px]">
+          {/* Download App column */}
+          <div className="w-[44%] xl:w-[146px] xl:flex-none">
+            <h3 className={`pb-[7px] xl:pb-[5px] ${columnHeading}`}>
+              {t("footerDownloadApp")}
+            </h3>
+            <div className="flex w-[66%] min-w-[140px] flex-col gap-[15px] xl:w-[185px]">
+              {data.googlePlayLink && (
+                <a
+                  href={data.googlePlayLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/footer/googlePlay.png"
+                    alt="Get it on Google Play"
+                    width={140}
+                    height={46}
+                    className="h-auto w-[140px]"
+                  />
+                </a>
+              )}
+              {data.appStoreLink && (
+                <a
+                  href={data.appStoreLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/footer/appStore.png"
+                    alt="Download on the App Store"
+                    width={140}
+                    height={46}
+                    className="h-auto w-[140px]"
+                  />
+                </a>
+              )}
+            </div>
           </div>
+
+          {/* Get in Touch column */}
+          {data.getInTouch && (
+            <div className="order-4 flex flex-col items-start gap-x-[70px] xl:order-3 xl:max-w-[185px] xl:flex-none">
+              <h3 className={`${columnHeading}`}>{data.getInTouch.title}</h3>
+              <p className="m-0 mb-[15px] font-sans text-[15px] leading-[140%] font-normal tracking-[0.02em] whitespace-pre-line xl:mb-5 xl:text-[16px] xl:leading-[140%]">
+                {data.getInTouch.desc}
+              </p>
+              <Button href="/contact-us" color="white" className="xl:px-7!">
+                {data.getInTouch.ButtonLabel}
+              </Button>
+            </div>
+          )}
         </div>
 
-        {/* Get in Touch column */}
-        {data.getInTouch && (
-          <div className="flex flex-col items-start xl:order-3 xl:max-w-[220px] xl:flex-none">
-            <h3 className={columnHeading}>{data.getInTouch.title}</h3>
-            <p className="m-0 mb-6 font-sans text-[15px] leading-[162.5%] tracking-[0.02em] whitespace-pre-line xl:mb-7 xl:text-[16px] xl:leading-[163%]">
-              {data.getInTouch.desc}
-            </p>
-            <Button
-              href="/contact-us"
-              color="white"
-              useArrow
-              className="xl:px-7!"
-            >
-              {data.getInTouch.ButtonLabel}
-            </Button>
-          </div>
-        )}
-
         {/* Copyright, disclaimer, social icons — reordered per breakpoint via `order`, repositioned under the logo column at desktop via col/row-start */}
-        <div className="col-span-2 flex flex-col items-center xl:order-1 xl:grow xl:items-start">
+        <div className="items-centerorder-5 order-4 flex w-full grow flex-col items-center xl:order-1 xl:w-[355px] xl:items-start">
           <Logo className="hidden xl:flex" />
           <p className="order-1 m-0 text-center font-sans text-[13px] leading-[145%] tracking-[0.02em] whitespace-pre-line opacity-[0.85] xl:order-2 xl:mt-6 xl:text-left">
             {data.desc}
           </p>
           <Link
             href={data.tncLink ?? "#"}
-            className="order-2 mt-3 font-sans text-[13px] leading-[145%] tracking-[0.02em] underline hover:opacity-80 xl:order-3 xl:mt-2"
+            className="order-2 mt-3 text-center font-sans text-[13px] leading-[145%] tracking-[0.02em] hover:underline hover:opacity-80 xl:order-3 xl:mt-2 xl:text-left"
           >
             {t("navDisclaimerPrivacy")}
           </Link>
-          <div className="order-3 mt-11 flex items-center gap-2.5 xl:order-1 xl:mt-6">
+          <div className="order-3 mt-[25px] flex items-center gap-2.5">
             {socialLinks.map((social) => (
               <a
                 key={social.name}
@@ -169,13 +168,13 @@ export default async function Footer({ data = undefined }: FooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="flex h-8 w-8 items-center justify-center rounded-full hover:opacity-80 xl:h-8 xl:w-[26px] xl:rounded-[21px] xl:p-0.5"
+                className="flex h-8 w-8 items-center justify-center rounded-full hover:opacity-80 xl:rounded-[21px] xl:p-0.5"
               >
                 <Image
                   src={social.icon}
                   alt=""
-                  width={22}
-                  height={22}
+                  width={32}
+                  height={32}
                   aria-hidden="true"
                 />
               </a>

@@ -58,8 +58,8 @@ export default function RouteMobilePicker({
         aria-hidden="true"
       />
       <div
-        className={`fixed right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto rounded-[21px] bg-[var(--color-earth-light)] p-5 transition-transform duration-500 ease-in-out lg:hidden ${
-          sheetOpen ? "translate-y-0" : "translate-y-full"
+        className={`absolute right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto rounded-[21px] bg-[var(--color-earth-light)] p-5 transition-transform duration-500 ease-in-out lg:hidden ${
+          sheetOpen ? "translate-y-0" : "translate-y-[calc(100%+20px)]"
         }`}
         role="dialog"
         aria-modal="true"

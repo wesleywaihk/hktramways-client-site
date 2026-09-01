@@ -46,7 +46,9 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
   };
 
   const recomputeBounds = () => {
-    const viewportWidth = window.innerWidth;
+    // documentElement.clientWidth excludes the vertical scrollbar, unlike
+    // window.innerWidth, so it matches the actually visible content edge.
+    const viewportWidth = document.documentElement.clientWidth;
     const rowWidth = rowRef.current?.scrollWidth ?? 0;
     const startX = getStartX(viewportWidth);
 
