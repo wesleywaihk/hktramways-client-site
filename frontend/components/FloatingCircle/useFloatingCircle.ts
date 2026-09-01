@@ -54,6 +54,13 @@ export function useFloatingCircle(containerRef: RefObject<HTMLElement | null>) {
     pendingPos.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     const isEntering = !isHoveringRef.current;
     isHoveringRef.current = true;
+    // content/visibility only actually change on entry — a mousemove within
+    // the same hovered element fires repeatedly with an equivalent but
+    // referentially-new node, which would otherwise re-render on every pixel
+    if (isEntering) {
+      setVisible(true);
+      setContent(hoverContent);
+    }
     if (rafRef.current == null) {
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = null;
@@ -75,8 +82,6 @@ export function useFloatingCircle(containerRef: RefObject<HTMLElement | null>) {
         }
       });
     }
-    setVisible(true);
-    setContent(hoverContent);
   };
 
   const onHoverEnd = () => {

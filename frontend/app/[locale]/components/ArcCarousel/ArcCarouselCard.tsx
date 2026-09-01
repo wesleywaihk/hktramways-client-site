@@ -1,3 +1,4 @@
+import { memo } from "react";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import type { ArcCarouselItem } from "./ArcCarousel";
 
@@ -14,7 +15,7 @@ export interface ArcCarouselCardProps {
   onHoverEnd?: () => void;
 }
 
-export default function ArcCarouselCard({
+function ArcCarouselCard({
   item,
   cardWidth,
   cardHeight,
@@ -92,3 +93,5 @@ export default function ArcCarouselCard({
     </div>
   );
 }
+
+export default memo(ArcCarouselCard);

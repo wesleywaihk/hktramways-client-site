@@ -3,7 +3,7 @@ import Image from "next/image";
 import SouveniorIcon from "./SouveniorIcon";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import type { SouveniorItem } from "@/types/api";
-export const TRANSFORM_CLASS =
+const TRANSFORM_CLASS =
   "gpu-transform transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]";
 
 function formatPrice(price: number) {
@@ -72,7 +72,7 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
 
         <SouveniorIcon
           icon={item.icon?.icon}
-          className="absolute right-3.5 bottom-3.5 z-10 group-hover:scale-110 sm:right-5 sm:bottom-5"
+          className={`absolute right-[3.4vw] bottom-[3.4vw] z-10 group-hover:scale-115 md:right-[1.9vw] md:bottom-[1.9vw] lg:right-5 lg:bottom-5 ${TRANSFORM_CLASS}`}
         />
       </div>
 

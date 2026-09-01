@@ -1,6 +1,5 @@
 import BtnIcon from "@/components/icons/BtnIcon";
 import type { IconEnum } from "@/types/api";
-import { TRANSFORM_CLASS } from "./SouveniorCard";
 
 interface SouveniorIconProps {
   icon?: IconEnum | null;
@@ -14,11 +13,11 @@ export default function SouveniorIcon({
   if (!icon) return null;
   return (
     <div
-      className={`text-green grid h-[10vw] w-[10vw] place-items-center rounded-full bg-white shadow-md ${TRANSFORM_CLASS} md:h-15 md:w-15 ${className}`}
+      className={`text-green grid h-[10vw] w-[10vw] place-items-center rounded-full bg-white shadow-md md:h-15 md:w-15 lg:h-[60px] lg:w-[60px] ${className}`}
     >
       <BtnIcon
         icon={icon}
-        className="h-[6vw]! w-[6vw]! md:h-[30px]! md:w-[30px]!"
+        className="h-[5.5vw]! w-[5.5vw]! md:h-[24.93px]! md:w-[24.93px]!"
       />
     </div>
   );

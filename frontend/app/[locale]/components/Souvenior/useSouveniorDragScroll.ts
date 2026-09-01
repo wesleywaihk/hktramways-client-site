@@ -9,6 +9,8 @@ const MAX_CONTAINER_WIDTH = 1280;
 const GUTTER = 24;
 const LG_BREAKPOINT = 1024;
 const MOBILE_END_GUTTER = 20;
+const WHEEL_EASE = 0.2;
+const WHEEL_EASE_MIN_DELTA = 0.5;
 
 function getStartX(viewportWidth: number) {
   return Math.max(0, (viewportWidth - MAX_CONTAINER_WIDTH) / 2) + GUTTER;
@@ -35,6 +37,8 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
     velocity: number;
   } | null>(null);
   const momentumFrame = useRef<number | null>(null);
+  const wheelTargetRef = useRef(0);
+  const wheelFrame = useRef<number | null>(null);
 
   const applyX = (x: number) => {
     const { min, max } = boundsRef.current;
@@ -83,6 +87,29 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
     }
   };
 
+  const stopWheelEase = () => {
+    if (wheelFrame.current !== null) {
+      cancelAnimationFrame(wheelFrame.current);
+      wheelFrame.current = null;
+    }
+  };
+
+  const runWheelEase = () => {
+    const step = () => {
+      const diff = wheelTargetRef.current - xRef.current;
+      if (Math.abs(diff) < WHEEL_EASE_MIN_DELTA) {
+        applyX(wheelTargetRef.current);
+        wheelFrame.current = null;
+        return;
+      }
+      applyX(xRef.current + diff * WHEEL_EASE);
+      wheelFrame.current = requestAnimationFrame(step);
+    };
+    if (wheelFrame.current === null) {
+      wheelFrame.current = requestAnimationFrame(step);
+    }
+  };
+
   const runMomentum = (velocity: number) => {
     let v = velocity;
     const step = () => {
@@ -104,6 +131,7 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
 
     const onResize = () => {
       stopMomentum();
+      stopWheelEase();
       const resetX = recomputeBounds();
       applyX(resetX);
     };
@@ -120,13 +148,20 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
       if (delta === 0) return;
       e.preventDefault();
       stopMomentum();
-      applyX(xRef.current - delta);
+      if (wheelFrame.current === null) wheelTargetRef.current = xRef.current;
+      const { min, max } = boundsRef.current;
+      wheelTargetRef.current = Math.min(
+        max,
+        Math.max(min, wheelTargetRef.current - delta),
+      );
+      runWheelEase();
     };
     el?.addEventListener("wheel", onWheel, { passive: false });
 
     return () => {
       window.removeEventListener("resize", onResize);
       el?.removeEventListener("wheel", onWheel);
+      stopWheelEase();
     };
   }, [data]);
 
@@ -134,6 +169,7 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
     const el = containerRef.current;
     if (!el) return;
     stopMomentum();
+    stopWheelEase();
     el.setPointerCapture(e.pointerId);
     dragState.current = {
       startX: e.clientX,
