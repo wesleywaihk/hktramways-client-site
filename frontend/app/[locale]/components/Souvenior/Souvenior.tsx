@@ -61,7 +61,7 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
 
   return (
     <section className="borderless bg-green flex h-auto flex-col justify-center py-[90px] lg:py-[120px]">
-      <div className="sectionContainer max-w-screen-xl items-center justify-between gap-4">
+      <div className="sectionContainer content-max-w items-center justify-between gap-4">
         <h2 className="title-text mx-0 grow px-0 text-center text-white lg:text-left">
           {title}
         </h2>
@@ -75,21 +75,21 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
 
       <div
         ref={containerRef}
-        className="mt-10 cursor-grab touch-pan-y overflow-hidden pt-[34px] select-none active:cursor-grabbing md:mt-14 md:pt-[28px] lg:pt-[28px]"
+        className="pageBorder mt-10 cursor-grab touch-pan-y overflow-hidden pt-[34px] select-none active:cursor-grabbing md:mt-14 md:pt-[28px] lg:pt-[28px]"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
         onClickCapture={onClickCapture}
       >
-        <div ref={rowRef} className="flex w-max gap-[30px]">
+        <div ref={rowRef} className="flex w-max gap-[30px] lg:gap-[43px]">
           {items.map((item, index) => (
             <SouveniorCard key={item.id} item={item} order={index + 1} />
           ))}
         </div>
       </div>
 
-      <div className="sectionContainer mt-10 block max-w-screen-xl items-center justify-center lg:hidden">
+      <div className="sectionContainer content-max-w mt-10 block items-center justify-center lg:hidden">
         {data.actionButton && (
           <ActionButton {...data.actionButton} className="!px-6 !py-[14px]" />
         )}
