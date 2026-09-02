@@ -7,6 +7,7 @@ import Button from "@/components/Button/Button";
 import { fetchFares } from "@/hooks/useApiEndpoint/api";
 import FareGfx from "./FareGfx";
 import FareAccordionItem from "./FareAccordionItem";
+import { devClassName } from "@/lib/devClassName";
 import type { FaresData, PlanYourRideResponse } from "@/types/api";
 
 export interface FaresProps {
@@ -39,7 +40,7 @@ export default function Fares({ locale }: FaresProps) {
 
   if (fares === undefined) {
     return (
-      <section className="borderless">
+      <section className={`${devClassName("fares")}borderless`}>
         <Loading />
       </section>
     );
@@ -59,7 +60,9 @@ export default function Fares({ locale }: FaresProps) {
   } = fares;
 
   return (
-    <section className="borderless bg-green flex h-auto flex-col justify-center pt-[45px] pb-[90px] lg:pt-[60px] lg:pb-[120px]">
+    <section
+      className={`${devClassName("fares")}borderless bg-green flex h-auto flex-col justify-center pt-[45px] pb-[90px] lg:pt-[60px] lg:pb-[120px]`}
+    >
       <div className="sectionContainer max-w-screen-xl flex-col gap-10">
         <div className="flex flex-col items-center gap-4 text-center">
           <h2 className="title-text text-white">{Title}</h2>
@@ -99,7 +102,7 @@ export default function Fares({ locale }: FaresProps) {
                 color="white"
                 useArrow={monthlyTicketActionButton.useArrow ?? true}
                 startIcon={monthlyTicketActionButton.startIcon?.icon}
-                className="!border-yellow !bg-yellow !text-accent-brown hover:!bg-yellow hover:!text-accent-brown mt-[-20px] !w-full !justify-between !gap-[10px] !rounded-[21px] !py-[15px] !pr-5 !pl-[30px] !text-[16px] !leading-[162.5%] !normal-case"
+                className="border-yellow! bg-yellow! text-accent-brown! hover:bg-yellow! hover:text-accent-brown! text-body mt-[-20px] w-full! gap-0 py-[13px] pr-[15px] pl-[10px] text-center font-semibold normal-case! lg:gap-[10px] lg:py-[15px] lg:pr-[18px] lg:pl-[30px]"
               >
                 {monthlyTicketActionButton.label}
               </Button>
@@ -114,7 +117,7 @@ export default function Fares({ locale }: FaresProps) {
               color="white"
               useArrow={actionButton.useArrow ?? false}
               startIcon={actionButton.startIcon?.icon}
-              className="!h-[62px] !w-[400px] !justify-center !gap-[15px] !rounded-[21px] !px-6 !text-[21px] !leading-[152.4%] !normal-case"
+              className="h-[62px]! w-[400px]! normal-case!"
             >
               {actionButton.label}
             </Button>

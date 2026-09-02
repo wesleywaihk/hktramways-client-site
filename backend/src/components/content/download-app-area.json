@@ -34,6 +34,9 @@
       "type": "component",
       "component": "content.action-button",
       "repeatable": false
+    },
+    "bgColor": {
+      "type": "string"
     }
   },
   "config": {}

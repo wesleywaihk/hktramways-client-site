@@ -2,7 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import SouveniorIcon from "./SouveniorIcon";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
+import { devClassName } from "@/lib/devClassName";
 import type { SouveniorItem } from "@/types/api";
+const TRANSFORM_CLASS =
+  "gpu-transform transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]";
 
 function formatPrice(price: number) {
   return Number.isInteger(price) ? String(price) : price.toFixed(2);
@@ -17,7 +20,9 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
   const href = item.link?.url ?? undefined;
 
   return (
-    <div className="group relative flex w-[53vw] shrink-0 flex-col items-center md:w-[35vw] lg:w-[320px]">
+    <div
+      className={`${devClassName("souvenior-card")}group relative flex w-[53vw] shrink-0 flex-col items-center md:w-[35vw] lg:w-[320px]`}
+    >
       {href && (
         <Link
           href={href}
@@ -30,7 +35,9 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
         />
       )}
       <div className="relative aspect-square w-full">
-        <div className="absolute inset-0 transition-all duration-300 ease-out group-hover:inset-[3vw] md:group-hover:inset-[2vw] lg:group-hover:inset-[18px]">
+        <div
+          className={`absolute inset-0 ${TRANSFORM_CLASS} group-hover:inset-[3vw] md:group-hover:inset-[2vw] lg:group-hover:inset-[18px]`}
+        >
           <ResponsiveImg
             bannerImage={{
               id: item.image?.id ?? 0,
@@ -43,7 +50,9 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
           />
         </div>
 
-        <div className="border-green-light pointer-events-none absolute inset-0 z-10 rounded-full border-0 transition-all duration-300 ease-out ring-inset group-hover:border-[3vw] md:group-hover:border-[2vw] lg:group-hover:border-[18px]" />
+        <div
+          className={`border-green-light pointer-events-none absolute inset-0 z-10 rounded-full border-0 ${TRANSFORM_CLASS} ring-inset group-hover:border-[3vw] md:group-hover:border-[2vw] lg:group-hover:border-[18px]`}
+        />
 
         <div className="pointer-events-none absolute -top-[34px] -left-[3px] z-20 md:-top-[28px] md:-left-[16px] lg:-top-[28px] lg:-left-[16px]">
           <Image
@@ -59,24 +68,24 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
             alt=""
             width={84}
             height={87}
-            className="hidden h-auto md:block md:w-[10vw] lg:w-[87px]"
+            className="hidden h-auto md:block md:w-[10vw] lg:w-[min(12vw,105px)]"
             aria-hidden="true"
           />
         </div>
 
         <SouveniorIcon
           icon={item.icon?.icon}
-          className="absolute right-5 bottom-5 z-10"
+          className={`absolute right-[3.4vw] bottom-[3.4vw] z-10 group-hover:scale-115 md:right-[1.9vw] md:bottom-[1.9vw] lg:right-5 lg:bottom-5 ${TRANSFORM_CLASS}`}
         />
       </div>
 
-      <p className="mt-3 line-clamp-2 min-h-[2.9em] text-center font-sans text-[15px] leading-[163%] font-normal tracking-[0.02em] text-white md:mt-4 lg:text-[16px]">
+      <p className="mx-auto mt-3 line-clamp-2 block min-h-[2.9em] max-w-[250px] text-center font-sans text-[15px] leading-[163%] font-normal tracking-[0.02em] text-white md:mt-4 lg:text-[16px]">
         {item.name}
       </p>
-      <p className="mt-1 flex items-baseline gap-1.5 text-[15px] font-semibold tracking-[0.02em] text-white md:text-[16px]">
+      <p className="mt-1 flex items-baseline justify-center gap-1.5 text-[18px] leading-[152%] font-semibold tracking-[0.02em] text-white lg:text-[21px]">
         <span>HK${formatPrice(item.pirce)}</span>
         {item.preDiscountPrice != null && (
-          <span className="text-[12px] font-normal text-white/50 line-through md:text-[13px]">
+          <span className="text-center text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-white/40 uppercase line-through">
             HK${formatPrice(item.preDiscountPrice)}
           </span>
         )}

@@ -1,3 +1,5 @@
+import { devClassName } from "@/lib/devClassName";
+
 type Direction = "west" | "east";
 
 interface DirectionToggleProps {
@@ -30,7 +32,9 @@ export default function DirectionToggle({
   eastLabel,
 }: DirectionToggleProps) {
   return (
-    <div className="flex rounded-[30px] bg-black/15 p-[10px]">
+    <div
+      className={`${devClassName("direction-toggle")}flex rounded-[30px] bg-black/15 p-[10px]`}
+    >
       <button
         type="button"
         onClick={() => onChange("west")}

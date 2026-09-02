@@ -1,21 +1,50 @@
+import { devClassName } from "@/lib/devClassName";
+
 export interface HamburgerIconProps {
   open: boolean;
   className?: string;
 }
 
-const bar =
-  "absolute left-0 w-full h-0.5 bg-current rounded-full transition-opacity duration-300 ease-out";
-
-export default function HamburgerIcon({ open, className }: HamburgerIconProps) {
+export default function HamburgerIcon({
+  open,
+  className = "",
+}: HamburgerIconProps) {
   return (
-    <span
-      className={`relative block h-9 w-[22px] transform-gpu cursor-pointer transition-transform duration-300 ease-out hover:scale-90 ${className ?? ""}`}
+    <svg
+      width="22"
+      height="36"
+      viewBox="0 0 22 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`${devClassName("hamburger-icon")}${className}`}
     >
-      <span className={`${bar} top-[7px]`} />
-      <span
-        className={`${bar} top-1/2 -translate-y-1/2 ${open ? "opacity-0" : "opacity-100"}`}
+      <line
+        x1="1"
+        y1="9"
+        x2="21"
+        y2="9"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
-      <span className={`${bar} bottom-[7px]`} />
-    </span>
+      <line
+        x1="1"
+        y1="17"
+        x2="21"
+        y2="17"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <line
+        x1="1"
+        y1="25"
+        x2="21"
+        y2="25"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }

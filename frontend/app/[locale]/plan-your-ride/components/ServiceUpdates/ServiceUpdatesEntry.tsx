@@ -1,4 +1,5 @@
 import IconButton from "@/components/Button/IconButton";
+import { devClassName } from "@/lib/devClassName";
 import type { AnnouncementItemData } from "@/types/api";
 import { formatDate } from "@/lib/formatDate";
 
@@ -12,7 +13,9 @@ export default function ServiceUpdatesEntry({
   const noRefer = link?.noRefer ?? false;
 
   return (
-    <div className="flex items-center justify-between gap-4 border-b border-black/10 py-6 first:pt-0 last:border-b-0 last:pb-0">
+    <div
+      className={`${devClassName("service-updates-entry")}flex items-center justify-between gap-4 border-b border-black/10 py-6 first:pt-0 last:border-b-0 last:pb-0`}
+    >
       <div className="min-w-0">
         <span className="text-green block text-[15px] leading-none font-semibold tracking-[0.02em] lg:text-[16px]">
           {formatDate(dateTime)}

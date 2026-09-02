@@ -13,6 +13,7 @@ import type {
   HomeArcCarouselResponse,
   Media,
 } from "@/types/api";
+import { devClassName } from "@/lib/devClassName";
 import { asImage } from "@/lib/media";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useArcCarouselSwipe } from "./useArcCarouselSwipe";
@@ -73,8 +74,8 @@ const lgGap = (cardWidth: string) => `calc(25vw + (${cardWidth}) / 8)`;
 /** tighter than lgGap: less space between cards at xl (1280px) and above */
 const xlGap = (cardWidth: string) => `calc(22vw + (${cardWidth}) / 8)`;
 
-const MOBILE_CARD_WIDTH = "30.34dvmax";
-const MOBILE_CARD_HEIGHT = "38dvmax";
+const MOBILE_CARD_WIDTH = "36dvmax"; //"30.34dvmax";
+const MOBILE_CARD_HEIGHT = "45dvmax"; //"38dvmax";
 const MOBILE_TILT = 8;
 const MOBILE_DROPS = [0, 32];
 const MOBILE_VISIBLE_RANGE = 1;
@@ -132,7 +133,9 @@ export default function ArcCarousel({ locale, documentId }: ArcCarouselProps) {
 
   if (data === undefined) {
     return (
-      <section className="borderless bg-green">
+      <section
+        className={`${devClassName("arc-carousel")}borderless bg-green`}
+      >
         <Loading />
       </section>
     );
@@ -206,8 +209,10 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   };
 
   return (
-    <section className="borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden py-[10dvh] select-none md:py-[6dvh]">
-      <div className="flex shrink-0 items-center justify-center gap-6 pb-8 md:gap-16 md:pb-10">
+    <section
+      className={`${devClassName("arc-carousel")}borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden pt-[15dvh] pb-[10dvh] select-none md:pt-[18dvh] md:pb-[12.7dvh]`}
+    >
+      <div className="flex shrink-0 items-center justify-center gap-6 md:mb-10 md:gap-16">
         <IconButton
           ariaLabel="Previous poster"
           onClick={prev}
@@ -240,12 +245,14 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           onClick={prev}
           reverse
           useArrow
+          shape="square"
           className="absolute top-1/2 left-4 z-30 grid h-9 w-9 -translate-y-1/2 md:hidden"
         />
         <IconButton
           ariaLabel="Next poster"
           onClick={next}
           useArrow
+          shape="square"
           className="absolute top-1/2 right-4 z-30 grid h-9 w-9 -translate-y-1/2 md:hidden"
         />
 
@@ -294,14 +301,26 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           ref={circleRef}
           visible={circleVisible}
           content={hoveredContent}
+          className="pt-4"
         />
       </div>
 
-      <div className="relative z-30 mt-6 shrink-0 px-8 text-center md:mt-8">
-        <p className="mx-auto max-w-[520px] text-[16px] leading-[163%] font-semibold tracking-[0.02em] whitespace-pre-line text-white">
+      <div className="relative z-30 shrink-0 px-8 text-center md:mt-8">
+        <p className="mx-auto w-[76vw] max-w-[400px] text-[15px] leading-[163%] font-semibold tracking-[0.02em] whitespace-pre-line text-white md:w-full md:max-w-[340px] md:text-[16px]">
           {active_.caption}
         </p>
       </div>
+
+      {active_.linkUrl && active_.callActionText && (
+        <div className="relative z-30 mt-[10px] mb-4 shrink-0 text-center md:hidden">
+          <a
+            href={active_.linkUrl}
+            className="border-b-2 border-white/20 pb-[3px] font-sans text-[15px] leading-[163%] font-normal tracking-[0.02em] text-white transition-colors duration-100 hover:border-white/60"
+          >
+            {active_.callActionText}
+          </a>
+        </div>
+      )}
 
       <div className="mt-6 flex shrink-0 justify-center md:mt-8">
         <Button

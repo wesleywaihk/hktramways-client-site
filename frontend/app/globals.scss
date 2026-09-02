@@ -33,18 +33,25 @@ body {
   background: var(--color-white);
   color: #171717;
   font-family: var(--font-sans);
-}
-
-@utility pageBorder {
-  @apply px-5 pb-0 lg:px-10;
+  overflow-x: hidden;
 }
 
 @utility pageWrapper {
   @apply pageBorder mx-auto flex w-full flex-col;
 }
 
+//page gutter: px-5 lg:px-10
+
+@utility pageBorder {
+  @apply px-5 pb-0 lg:px-10; //page gutter
+}
+
 @utility borderless {
-  @apply -mx-5 w-[calc(100%+2.5rem)] lg:-mx-10 lg:w-[calc(100%+80px)];
+  @apply -mx-5 w-[calc(100%+40px)] lg:-mx-10 lg:w-[calc(100%+80px)]; //100% + page gutter x2
+}
+
+@utility content-max-w {
+  @apply max-w-[1180px] lg:max-w-[1220px]; //1140 +  page gutter x2
 }
 
 @utility sectionContainer {
@@ -55,4 +62,8 @@ body {
   @apply leading-[107%] font-semibold tracking-[0.02em] uppercase;
   font-size: clamp(44.8px, 3.8888888889vw, 84px);
   //font-size: clamp(40px, 24.73px + 4.07vw, 56px);
+}
+
+@utility text-body {
+  @apply text-[15px] leading-[163%] tracking-[0.02em] lg:text-[16px];
 }

@@ -618,6 +618,12 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::home.home'>;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'seo.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     souvenior: Schema.Attribute.Component<'page-home.souvenior', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -763,6 +769,12 @@ export interface ApiPlanYourRidePlanYourRide
       'page-play-your-ride.schedule',
       false
     > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    seo: Schema.Attribute.Component<'seo.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

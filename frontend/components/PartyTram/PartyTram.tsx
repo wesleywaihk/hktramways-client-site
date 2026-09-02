@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import Loading from "@/components/Loading/Loading";
 import { fetchPartyTram } from "@/hooks/useApiEndpoint/api";
 import type { PartyTramData, PartyTramResponse } from "@/types/api";
+import { devClassName } from "@/lib/devClassName";
 import CloudLayer from "./CloudLayer";
 import PartyTramCarousel from "./PartyTramCarousel";
+import GroundLayer from "./GroundLayer";
 
 export interface PartyTramProps {
   locale: string;
@@ -34,7 +36,7 @@ export default function PartyTram({ locale }: PartyTramProps) {
 
   if (data === undefined) {
     return (
-      <section className="borderless">
+      <section className={`${devClassName("party-tram")}borderless`}>
         <Loading />
       </section>
     );
@@ -43,7 +45,10 @@ export default function PartyTram({ locale }: PartyTramProps) {
   if (!data || !data?.item) return null;
 
   return (
-    <section className="borderless relative h-[100dvh] overflow-hidden bg-[url('/partyTram/partytram-bg_m.jpg')] bg-cover bg-bottom lg:aspect-auto lg:bg-[url('/partyTram/partytram-bg.jpg')]">
+    <section
+      className={`${devClassName("party-tram")}borderless relative h-[100dvh] overflow-hidden bg-[url('/partyTram/partytram-bg_m.jpg')] bg-cover bg-bottom lg:aspect-auto lg:bg-[url('/partyTram/partytram-bg.jpg')]`}
+    >
+      <GroundLayer />
       <CloudLayer />
       <PartyTramCarousel data={data} />
     </section>

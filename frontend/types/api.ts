@@ -130,6 +130,7 @@ export interface DownloadAppAreaData {
   Image: Media | null;
   title: string;
   desc: string;
+  bgColor: string | null;
   actionButton1: ActionButton | null;
   actionButton2: ActionButton | null;
 }
@@ -163,6 +164,7 @@ export interface Home {
   documentId: string;
   Title: string;
   bannerImage: ResponsiveImage[] | null;
+  seo: Seo | null;
 }
 
 export interface HomeResponse {
@@ -255,6 +257,7 @@ export interface PlanYourRideData {
   bannerImage: ResponsiveImage[] | null;
   ServiceUpdates: ServiceUpdatesData | null;
   Fares: FaresData | null;
+  seo: Seo | null;
 }
 
 export interface PlanYourRideResponse {
@@ -287,7 +290,7 @@ export interface GlobalFavicon {
   mime: string;
 }
 
-export interface GlobalSeo {
+export interface Seo {
   id: number;
   metaTitle: string;
   metaDescription: string;
@@ -329,7 +332,7 @@ export interface GlobalData {
   documentId: string;
   locale: string;
   favicon: GlobalFavicon | null;
-  seo: GlobalSeo | null;
+  seo: Seo | null;
   footer: GlobalFooter | null;
 }
 

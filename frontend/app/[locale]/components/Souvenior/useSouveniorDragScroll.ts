@@ -7,6 +7,10 @@ const MOMENTUM_FRICTION = 0.95;
 const MOMENTUM_MIN_VELOCITY = 0.05;
 const MAX_CONTAINER_WIDTH = 1280;
 const GUTTER = 24;
+const LG_BREAKPOINT = 1024;
+const MOBILE_END_GUTTER = 20;
+const WHEEL_EASE = 0.2;
+const WHEEL_EASE_MIN_DELTA = 0.5;
 
 function getStartX(viewportWidth: number) {
   return Math.max(0, (viewportWidth - MAX_CONTAINER_WIDTH) / 2) + GUTTER;
@@ -20,6 +24,7 @@ function getStartX(viewportWidth: number) {
 export function useSouveniorDragScroll(data?: SouveniorData | null) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rowRef = useRef<HTMLDivElement | null>(null);
+  const actionButtonRef = useRef<HTMLElement | null>(null);
   const xRef = useRef(0);
   const boundsRef = useRef({ min: 0, max: 0 });
   const dragState = useRef<{
@@ -32,6 +37,8 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
     velocity: number;
   } | null>(null);
   const momentumFrame = useRef<number | null>(null);
+  const wheelTargetRef = useRef(0);
+  const wheelFrame = useRef<number | null>(null);
 
   const applyX = (x: number) => {
     const { min, max } = boundsRef.current;
@@ -43,11 +50,32 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
   };
 
   const recomputeBounds = () => {
-    const viewportWidth = window.innerWidth;
-    const containerWidth = containerRef.current?.clientWidth ?? viewportWidth;
+    // documentElement.clientWidth excludes the vertical scrollbar, unlike
+    // window.innerWidth, so it matches the actually visible content edge.
+    const viewportWidth = document.documentElement.clientWidth;
     const rowWidth = rowRef.current?.scrollWidth ?? 0;
     const startX = getStartX(viewportWidth);
-    const minX = Math.min(startX, containerWidth - GUTTER - rowWidth);
+
+    // The row sits in normal flow after the container's left padding, so
+    // translateX(0) renders its left edge at containerLeft + paddingLeft,
+    // not at containerLeft. Bounds must be computed from that content edge.
+    let contentLeft = 0;
+    if (containerRef.current) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const paddingLeft = parseFloat(
+        getComputedStyle(containerRef.current).paddingLeft,
+      );
+      contentLeft = containerRect.left + (Number.isNaN(paddingLeft) ? 0 : paddingLeft);
+    }
+
+    let minX: number;
+    if (viewportWidth >= LG_BREAKPOINT && actionButtonRef.current) {
+      const buttonRight = actionButtonRef.current.getBoundingClientRect().right;
+      minX = Math.min(startX, buttonRight - contentLeft - rowWidth);
+    } else {
+      minX = Math.min(startX, viewportWidth - MOBILE_END_GUTTER - contentLeft - rowWidth);
+    }
+
     boundsRef.current = { min: minX, max: startX };
     return startX;
   };
@@ -56,6 +84,29 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
     if (momentumFrame.current !== null) {
       cancelAnimationFrame(momentumFrame.current);
       momentumFrame.current = null;
+    }
+  };
+
+  const stopWheelEase = () => {
+    if (wheelFrame.current !== null) {
+      cancelAnimationFrame(wheelFrame.current);
+      wheelFrame.current = null;
+    }
+  };
+
+  const runWheelEase = () => {
+    const step = () => {
+      const diff = wheelTargetRef.current - xRef.current;
+      if (Math.abs(diff) < WHEEL_EASE_MIN_DELTA) {
+        applyX(wheelTargetRef.current);
+        wheelFrame.current = null;
+        return;
+      }
+      applyX(xRef.current + diff * WHEEL_EASE);
+      wheelFrame.current = requestAnimationFrame(step);
+    };
+    if (wheelFrame.current === null) {
+      wheelFrame.current = requestAnimationFrame(step);
     }
   };
 
@@ -80,6 +131,7 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
 
     const onResize = () => {
       stopMomentum();
+      stopWheelEase();
       const resetX = recomputeBounds();
       applyX(resetX);
     };
@@ -96,13 +148,20 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
       if (delta === 0) return;
       e.preventDefault();
       stopMomentum();
-      applyX(xRef.current - delta);
+      if (wheelFrame.current === null) wheelTargetRef.current = xRef.current;
+      const { min, max } = boundsRef.current;
+      wheelTargetRef.current = Math.min(
+        max,
+        Math.max(min, wheelTargetRef.current - delta),
+      );
+      runWheelEase();
     };
     el?.addEventListener("wheel", onWheel, { passive: false });
 
     return () => {
       window.removeEventListener("resize", onResize);
       el?.removeEventListener("wheel", onWheel);
+      stopWheelEase();
     };
   }, [data]);
 
@@ -110,6 +169,7 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
     const el = containerRef.current;
     if (!el) return;
     stopMomentum();
+    stopWheelEase();
     el.setPointerCapture(e.pointerId);
     dragState.current = {
       startX: e.clientX,
@@ -163,6 +223,7 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
   return {
     containerRef,
     rowRef,
+    actionButtonRef,
     onPointerDown,
     onPointerMove,
     onPointerUp,

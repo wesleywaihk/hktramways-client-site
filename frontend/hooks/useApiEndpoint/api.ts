@@ -25,7 +25,7 @@ export const fetchHome = cache(async function fetchHome(
   previewMode: boolean,
   locale: string,
 ) {
-  const populate = buildPopulate(["bannerImage"]);
+  const populate = buildPopulate(["bannerImage", "seo"]);
   const url = previewMode
     ? `${API_URL}/api/homes/${documentId}?status=draft&locale=${locale}&${populate}`
     : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
@@ -181,7 +181,7 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
   locale: string,
   options?: { cache?: RequestCache },
 ) {
-  const populate = buildPopulate(["actionButton", "bannerImage"]);
+  const populate = buildPopulate(["actionButton", "bannerImage", "seo"]);
   const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);

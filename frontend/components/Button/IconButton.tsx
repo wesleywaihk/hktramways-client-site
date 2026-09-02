@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BtnIcon from "@/components/icons/BtnIcon";
 import ArrowIco from "@/components/icons/ArrowIco";
+import { devClassName } from "@/lib/devClassName";
 import type { IconEnum } from "@/types/api";
 import "./Button.scss";
 
@@ -45,6 +46,7 @@ export default function IconButton({
   className,
 }: IconButtonProps) {
   const classes = [
+    devClassName("icon-button"),
     "group place-items-center cursor-pointer border-2 border-transparent hover:border-white transition-colors duration-200 ease-out",
     shapeClasses[shape],
     colorClasses[color],
@@ -58,7 +60,7 @@ export default function IconButton({
     <span className="relative h-5 w-5 shrink-0 overflow-hidden">
       {useArrow ? (
         <ArrowIco
-          className="absolute inset-0 m-auto group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
+          className="absolute inset-0 m-auto h-5 w-5 group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
           aria-hidden="true"
         />
       ) : (

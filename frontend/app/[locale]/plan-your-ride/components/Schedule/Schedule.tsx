@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Loading from "@/components/Loading/Loading";
 import { fetchSchedule } from "@/hooks/useApiEndpoint/api";
+import { devClassName } from "@/lib/devClassName";
 import DirectionToggle from "./DirectionToggle";
 import { EASTBOUND_ROUTES, WESTBOUND_ROUTES } from "./routes";
 import type {
@@ -67,7 +68,9 @@ export default function Schedule({ locale }: ScheduleProps) {
 
   if (data === undefined) {
     return (
-      <section className="sectionContainer borderless bg-green">
+      <section
+        className={`${devClassName("schedule")}sectionContainer borderless bg-green`}
+      >
         <Loading />
       </section>
     );
@@ -81,7 +84,9 @@ export default function Schedule({ locale }: ScheduleProps) {
     : data.seheduleEastBound) as unknown as Record<string, ScheduleDay>;
 
   return (
-    <section className="borderless sectionContainer bg-green pt-[90px] pb-[45px] lg:pt-[120px] lg:pb-[60px]">
+    <section
+      className={`${devClassName("schedule")}borderless sectionContainer bg-green pt-[90px] pb-[45px] lg:pt-[120px] lg:pb-[60px]`}
+    >
       <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center gap-8">
         <div className="flex flex-col items-center gap-2 text-center">
           <h2 className="title-text text-center text-white">

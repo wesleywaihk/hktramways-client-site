@@ -8,6 +8,7 @@ import {
   fetchServiceUpdates,
 } from "@/hooks/useApiEndpoint/api";
 import ServiceUpdatesEntry from "./ServiceUpdatesEntry";
+import { devClassName } from "@/lib/devClassName";
 import type {
   AnnouncementItemData,
   AnnouncementItemsResponse,
@@ -62,7 +63,9 @@ export default function ServiceUpdates({
 
   if (state === undefined) {
     return (
-      <section className="borderless">
+      <section
+        className={`${devClassName("service-updates")}borderless`}
+      >
         <Loading />
       </section>
     );
@@ -75,7 +78,9 @@ export default function ServiceUpdates({
   const { title, actionButton } = serviceUpdates;
 
   return (
-    <section className="borderless flex h-auto flex-col justify-center py-[90px] lg:py-[120px]">
+    <section
+      className={`${devClassName("service-updates")}borderless flex h-auto flex-col justify-center py-[90px] lg:py-[120px]`}
+    >
       <div className="sectionContainer max-w-screen-xl flex-col items-center gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
         <div className="flex flex-col items-center gap-8 text-center lg:w-[476px] lg:shrink-0 lg:items-start lg:text-left">
           <h2 className="title-text text-green">{title}</h2>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import BtnIcon from "@/components/icons/BtnIcon";
+import ArrowIco from "@/components/icons/ArrowIco";
+import { devClassName } from "@/lib/devClassName";
 import type { IconEnum } from "@/types/api";
 import "./Button.scss";
 
@@ -40,30 +42,17 @@ const variantColorClasses: Record<
 };
 
 const buttonClasses =
-  "group inline-flex items-center justify-center gap-2.5 lg:gap-3.5 " +
-  "px-5 py-3.5 lg:px-6.5 lg:py-[19px] " +
+  "group inline-flex items-center justify-center gap-[10px] lg:gap-[14px] " +
+  "px-5 py-[14px] lg:px-8 lg:py-[19px] " +
   "rounded-[18px] lg:rounded-[21px] border-2 cursor-pointer " +
-  "font-sans text-[14px] leading-[157%] font-semibold uppercase tracking-[0.02em] whitespace-nowrap " +
   "transition-colors duration-200 ease-out";
 
 const Arrow = () => (
-  <span className="relative h-4 w-4 shrink-0 translate-y-[1px] overflow-hidden">
-    <svg
-      className="absolute inset-0 group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
+  <span className="relative h-5 w-5 shrink-0 overflow-hidden">
+    <ArrowIco
+      className="absolute inset-0 h-5 w-5 group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
       aria-hidden="true"
-    >
-      <path
-        d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    />
   </span>
 );
 
@@ -92,21 +81,30 @@ export default function Button({
           <BtnIcon icon={startIcon} />
         </span>
       )}
-      <span className="translate-y-[1px]">{children}</span>
+      <span className="text-center font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] whitespace-nowrap uppercase lg:translate-y-[1px]">
+        {children}
+      </span>
       {useArrow && <Arrow />}
     </>
   );
 
   if (href) {
     return (
-      <Link href={href} className={`no-wrap flex flex-row ${classes}`}>
+      <Link
+        href={href}
+        className={`${devClassName("button")}no-wrap flex flex-row ${classes}`}
+      >
         {content}
       </Link>
     );
   }
 
   return (
-    <button type="button" onClick={onClick} className={classes}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`${devClassName("button")}${classes}`}
+    >
       {content}
     </button>
   );

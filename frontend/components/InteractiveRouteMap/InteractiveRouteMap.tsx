@@ -39,10 +39,14 @@ export default function InteractiveRouteMap({
     };
   }, [locale]);
 
+  const bgClass = data?.bgColor
+    ? ""
+    : "[&>div]:bg-green-fresh [&>div]:bg-cover [&>div]:lg:bg-[url('/partyTram/InteractiveRouteMap/bg.png')]";
+
   return (
     <DownloadAppAreaUI
       data={data}
-      className={`[&>div]:bg-green-fresh [&>div>div>div>h2]:text-green [&>div>div>div>p]:text-green py-[45px] lg:py-[60px] [&>div]:bg-cover [&>div]:lg:bg-[url('/partyTram/InteractiveRouteMap/bg.png')] ${className}`}
+      className={`[&>div>div>div>h2]:text-green [&>div>div>div>p]:text-green py-[45px] lg:py-[60px] ${bgClass} ${className}`}
       buttonColor="green"
       buttonVariant="solid"
     />

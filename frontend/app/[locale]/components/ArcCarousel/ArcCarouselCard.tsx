@@ -1,4 +1,6 @@
+import { memo } from "react";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
+import { devClassName } from "@/lib/devClassName";
 import type { ArcCarouselItem } from "./ArcCarousel";
 
 export interface ArcCarouselCardProps {
@@ -14,7 +16,7 @@ export interface ArcCarouselCardProps {
   onHoverEnd?: () => void;
 }
 
-export default function ArcCarouselCard({
+function ArcCarouselCard({
   item,
   cardWidth,
   cardHeight,
@@ -30,7 +32,7 @@ export default function ArcCarouselCard({
 
   return (
     <div
-      className="group absolute top-1/2 left-1/2 will-change-transform"
+      className={`${devClassName("arc-carousel-card")}group absolute top-1/2 left-1/2 will-change-transform`}
       style={{
         width: cardWidth,
         height: cardHeight,
@@ -42,7 +44,7 @@ export default function ArcCarouselCard({
       }}
       onClick={onClick}
     >
-      <figure className="m-0 h-full w-full overflow-hidden shadow-lg transition-transform duration-150 ease-out group-hover:-translate-y-[5%]">
+      <figure className="m-0 h-full w-full overflow-hidden transition-transform duration-150 ease-out group-hover:-translate-y-[5%]">
         <div
           className="bg-earth-light relative flex h-full w-full items-end"
           onMouseMove={
@@ -92,3 +94,5 @@ export default function ArcCarouselCard({
     </div>
   );
 }
+
+export default memo(ArcCarouselCard);

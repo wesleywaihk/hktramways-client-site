@@ -1,6 +1,10 @@
 import type { SVGProps } from "react";
+import { devClassName } from "@/lib/devClassName";
 
-export default function BusketIco(props: SVGProps<SVGSVGElement>) {
+export default function BusketIco({
+  className,
+  ...props
+}: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="24"
@@ -8,6 +12,7 @@ export default function BusketIco(props: SVGProps<SVGSVGElement>) {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`${devClassName("busket-ico")}${className ?? ""}`}
       {...props}
     >
       <path

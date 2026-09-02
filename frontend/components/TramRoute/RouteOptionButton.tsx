@@ -1,28 +1,27 @@
 import { useTranslations } from "next-intl";
 import ExchangeArrow from "./ExchangeArrow";
+import { devClassName } from "@/lib/devClassName";
 import type { RouteStop } from "./routes";
 
 export interface RouteOptionButtonProps {
   route: RouteStop;
   active: boolean;
   onClick: () => void;
-  fullWidth?: boolean;
 }
+
+const gridClasses = `grid items-center p-[15px] lg:px-4 lg:py-3.5 w-full grid-cols-[24px_1fr_20px_1fr] w-full justify-between rounded-[21px] transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]`;
+
+const idClass =
+  "flex h-6 w-6 items-center justify-center rounded-full text-center text-[12px] leading-[100%] font-semibold tracking-[0.02em] md:text-[14px] transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]";
+const txtClass =
+  "text-center text-[14px] leading-[120%] font-semibold tracking-[0.02em] normal-case! md:text-[18px] md:leading-[178%]";
 
 export default function RouteOptionButton({
   route,
   active,
   onClick,
-  fullWidth = false,
 }: RouteOptionButtonProps) {
   const t = useTranslations("common");
-  const gridClasses =
-    `grid items-center gap-x-3 px-4 py-3.5 ${
-      fullWidth
-        ? "w-full grid-cols-[24px_1fr_20px_1fr]"
-        : "w-fit grid-cols-[24px_150px_20px_150px]"
-    } ` +
-    "font-sans text-[13px] lg:text-[14px] font-bold uppercase tracking-[0.02em] cursor-pointer";
 
   if (active) {
     return (
@@ -30,14 +29,12 @@ export default function RouteOptionButton({
         type="button"
         onClick={onClick}
         aria-pressed={active}
-        className={`${gridClasses} bg-green rounded-[21px] text-white shadow-md transition-colors duration-200 ease-out`}
+        className={`${devClassName("route-option-button")}${gridClasses} bg-green text-white`}
       >
-        <span className="text-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-[12px] font-bold transition-colors duration-200 ease-out">
-          {route.id}
-        </span>
-        <span className="text-center">{t(route.from)}</span>
-        <ExchangeArrow className="mx-auto h-5 w-5 transition-colors duration-200 ease-out" />
-        <span className="text-center">{t(route.to)}</span>
+        <span className={`${idClass} text-green bg-white`}>{route.id}</span>
+        <span className={txtClass}>{t(route.from)}</span>
+        <ExchangeArrow className="mx-auto h-5 w-5 transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]" />
+        <span className={txtClass}>{t(route.to)}</span>
       </button>
     );
   }
@@ -47,14 +44,16 @@ export default function RouteOptionButton({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`${gridClasses} group text-green hover:bg-green rounded-[21px] bg-transparent transition-colors duration-200 ease-out hover:text-white hover:shadow-md`}
+      className={`${devClassName("route-option-button")}${gridClasses} group text-green hover:bg-green cursor-pointer bg-transparent hover:text-white`}
     >
-      <span className="bg-green group-hover:text-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white transition-colors duration-200 ease-out group-hover:bg-white">
+      <span
+        className={`${idClass} bg-green group-hover:text-green text-white group-hover:bg-white`}
+      >
         {route.id}
       </span>
-      <span>{t(route.from)}</span>
-      <ExchangeArrow className="text-green/40 mx-auto h-5 w-5 transition-colors duration-200 ease-out group-hover:text-white" />
-      <span>{t(route.to)}</span>
+      <span className={txtClass}>{t(route.from)}</span>
+      <ExchangeArrow className="text-green mx-auto h-5 w-5 transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)] group-hover:text-white" />
+      <span className={txtClass}>{t(route.to)}</span>
     </button>
   );
 }

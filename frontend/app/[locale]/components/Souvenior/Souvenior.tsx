@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Loading from "@/components/Loading/Loading";
 import { fetchSouvenior } from "@/hooks/useApiEndpoint/api";
+import { devClassName } from "@/lib/devClassName";
 import SouveniorCard from "./SouveniorCard";
 import ActionButton from "./ActionButton";
 import { useSouveniorDragScroll } from "./useSouveniorDragScroll";
@@ -37,6 +38,7 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
   const {
     containerRef,
     rowRef,
+    actionButtonRef,
     onPointerDown,
     onPointerMove,
     onPointerUp,
@@ -46,7 +48,9 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
 
   if (data === undefined) {
     return (
-      <section className="borderless bg-green">
+      <section
+        className={`${devClassName("souvenior")}borderless bg-green`}
+      >
         <Loading />
       </section>
     );
@@ -60,40 +64,43 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
   if (!items.length) return null;
 
   return (
-    <section className="borderless bg-green flex h-auto flex-col justify-center py-[90px] lg:py-[120px]">
-      <div className="sectionContainer max-w-screen-xl items-center justify-between gap-4">
+    <section
+      className={`${devClassName("souvenior")}borderless bg-green flex h-auto flex-col justify-center py-[90px] lg:py-[120px]`}
+    >
+      <div className="sectionContainer content-max-w items-center justify-between gap-4">
         <h2 className="title-text mx-0 grow px-0 text-center text-white lg:text-left">
           {title}
         </h2>
         {data.actionButton && (
-          <ActionButton
-            {...data.actionButton}
-            className="hidden! px-[28px]! py-[19px]! lg:inline-flex! lg:shrink-0"
-          />
+          <div
+            ref={actionButtonRef as React.RefObject<HTMLDivElement>}
+            className="hidden! lg:inline-flex! lg:shrink-0"
+          >
+            <ActionButton {...data.actionButton} />
+          </div>
         )}
       </div>
 
       <div
         ref={containerRef}
-        className="mt-10 cursor-grab touch-pan-y overflow-hidden pt-[34px] select-none active:cursor-grabbing md:mt-14 md:pt-[28px] lg:pt-[28px]"
+        className="pageBorder mt-10 cursor-grab touch-pan-y overflow-hidden pt-[34px] select-none active:cursor-grabbing md:mt-14 md:pt-[28px] lg:pt-[28px]"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerLeave}
         onClickCapture={onClickCapture}
       >
-        <div ref={rowRef} className="flex w-max gap-[30px]">
+        <div ref={rowRef} className="flex w-max gap-[30px] lg:gap-[43px]">
           {items.map((item, index) => (
             <SouveniorCard key={item.id} item={item} order={index + 1} />
           ))}
         </div>
       </div>
-
-      <div className="sectionContainer mt-10 block max-w-screen-xl items-center justify-center lg:hidden">
-        {data.actionButton && (
-          <ActionButton {...data.actionButton} className="!px-6 !py-[14px]" />
-        )}
-      </div>
+      {data.actionButton && (
+        <div className="sectionContainer content-max-w mt-10 flex items-center justify-center lg:hidden">
+          <ActionButton {...data.actionButton} />
+        </div>
+      )}
     </section>
   );
 }

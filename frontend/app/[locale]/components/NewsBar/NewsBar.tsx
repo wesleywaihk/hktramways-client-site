@@ -3,7 +3,10 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import type { AnnouncementItemData } from "@/types/api";
+import { devClassName } from "@/lib/devClassName";
 import NewsBarEntry from "./NewsBarEntry";
+
+const DEF_SPEED = 40;
 
 export interface NewsBarProps {
   items?: AnnouncementItemData[];
@@ -27,7 +30,7 @@ function repeatToMinimum(
 export default function NewsBar({
   items = [],
   locale,
-  speed = 120,
+  speed = DEF_SPEED,
 }: NewsBarProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
@@ -64,7 +67,9 @@ export default function NewsBar({
   if (!visibleItems.length) return null;
 
   return (
-    <section className="borderless relative flex h-[52px] overflow-visible bg-white pl-[53px] lg:h-[60px] lg:pl-[92px]">
+    <section
+      className={`${devClassName("news-bar")}borderless relative flex h-[52px] overflow-visible bg-white pl-[53px] lg:h-[60px] lg:pl-[92px]`}
+    >
       <Image
         src="/home/newsBar/dingDingCat.svg"
         alt=""

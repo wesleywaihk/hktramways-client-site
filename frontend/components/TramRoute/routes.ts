@@ -26,5 +26,5 @@ export const ROUTES: RouteStop[] = [
 ];
 
 export function routeImage(id: number, mobile: boolean) {
-  return `/home/tramRoute/routes-map0${id}${mobile ? "_m" : ""}.jpg`;
+  return `/home/tramRoute/routes-map0${id}${mobile ? "_m" : ""}.svg`;
 }

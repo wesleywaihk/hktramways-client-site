@@ -1,3 +1,5 @@
+import { devClassName } from "@/lib/devClassName";
+
 export interface FareGfxEntry {
   label: string;
   fare: string;
@@ -17,7 +19,7 @@ export default function FareGfx({ adult, child, senior }: FareGfxProps) {
       viewBox="0 0 530 344"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="mx-auto h-auto w-full max-w-[600px]"
+      className={`${devClassName("fare-gfx")}mx-auto h-auto w-full max-w-[600px]`}
     >
       <g clipPath="url(#clip0_193_6895)">
         <path
