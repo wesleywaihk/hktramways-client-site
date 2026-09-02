@@ -11,6 +11,7 @@ import { asImage } from "@/lib/media";
 export interface DownloadAppAreaUIProps {
   // `undefined` = still loading, `null` = loaded but nothing to show.
   data?: DownloadAppAreaData | null;
+  compClassName?: string;
   className?: string;
   buttonColor?: ButtonColor;
   buttonVariant?: ButtonVariant;
@@ -18,6 +19,7 @@ export interface DownloadAppAreaUIProps {
 
 export default function DownloadAppAreaUI({
   data,
+  compClassName = "download-app-area",
   className = "",
   buttonColor = "white",
   buttonVariant = "outline",
@@ -25,7 +27,7 @@ export default function DownloadAppAreaUI({
   if (data === undefined) {
     return (
       <section
-        className={`${devClassName("download-app-area-ui")}borderless bg-green ${className}`}
+        className={`${devClassName(compClassName)}borderless bg-green ${className}`}
       >
         <Loading />
       </section>
@@ -39,10 +41,10 @@ export default function DownloadAppAreaUI({
 
   return (
     <section
-      className={`${devClassName("download-app-area-ui")}borderless sectionContainer bg-green flex h-auto flex-col justify-center ${className}`}
+      className={`${devClassName(compClassName)}borderless sectionContainer bg-green flex h-auto flex-col justify-center ${className}`}
     >
       <div
-        className="bg-green-light mx-auto w-full rounded-[21px] px-5 py-[60px] lg:rounded-[30px] lg:px-[50px] lg:py-20"
+        className="content-box bg-green-light mx-auto w-full rounded-[21px] px-5 py-[60px] lg:rounded-[30px] lg:px-[50px] lg:py-20"
         style={data.bgColor ? { backgroundColor: data.bgColor } : undefined}
       >
         <div className="mx-auto flex max-w-[869px] flex-col items-center gap-y-5 lg:flex-row lg:gap-x-[60px]">
