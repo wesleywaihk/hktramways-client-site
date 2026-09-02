@@ -4,6 +4,7 @@ import { useState } from "react";
 import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 import { IMG_URL } from "@/consts";
 import { Media, ResponsiveImage } from "@/types/api";
+import { devClassName } from "@/lib/devClassName";
 import { asImage } from "@/lib/media";
 
 type AutoHeight = "to-img" | "to-parent";
@@ -49,7 +50,7 @@ export default function ResponsiveImg({
       <div
         role="img"
         aria-label={alt}
-        className={`bg-earth-light flex items-center justify-center ${className}`}
+        className={`${devClassName("responsive-img")}bg-earth-light flex items-center justify-center ${className}`}
       >
         <ImageNotSupportedIcon
           className="text-green-30"
@@ -71,7 +72,7 @@ export default function ResponsiveImg({
 
   return (
     <div
-      className={`relative flex aspect-auto h-full w-full items-center justify-center overflow-hidden ${className}`}
+      className={`${devClassName("responsive-img")}relative flex aspect-auto h-full w-full items-center justify-center overflow-hidden ${className}`}
     >
       {!loaded && (
         <div

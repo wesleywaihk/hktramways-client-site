@@ -1,4 +1,5 @@
 import BtnIcon from "@/components/icons/BtnIcon";
+import { devClassName } from "@/lib/devClassName";
 import type { IconEnum } from "@/types/api";
 
 interface SouveniorIconProps {
@@ -13,7 +14,7 @@ export default function SouveniorIcon({
   if (!icon) return null;
   return (
     <div
-      className={`text-green grid h-[10vw] w-[10vw] place-items-center rounded-full bg-white shadow-md md:h-15 md:w-15 lg:h-[60px] lg:w-[60px] ${className}`}
+      className={`${devClassName("souvenior-icon")}text-green grid h-[10vw] w-[10vw] place-items-center rounded-full bg-white shadow-md md:h-15 md:w-15 lg:h-[60px] lg:w-[60px] ${className}`}
     >
       <BtnIcon
         icon={icon}

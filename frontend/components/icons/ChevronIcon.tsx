@@ -1,3 +1,5 @@
+import { devClassName } from "@/lib/devClassName";
+
 export interface ChevronIconProps {
   /** flips to point up when the submenu is expanded (mobile accordion) */
   active?: boolean;
@@ -20,7 +22,7 @@ export default function ChevronIcon({
       viewBox="0 0 26 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={`gpu-transform transition-transform duration-300 ease-out ${className ?? ""}`}
+      className={`${devClassName("chevron-icon")}gpu-transform transition-transform duration-300 ease-out ${className ?? ""}`}
       style={{ transform: `rotate(${rotation}deg)` }}
     >
       <path

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BtnIcon from "@/components/icons/BtnIcon";
 import ArrowIco from "@/components/icons/ArrowIco";
+import { devClassName } from "@/lib/devClassName";
 import type { IconEnum } from "@/types/api";
 import "./Button.scss";
 
@@ -89,14 +90,21 @@ export default function Button({
 
   if (href) {
     return (
-      <Link href={href} className={`no-wrap flex flex-row ${classes}`}>
+      <Link
+        href={href}
+        className={`${devClassName("button")}no-wrap flex flex-row ${classes}`}
+      >
         {content}
       </Link>
     );
   }
 
   return (
-    <button type="button" onClick={onClick} className={classes}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`${devClassName("button")}${classes}`}
+    >
       {content}
     </button>
   );

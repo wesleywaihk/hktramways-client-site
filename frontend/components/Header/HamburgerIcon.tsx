@@ -1,3 +1,5 @@
+import { devClassName } from "@/lib/devClassName";
+
 export interface HamburgerIconProps {
   open: boolean;
   className?: string;
@@ -14,7 +16,7 @@ export default function HamburgerIcon({
       viewBox="0 0 22 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={`${devClassName("hamburger-icon")}${className}`}
     >
       <line
         x1="1"

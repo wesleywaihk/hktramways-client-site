@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import ExchangeArrow from "./ExchangeArrow";
+import { devClassName } from "@/lib/devClassName";
 import type { RouteStop } from "./routes";
 
 export interface RouteOptionButtonProps {
@@ -28,7 +29,7 @@ export default function RouteOptionButton({
         type="button"
         onClick={onClick}
         aria-pressed={active}
-        className={`${gridClasses} bg-green text-white`}
+        className={`${devClassName("route-option-button")}${gridClasses} bg-green text-white`}
       >
         <span className={`${idClass} text-green bg-white`}>{route.id}</span>
         <span className={txtClass}>{t(route.from)}</span>
@@ -43,7 +44,7 @@ export default function RouteOptionButton({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`${gridClasses} group text-green hover:bg-green cursor-pointer bg-transparent hover:text-white`}
+      className={`${devClassName("route-option-button")}${gridClasses} group text-green hover:bg-green cursor-pointer bg-transparent hover:text-white`}
     >
       <span
         className={`${idClass} bg-green group-hover:text-green text-white group-hover:bg-white`}

@@ -5,6 +5,7 @@ import BusketIco from "@/components/icons/BusketIco";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
 import FaqIco from "@/components/icons/FaqIco";
 import SpeakerIco from "@/components/icons/SpeakerIco";
+import { devClassName } from "@/lib/devClassName";
 import type { IconEnum } from "@/types/api";
 
 const IconComponents: Record<
@@ -30,7 +31,7 @@ export default function BtnIcon({ icon, className, ...props }: BtnIconProps) {
 
   return (
     <Icon
-      className={`h-5 w-5 shrink-0 ${className ?? ""}`}
+      className={`${devClassName("btn-icon")}h-5 w-5 shrink-0 ${className ?? ""}`}
       aria-hidden="true"
       {...props}
     />

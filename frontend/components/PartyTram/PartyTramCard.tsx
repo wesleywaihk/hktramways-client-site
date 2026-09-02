@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { PartyTramItem } from "@/types/api";
 import { IMG_URL } from "@/consts";
+import { devClassName } from "@/lib/devClassName";
 
 function mediaSrc(url: string) {
   return url.startsWith("http") ? url : `${IMG_URL}${url}`;
@@ -68,7 +69,7 @@ function PartyTramCard({
 
   return (
     <div
-      className="absolute top-auto bottom-[11.5dvh] left-1/2 overflow-hidden transition-transform lg:bottom-[13dvh]"
+      className={`${devClassName("party-tram-card")}absolute top-auto bottom-[11.5dvh] left-1/2 overflow-hidden transition-transform lg:bottom-[13dvh]`}
       style={style}
       onClick={onClick}
       onDragStart={(e) => e.preventDefault()}

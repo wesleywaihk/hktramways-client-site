@@ -9,6 +9,7 @@ import { useArcCarouselSwipe } from "@/app/[locale]/components/ArcCarousel/useAr
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { usePreviousValue } from "./usePreviousValue";
 import PartyTramCard from "./PartyTramCard";
+import { devClassName } from "@/lib/devClassName";
 import type { PartyTramData } from "@/types/api";
 
 /** mobile peek-carousel: how much of the previous/next slide peeks in from each edge */
@@ -125,7 +126,9 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
   const CARD_GAP_VW = isLg ? LG_CARD_GAP_VW : MOBILE_CARD_GAP_VW;
 
   return (
-    <div className="relative z-10 flex h-full flex-col items-center pt-[13dvh] lg:items-start">
+    <div
+      className={`${devClassName("party-tram-carousel")}relative z-10 flex h-full flex-col items-center pt-[13dvh] lg:items-start`}
+    >
       <div className="max-screen-lg mx-auto flex w-full items-center justify-center gap-6 lg:gap-16 lg:px-16">
         <IconButton
           ariaLabel="Previous tram"

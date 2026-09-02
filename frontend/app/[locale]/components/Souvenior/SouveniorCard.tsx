@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SouveniorIcon from "./SouveniorIcon";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
+import { devClassName } from "@/lib/devClassName";
 import type { SouveniorItem } from "@/types/api";
 const TRANSFORM_CLASS =
   "gpu-transform transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]";
@@ -19,7 +20,9 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
   const href = item.link?.url ?? undefined;
 
   return (
-    <div className="group relative flex w-[53vw] shrink-0 flex-col items-center md:w-[35vw] lg:w-[320px]">
+    <div
+      className={`${devClassName("souvenior-card")}group relative flex w-[53vw] shrink-0 flex-col items-center md:w-[35vw] lg:w-[320px]`}
+    >
       {href && (
         <Link
           href={href}

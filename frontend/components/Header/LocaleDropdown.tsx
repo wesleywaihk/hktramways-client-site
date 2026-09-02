@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLocaleSwitcher, LOCALE_LABELS } from "@/i18n/useLocaleSwitcher";
+import { devClassName } from "@/lib/devClassName";
 
 export interface LocaleDropdownProps {
   /** true when this trigger sits on a white background, so hover must invert to stay visible */
@@ -50,7 +51,10 @@ export default function LocaleDropdown({
   const otherLocales = locales.filter((loc) => loc !== locale);
 
   return (
-    <div className="relative" ref={wrapperRef}>
+    <div
+      className={`${devClassName("locale-dropdown")}relative`}
+      ref={wrapperRef}
+    >
       <button
         type="button"
         className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-[14px] border-2 bg-transparent font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] text-[var(--header-fg)] uppercase transition-colors duration-200 ease-out ${

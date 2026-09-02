@@ -1,3 +1,5 @@
+import { devClassName } from "@/lib/devClassName";
+
 export interface ExchangeArrowProps {
   className?: string;
 }
@@ -9,7 +11,7 @@ export default function ExchangeArrow({ className }: ExchangeArrowProps) {
       height="16"
       viewBox="0 0 24 24"
       fill="none"
-      className={`shrink-0 ${className ?? ""}`}
+      className={`${devClassName("exchange-arrow")}shrink-0 ${className ?? ""}`}
       aria-hidden="true"
     >
       <path

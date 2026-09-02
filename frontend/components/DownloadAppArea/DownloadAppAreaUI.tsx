@@ -5,6 +5,7 @@ import Button, {
 } from "@/components/Button/Button";
 import Loading from "@/components/Loading/Loading";
 import type { DownloadAppAreaData } from "@/types/api";
+import { devClassName } from "@/lib/devClassName";
 import { asImage } from "@/lib/media";
 
 export interface DownloadAppAreaUIProps {
@@ -23,7 +24,9 @@ export default function DownloadAppAreaUI({
 }: DownloadAppAreaUIProps) {
   if (data === undefined) {
     return (
-      <section className={`borderless bg-green ${className}`}>
+      <section
+        className={`${devClassName("download-app-area-ui")}borderless bg-green ${className}`}
+      >
         <Loading />
       </section>
     );
@@ -36,7 +39,7 @@ export default function DownloadAppAreaUI({
 
   return (
     <section
-      className={`borderless sectionContainer bg-green flex h-auto flex-col justify-center ${className}`}
+      className={`${devClassName("download-app-area-ui")}borderless sectionContainer bg-green flex h-auto flex-col justify-center ${className}`}
     >
       <div
         className="bg-green-light mx-auto w-full rounded-[21px] px-5 py-[60px] lg:rounded-[30px] lg:px-[50px] lg:py-20"

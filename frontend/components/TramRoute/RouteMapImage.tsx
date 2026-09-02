@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ROUTES, routeImage } from "./routes";
+import { devClassName } from "@/lib/devClassName";
 
 export interface RouteMapImageProps {
   selectedId: number;
@@ -29,7 +30,9 @@ export default function RouteMapImage({ selectedId }: RouteMapImageProps) {
   }, [selectedId, displayedId]);
 
   return (
-    <div className="relative mt-10 aspect-[1179/672] w-full lg:mt-14 lg:aspect-[4320/1170]">
+    <div
+      className={`${devClassName("route-map-image")}relative mt-10 aspect-[1179/672] w-full lg:mt-14 lg:aspect-[4320/1170]`}
+    >
       {ROUTES.map((route) => {
         const alt = `${t(route.from)} - ${t(route.to)}`;
         const active = route.id === displayedId;

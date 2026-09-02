@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
+import { devClassName } from "@/lib/devClassName";
 import { isImageMedia, isVideoMedia } from "@/lib/media";
 import { useElementScrollProgress } from "@/hooks/useElementScrollProgress";
 import ImageCard from "./ImageCard";
@@ -61,7 +62,7 @@ export default function Banner({
   return (
     <section
       ref={sectionRef}
-      className={`bg-green borderless relative overflow-hidden ${className}`}
+      className={`${devClassName("banner")}bg-green borderless relative overflow-hidden ${className}`}
     >
       {banners.map((banner, index) => {
         const cardClassName = `transition-opacity duration-1000 ease-in-out ${

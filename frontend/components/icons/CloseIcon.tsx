@@ -1,3 +1,5 @@
+import { devClassName } from "@/lib/devClassName";
+
 export interface CloseIconProps {
   className?: string;
 }
@@ -10,7 +12,7 @@ export default function CloseIcon({ className }: CloseIconProps) {
       viewBox="0 0 28 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={`${devClassName("close-icon")}${className ?? ""}`}
     >
       <line
         x1="2.41421"

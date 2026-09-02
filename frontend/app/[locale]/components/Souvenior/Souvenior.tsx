@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Loading from "@/components/Loading/Loading";
 import { fetchSouvenior } from "@/hooks/useApiEndpoint/api";
+import { devClassName } from "@/lib/devClassName";
 import SouveniorCard from "./SouveniorCard";
 import ActionButton from "./ActionButton";
 import { useSouveniorDragScroll } from "./useSouveniorDragScroll";
@@ -47,7 +48,9 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
 
   if (data === undefined) {
     return (
-      <section className="borderless bg-green">
+      <section
+        className={`${devClassName("souvenior")}borderless bg-green`}
+      >
         <Loading />
       </section>
     );
@@ -61,7 +64,9 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
   if (!items.length) return null;
 
   return (
-    <section className="borderless bg-green flex h-auto flex-col justify-center py-[90px] lg:py-[120px]">
+    <section
+      className={`${devClassName("souvenior")}borderless bg-green flex h-auto flex-col justify-center py-[90px] lg:py-[120px]`}
+    >
       <div className="sectionContainer content-max-w items-center justify-between gap-4">
         <h2 className="title-text mx-0 grow px-0 text-center text-white lg:text-left">
           {title}

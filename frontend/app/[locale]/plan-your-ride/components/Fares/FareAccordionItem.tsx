@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Collapse from "@mui/material/Collapse";
 import { IMG_URL } from "@/consts";
+import { devClassName } from "@/lib/devClassName";
 import type { FaresData } from "@/types/api";
 
 function mediaSrc(url: string) {
@@ -19,7 +20,9 @@ export default function FareAccordionItem({
   const iconSrc = item.icon?.url ? mediaSrc(item.icon.url) : null;
 
   return (
-    <div className="border-b border-white/30">
+    <div
+      className={`${devClassName("fare-accordion-item")}border-b border-white/30`}
+    >
       <button
         type="button"
         onClick={onToggle}

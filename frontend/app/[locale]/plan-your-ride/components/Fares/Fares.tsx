@@ -7,6 +7,7 @@ import Button from "@/components/Button/Button";
 import { fetchFares } from "@/hooks/useApiEndpoint/api";
 import FareGfx from "./FareGfx";
 import FareAccordionItem from "./FareAccordionItem";
+import { devClassName } from "@/lib/devClassName";
 import type { FaresData, PlanYourRideResponse } from "@/types/api";
 
 export interface FaresProps {
@@ -39,7 +40,7 @@ export default function Fares({ locale }: FaresProps) {
 
   if (fares === undefined) {
     return (
-      <section className="borderless">
+      <section className={`${devClassName("fares")}borderless`}>
         <Loading />
       </section>
     );
@@ -59,7 +60,9 @@ export default function Fares({ locale }: FaresProps) {
   } = fares;
 
   return (
-    <section className="borderless bg-green flex h-auto flex-col justify-center pt-[45px] pb-[90px] lg:pt-[60px] lg:pb-[120px]">
+    <section
+      className={`${devClassName("fares")}borderless bg-green flex h-auto flex-col justify-center pt-[45px] pb-[90px] lg:pt-[60px] lg:pb-[120px]`}
+    >
       <div className="sectionContainer max-w-screen-xl flex-col gap-10">
         <div className="flex flex-col items-center gap-4 text-center">
           <h2 className="title-text text-white">{Title}</h2>

@@ -1,6 +1,10 @@
 import type { SVGProps } from "react";
+import { devClassName } from "@/lib/devClassName";
 
-export default function UprightArrowIco(props: SVGProps<SVGSVGElement>) {
+export default function UprightArrowIco({
+  className,
+  ...props
+}: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="26"
@@ -8,6 +12,7 @@ export default function UprightArrowIco(props: SVGProps<SVGSVGElement>) {
       viewBox="0 0 26 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`${devClassName("upright-arrow-ico")}${className ?? ""}`}
       {...props}
     >
       <path

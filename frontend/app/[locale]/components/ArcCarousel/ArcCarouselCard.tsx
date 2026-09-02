@@ -1,5 +1,6 @@
 import { memo } from "react";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
+import { devClassName } from "@/lib/devClassName";
 import type { ArcCarouselItem } from "./ArcCarousel";
 
 export interface ArcCarouselCardProps {
@@ -31,7 +32,7 @@ function ArcCarouselCard({
 
   return (
     <div
-      className="group absolute top-1/2 left-1/2 will-change-transform"
+      className={`${devClassName("arc-carousel-card")}group absolute top-1/2 left-1/2 will-change-transform`}
       style={{
         width: cardWidth,
         height: cardHeight,

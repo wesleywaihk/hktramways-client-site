@@ -13,6 +13,7 @@ import type {
   HomeArcCarouselResponse,
   Media,
 } from "@/types/api";
+import { devClassName } from "@/lib/devClassName";
 import { asImage } from "@/lib/media";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useArcCarouselSwipe } from "./useArcCarouselSwipe";
@@ -132,7 +133,9 @@ export default function ArcCarousel({ locale, documentId }: ArcCarouselProps) {
 
   if (data === undefined) {
     return (
-      <section className="borderless bg-green">
+      <section
+        className={`${devClassName("arc-carousel")}borderless bg-green`}
+      >
         <Loading />
       </section>
     );
@@ -206,7 +209,9 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
   };
 
   return (
-    <section className="borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden pt-[15dvh] pb-[10dvh] select-none md:pt-[18dvh] md:pb-[12.7dvh]">
+    <section
+      className={`${devClassName("arc-carousel")}borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden pt-[15dvh] pb-[10dvh] select-none md:pt-[18dvh] md:pb-[12.7dvh]`}
+    >
       <div className="flex shrink-0 items-center justify-center gap-6 md:mb-10 md:gap-16">
         <IconButton
           ariaLabel="Previous poster"

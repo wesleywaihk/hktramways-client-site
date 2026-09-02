@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import Button from "@/components/Button/Button";
 import ChevronIcon from "@/components/icons/ChevronIcon";
+import { devClassName } from "@/lib/devClassName";
 import type { GlobalFooter } from "@/types/api";
 import { socialPlatforms } from "./footerData";
 
@@ -64,7 +65,9 @@ export default async function Footer({ data = undefined }: FooterProps) {
   ].filter((fare): fare is { label: string; value: number } => !!fare);
 
   return (
-    <footer className="bg-green pt-[60px] pb-[32px] text-white xl:pt-[80px] xl:pb-[50px]">
+    <footer
+      className={`${devClassName("footer")}bg-green pt-[60px] pb-[32px] text-white xl:pt-[80px] xl:pb-[50px]`}
+    >
       <div className="pageBorder flex flex-col items-start gap-y-[30px] xl:flex-row xl:gap-x-[65px]">
         {/* Logo column */}
         <Logo className="order-1 w-full xl:flex xl:hidden" />

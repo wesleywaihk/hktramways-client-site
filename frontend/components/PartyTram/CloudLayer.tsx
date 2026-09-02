@@ -1,3 +1,4 @@
+import { devClassName } from "@/lib/devClassName";
 import "./PartyTram.scss";
 
 /** seconds for the cloud layer to complete one full drift cycle */
@@ -9,7 +10,7 @@ const Cloud = () => (
 export default function CloudLayer() {
   return (
     <div
-      className="absolute inset-x-0 top-0 flex aspect-[2892/436] h-[36dvh] w-auto [animation:cloud-drift_linear_infinite] lg:aspect-[6168/1156] lg:h-[52dvh]"
+      className={`${devClassName("cloud-layer")}absolute inset-x-0 top-0 flex aspect-[2892/436] h-[36dvh] w-auto [animation:cloud-drift_linear_infinite] lg:aspect-[6168/1156] lg:h-[52dvh]`}
       style={{ animationDuration: `${CLOUD_DRIFT_DURATION_S}s` }}
       aria-hidden="true"
     >

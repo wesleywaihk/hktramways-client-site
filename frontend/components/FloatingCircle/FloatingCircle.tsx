@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import LongArrowIco from "@/components/icons/LongArrowIco";
+import { devClassName } from "@/lib/devClassName";
 
 export type FloatingCircleBreakpoint = "sm" | "md" | "lg" | "xl" | "2xl";
 
@@ -31,6 +32,7 @@ const FloatingCircle = forwardRef<HTMLDivElement, FloatingCircleProps>(
         ref={ref}
         aria-hidden="true"
         className={[
+          devClassName("floating-circle"),
           `hidden ${VISIBLE_FROM_CLASSES[visibleFrom]}`,
           "text-green pointer-events-none absolute top-0 left-0 z-20 h-[150px] w-[150px] flex-col items-center justify-center gap-1 rounded-full bg-white transition-[opacity,transform] duration-150 ease-out will-change-transform",
           visible ? "opacity-100" : "opacity-0",

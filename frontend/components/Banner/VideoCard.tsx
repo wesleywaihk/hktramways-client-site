@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { devClassName } from "@/lib/devClassName";
 import { SCROLL_DISTANCE } from "./Banner";
 import { FADE_DURATION_MS } from "./Banner";
 
@@ -64,7 +65,7 @@ export default function VideoCard({
 
   return (
     <div
-      className={`absolute inset-0 ${
+      className={`${devClassName("video-card")}absolute inset-0 ${
         useBorder
           ? "left-5 w-[calc(100%-40px)] rounded-[21px] lg:left-10 lg:w-[calc(100%-80px)] lg:rounded-[30px]"
           : "w-full"

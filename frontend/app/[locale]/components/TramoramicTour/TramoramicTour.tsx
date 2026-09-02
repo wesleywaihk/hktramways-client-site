@@ -10,6 +10,7 @@ import type {
   HomeTramoramicTourResponse,
   TramoramicTourData,
 } from "@/types/api";
+import { devClassName } from "@/lib/devClassName";
 import { asImage } from "@/lib/media";
 import useSlideShow from "./useSlideShow";
 
@@ -48,7 +49,9 @@ export default function TramoramicTour({
 
   if (data === undefined) {
     return (
-      <section className="borderless bg-red-dark">
+      <section
+        className={`${devClassName("tramoramic-tour")}borderless bg-red-dark`}
+      >
         <Loading />
       </section>
     );
@@ -77,7 +80,9 @@ export default function TramoramicTour({
   const action2StartIcon = data?.action2?.startIcon?.icon ?? "calendar";
 
   return (
-    <section className="borderless bg-red-dark relative flex h-auto overflow-hidden pt-20 pb-20 lg:h-[100dvh] lg:py-24">
+    <section
+      className={`${devClassName("tramoramic-tour")}borderless bg-red-dark relative flex h-auto overflow-hidden pt-20 pb-20 lg:h-[100dvh] lg:py-24`}
+    >
       <div className="content-max-w pageBorder mx-auto flex w-full flex-col items-center gap-12 lg:flex-row lg:gap-8 lg:gap-16">
         <div className="relative mx-auto mt-[12vmin] mb-[6vmin] min-h-[min(80vmin,600px)] w-[1px] overflow-visible lg:mx-0 lg:my-0 lg:min-h-0 lg:w-[min(42vw,612px)]">
           {/* min-h-[84.5vmin]*/}

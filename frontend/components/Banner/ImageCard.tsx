@@ -1,5 +1,6 @@
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
+import { devClassName } from "@/lib/devClassName";
 import { SCROLL_DISTANCE } from "./Banner";
 export interface ImageCardProps {
   bannerImage?: ResponsiveImage | null;
@@ -34,7 +35,7 @@ export default function ImageCard({
 
   return (
     <div
-      className={`absolute top-0 overflow-hidden ${
+      className={`${devClassName("image-card")}absolute top-0 overflow-hidden ${
         useBorder
           ? "right-5 bottom-5 left-5 rounded-[21px] lg:right-10 lg:bottom-10 lg:left-10 lg:rounded-[30px]"
           : "right-0 bottom-0 left-0"

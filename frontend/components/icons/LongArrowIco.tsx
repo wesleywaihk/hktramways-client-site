@@ -1,6 +1,10 @@
 import type { SVGProps } from "react";
+import { devClassName } from "@/lib/devClassName";
 
-export default function LongArrowIco(props: SVGProps<SVGSVGElement>) {
+export default function LongArrowIco({
+  className,
+  ...props
+}: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="20"
@@ -8,6 +12,7 @@ export default function LongArrowIco(props: SVGProps<SVGSVGElement>) {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={`${devClassName("long-arrow-ico")}${className ?? ""}`}
       {...props}
     >
       <path

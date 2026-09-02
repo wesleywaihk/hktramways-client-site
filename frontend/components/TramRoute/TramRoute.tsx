@@ -9,6 +9,7 @@ import RouteOptionButton from "./RouteOptionButton";
 import RouteMapImage from "./RouteMapImage";
 import RouteMobilePicker from "./RouteMobilePicker";
 import { ROUTES } from "./routes";
+import { devClassName } from "@/lib/devClassName";
 import type { TramRouteData, TramRouteResponse } from "@/types/api";
 
 export interface TramRouteProps {
@@ -41,7 +42,9 @@ export default function TramRoute({ locale }: TramRouteProps) {
 
   if (data === undefined) {
     return (
-      <section className="borderless bg-earth-light">
+      <section
+        className={`${devClassName("tram-route")}borderless bg-earth-light`}
+      >
         <Loading />
       </section>
     );
@@ -60,7 +63,9 @@ export default function TramRoute({ locale }: TramRouteProps) {
     ROUTES.find((route) => route.id === selected) ?? ROUTES[0];
 
   return (
-    <section className="borderless bg-earth-light relative overflow-hidden pt-16 md:pt-20 lg:pt-24">
+    <section
+      className={`${devClassName("tram-route")}borderless bg-earth-light relative overflow-hidden pt-16 md:pt-20 lg:pt-24`}
+    >
       <div className="content-max-w mx-auto flex flex-col gap-10 px-5 lg:flex-row lg:items-start lg:justify-between lg:gap-16 lg:px-6">
         <div className="mx-auto flex max-w-[583px] flex-col items-center text-center lg:ml-0 lg:items-start lg:text-left">
           <h2 className="title-text text-green">{title}</h2>

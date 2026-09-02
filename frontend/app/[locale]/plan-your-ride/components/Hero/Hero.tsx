@@ -1,5 +1,6 @@
 import Banner from "@/components/Banner/Banner";
 import Button from "@/components/Button/Button";
+import { devClassName } from "@/lib/devClassName";
 import type {
   ActionButton as ActionButtonProps,
   ResponsiveImage,
@@ -19,7 +20,9 @@ export default function Hero({
   bannerImage,
 }: HeroProps) {
   return (
-    <section className="borderless flex h-[calc(100dvh-76px)] flex-col lg:h-[calc(100dvh-100px)]">
+    <section
+      className={`${devClassName("hero")}borderless flex h-[calc(100dvh-76px)] flex-col lg:h-[calc(100dvh-100px)]`}
+    >
       <div className="sectionContainer bg-green flex h-[calc(calc(100dvh-76px)*0.57)] items-center lg:h-[calc(calc(100dvh-100px)*0.34)] lg:px-10">
         <div className="mx-auto flex max-w-screen-lg grow flex-col items-center justify-center gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex flex-col gap-3">

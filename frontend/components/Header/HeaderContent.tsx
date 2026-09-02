@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { desktopNavLinks } from "./navLinks";
 import LocaleDropdown from "./LocaleDropdown";
 import HamburgerIcon from "./HamburgerIcon";
+import { devClassName } from "@/lib/devClassName";
 
 export interface HeaderContentProps {
   locale: string;
@@ -30,7 +31,7 @@ export default function HeaderContent({
   const t = useTranslations("common");
   return (
     <div
-      className={`flex ${alignClassName} justify-between ${paddingClassName}`}
+      className={`${devClassName("header-content")}flex ${alignClassName} justify-between ${paddingClassName}`}
     >
       <Link
         href={`/${locale}`}
