@@ -6,6 +6,7 @@ import I18nProvider from "@/components/I18nProvider";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
 import { HeaderStyleProvider } from "@/components/Header/HeaderStyle/HeaderStyleProvider";
 import MetaUpdater from "@/components/MetaUpdater";
+import StructuredData from "@/components/StructuredData";
 import ScrollToTop from "@/components/ScrollToTop";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
@@ -43,10 +44,12 @@ export default async function LocaleLayout({
 
   let metaTitle = "";
   let footer: GlobalFooter | null = null;
+  let structuredData: unknown = null;
   try {
     const globalRes = await getGlobalData(locale);
     metaTitle = globalRes.data?.seo?.metaTitle ?? "";
     footer = globalRes.data?.footer ?? null;
+    structuredData = globalRes.data?.seo?.structuredData ?? null;
   } catch {
     metaTitle = "";
   }
@@ -55,6 +58,7 @@ export default async function LocaleLayout({
     <I18nProvider locale={locale}>
       <MuiThemeProvider>
         <HeaderStyleProvider>
+          <StructuredData data={structuredData} />
           <MetaUpdater metaTitle={metaTitle} />
           <ScrollToTop />
           <Header />

@@ -4,10 +4,12 @@ import { fetchHome, fetchAnnouncements } from "@/hooks/useApiEndpoint/api";
 import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
 import {
   generateEntityPageMetadata,
+  getEntityStructuredData,
   getPreviewDocumentId,
 } from "@/lib/pageMetadata";
 import type { Home, AnnouncementItemsResponse } from "@/types/api";
 import Banner from "@/components/Banner/Banner";
+import StructuredData from "@/components/StructuredData";
 import NewsBar from "./components/NewsBar/NewsBar";
 import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
 import TramRoute from "@/components/TramRoute/TramRoute";
@@ -58,6 +60,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
 
   return (
     <div className="pageWrapper mt-0">
+      <StructuredData data={getEntityStructuredData(home, (h) => h.seo)} />
       {/* <SetHeaderStyle style="transparent" /> */}
       <Banner
         bannerImage={home.bannerImage}
