@@ -307,7 +307,11 @@ export const fetchAnnouncements = cache(
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side PartyTram component, directly against NEXT_PUBLIC_API_URL.
 export async function fetchPartyTram(locale: string) {
-  const populate = buildPopulate(["item.carouselItem", "item.tramDetailsItem"]);
+  const populate = buildPopulate([
+    "item.carouselItem",
+    "item.tramDetailsItem",
+    "item.overlayImg",
+  ]);
   const url = `${API_URL}/api/party-tram?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);

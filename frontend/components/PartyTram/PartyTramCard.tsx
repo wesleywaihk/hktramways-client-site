@@ -39,6 +39,7 @@ function PartyTramCard({
   onLinkClick,
 }: PartyTramCardProps) {
   const img = item.carouselItem?.image;
+  const overlayImg = item.overlayImg;
   const link = item.carouselItem?.hyperlink?.url;
 
   const ratio = img ? img.width / img.height : undefined;
@@ -57,14 +58,33 @@ function PartyTramCard({
   };
 
   const imageEl = img && (
-    <Image
-      src={mediaSrc(img.url)}
-      alt={img.alternativeText ?? ""}
-      fill
-      draggable={false}
-      className="pointer-events-none object-cover select-none"
-      sizes={`${cardWidthPct}vw`}
-    />
+    <>
+      <Image
+        src={mediaSrc(img.url)}
+        alt={img.alternativeText ?? ""}
+        fill
+        draggable={false}
+        className="pointer-events-none object-cover select-none"
+        sizes={`${cardWidthPct}vw`}
+      />
+      {overlayImg && (
+        <Image
+          src={mediaSrc(overlayImg.url)}
+          alt={overlayImg.alternativeText ?? ""}
+          width={overlayImg.width}
+          height={overlayImg.height}
+          draggable={false}
+          className="pointer-events-none absolute h-auto select-none"
+          style={{
+            left: `${item.overlayX ?? 0}%`,
+            top: `${item.overlayY ?? 0}%`,
+            width: `${item.overlayW ?? 100}%`,
+            height: item.overlayH != null ? `${item.overlayH}%` : "auto",
+          }}
+          sizes={`${cardWidthPct}vw`}
+        />
+      )}
+    </>
   );
 
   return (

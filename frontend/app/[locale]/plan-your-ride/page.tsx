@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { fetchPlanYourRide } from "@/hooks/useApiEndpoint/api";
 import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
-import { generateEntityPageMetadata } from "@/lib/pageMetadata";
+import {
+  generateEntityPageMetadata,
+  getEntityStructuredData,
+} from "@/lib/pageMetadata";
+import StructuredData from "@/components/StructuredData";
 import Hero from "./components/Hero/Hero";
 import Schedule from "./components/Schedule/Schedule";
 import Fares from "./components/Fares/Fares";
@@ -48,6 +52,9 @@ export default async function PlanYourRidePage({
 
   return (
     <div className="pageWrapper mt-0">
+      <StructuredData
+        data={getEntityStructuredData(heroData, (h) => h.seo)}
+      />
       <Hero
         title={heroData.title}
         desc={heroData.desc}

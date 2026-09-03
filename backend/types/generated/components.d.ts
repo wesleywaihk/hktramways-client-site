@@ -46,9 +46,10 @@ export interface ContentCarouselItem extends Struct.ComponentSchema {
     icon: 'code';
   };
   attributes: {
-    desc: Schema.Attribute.Text;
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
     hyperlink: Schema.Attribute.Component<'content.hyperlink', false>;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
   };
 }
 
@@ -157,6 +158,13 @@ export interface ContentPartyTramItem extends Struct.ComponentSchema {
     callActionNumber: Schema.Attribute.Integer;
     callActionText: Schema.Attribute.String;
     carouselItem: Schema.Attribute.Component<'content.carousel-item', false>;
+    overlayH: Schema.Attribute.Decimal;
+    overlayImg: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    overlayW: Schema.Attribute.Decimal;
+    overlayX: Schema.Attribute.Decimal;
+    overlayY: Schema.Attribute.Decimal;
     tramDetailsItem: Schema.Attribute.Component<
       'content.tram-details-item',
       false

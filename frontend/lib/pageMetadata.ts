@@ -100,3 +100,17 @@ export async function generateEntityPageMetadata<T>(
     return {};
   }
 }
+
+/**
+ * Resolves the JSON-LD structured data for an entity page: the entity's own
+ * `seo.structuredData` if present, otherwise `null` (the layout already
+ * renders the site-wide one, so pages only need to render this when the
+ * entity provides its own).
+ */
+export function getEntityStructuredData<T>(
+  entity: T | null,
+  getSeo?: (entity: T) => Seo | null | undefined,
+): unknown | null {
+  const pageSeo = entity && getSeo ? getSeo(entity) : null;
+  return pageSeo?.structuredData ?? null;
+}
