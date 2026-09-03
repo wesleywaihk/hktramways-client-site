@@ -9,6 +9,7 @@
     "image": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
@@ -17,7 +18,8 @@
       ]
     },
     "desc": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "hyperlink": {
       "type": "component",

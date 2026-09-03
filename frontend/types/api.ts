@@ -143,6 +143,11 @@ export interface TramDetailsItem {
 export interface PartyTramItem {
   id: number;
   carouselItem: CarouselItem | null;
+  overlayImg: Media | null;
+  overlayX: number | null;
+  overlayY: number | null;
+  overlayW: number | null;
+  overlayH: number | null;
   callActionNumber: number | null;
   callActionText: string | null;
   tramDetailsItem: TramDetailsItem | null;

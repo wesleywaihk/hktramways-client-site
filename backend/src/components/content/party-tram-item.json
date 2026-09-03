@@ -10,8 +10,30 @@
       "component": "content.carousel-item",
       "repeatable": false
     },
+    "overlayImg": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
     "callActionNumber": {
       "type": "integer"
+    },
+    "overlayX": {
+      "type": "decimal"
+    },
+    "overlayY": {
+      "type": "decimal"
+    },
+    "overlayW": {
+      "type": "decimal"
+    },
+    "overlayH": {
+      "type": "decimal"
     },
     "callActionText": {
       "type": "string"
