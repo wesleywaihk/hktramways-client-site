@@ -43,8 +43,8 @@ const variantColorClasses: Record<
 
 const buttonClasses =
   "group inline-flex items-center justify-center gap-[10px] lg:gap-[14px] " +
-  "px-5 py-[14px] lg:px-8 lg:py-[19px] " +
-  "rounded-[18px] lg:rounded-[21px] border-2 cursor-pointer " +
+  "px-5 py-3  lg:px-8 lg:py-4 min-h-[50px] lg:min-h-[60px] " +
+  "rounded-[18px] lg:rounded-[21px] border-[2px] cursor-pointer " +
   "transition-colors duration-200 ease-out";
 
 const Arrow = () => (

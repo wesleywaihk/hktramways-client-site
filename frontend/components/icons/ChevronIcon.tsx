@@ -13,7 +13,7 @@ export default function ChevronIcon({
   desktop,
   className,
 }: ChevronIconProps) {
-  const rotation = desktop ? 0 : active ? 90 : -90;
+  const rotation = desktop ? 0 : active ? -90 : 90;
 
   return (
     <svg

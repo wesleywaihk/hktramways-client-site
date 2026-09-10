@@ -18,7 +18,7 @@ export default function SouveniorIcon({
     >
       <BtnIcon
         icon={icon}
-        className="h-[5.5vw]! w-[5.5vw]! md:h-[24.93px]! md:w-[24.93px]!"
+        className="h-[5.5vw]! w-[5.5vw]! md:h-[30px]! md:w-[30px]!"
       />
     </div>
   );

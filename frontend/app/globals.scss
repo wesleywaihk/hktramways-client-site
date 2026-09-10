@@ -64,6 +64,10 @@ body {
   //font-size: clamp(40px, 24.73px + 4.07vw, 56px);
 }
 
+@utility title-2-text {
+  @apply text-[32px] leading-[118%] font-semibold tracking-[0.02em] lg:text-[40px];
+}
+
 @utility text-body {
   @apply text-[15px] leading-[163%] tracking-[0.02em] lg:text-[16px];
 }

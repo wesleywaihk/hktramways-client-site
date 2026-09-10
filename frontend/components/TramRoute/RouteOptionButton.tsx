@@ -29,11 +29,11 @@ export default function RouteOptionButton({
         type="button"
         onClick={onClick}
         aria-pressed={active}
-        className={`${devClassName("route-option-button")}${gridClasses} bg-green text-white`}
+        className={`${devClassName("route-option-button")}${gridClasses} bg-green px-[28px] py-[14px] text-white`}
       >
         <span className={`${idClass} text-green bg-white`}>{route.id}</span>
         <span className={txtClass}>{t(route.from)}</span>
-        <ExchangeArrow className="mx-auto h-5 w-5 transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]" />
+        <ExchangeArrow className="mx-auto h-6 w-6 transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]" />
         <span className={txtClass}>{t(route.to)}</span>
       </button>
     );
@@ -52,7 +52,7 @@ export default function RouteOptionButton({
         {route.id}
       </span>
       <span className={txtClass}>{t(route.from)}</span>
-      <ExchangeArrow className="text-green mx-auto h-5 w-5 transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)] group-hover:text-white" />
+      <ExchangeArrow className="text-green mx-auto h-6 w-6 transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)] group-hover:text-white" />
       <span className={txtClass}>{t(route.to)}</span>
     </button>
   );

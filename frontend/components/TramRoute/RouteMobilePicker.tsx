@@ -35,11 +35,11 @@ export default function RouteMobilePicker({
           className="text-green flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-[21px] bg-white p-4 font-sans text-[13px] font-bold tracking-[0.02em]"
         >
           <span className="grid flex-1 grid-cols-[24px_1fr_20px_1fr] items-center gap-2.5">
-            <span className="bg-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-center font-sans text-[14px] leading-[100%] font-semibold tracking-[0.02em] text-white">
+            <span className="bg-green flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-center font-sans text-[12px] leading-[100%] font-semibold tracking-[0.02em] text-white">
               {activeRoute.id}
             </span>
             <span className={txtClass}>{t(activeRoute.from)}</span>
-            <ExchangeArrow className="text-green mx-auto h-5 w-5" />
+            <ExchangeArrow className="text-green mx-auto h-6 w-6" />
             <span className={txtClass}>{t(activeRoute.to)}</span>
           </span>
           <ChevronIcon className="h-5 w-5 shrink-0" />
@@ -47,7 +47,7 @@ export default function RouteMobilePicker({
       </div>
 
       <div
-        className={`fixed inset-0 z-[1010] bg-black/40 transition-opacity duration-300 ease-in-out lg:hidden ${
+        className={`fixed inset-0 z-[1010] bg-black/80 transition-opacity duration-300 ease-in-out lg:hidden ${
           sheetOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -76,7 +76,7 @@ export default function RouteMobilePicker({
             <CloseIcon className="h-[22px] w-[22px]" />
           </button>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-[2px]">
           {ROUTES.map((route) => (
             <RouteOptionButton
               key={route.id}

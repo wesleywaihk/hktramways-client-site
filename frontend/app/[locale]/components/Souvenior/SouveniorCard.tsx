@@ -60,7 +60,7 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
             alt=""
             width={59}
             height={53.6}
-            className="h-auto w-[14vw] md:hidden"
+            className="h-auto w-[14vw] md:w-[10vw] lg:hidden"
             aria-hidden="true"
           />
           <Image
@@ -68,7 +68,7 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
             alt=""
             width={84}
             height={87}
-            className="hidden h-auto md:block md:w-[10vw] lg:w-[min(12vw,105px)]"
+            className="hidden h-auto lg:block lg:w-[min(12vw,105px)]"
             aria-hidden="true"
           />
         </div>
@@ -79,7 +79,7 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
         />
       </div>
 
-      <p className="mx-auto mt-3 line-clamp-2 block min-h-[2.9em] max-w-[250px] text-center font-sans text-[15px] leading-[163%] font-normal tracking-[0.02em] text-white md:mt-4 lg:text-[16px]">
+      <p className="mx-auto mt-3 line-clamp-2 block min-h-[2.9em] max-w-[280px] px-[15px] text-center font-sans text-[15px] leading-[163%] font-normal tracking-[0.02em] text-white md:mt-4 lg:text-[16px]">
         {item.name}
       </p>
       <p className="mt-1 flex items-baseline justify-center gap-1.5 text-[18px] leading-[152%] font-semibold tracking-[0.02em] text-white lg:text-[21px]">

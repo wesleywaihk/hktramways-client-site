@@ -13,6 +13,10 @@ const WHEEL_EASE = 0.2;
 const WHEEL_EASE_MIN_DELTA = 0.5;
 
 function getStartX(viewportWidth: number) {
+  // Below lg, the row's left inset already comes from the container's
+  // own page-gutter padding, so translateX should start at 0 — adding
+  // GUTTER here would double up the offset.
+  if (viewportWidth < LG_BREAKPOINT) return 0;
   return Math.max(0, (viewportWidth - MAX_CONTAINER_WIDTH) / 2) + GUTTER;
 }
 

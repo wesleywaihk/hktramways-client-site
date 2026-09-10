@@ -57,7 +57,6 @@ function mapCarouselData(data: ArcCarouselData | null | undefined) {
 }
 
 const DESKTOP_CARD_WIDTH = "33.6dvh";
-const DESKTOP_CARD_HEIGHT = "42dvh";
 const DESKTOP_TILT = 7;
 const DESKTOP_DROPS = [0, 37, 125];
 const DESKTOP_VISIBLE_RANGE = 2;
@@ -75,7 +74,6 @@ const lgGap = (cardWidth: string) => `calc(25vw + (${cardWidth}) / 8)`;
 const xlGap = (cardWidth: string) => `calc(22vw + (${cardWidth}) / 8)`;
 
 const MOBILE_CARD_WIDTH = "36dvmax"; //"30.34dvmax";
-const MOBILE_CARD_HEIGHT = "45dvmax"; //"38dvmax";
 const MOBILE_TILT = 8;
 const MOBILE_DROPS = [0, 32];
 const MOBILE_VISIBLE_RANGE = 1;
@@ -91,7 +89,7 @@ const mobileGap = (cardWidth: string) => `calc(50vw + (${cardWidth}) / 4)`;
  * off-screen instead of ~75%, and the gap between cards shrinks with it.
  */
 const smGap = (cardWidth: string) => `calc(44vw + (${cardWidth}) / 5)`;
-
+const mdGap = (cardWidth: string) => `calc(44vw + (${cardWidth}) / 3.5)`;
 /** matches the card transform transition duration below, used to know when a slide has settled */
 const CARD_TRANSITION_MS = 550;
 
@@ -133,9 +131,7 @@ export default function ArcCarousel({ locale, documentId }: ArcCarouselProps) {
 
   if (data === undefined) {
     return (
-      <section
-        className={`${devClassName("arc-carousel")}borderless bg-green`}
-      >
+      <section className={`${devClassName("arc-carousel")}borderless bg-green`}>
         <Loading />
       </section>
     );
@@ -174,10 +170,9 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
     onPointerUp,
     onPointerLeave,
   } = useArcCarouselSwipe(total);
-  const { isMobile, isSmToMd, isXl } = useMediaQuery();
+  const { isMobile, isSmToMd, isMd, isXl } = useMediaQuery();
 
   const cardWidth = isMobile ? MOBILE_CARD_WIDTH : DESKTOP_CARD_WIDTH;
-  const cardHeight = isMobile ? MOBILE_CARD_HEIGHT : DESKTOP_CARD_HEIGHT;
   const tilt = isMobile ? MOBILE_TILT : DESKTOP_TILT;
   const drops = isMobile ? MOBILE_DROPS : DESKTOP_DROPS;
   const visibleRange = isMobile ? MOBILE_VISIBLE_RANGE : DESKTOP_VISIBLE_RANGE;
@@ -202,24 +197,27 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
       ? smGap(cardWidth)
       : isMobile
         ? mobileGap(cardWidth)
-        : isXl
-          ? xlGap(cardWidth)
-          : lgGap(cardWidth);
+        : isMd
+          ? mdGap(cardWidth)
+          : isXl
+            ? xlGap(cardWidth)
+            : lgGap(cardWidth);
     return `calc(-50% + ${off} * ${gap})`;
   };
 
   return (
     <section
-      className={`${devClassName("arc-carousel")}borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden pt-[15dvh] pb-[10dvh] select-none md:pt-[18dvh] md:pb-[12.7dvh]`}
+      // className={`${devClassName("arc-carousel")}borderless bg-green relative flex h-[100dvh] flex-col overflow-hidden pt-[13.5dvh] pb-[9dvh] select-none lg:pt-[16.2dvh] lg:pb-[11.43dvh] [@media(min-height:920px)]:pt-[15dvh] [@media(min-height:920px)]:pb-[10dvh] lg:[@media(min-height:920px)]:pt-[18dvh] lg:[@media(min-height:920px)]:pb-[12.7dvh]`}
+      className={`${devClassName("arc-carousel")}borderless bg-green relative flex h-[100dvh] min-h-[776px] flex-col overflow-hidden pt-[15dvh] pb-[10dvh] select-none lg:min-h-[983px] lg:pt-[18dvh] lg:pb-[12.7dvh]`}
     >
-      <div className="flex shrink-0 items-center justify-center gap-6 md:mb-10 md:gap-16">
+      <div className="content-max-w pageBorder flex shrink-0 items-center justify-between gap-6 self-center lg:mb-10 lg:w-full lg:gap-16">
         <IconButton
           ariaLabel="Previous poster"
           onClick={prev}
           reverse
           useArrow
           shape="square"
-          className="z-10 hidden shrink-0 md:grid"
+          className="z-10 hidden shrink-0 lg:grid"
         />
 
         <h2 className="title-text text-center text-white">{heading}</h2>
@@ -229,7 +227,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           onClick={next}
           useArrow
           shape="square"
-          className="z-10 hidden shrink-0 md:grid"
+          className="z-10 hidden shrink-0 lg:grid"
         />
       </div>
 
@@ -246,14 +244,14 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           reverse
           useArrow
           shape="square"
-          className="absolute top-1/2 left-4 z-30 grid h-9 w-9 -translate-y-1/2 md:hidden"
+          className="absolute top-1/2 left-4 z-30 grid h-9 w-9 -translate-y-1/2 lg:hidden"
         />
         <IconButton
           ariaLabel="Next poster"
           onClick={next}
           useArrow
           shape="square"
-          className="absolute top-1/2 right-4 z-30 grid h-9 w-9 -translate-y-1/2 md:hidden"
+          className="absolute top-1/2 right-4 z-30 grid h-9 w-9 -translate-y-1/2 lg:hidden"
         />
 
         {items.map((item, i) => {
@@ -273,8 +271,6 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
             <ArcCarouselCard
               key={item.id}
               item={item}
-              cardWidth={cardWidth}
-              cardHeight={cardHeight}
               transform={`translateX(${translateX(off)}) translateY(calc(-50% + ${dropY}px)) rotate(${off * tilt}deg) scale(${scale})`}
               zIndex={20 - abs}
               hidden={hidden}
@@ -305,14 +301,14 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
         />
       </div>
 
-      <div className="relative z-30 shrink-0 px-8 text-center md:mt-8">
-        <p className="mx-auto w-[76vw] max-w-[400px] text-[15px] leading-[163%] font-semibold tracking-[0.02em] whitespace-pre-line text-white md:w-full md:max-w-[340px] md:text-[16px]">
+      <div className="relative z-30 shrink-0 px-8 text-center lg:mt-8">
+        <p className="mx-auto w-[76vw] max-w-[400px] text-[15px] leading-[163%] font-semibold tracking-[0.02em] whitespace-pre-line text-white lg:w-full lg:max-w-[340px] lg:text-[16px]">
           {active_.caption}
         </p>
       </div>
 
       {active_.linkUrl && active_.callActionText && (
-        <div className="relative z-30 mt-[10px] mb-4 shrink-0 text-center md:hidden">
+        <div className="relative z-30 mt-[10px] mb-4 shrink-0 text-center lg:hidden">
           <a
             href={active_.linkUrl}
             className="border-b-2 border-white/20 pb-[3px] font-sans text-[15px] leading-[163%] font-normal tracking-[0.02em] text-white transition-colors duration-100 hover:border-white/60"
@@ -322,7 +318,7 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
         </div>
       )}
 
-      <div className="mt-6 flex shrink-0 justify-center md:mt-8">
+      <div className="mt-6 flex shrink-0 justify-center lg:mt-8">
         <Button
           href={buttonUrl}
           color="white"
