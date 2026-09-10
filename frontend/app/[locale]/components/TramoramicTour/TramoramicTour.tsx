@@ -120,7 +120,7 @@ export default function TramoramicTour({
             <span className="text-white">{title2}</span>
           </h2>
           <p className="text-body mt-4 text-white lg:mt-6">{desc}</p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4 lg:mt-8 lg:justify-start">
+          <div className="mt-6 flex flex-wrap justify-center gap-5 lg:mt-8 lg:justify-start">
             <Button
               href={action1Url}
               color="white"

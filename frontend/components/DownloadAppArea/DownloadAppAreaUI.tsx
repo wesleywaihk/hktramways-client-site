@@ -64,7 +64,7 @@ export default function DownloadAppAreaUI({
           </div>
 
           <div className="mx-auto flex max-w-[500px] flex-col items-center text-center lg:mx-0 lg:max-w-full lg:items-start lg:text-left">
-            <h2 className="text-[28px] leading-[120%] font-semibold tracking-[0.02em] text-white lg:text-[32px] lg:text-[40px]">
+            <h2 className="title-2-text text-white">
               {data.title}
             </h2>
             <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-white/90 lg:text-[16px]">

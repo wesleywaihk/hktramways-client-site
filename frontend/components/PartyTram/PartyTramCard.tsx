@@ -47,11 +47,9 @@ function PartyTramCard({
     width: ratio
       ? `min(${cardWidthPct}%, calc((100cqh - ${cardHeightOffset}) * ${ratio}))`
       : `${cardWidthPct}%`,
-    height: "auto",
     aspectRatio: img ? `${img.width} / ${img.height}` : undefined,
     transform,
     transitionDuration,
-    transitionTimingFunction: "cubic-bezier(0.22,0.9,0.3,1)",
     transitionDelay,
     opacity: hidden ? 0 : 1,
     pointerEvents: hidden ? "none" : "auto",
@@ -89,7 +87,7 @@ function PartyTramCard({
 
   return (
     <div
-      className={`${devClassName("party-tram-card")}absolute top-auto bottom-[11.5dvh] left-1/2 overflow-hidden transition-transform lg:bottom-[13dvh]`}
+      className={`${devClassName("party-tram-card")}absolute top-auto bottom-[11.5dvh] left-1/2 h-auto overflow-hidden transition-transform will-change-transform backface-hidden ease-[cubic-bezier(0.22,0.9,0.3,1)] lg:bottom-[13dvh]`}
       style={style}
       onClick={onClick}
       onDragStart={(e) => e.preventDefault()}

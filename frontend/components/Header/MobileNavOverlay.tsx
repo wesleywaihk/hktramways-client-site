@@ -28,7 +28,7 @@ export default function MobileNavOverlay({
   return (
     <>
       <div
-        className={`fixed inset-0 z-[1010] bg-black/40 transition-opacity duration-300 ease-in-out ${
+        className={`fixed inset-0 z-[1010] bg-black/80 transition-opacity duration-300 ease-in-out ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -37,7 +37,7 @@ export default function MobileNavOverlay({
         aria-hidden="true"
       />
       <div
-        className={`bg-green fixed top-0 right-0 bottom-0 z-[1011] flex w-full max-w-[393px] flex-col p-7.5 px-[30px] text-white transition-transform duration-500 ease-in-out ${
+        className={`bg-green fixed inset-0 z-[1011] flex w-full flex-col p-7.5 px-[30px] text-white transition-transform duration-500 ease-in-out ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         role="dialog"

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
@@ -26,6 +27,16 @@ export default function RouteMobilePicker({
   selectLabel,
 }: RouteMobilePickerProps) {
   const t = useTranslations("common");
+
+  useEffect(() => {
+    if (!sheetOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [sheetOpen]);
+
   return (
     <>
       <div className="absolute right-5 bottom-5 left-5 z-20 m-0 w-auto lg:hidden">
@@ -35,11 +46,11 @@ export default function RouteMobilePicker({
           className="text-green flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-[21px] bg-white p-4 font-sans text-[13px] font-bold tracking-[0.02em]"
         >
           <span className="grid flex-1 grid-cols-[24px_1fr_20px_1fr] items-center gap-2.5">
-            <span className="bg-green flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-center font-sans text-[14px] leading-[100%] font-semibold tracking-[0.02em] text-white">
+            <span className="bg-green flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-center font-sans text-[12px] leading-[100%] font-semibold tracking-[0.02em] text-white">
               {activeRoute.id}
             </span>
             <span className={txtClass}>{t(activeRoute.from)}</span>
-            <ExchangeArrow className="text-green mx-auto h-5 w-5" />
+            <ExchangeArrow className="text-green mx-auto h-6 w-6" />
             <span className={txtClass}>{t(activeRoute.to)}</span>
           </span>
           <ChevronIcon className="h-5 w-5 shrink-0" />
@@ -47,7 +58,7 @@ export default function RouteMobilePicker({
       </div>
 
       <div
-        className={`fixed inset-0 z-[1010] bg-black/40 transition-opacity duration-300 ease-in-out lg:hidden ${
+        className={`fixed inset-0 z-[1010] bg-black/80 transition-opacity duration-300 ease-in-out lg:hidden ${
           sheetOpen
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -56,7 +67,7 @@ export default function RouteMobilePicker({
         aria-hidden="true"
       />
       <div
-        className={`absolute right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto rounded-[21px] bg-[var(--color-earth-light)] p-5 transition-transform duration-500 ease-in-out lg:hidden ${
+        className={`fixed right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto rounded-[21px] bg-[var(--color-earth-light)] p-5 transition-transform duration-500 ease-in-out lg:hidden ${
           sheetOpen ? "translate-y-0" : "translate-y-[calc(100%+20px)]"
         }`}
         role="dialog"
@@ -76,7 +87,7 @@ export default function RouteMobilePicker({
             <CloseIcon className="h-[22px] w-[22px]" />
           </button>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-[2px]">
           {ROUTES.map((route) => (
             <RouteOptionButton
               key={route.id}

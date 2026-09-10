@@ -80,7 +80,7 @@ export default function TramRoute({ locale }: TramRouteProps) {
           </Button>
         </div>
 
-        <div className="hidden shrink-0 flex-col items-start gap-[18px] lg:flex lg:w-[30vw] lg:max-w-[437px] lg:min-w-[400px]">
+        <div className="hidden shrink-0 flex-col items-start gap-[2px] lg:flex lg:w-[30vw] lg:max-w-[437px] lg:min-w-[400px]">
           {ROUTES.map((route) => (
             <RouteOptionButton
               key={route.id}

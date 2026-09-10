@@ -5,8 +5,6 @@ import type { ArcCarouselItem } from "./ArcCarousel";
 
 export interface ArcCarouselCardProps {
   item: ArcCarouselItem;
-  cardWidth: string;
-  cardHeight: string;
   transform: string;
   zIndex: number;
   hidden: boolean;
@@ -18,8 +16,6 @@ export interface ArcCarouselCardProps {
 
 function ArcCarouselCard({
   item,
-  cardWidth,
-  cardHeight,
   transform,
   zIndex,
   hidden,
@@ -32,10 +28,8 @@ function ArcCarouselCard({
 
   return (
     <div
-      className={`${devClassName("arc-carousel-card")}group absolute top-1/2 left-1/2 will-change-transform`}
+      className={`${devClassName("arc-carousel-card")}group absolute top-1/2 left-1/2 aspect-[4/5] h-[63%] w-auto will-change-transform md:h-[80%] lg:h-[90%] xl:h-[101.9%]`}
       style={{
-        width: cardWidth,
-        height: cardHeight,
         transform,
         zIndex,
         opacity: hidden ? 0 : 1,

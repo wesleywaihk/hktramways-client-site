@@ -31,7 +31,7 @@ export default function RouteMapImage({ selectedId }: RouteMapImageProps) {
 
   return (
     <div
-      className={`${devClassName("route-map-image")}relative mt-10 aspect-[1179/672] w-full lg:mt-14 lg:aspect-[4320/1170]`}
+      className={`${devClassName("route-map-image")}relative mt-10 aspect-[1179/672] w-full lg:aspect-[4320/1170]`}
     >
       {ROUTES.map((route) => {
         const alt = `${t(route.from)} - ${t(route.to)}`;
