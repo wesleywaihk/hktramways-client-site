@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
@@ -26,6 +27,16 @@ export default function RouteMobilePicker({
   selectLabel,
 }: RouteMobilePickerProps) {
   const t = useTranslations("common");
+
+  useEffect(() => {
+    if (!sheetOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [sheetOpen]);
+
   return (
     <>
       <div className="absolute right-5 bottom-5 left-5 z-20 m-0 w-auto lg:hidden">
@@ -56,7 +67,7 @@ export default function RouteMobilePicker({
         aria-hidden="true"
       />
       <div
-        className={`absolute right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto rounded-[21px] bg-[var(--color-earth-light)] p-5 transition-transform duration-500 ease-in-out lg:hidden ${
+        className={`fixed right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto rounded-[21px] bg-[var(--color-earth-light)] p-5 transition-transform duration-500 ease-in-out lg:hidden ${
           sheetOpen ? "translate-y-0" : "translate-y-[calc(100%+20px)]"
         }`}
         role="dialog"
