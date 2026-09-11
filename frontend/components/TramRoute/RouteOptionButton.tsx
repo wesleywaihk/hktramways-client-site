@@ -29,7 +29,7 @@ export default function RouteOptionButton({
         type="button"
         onClick={onClick}
         aria-pressed={active}
-        className={`${devClassName("route-option-button")}${gridClasses} bg-green px-[28px] py-[14px] text-white`}
+        className={`${devClassName("route-option-button")}${gridClasses} bg-green gap-[7px] text-white lg:gap-5 lg:px-[28px] lg:py-[14px]`}
       >
         <span className={`${idClass} text-green bg-white`}>{route.id}</span>
         <span className={txtClass}>{t(route.from)}</span>
@@ -44,7 +44,7 @@ export default function RouteOptionButton({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`${devClassName("route-option-button")}${gridClasses} group text-green hover:bg-green cursor-pointer bg-transparent hover:text-white`}
+      className={`${devClassName("route-option-button")}${gridClasses} group text-green hover:bg-green cursor-pointer gap-[7px] bg-transparent hover:text-white lg:gap-5 lg:px-[28px] lg:py-[14px]`}
     >
       <span
         className={`${idClass} bg-green group-hover:text-green text-white group-hover:bg-white`}

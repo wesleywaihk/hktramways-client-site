@@ -1,5 +1,5 @@
 import { devClassName } from "@/lib/devClassName";
-import "./PartyTram.scss";
+import "./PartyTram.module.scss";
 
 /** seconds for the cloud layer to complete one full drift cycle */
 const CLOUD_DRIFT_DURATION_S = 40;

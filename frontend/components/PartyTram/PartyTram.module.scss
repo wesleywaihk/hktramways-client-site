@@ -1,0 +1,20 @@
+:global {
+  @keyframes cloud-drift {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* iOS Safari flickers on transform-transitioned cards unless promoted to its
+   own compositing layer; that same promotion causes a visible flash on
+   desktop Chrome/Firefox, so scope it to iOS Safari only. */
+@supports (-webkit-touch-callout: none) {
+  .iosFix {
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+}

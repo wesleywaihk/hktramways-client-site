@@ -56,10 +56,35 @@ function mapCarouselData(data: ArcCarouselData | null | undefined) {
   };
 }
 
+// ---- mobile (<640px) ----------------------------------------------------
+const MOBILE_CARD_WIDTH = "36dvmax"; //"30.34dvmax";
+const MOBILE_TILT = 8;
+const MOBILE_DROPS = [0, 10];
+const MD_DROPS = [0, 12.1];
+const MOBILE_VISIBLE_RANGE = 1;
+/**
+ * Slot spacing for mobile: only offsets -1/0/1 are visible, so the 1st/last
+ * visible card (offset = ±1) should end up ~75% off-screen:
+ *   1 * gap = viewportWidth/2 + 0.25 * cardWidth = 50vw + cardWidth/4
+ */
+const mobileGap = (cardWidth: string) => `calc(50vw + (${cardWidth}) / 4)`;
+
+// ---- sm→md (640–767.99px) and md (768–1279.99px) ------------------------
+/**
+ * Slot spacing for the sm→md range: same card size/tilt as mobile, but
+ * tighter — the 1st/last visible card should sit only ~60% off-screen
+ * instead of ~75%, and the gap between cards shrinks with it.
+ */
+const smGap = (cardWidth: string) => `calc(44vw + (${cardWidth}) / 5)`;
+const mdGap = (cardWidth: string) => `calc(33vw + (${cardWidth}) / 5)`;
+
+// ---- desktop: lg (1024–1279.99px) and xl (≥1280px) -----------------------
 const DESKTOP_CARD_WIDTH = "33.6dvh";
-const DESKTOP_TILT = 7;
-const DESKTOP_DROPS = [0, 37, 125];
 const DESKTOP_VISIBLE_RANGE = 2;
+const LG_TILT = 13;
+const LG_DROPS = [0, 13.6, 52.3];
+const XL_TILT = 10.8;
+const XL_DROPS = [0, 13.1, 46.2];
 /**
  * Slot spacing for desktop: the edge cards (offset = ±2, the 1st/last of 5)
  * end up ~75% off-screen. Derived from wanting `off * gap` to push the
@@ -72,24 +97,13 @@ const DESKTOP_VISIBLE_RANGE = 2;
 const lgGap = (cardWidth: string) => `calc(25vw + (${cardWidth}) / 8)`;
 /** tighter than lgGap: less space between cards at xl (1280px) and above */
 const xlGap = (cardWidth: string) => `calc(22vw + (${cardWidth}) / 8)`;
+/** extra px pushing the near cards (offset ±1) further from center; outer cards (offset ±2) are untouched */
+const NEAR_CARD_SHIFT_LG = 20.5;
+const NEAR_CARD_SHIFT_XL = 20;
+/** extra rotation added to the outermost cards (offset ±2) on lg screens and up, as a % of the base tilt */
+const OUTER_CARD_EXTRA_TILT_PCT = 0.3;
 
-const MOBILE_CARD_WIDTH = "36dvmax"; //"30.34dvmax";
-const MOBILE_TILT = 8;
-const MOBILE_DROPS = [0, 32];
-const MOBILE_VISIBLE_RANGE = 1;
-/**
- * Slot spacing for mobile: only offsets -1/0/1 are visible, so the 1st/last
- * visible card (offset = ±1) should end up ~75% off-screen:
- *   1 * gap = viewportWidth/2 + 0.25 * cardWidth = 50vw + cardWidth/4
- */
-const mobileGap = (cardWidth: string) => `calc(50vw + (${cardWidth}) / 4)`;
-/**
- * Slot spacing for the sm→md range (640–767.99px): same card size/tilt as
- * mobile, but tighter — the 1st/last visible card should sit only ~60%
- * off-screen instead of ~75%, and the gap between cards shrinks with it.
- */
-const smGap = (cardWidth: string) => `calc(44vw + (${cardWidth}) / 5)`;
-const mdGap = (cardWidth: string) => `calc(44vw + (${cardWidth}) / 3.5)`;
+// ---- shared ---------------------------------------------------------------
 /** matches the card transform transition duration below, used to know when a slide has settled */
 const CARD_TRANSITION_MS = 550;
 
@@ -170,12 +184,19 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
     onPointerUp,
     onPointerLeave,
   } = useArcCarouselSwipe(total);
-  const { isMobile, isSmToMd, isMd, isXl } = useMediaQuery();
+  const { isMobile, isSmToMd, isMd, isLg, isXl } = useMediaQuery();
 
   const cardWidth = isMobile ? MOBILE_CARD_WIDTH : DESKTOP_CARD_WIDTH;
-  const tilt = isMobile ? MOBILE_TILT : DESKTOP_TILT;
-  const drops = isMobile ? MOBILE_DROPS : DESKTOP_DROPS;
+  const tilt = isMobile ? MOBILE_TILT : isLg && !isXl ? LG_TILT : XL_TILT;
+  const drops = isMobile
+    ? MOBILE_DROPS
+    : isMd && !isLg
+      ? MD_DROPS
+      : isLg && !isXl
+        ? LG_DROPS
+        : XL_DROPS;
   const visibleRange = isMobile ? MOBILE_VISIBLE_RANGE : DESKTOP_VISIBLE_RANGE;
+  const isLgOrXl = !isMobile && !isSmToMd && !isMd;
   const active_ = items[active] ?? items[0];
 
   const {
@@ -202,7 +223,13 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
           : isXl
             ? xlGap(cardWidth)
             : lgGap(cardWidth);
-    return `calc(-50% + ${off} * ${gap})`;
+    // on lg/xl, nudge only the near cards (offset ±1) further from center;
+    // the outer cards (offset ±2) are left untouched
+    const nearCardShift =
+      isLgOrXl && Math.abs(off) === 1
+        ? off * (isXl ? NEAR_CARD_SHIFT_XL : NEAR_CARD_SHIFT_LG)
+        : 0;
+    return `calc(-50% + ${off} * ${gap} + ${nearCardShift}px)`;
   };
 
   return (
@@ -266,12 +293,17 @@ function ArcCarouselView({ mapped }: { mapped: MappedArcCarousel }) {
 
           const dropY = drops[Math.min(abs, drops.length - 1)];
           const scale = Math.max(1 - abs * 0.08, 0.78);
+          // the outermost cards (offset ±2) tilt a bit more on lg screens and up
+          const extraTilt =
+            isLgOrXl && abs === maxOff
+              ? off * tilt * OUTER_CARD_EXTRA_TILT_PCT
+              : 0;
 
           return (
             <ArcCarouselCard
               key={item.id}
               item={item}
-              transform={`translateX(${translateX(off)}) translateY(calc(-50% + ${dropY}px)) rotate(${off * tilt}deg) scale(${scale})`}
+              transform={`translateX(${translateX(off)}) translateY(calc(-50% + ${dropY}%)) rotate(${off * tilt + extraTilt}deg) scale(${scale})`}
               zIndex={20 - abs}
               hidden={hidden}
               transition={

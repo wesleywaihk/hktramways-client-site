@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { PartyTramItem } from "@/types/api";
 import { IMG_URL } from "@/consts";
 import { devClassName } from "@/lib/devClassName";
+import styles from "./PartyTram.module.scss";
 
 function mediaSrc(url: string) {
   return url.startsWith("http") ? url : `${IMG_URL}${url}`;
@@ -87,7 +88,7 @@ function PartyTramCard({
 
   return (
     <div
-      className={`${devClassName("party-tram-card")}absolute top-auto bottom-[11.5dvh] left-1/2 h-auto overflow-hidden transition-transform will-change-transform backface-hidden ease-[cubic-bezier(0.22,0.9,0.3,1)] lg:bottom-[13dvh]`}
+      className={`${devClassName("party-tram-card")}${styles.iosFix} absolute top-auto bottom-[11.5dvh] left-1/2 h-auto overflow-hidden transition-transform ease-[cubic-bezier(0.22,0.9,0.3,1)] lg:bottom-[13dvh]`}
       style={style}
       onClick={onClick}
       onDragStart={(e) => e.preventDefault()}

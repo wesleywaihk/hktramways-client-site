@@ -6,6 +6,7 @@ import ExchangeArrow from "./ExchangeArrow";
 import RouteOptionButton from "./RouteOptionButton";
 import { ROUTES } from "./routes";
 import type { RouteStop } from "./routes";
+import { devClassName } from "@/lib/devClassName";
 
 export interface RouteMobilePickerProps {
   activeRoute: RouteStop;
@@ -39,13 +40,15 @@ export default function RouteMobilePicker({
 
   return (
     <>
-      <div className="absolute right-5 bottom-5 left-5 z-20 m-0 w-auto lg:hidden">
+      <div
+        className={`${devClassName("route-mobile-picker")}absolute right-5 bottom-5 left-5 z-20 m-0 w-auto lg:hidden`}
+      >
         <button
           type="button"
           onClick={onOpen}
-          className="text-green flex w-full cursor-pointer items-center justify-between gap-2.5 rounded-[21px] bg-white p-4 font-sans text-[13px] font-bold tracking-[0.02em]"
+          className="text-green flex w-full cursor-pointer items-center justify-between gap-[7px] rounded-[21px] bg-white p-4 font-sans text-[13px] font-bold tracking-[0.02em]"
         >
-          <span className="grid flex-1 grid-cols-[24px_1fr_20px_1fr] items-center gap-2.5">
+          <span className="grid flex-1 grid-cols-[24px_1fr_20px_1fr] items-center gap-[7px]">
             <span className="bg-green flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-center font-sans text-[12px] leading-[100%] font-semibold tracking-[0.02em] text-white">
               {activeRoute.id}
             </span>
