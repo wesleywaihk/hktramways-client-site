@@ -28,7 +28,7 @@ function ArcCarouselCard({
 
   return (
     <div
-      className={`${devClassName("arc-carousel-card")}group absolute top-1/2 left-1/2 aspect-[4/5] h-[83%] w-auto will-change-transform md:h-[76%] lg:h-[33vw] xl:h-[clamp(396px,29.5vmin,470px)]`}
+      className={`${devClassName("arc-carousel-card")}group absolute top-1/2 left-1/2 aspect-[4/5] h-[80%] max-h-[288px] w-auto will-change-transform sm:h-[67%] sm:max-h-none md:h-[76%] lg:h-[33vw] xl:h-[clamp(396px,29.5vmin,470px)]`}
       //lg:h-[90%] xl:h-[101.9%]
       style={{
         transform,

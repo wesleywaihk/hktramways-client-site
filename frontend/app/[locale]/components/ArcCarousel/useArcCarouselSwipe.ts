@@ -15,6 +15,9 @@ export function useArcCarouselSwipe(
   navCooldownMs: number = WHEEL_NAV_COOLDOWN_MS,
 ) {
   const [active, setActive] = useState(0);
+  // unbounded counterpart to `active` (never wraps): lets consumers derive a
+  // continuous slide position so cards never jump when `active` wraps around
+  const [contActive, setContActive] = useState(0);
   const [dir, setDir] = useState(0); // last navigation direction: 1 = next, -1 = prev
   const dragStart = useRef<number | null>(null);
   const dragged = useRef(false);
@@ -29,6 +32,7 @@ export function useArcCarouselSwipe(
       navLockedUntil.current = now + navCooldownMs;
       setDir(d);
       setActive((a) => (a + d + total) % total);
+      setContActive((c) => c + d);
     },
     [total, navCooldownMs],
   );
@@ -88,6 +92,7 @@ export function useArcCarouselSwipe(
 
   return {
     active,
+    contActive,
     dir,
     trackRef,
     prev,
