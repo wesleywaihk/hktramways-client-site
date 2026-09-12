@@ -76,13 +76,13 @@ const MOBILE_VISIBLE_RANGE = 1;
  * instead of ~75%, and the gap between cards shrinks with it.
  */
 const SM_GAP = (cardWidth: string) => `calc(35vw + (${cardWidth}) / 4)`;
-const MD_DROPS = [0, 9.5, 32];
+const MD_DROPS = [0, 10.5, 32];
 const MD_GAP = (cardWidth: string) => `calc(34vw + (${cardWidth}) / 5)`;
 
 // ---- desktop: lg (1024–1279.99px), xl (1280–1535.99px), xxl (≥1536px) ----
 const DESKTOP_CARD_WIDTH = "33.6dvh";
 const LG_VISIBLE_RANGE = 2;
-const LG_TILT = 10;
+const LG_TILT = 10.5;
 const LG_DROPS = [0, 12.5, 42.5, 100];
 /**
  * Slot spacing for desktop: the edge cards (offset = ±2, the 1st/last of 5)
@@ -112,7 +112,7 @@ const XXL_DROPS = [0, 9.7, 34.2, 75.5, 130];
  * cardWidth/(4*3) = 16.67vw + cardWidth/12 as a baseline, hand-tuned from
  * there to 19vw + cardWidth/14 for the desired snugness at this breakpoint.
  */
-const XXL_GAP = (cardWidth: string) => `calc(16vw + (${cardWidth}) / 16)`;
+const XXL_GAP = (cardWidth: string) => `calc(19vw + (${cardWidth}) / 16)`;
 /** extra px pushing the near cards (offset ±1) further from center on xxl */
 const XXL_NEAR_CARD_SHIFT = 28;
 /** extra px pushing the offset ±2 cards further from center on xxl (7-card layout only); the outermost cards (offset ±3) are untouched */
