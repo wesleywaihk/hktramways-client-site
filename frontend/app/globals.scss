@@ -36,6 +36,12 @@ body {
   overflow-x: hidden;
 }
 
+p {
+  font-size: clamp(0.8rem, 1.1111111111vw, 1.5rem);
+  line-height: 1.62;
+  letter-spacing: 0.02rem;
+}
+
 @utility pageWrapper {
   @apply pageBorder mx-auto flex w-full flex-col;
 }
@@ -65,7 +71,7 @@ body {
 }
 
 @utility title-2-text {
-  @apply text-[32px] leading-[118%] font-semibold tracking-[0.02em] lg:text-[40px];
+  @apply text-[clamp(2.1rem,2.9166666667vw,3.9375rem)] leading-[1.18] font-semibold tracking-[0.0625rem];
 }
 
 @utility text-body {

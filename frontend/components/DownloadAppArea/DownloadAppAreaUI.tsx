@@ -41,59 +41,56 @@ export default function DownloadAppAreaUI({
 
   return (
     <section
-      className={`${devClassName(compClassName)}borderless sectionContainer bg-green flex h-auto flex-col justify-center ${className}`}
+      className={`${devClassName(compClassName)}borderless sectionContainer bg-green flex h-auto ${className}`}
     >
       <div
-        className="content-box bg-green-light mx-auto w-full rounded-[21px] px-5 py-[60px] lg:rounded-[30px] lg:px-[50px] lg:py-20"
+        className="content-box bg-green-light mx-auto mb-[clamp(4rem,5.5555555556vw,7.5rem)] flex w-full flex-col items-center justify-center rounded-[clamp(1.5rem,2.0833333333vw,2.8125rem)] p-[clamp(4rem,5.5555555556vw,7.5rem)] text-white lg:flex-row lg:gap-[clamp(3rem,4.1666666667vw,5.625rem)]"
         style={data.bgColor ? { backgroundColor: data.bgColor } : undefined}
       >
-        <div className="mx-auto flex max-w-[869px] flex-col items-center gap-y-5 lg:flex-row lg:gap-x-[60px]">
-          <div
-            className="w-[201px] shrink-0 lg:w-[238px]"
-            style={{ aspectRatio }}
-          >
-            <ResponsiveImg
-              bannerImage={{
-                id: image?.id ?? 0,
-                altText: image?.alternativeText ?? data.title,
-                imageD: image,
-                imageM: null,
-              }}
-              sizes="(min-width: 1024px) 300px, (min-width: 768px) 260px, 220px"
-            />
-          </div>
+        <div
+          className="mb-[clamp(1.125rem,5.0890585242vw,1.5rem)] w-[clamp(11.25rem,50.8905852417vw,15rem)] shrink-0 lg:mb-0 lg:w-[clamp(11.9rem,16.5277777778vw,22.3125rem)]"
 
-          <div className="mx-auto flex max-w-[500px] flex-col items-center text-center lg:mx-0 lg:max-w-full lg:items-start lg:text-left">
-            <h2 className="title-2-text text-white">
-              {data.title}
-            </h2>
-            <p className="mt-4 text-[15px] leading-[163%] tracking-[0.02em] text-white/90 lg:text-[16px]">
-              {data.desc}
-            </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-[15px] lg:mt-8 lg:justify-start lg:gap-5">
-              {data.actionButton1 && (
-                <Button
-                  href={data.actionButton1.link?.url ?? "#"}
-                  color={buttonColor}
-                  variant={buttonVariant}
-                  useArrow={data.actionButton1.useArrow ?? false}
-                  startIcon={data.actionButton1.startIcon?.icon}
-                >
-                  {data.actionButton1.label}
-                </Button>
-              )}
-              {data.actionButton2 && (
-                <Button
-                  href={data.actionButton2.link?.url ?? "#"}
-                  color={buttonColor}
-                  variant={buttonVariant}
-                  useArrow={data.actionButton2.useArrow ?? false}
-                  startIcon={data.actionButton2.startIcon?.icon}
-                >
-                  {data.actionButton2.label}
-                </Button>
-              )}
-            </div>
+          style={{ aspectRatio }}
+        >
+          <ResponsiveImg
+            bannerImage={{
+              id: image?.id ?? 0,
+              altText: image?.alternativeText ?? data.title,
+              imageD: image,
+              imageM: null,
+            }}
+            sizes="(min-width: 1024px) 300px, (min-width: 768px) 260px, 220px"
+          />
+        </div>
+
+        <div className="mx-auto flex w-full flex-col items-center text-center lg:mx-0 lg:w-[50%]! lg:items-start lg:text-left">
+          <h2 className="title-2-text text-white">{data.title}</h2>
+          <p className="mt-[clamp(0.75rem,1.0416666667vw,1.40625rem)] text-white/90">
+            {data.desc}
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-[15px] lg:mt-8 lg:justify-start lg:gap-5">
+            {data.actionButton1 && (
+              <Button
+                href={data.actionButton1.link?.url ?? "#"}
+                color={buttonColor}
+                variant={buttonVariant}
+                useArrow={data.actionButton1.useArrow ?? false}
+                startIcon={data.actionButton1.startIcon?.icon}
+              >
+                {data.actionButton1.label}
+              </Button>
+            )}
+            {data.actionButton2 && (
+              <Button
+                href={data.actionButton2.link?.url ?? "#"}
+                color={buttonColor}
+                variant={buttonVariant}
+                useArrow={data.actionButton2.useArrow ?? false}
+                startIcon={data.actionButton2.startIcon?.icon}
+              >
+                {data.actionButton2.label}
+              </Button>
+            )}
           </div>
         </div>
       </div>
