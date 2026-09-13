@@ -11,9 +11,9 @@ export interface HeaderContentProps {
   navOpen: boolean;
   onOpenNav: () => void;
   logoSrc: string;
-  logoClassName: string;
-  alignClassName?: string;
-  paddingClassName?: string;
+  logoClassName?: string;
+  // alignClassName?: string;
+  className?: string;
   /** true when this header sits on a white background, so the lang button's hover state must invert to stay visible */
   invertLangHover?: boolean;
 }
@@ -23,19 +23,20 @@ export default function HeaderContent({
   navOpen,
   onOpenNav,
   logoSrc,
-  logoClassName,
-  alignClassName = "items-center",
-  paddingClassName = "p-5 lg:py-[30px] lg:px-10",
+  logoClassName = "",
+  // alignClassName = "items-center",
+  className = "",
   invertLangHover = false,
 }: HeaderContentProps) {
   const t = useTranslations("common");
   return (
     <div
-      className={`${devClassName("header-content")}flex ${alignClassName} justify-between ${paddingClassName}`}
+      className={`${devClassName("header-content")}flex pageBorder w-full items-center justify-between self-center py-[clamp(1rem,1.3889vw,1.875rem)] ${className}`}
     >
       <Link
         href={`/${locale}`}
-        className={`mr-5 flex shrink-0 items-center lg:mr-10 ${logoClassName}`}
+        className={`flex w-[clamp(6.65rem,9.2361111111vw,12.46875rem)] shrink-0 items-center ${logoClassName}`}
+        // mr-5 lg:mr-10
       >
         <Image
           src={logoSrc}
@@ -43,13 +44,13 @@ export default function HeaderContent({
           width={134}
           height={40}
           priority
-          className="h-full w-full"
+          className="h-auto w-full"
         />
       </Link>
 
-      <div className="flex items-center gap-4 lg:gap-5">
-        <div className="hidden lg:flex lg:items-center lg:gap-[30px]">
-          <nav className="flex items-center gap-[30px]">
+      <div className="flex items-center gap-[clamp(1rem,1.3888888889vw,1.875rem)]">
+        <div className="hidden gap-[clamp(1rem,1.3888888889vw,1.875rem)] lg:flex lg:items-center">
+          <nav className="mr-[clamp(0.5rem,0.6944444444vw,0.9375rem)] flex items-center gap-[clamp(1.5rem,2.0833333333vw,2.8125rem)]">
             {desktopNavLinks.map((link) => (
               <Link
                 key={link.href}
@@ -82,12 +83,12 @@ export default function HeaderContent({
         </button>
         <button
           type="button"
-          className="transform-gpu cursor-pointer border-none bg-transparent transition-transform duration-300 ease-out hover:scale-90 lg:w-[26px]"
+          className="h-[clamp(1.3rem,1.8055555556vw,2.4375rem)] w-[clamp(1.5rem,2.0833333333vw,2.8125rem)] transform-gpu cursor-pointer border-none bg-transparent transition-transform duration-300 ease-out hover:scale-90"
           onClick={onOpenNav}
           aria-label={t("navOpenMenu")}
           aria-expanded={navOpen}
         >
-          <HamburgerIcon open={navOpen} />
+          <HamburgerIcon /*open={navOpen}*/ />
         </button>
       </div>
     </div>

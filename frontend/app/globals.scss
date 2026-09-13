@@ -36,24 +36,34 @@ body {
   overflow-x: hidden;
 }
 
-p {
+@utility paragraph {
   font-size: clamp(0.8rem, 1.1111111111vw, 1.5rem);
   line-height: 1.62;
   letter-spacing: 0.02rem;
+}
+
+p {
+  @apply paragraph;
+}
+
+//page gutter: px-5 lg:px-10
+// $page-getter: clamp(2rem, 2.7778vw, 3.75rem);
+
+@utility pageBorder {
+  @apply px-5 pb-0 lg:px-10; //page gutter
+  // padding-left: $page-getter;
+  // padding-right: $page-getter;
 }
 
 @utility pageWrapper {
   @apply pageBorder mx-auto flex w-full flex-col;
 }
 
-//page gutter: px-5 lg:px-10
-
-@utility pageBorder {
-  @apply px-5 pb-0 lg:px-10; //page gutter
-}
-
 @utility borderless {
   @apply -mx-5 w-[calc(100%+40px)] lg:-mx-10 lg:w-[calc(100%+80px)]; //100% + page gutter x2
+  // margin-left: calc(-1 * #{$page-getter});
+  // margin-right: calc(-1 * #{$page-getter});
+  // width: calc(100% + #{$page-getter} * 2);
 }
 
 @utility content-max-w {

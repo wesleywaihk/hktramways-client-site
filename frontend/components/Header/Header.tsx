@@ -14,34 +14,33 @@ export default function Header() {
   const [navOpen, setNavOpen] = useState(false);
   const atTop = useAtTop();
   const { headerStyle } = useHeaderStyle();
-  const { isLg } = useMediaQuery();
+  const { isLg, isXl, isXxl } = useMediaQuery();
+  const isDesktop = isLg || isXl || isXxl;
 
   return (
     <>
       <header
-        className={`text-green fixed top-0 z-[1002] w-full bg-white shadow-[0_3px_20px_0_rgba(0,0,0,0.1)] transition-transform duration-300 ease-in-out lg:rounded-br-[25px] lg:rounded-bl-[25px] ${atTop ? "-translate-y-full" : "translate-y-0"}`}
+        className={`text-green fixed top-0 z-[1002] w-full bg-white shadow-[0_3px_20px_0_rgba(0,0,0,0.1)] transition-transform duration-300 ease-in-out lg:rounded-br-[clamp(1.5rem,2.0833333333vw,2.8125rem)] lg:rounded-bl-[clamp(1.5rem,2.0833333333vw,2.8125rem)] ${atTop ? "-translate-y-[102%]" : "translate-y-0"}`}
       >
         <HeaderContent
           locale={locale}
           navOpen={navOpen}
           onOpenNav={() => setNavOpen(true)}
           logoSrc="/logo-green.svg"
-          logoClassName="min-w-[120.33px] h-9 lg:min-w-[133.7px] lg:h-10"
-          alignClassName="items-center"
-          paddingClassName="px-5 lg:px-10 py-5 lg:py-5"
+          // alignClassName="items-center"
           invertLangHover
         />
       </header>
 
       <header
-        className={`bg-green relative w-full text-white ${headerStyle === "transparent" ? "hidden lg:block" : ""}`}
+        className={`bg-green flex h-[76px] w-full items-center text-white lg:h-[100px]! ${headerStyle === "transparent" ? "hidden lg:block" : ""}`}
       >
         <HeaderContent
           locale={locale}
           navOpen={navOpen}
           onOpenNav={() => setNavOpen(true)}
           logoSrc="/logo-white.svg"
-          logoClassName="min-w-[120.33px] h-9 lg:min-w-[133.7px] lg:h-10"
+          className="py-0!"
         />
       </header>
 
@@ -52,13 +51,13 @@ export default function Header() {
             navOpen={navOpen}
             onOpenNav={() => setNavOpen(true)}
             logoSrc="/logo-v.svg"
-            logoClassName="h-[110px]"
-            alignClassName="items-start"
+            // logoClassName="h-[110px]"
+            className="items-start"
           />
         </header>
       )}
 
-      {isLg ? (
+      {isDesktop ? (
         <DesktopNavOverlay open={navOpen} onClose={() => setNavOpen(false)} />
       ) : (
         <MobileNavOverlay open={navOpen} onClose={() => setNavOpen(false)} />
