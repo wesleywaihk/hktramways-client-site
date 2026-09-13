@@ -14,8 +14,7 @@ export default function Header() {
   const [navOpen, setNavOpen] = useState(false);
   const atTop = useAtTop();
   const { headerStyle } = useHeaderStyle();
-  const { isLg, isXl, isXxl } = useMediaQuery();
-  const isDesktop = isLg || isXl || isXxl;
+  const { isLgUp } = useMediaQuery();
 
   return (
     <>
@@ -57,7 +56,7 @@ export default function Header() {
         </header>
       )}
 
-      {isDesktop ? (
+      {isLgUp ? (
         <DesktopNavOverlay open={navOpen} onClose={() => setNavOpen(false)} />
       ) : (
         <MobileNavOverlay open={navOpen} onClose={() => setNavOpen(false)} />

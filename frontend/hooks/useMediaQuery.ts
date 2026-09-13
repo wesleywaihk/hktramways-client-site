@@ -67,5 +67,13 @@ export function useMediaQuery() {
     };
   }, []);
 
-  return { isMobile, isSm, isMd, isLg, isXl, isXxl };
+  return {
+    isMobile,
+    isSm,
+    isMd,
+    isLg,
+    isXl,
+    isXxl,
+    isLgUp: isLg || isXl || isXxl,
+  };
 }
