@@ -1,5 +1,5 @@
 import { devClassName } from "@/lib/devClassName";
-import "./PartyTram.scss";
+import "./PartyTram.module.scss";
 
 export default function GroundLayer() {
   return (

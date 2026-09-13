@@ -90,7 +90,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
     onPointerLeave,
     wasDragged,
   } = useArcCarouselSwipe(total, SLIDE_TOTAL_MS);
-  const { isLg } = useMediaQuery();
+  const { isLgUp } = useMediaQuery();
   const {
     circleRef,
     visible: circleVisible,
@@ -122,8 +122,8 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
       ? `${item.callActionNumber != null ? `${formatCallActionNumber(item.callActionNumber)} ` : ""}${item.callActionText ?? ""}`.trim()
       : null;
 
-  const CARD_WIDTH_PCT = isLg ? LG_CARD_WIDTH_PCT : MOBILE_CARD_WIDTH_PCT;
-  const CARD_GAP_VW = isLg ? LG_CARD_GAP_VW : MOBILE_CARD_GAP_VW;
+  const CARD_WIDTH_PCT = isLgUp ? LG_CARD_WIDTH_PCT : MOBILE_CARD_WIDTH_PCT;
+  const CARD_GAP_VW = isLgUp ? LG_CARD_GAP_VW : MOBILE_CARD_GAP_VW;
 
   return (
     <div
@@ -185,7 +185,7 @@ export default function PartyTramCarousel({ data }: PartyTramCarouselProps) {
               Math.abs(off) === wrapMax &&
               Math.sign(prevOff) !== Math.sign(off);
 
-            const cardHeightOffset = isLg ? "13dvh" : "11.5dvh";
+            const cardHeightOffset = isLgUp ? "13dvh" : "11.5dvh";
 
             return (
               <PartyTramCard

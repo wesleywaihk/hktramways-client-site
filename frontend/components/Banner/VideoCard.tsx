@@ -31,13 +31,13 @@ export default function VideoCard({
 }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [shouldRender, setShouldRender] = useState(isActive);
-  const { isLg } = useMediaQuery();
+  const { isLgUp } = useMediaQuery();
   const imageD = bannerImage?.imageD;
   const imageM = bannerImage?.imageM;
   const alt = bannerImage?.altText ?? "";
   const srcD = imageD?.url ? `${url}${imageD.url}` : undefined;
   const srcM = imageM?.url ? `${url}${imageM.url}` : srcD;
-  const src = isLg ? (srcD ?? srcM) : (srcM ?? srcD);
+  const src = isLgUp ? (srcD ?? srcM) : (srcM ?? srcD);
 
   // keep the <video> mounted through the fade-out instead of popping it out mid-transition
   if (isActive && !shouldRender) setShouldRender(true);
