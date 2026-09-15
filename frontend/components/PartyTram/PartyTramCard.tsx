@@ -95,17 +95,14 @@ function PartyTramCard({
       onMouseMove={onHoverMove}
       onMouseLeave={onHoverEnd}
     >
-      {active && link ? (
+      {imageEl}
+      {active && link && (
         <Link
           href={link}
           className="absolute inset-0"
           onClick={onLinkClick}
           onDragStart={(e) => e.preventDefault()}
-        >
-          {imageEl}
-        </Link>
-      ) : (
-        imageEl
+        />
       )}
     </div>
   );
