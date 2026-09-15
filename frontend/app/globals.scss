@@ -29,6 +29,10 @@
     sans-serif;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background: var(--color-white);
   color: #171717;
