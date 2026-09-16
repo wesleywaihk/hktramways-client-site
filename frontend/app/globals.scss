@@ -87,3 +87,21 @@ p {
 @utility text-body {
   @apply text-[15px] leading-[163%] tracking-[0.02em] lg:text-[16px];
 }
+
+@utility thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #9e9e9e transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #9e9e9e;
+    border-radius: 3px;
+  }
+}
