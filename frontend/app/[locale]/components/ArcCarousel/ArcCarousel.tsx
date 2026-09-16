@@ -57,62 +57,36 @@ function mapCarouselData(data: ArcCarouselData | null | undefined) {
 }
 
 // ---- mobile (<640px) ----------------------------------------------------
-const MOBILE_CARD_WIDTH = "36dvmax"; //"30.34dvmax";
-const MOBILE_TILT = 8;
-/**
- * Slot spacing for mobile: only offsets -1/0/1 are visible. `1 * gap` pushes
- * the 1st/last visible card (offset = ±1) mostly off-screen; 40vw (rather
- * than the 50vw that would put it exactly 75% off-screen) is tuned down for
- * a tighter fan.
- */
-const MOBILE_GAP = (cardWidth: string) => `calc(40vw + (${cardWidth}) / 4)`;
+const MOBILE_CARD_WIDTH = "57.9vw"; //"30.34dvmax";
+const MOBILE_TILT = 9;
+const MOBILE_GAP = (cardWidth: string) => `calc(120px + (${cardWidth}) / 2)`;
 const MOBILE_DROPS = [0, 10.5, 34];
 const MOBILE_VISIBLE_RANGE = 1;
 
 // ---- sm→md (640–767.99px) and md (768–1023.99px) -------------------------
-/**
- * Slot spacing for the sm→md range: same card size/tilt as mobile, but
- * tighter — the 1st/last visible card should sit only ~60% off-screen
- * instead of ~75%, and the gap between cards shrinks with it.
- */
-const SM_GAP = (cardWidth: string) => `calc(35vw + (${cardWidth}) / 4)`;
+const SM_GAP = (cardWidth: string) => `calc(220px + (${cardWidth}) / 2)`;
 const MD_DROPS = [0, 10.5, 32];
-const MD_GAP = (cardWidth: string) => `calc(34vw + (${cardWidth}) / 5)`;
+const MD_GAP = (cardWidth: string) => `calc(260px + (${cardWidth}) / 2)`;
 
 // ---- desktop: lg (1024–1279.99px), xl (1280–1535.99px), xxl (≥1536px) ----
-const DESKTOP_CARD_WIDTH = "33.6dvh";
+const DESKTOP_CARD_WIDTH = "22.9vw";
 const LG_VISIBLE_RANGE = 2;
 const LG_TILT = 10.5;
-const LG_DROPS = [0, 12.5, 42.5, 100];
-/**
- * Slot spacing for desktop: the edge cards (offset = ±2, the 1st/last of 5)
- * end up ~75% off-screen. Derived from wanting `off * gap` to push the
- * card's near edge to `viewportWidth/2 - 0.25 * cardWidth`:
- *   maxOff * gap = viewportWidth/2 + 0.25 * cardWidth
- *   gap = viewportWidth/(2 * maxOff) + cardWidth/(4 * maxOff)
- * For maxOff = 2 this is 25vw + cardWidth/8, so the gap scales with the
- * viewport instead of a fixed px value.
- */
-const LG_GAP = (cardWidth: string) => `calc(25vw + (${cardWidth}) / 8)`;
-/** extra px pushing the near cards (offset ±1) further from center; outer cards (offset ±2) are untouched */
-const LG_NEAR_CARD_SHIFT = 20.5;
+const LG_DROPS = [0, 11.5, 45.5, 110];
+
+const LG_GAP = (cardWidth: string) => `calc(245px + (${cardWidth}) / 4)`;
+const LG_NEAR_CARD_SHIFT = 11.5;
 
 const XL_VISIBLE_RANGE = 2;
-const XL_TILT = 8;
-const XL_DROPS = [0, 12, 44, 98];
-const XL_GAP = (cardWidth: string) => `calc(22vw + (${cardWidth}) / 8)`;
+const XL_TILT = 9;
+const XL_DROPS = [0, 11, 40, 105];
+const XL_GAP = (cardWidth: string) => `calc(280px + (${cardWidth}) / 4)`;
 const XL_NEAR_CARD_SHIFT = 20.5;
 
 const XXL_VISIBLE_RANGE = 3;
 const XXL_TILT = 7.5;
 const XXL_DROPS = [0, 9.7, 34.2, 75.5, 130];
-/**
- * xxl shows 7 cards (offset ±3, see XXL_VISIBLE_RANGE) instead of lg/xl's 5,
- * so the edge-offset in the formula above is 3, not 2: viewportWidth/(2*3) +
- * cardWidth/(4*3) = 16.67vw + cardWidth/12 as a baseline, hand-tuned from
- * there to 19vw + cardWidth/14 for the desired snugness at this breakpoint.
- */
-const XXL_GAP = (cardWidth: string) => `calc(19vw + (${cardWidth}) / 16)`;
+const XXL_GAP = (cardWidth: string) => `calc(260px + (${cardWidth}) / 6)`;
 /** extra px pushing the near cards (offset ±1) further from center on xxl */
 const XXL_NEAR_CARD_SHIFT = 28;
 /** extra px pushing the offset ±2 cards further from center on xxl (7-card layout only); the outermost cards (offset ±3) are untouched */

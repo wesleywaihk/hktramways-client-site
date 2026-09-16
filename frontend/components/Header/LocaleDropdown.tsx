@@ -82,7 +82,7 @@ export default function LocaleDropdown({
             <button
               key={loc}
               type="button"
-              className="text-green flex w-[58px] cursor-pointer items-center justify-center border-none bg-transparent px-[18px] py-[5px] font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase transition-colors duration-200 ease-out hover:bg-[#e6f1ed]"
+              className="text-green flex w-[58px] cursor-pointer items-center justify-center border-none bg-transparent px-[18px] py-[5px] font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase transition-colors duration-200 ease-out hover:text-[var(--color-black)]"
               role="option"
               aria-selected={false}
               onClick={() => {

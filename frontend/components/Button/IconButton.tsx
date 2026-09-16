@@ -29,7 +29,7 @@ const colorClasses: Record<IconButtonColor, string> = {
 
 const shapeClasses: Record<IconButtonShape, string> = {
   circle: "rounded-full",
-  square: "h-10 w-10 rounded-[14px] lg:h-11 lg:w-11 lg:rounded-[16px]",
+  square: "h-10 w-10 rounded-[14px] lg:h-[60px] lg:w-[60px] lg:rounded-[21px]",
 };
 
 export default function IconButton({
@@ -43,18 +43,9 @@ export default function IconButton({
   icon,
   color = "green",
   shape = "circle",
-  className,
+  className = "",
 }: IconButtonProps) {
-  const classes = [
-    devClassName("icon-button"),
-    "group place-items-center cursor-pointer border-2 border-transparent hover:border-white transition-colors duration-200 ease-out",
-    shapeClasses[shape],
-    colorClasses[color],
-    reverse && "rotate-180",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const classes = `${devClassName("icon-button")}group place-items-center cursor-pointer border-2 border-transparent hover:border-white transition-colors duration-200 ease-out ${shapeClasses[shape]} ${colorClasses[color]} ${reverse ? "rotate-180" : ""} ${className}`;
 
   const content = (
     <span className="relative h-5 w-5 shrink-0 overflow-hidden">

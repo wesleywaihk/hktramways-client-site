@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
@@ -7,6 +6,7 @@ import RouteOptionButton from "./RouteOptionButton";
 import { ROUTES } from "./routes";
 import type { RouteStop } from "./routes";
 import { devClassName } from "@/lib/devClassName";
+import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 
 export interface RouteMobilePickerProps {
   activeRoute: RouteStop;
@@ -17,7 +17,7 @@ export interface RouteMobilePickerProps {
   selectLabel: string;
 }
 const txtClass =
-  "text-center font-sans text-[15px] leading-[130%] font-semibold tracking-[0.02em]"; //whitespace-nowrap  ?
+  "text-center font-sans text-[15px] leading-[130%] font-semibold tracking-[0.02em] min-[393px]:whitespace-nowrap";
 
 export default function RouteMobilePicker({
   activeRoute,
@@ -29,14 +29,7 @@ export default function RouteMobilePicker({
 }: RouteMobilePickerProps) {
   const t = useTranslations("common");
 
-  useEffect(() => {
-    if (!sheetOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [sheetOpen]);
+  useLockBodyScroll(sheetOpen);
 
   return (
     <>

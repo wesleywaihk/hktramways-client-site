@@ -44,7 +44,7 @@ export default function DownloadAppAreaUI({
       className={`${devClassName(compClassName)}borderless sectionContainer bg-green flex h-auto ${className}`}
     >
       <div
-        className="content-box bg-green-light mx-auto mb-[clamp(4rem,5.5555555556vw,7.5rem)] flex w-full flex-col items-center justify-center rounded-[clamp(1.5rem,2.0833333333vw,2.8125rem)] p-[clamp(4rem,5.5555555556vw,7.5rem)] text-white lg:flex-row lg:gap-[clamp(3rem,4.1666666667vw,5.625rem)]"
+        className="content-box bg-green-light mx-auto mb-[clamp(3.375rem,15.2671755725vw,4.5rem)] flex w-full flex-col items-center justify-center rounded-[clamp(1.18125rem,5.3435114504vw,1.575rem)] px-[clamp(1.125rem,5.0890585242vw,1.5rem)] py-[clamp(3.375rem,15.2671755725vw,4.5rem)] text-white md:mb-[clamp(4rem,5.5555555556vw,7.5rem)] md:rounded-[clamp(1.5rem,2.0833333333vw,2.8125rem)] md:p-[clamp(4rem,5.5555555556vw,7.5rem)] lg:flex-row lg:gap-[clamp(3rem,4.1666666667vw,5.625rem)]"
         style={data.bgColor ? { backgroundColor: data.bgColor } : undefined}
       >
         <div
