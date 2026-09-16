@@ -32,14 +32,15 @@ export default function Header() {
       </header>
 
       <header
-        className={`bg-green flex h-[76px] w-full items-center text-white lg:h-[100px]! ${headerStyle === "transparent" ? "hidden lg:block" : ""}`}
+        className={`flex h-[76px] w-full items-center lg:h-[100px]! ${headerStyle === "white" ? "bg-white text-green" : "bg-green text-white"} ${headerStyle === "transparent" ? "hidden lg:block" : ""}`}
       >
         <HeaderContent
           locale={locale}
           navOpen={navOpen}
           onOpenNav={() => setNavOpen(true)}
-          logoSrc="/logo-white.svg"
+          logoSrc={headerStyle === "white" ? "/logo-green.svg" : "/logo-white.svg"}
           className="py-0!"
+          invertLangHover={headerStyle === "white"}
         />
       </header>
 
