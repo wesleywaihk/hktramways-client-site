@@ -28,7 +28,7 @@ export default function RouteSelectPanel({
 
   return (
     <div
-      className={`${devClassName("route-select-panel")}rounded-[21px] bg-[var(--color-earth-light)] p-5 lg:shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] ${className}`}
+      className={`${devClassName("route-select-panel")}rounded-[21px] bg-[var(--color-earth-light)] py-[15px] lg:py-[12px] lg:shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] ${className}`}
     >
       <div className="mb-[30px] flex items-center justify-between lg:hidden">
         <span className="text-green font-sans text-[20px] leading-[110%] font-semibold tracking-[0.02em]">
@@ -49,10 +49,8 @@ export default function RouteSelectPanel({
             type="button"
             onClick={() => onSelect("all")}
             aria-pressed={activeId === "all"}
-            className={`w-full cursor-pointer rounded-[21px] p-[15px] text-center text-left text-[14px] font-semibold tracking-[0.02em] transition-colors duration-200 lg:rounded-[14px] lg:py-[12px] ${
-              activeId === "all"
-                ? "bg-green text-white"
-                : "text-green hover:bg-green bg-transparent hover:text-white"
+            className={`w-full cursor-pointer bg-transparent p-[15px] text-center text-left text-[14px] font-semibold tracking-[0.02em] transition-colors duration-200 lg:p-[12px] ${
+              activeId === "all" ? "text-black" : "text-green hover:text-black"
             }`}
           >
             {allLabel}

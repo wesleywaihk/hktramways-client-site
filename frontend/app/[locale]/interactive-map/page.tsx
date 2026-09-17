@@ -6,6 +6,7 @@ import SetHeaderStyle from "@/components/Header/HeaderStyle/SetHeaderStyle";
 import RouteToggle from "./components/RouteToggle/RouteToggle";
 import RouteSelect from "./components/RouteSelect/RouteSelect";
 import RouteStationList from "./components/RouteStationList/RouteStationList";
+import StationPopup from "./components/StationPopup/StationPopup";
 import { useInteractiveMap } from "./useInteractiveMap";
 
 interface InteractiveMapPageProps {
@@ -40,7 +41,7 @@ export default function InteractiveMapPage({
           onChange={setSelectedRoute}
         />
 
-        <div className="thin-scrollbar max-h-[50vh] overflow-y-auto lg:max-h-none lg:min-h-0 lg:flex-1 lg:pr-2">
+        <div className="thin-scrollbar max-h-[50vh] overflow-y-auto lg:mr-[-16px] lg:max-h-none lg:min-h-0 lg:w-[calc(100%+16px)] lg:flex-1 lg:pr-2">
           <RouteStationList
             key={`${direction}-${selectedRoute}`}
             routeId={selectedRoute}
@@ -49,9 +50,9 @@ export default function InteractiveMapPage({
             onSelectStation={setSelectedStation}
           />
         </div>
-        <div className="pointer-events-none absolute right-[8px] bottom-0 left-0 z-[100] h-5 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(255,255,255,1)]" />
+        <div className="pointer-events-none absolute right-0 bottom-0 left-0 z-[100] h-5 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(255,255,255,1)]" />
       </div>
-      <div className="order-1 -mx-5 flex h-[max(33dvh,200px)] w-[calc(100%+40px)] lg:order-2 lg:mx-0 lg:h-auto lg:w-[calc(100%-460px)] lg:w-full lg:grow lg:pb-10">
+      <div className="relative order-1 -mx-5 flex h-[max(33dvh,200px)] w-[calc(100%+40px)] lg:order-2 lg:mx-0 lg:h-auto lg:w-[calc(100%-460px)] lg:w-full lg:grow lg:pb-10">
         <iframe
           src="https://www.google.com/maps/d/embed?mid=1XEfC8fEOSY5x1QmyraeklfG0FDvDCkM&ehbc=2E312F"
           title={t("interactiveMapTitle")}
@@ -59,6 +60,14 @@ export default function InteractiveMapPage({
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
+        {selectedStation && (
+          <StationPopup
+            key={selectedStation}
+            locCode={selectedStation}
+            direction={direction}
+            onClose={() => setSelectedStation(null)}
+          />
+        )}
       </div>
     </div>
   );
