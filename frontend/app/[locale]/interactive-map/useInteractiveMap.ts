@@ -9,7 +9,7 @@ import {
 } from "./components/routes";
 
 export function useInteractiveMap(locale: string) {
-  const [direction, setDirectionState] = useState<Direction>("east");
+  const [direction, setDirectionState] = useState<Direction>("west");
   const [selectedRoute, setSelectedRouteState] = useState<number | "all">(
     "all",
   );

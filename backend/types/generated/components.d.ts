@@ -34,9 +34,7 @@ export interface ContentAttraction extends Struct.ComponentSchema {
     icon: Schema.Attribute.Media<'images' | 'files', true> &
       Schema.Attribute.Required;
     link: Schema.Attribute.String;
-    textEn: Schema.Attribute.String & Schema.Attribute.Required;
-    textZhCN: Schema.Attribute.String & Schema.Attribute.Required;
-    textZhHK: Schema.Attribute.String & Schema.Attribute.Required;
+    text: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -161,6 +159,18 @@ export interface ContentIconList extends Struct.ComponentSchema {
     icon: Schema.Attribute.Enumeration<
       ['map', 'calendar', 'busket', 'upRightArrow']
     >;
+  };
+}
+
+export interface ContentImageLink extends Struct.ComponentSchema {
+  collectionName: 'components_content_image_links';
+  info: {
+    displayName: 'imageLink';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    link: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -507,7 +517,16 @@ export interface SharedIconEnum extends Struct.ComponentSchema {
   };
   attributes: {
     icon: Schema.Attribute.Enumeration<
-      ['map', 'calendar', 'busket', 'upRightArrow', 'faq', 'speaker']
+      [
+        'map',
+        'calendar',
+        'busket',
+        'upRightArrow',
+        'faq',
+        'speaker',
+        'direction',
+        'clock',
+      ]
     >;
   };
 }
@@ -526,6 +545,7 @@ declare module '@strapi/strapi' {
       'content.get-in-touch': ContentGetInTouch;
       'content.hyperlink': ContentHyperlink;
       'content.icon-list': ContentIconList;
+      'content.image-link': ContentImageLink;
       'content.party-tram-item': ContentPartyTramItem;
       'content.schedule-basic-unit': ContentScheduleBasicUnit;
       'content.schedule-day': ContentScheduleDay;

@@ -11,6 +11,8 @@ export type ButtonColor = "green" | "white";
 export type ButtonProps = {
   children: React.ReactNode;
   href?: string;
+  target?: string;
+  rel?: string;
   onClick?: () => void;
   className?: string;
   useArrow?: boolean;
@@ -59,6 +61,8 @@ const Arrow = () => (
 export default function Button({
   children,
   href,
+  target,
+  rel,
   onClick,
   className,
   useArrow = false,
@@ -92,6 +96,8 @@ export default function Button({
     return (
       <Link
         href={href}
+        target={target}
+        rel={rel}
         className={`${devClassName("button")}no-wrap flex flex-row ${classes}`}
       >
         {content}

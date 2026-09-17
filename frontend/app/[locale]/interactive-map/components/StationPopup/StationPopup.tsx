@@ -1,18 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@/components/icons/CloseIcon";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
+import Button from "@/components/Button/Button";
 import { devClassName } from "@/lib/devClassName";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { IMG_URL } from "@/consts";
 import type { Direction } from "@/consts";
-import type { AttractionData, StationItemData } from "@/types/api";
+import type {
+  AttractionData,
+  ImageLinkData,
+  StationItemData,
+} from "@/types/api";
 import { routesForDirection, stationByLocCode, stationName } from "../routes";
 
 export interface StationPopupProps {
@@ -20,6 +25,8 @@ export interface StationPopupProps {
   direction: Direction;
   station?: StationItemData | null;
   loading?: boolean;
+  scheduleAppLink?: string | null;
+  bannerLink?: ImageLinkData | null;
   onClose: () => void;
 }
 
@@ -30,7 +37,7 @@ function mediaSrc(url: string) {
 function attractionText(attraction: AttractionData, locale: string): string {
   if (locale === "zh-HK") return attraction.textZhHK;
   if (locale === "zh-CN") return attraction.textZhCN;
-  return attraction.textEn;
+  return attraction.text;
 }
 
 export default function StationPopup({
@@ -38,9 +45,12 @@ export default function StationPopup({
   direction,
   station: stationItem,
   loading = false,
+  scheduleAppLink,
+  bannerLink,
   onClose,
 }: StationPopupProps) {
   const locale = useLocale();
+  const t = useTranslations("common");
   const [visible, setVisible] = useState(false);
   const { isLgUp } = useMediaQuery();
 
@@ -54,6 +64,11 @@ export default function StationPopup({
   const station = stationByLocCode(locCode);
   const name = stationName(station, locale);
   const district = stationName(station.district, locale);
+
+  const directionsUrl =
+    station.latitude != null && station.longitude != null
+      ? `https://www.google.com/maps/dir/?api=1&destination=${station.latitude},${station.longitude}`
+      : null;
 
   const routePills = routesForDirection(direction)
     .filter((route) => route.stations.includes(locCode))
@@ -74,7 +89,7 @@ export default function StationPopup({
         visible ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
       }`}
     >
-      <div className="relative shrink-0 p-5 pb-0">
+      <div className="relative shrink-0 p-[15px] pb-0">
         <button
           type="button"
           onClick={onClose}
@@ -92,7 +107,7 @@ export default function StationPopup({
         </p>
       </div>
 
-      <div className="thin-scrollbar min-h-0 flex-1 overflow-y-auto p-5 pt-3">
+      <div className="thin-scrollbar min-h-0 flex-1 overflow-y-auto p-[15px] pt-3">
         {routePills.length > 0 && (
           <div className="flex flex-col flex-wrap items-start gap-2">
             {routePills.map((pill) => (
@@ -113,7 +128,7 @@ export default function StationPopup({
         ) : (
           <>
             {stationItem?.image && (
-              <div className="relative mt-4 h-[160px] w-full overflow-hidden rounded-[12px]">
+              <div className="relative mt-5 h-[160px] w-full overflow-hidden rounded-[12px]">
                 <ResponsiveImg
                   bannerImage={{
                     id: stationItem.image.id,
@@ -126,7 +141,7 @@ export default function StationPopup({
             )}
 
             {stationItem?.attraction && stationItem.attraction.length > 0 && (
-              <ul className="mt-3 flex flex-col gap-3">
+              <ul className="mt-5 flex flex-col gap-3">
                 {stationItem.attraction.map((attraction) => {
                   const icon = attraction.icon?.[0];
                   const text = attractionText(attraction, locale);
@@ -173,6 +188,48 @@ export default function StationPopup({
               </ul>
             )}
           </>
+        )}
+
+        <div className="grid shrink-0 grid-cols-2 items-center gap-[15px] pt-5">
+          {directionsUrl && (
+            <Button
+              href={directionsUrl}
+              target="_blank"
+              rel="noopener"
+              startIcon="direction"
+              className="!min-h-0 w-full !gap-[10px] !rounded-[14px] !px-[12px] !py-[11.73px] lg:!py-[10px]"
+            >
+              {t("stationPopupDirections")}
+            </Button>
+          )}
+          {scheduleAppLink && (
+            <Button
+              href={scheduleAppLink}
+              target="_blank"
+              startIcon="clock"
+              className="lg:!py-[10px]] !min-h-0 w-full !gap-[10px] !rounded-[14px] !px-[12px] !py-[11.73px]"
+            >
+              {t("stationPopupNextTram")}
+            </Button>
+          )}
+        </div>
+
+        {bannerLink?.image && (
+          <div className="mt-[15px] shrink-0">
+            <a
+              href={bannerLink.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative block aspect-[29/7] w-full overflow-hidden rounded-[14px]"
+            >
+              <Image
+                src={mediaSrc(bannerLink.image.url)}
+                alt=""
+                fill
+                className="object-cover"
+              />
+            </a>
+          </div>
         )}
       </div>
     </div>

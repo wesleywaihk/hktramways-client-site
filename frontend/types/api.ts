@@ -62,7 +62,14 @@ export interface ArcCarouselItem {
 }
 
 export type IconEnum =
-  "map" | "calendar" | "busket" | "upRightArrow" | "faq" | "speaker";
+  | "map"
+  | "calendar"
+  | "busket"
+  | "upRightArrow"
+  | "faq"
+  | "speaker"
+  | "direction"
+  | "clock";
 
 export interface IconComponent {
   id: number;
@@ -280,9 +287,7 @@ export interface PlanYourRideInteractiveRouteMapResponse {
 export interface AttractionData {
   id: number;
   icon: Media[] | null;
-  textEn: string;
-  textZhHK: string;
-  textZhCN: string;
+  text: string;
   link: string | null;
 }
 
@@ -293,10 +298,18 @@ export interface StationItemData {
   attraction: AttractionData[];
 }
 
+export interface ImageLinkData {
+  id: number;
+  image: Media;
+  link: string;
+}
+
 export interface InteractiveMapData {
   id: number;
   documentId: string;
   station: StationItemData[];
+  ScheduleAppLink: string;
+  bannerLink: ImageLinkData | null;
 }
 
 export interface InteractiveMapResponse {

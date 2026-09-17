@@ -14,7 +14,9 @@
         "busket",
         "upRightArrow",
         "faq",
-        "speaker"
+        "speaker",
+        "direction",
+        "clock"
       ]
     }
   },

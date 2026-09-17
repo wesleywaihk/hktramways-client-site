@@ -326,7 +326,11 @@ export async function fetchPartyTram(locale: string) {
 export async function fetchInteractiveMap(
   locale: string,
 ): Promise<InteractiveMapResponse> {
-  const populate = buildPopulate(["station.image", "station.attraction.icon"]);
+  const populate = buildPopulate([
+    "station.image",
+    "station.attraction.icon",
+    "bannerLink.image",
+  ]);
   const url = `${API_URL}/api/interactive-maps?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);

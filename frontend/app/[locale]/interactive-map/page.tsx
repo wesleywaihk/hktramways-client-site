@@ -74,6 +74,8 @@ export default function InteractiveMapPage({
             station={interactiveMapData?.station.find(
               (s) => s.locCode === selectedStation,
             )}
+            scheduleAppLink={interactiveMapData?.ScheduleAppLink}
+            bannerLink={interactiveMapData?.bannerLink}
             onClose={() => setSelectedStation(null)}
           />
         )}
