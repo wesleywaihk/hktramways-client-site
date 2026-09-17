@@ -11,6 +11,7 @@ import Button from "@/components/Button/Button";
 import { devClassName } from "@/lib/devClassName";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useUserAgent } from "@/hooks/useUserAgent";
 import { IMG_URL } from "@/consts";
 import type { Direction } from "@/consts";
 import type {
@@ -19,6 +20,8 @@ import type {
   StationItemData,
 } from "@/types/api";
 import { routesForDirection, stationByLocCode, stationName } from "../routes";
+
+const GOOGLE_MAP_URL = "ttps://www.google.com/maps/dir/?api=1&destination=";
 
 export interface StationPopupProps {
   locCode: string;
@@ -34,9 +37,7 @@ function mediaSrc(url: string) {
   return url.startsWith("http") ? url : `${IMG_URL}${url}`;
 }
 
-function attractionText(attraction: AttractionData, locale: string): string {
-  if (locale === "zh-HK") return attraction.textZhHK;
-  if (locale === "zh-CN") return attraction.textZhCN;
+function attractionText(attraction: AttractionData): string {
   return attraction.text;
 }
 
@@ -53,6 +54,7 @@ export default function StationPopup({
   const t = useTranslations("common");
   const [visible, setVisible] = useState(false);
   const { isLgUp } = useMediaQuery();
+  const { isAndroid } = useUserAgent();
 
   useLockBodyScroll(!isLgUp);
 
@@ -67,7 +69,9 @@ export default function StationPopup({
 
   const directionsUrl =
     station.latitude != null && station.longitude != null
-      ? `https://www.google.com/maps/dir/?api=1&destination=${station.latitude},${station.longitude}`
+      ? isAndroid
+        ? `geo:${station.latitude},${station.longitude}?q=${station.latitude},${station.longitude}(${encodeURIComponent(name)})`
+        : `${GOOGLE_MAP_URL}${station.latitude},${station.longitude}`
       : null;
 
   const routePills = routesForDirection(direction)
@@ -144,7 +148,7 @@ export default function StationPopup({
               <ul className="mt-5 flex flex-col gap-3">
                 {stationItem.attraction.map((attraction) => {
                   const icon = attraction.icon?.[0];
-                  const text = attractionText(attraction, locale);
+                  const text = attractionText(attraction);
                   const row = (
                     <div className="flex items-center gap-2">
                       {icon?.url && (
