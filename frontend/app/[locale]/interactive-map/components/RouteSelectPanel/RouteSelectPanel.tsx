@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import CloseIcon from "@/components/icons/CloseIcon";
 import MapRouteOptionButton from "./MapRouteOptionButton";
-import { ROUTES } from "@/consts/routes";
+import { routesForDirection } from "../routes";
 import type { Direction } from "@/consts";
 import { devClassName } from "@/lib/devClassName";
 
@@ -28,7 +28,7 @@ export default function RouteSelectPanel({
 
   return (
     <div
-      className={`${devClassName("route-select-panel")}rounded-[21px] min-w-full bg-[var(--color-earth-light)] p-5 lg:shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] ${className}`}
+      className={`${devClassName("route-select-panel")}rounded-[21px] bg-[var(--color-earth-light)] p-5 lg:shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] ${className}`}
     >
       <div className="mb-[30px] flex items-center justify-between lg:hidden">
         <span className="text-green font-sans text-[20px] leading-[110%] font-semibold tracking-[0.02em]">
@@ -49,7 +49,7 @@ export default function RouteSelectPanel({
             type="button"
             onClick={() => onSelect("all")}
             aria-pressed={activeId === "all"}
-            className={`w-full cursor-pointer rounded-[21px] p-[15px] text-center text-[14px] font-semibold tracking-[0.02em] transition-colors duration-200 lg:rounded-[14px] lg:p-[8px] ${
+            className={`w-full cursor-pointer rounded-[21px] p-[15px] text-center text-left text-[14px] font-semibold tracking-[0.02em] transition-colors duration-200 lg:rounded-[14px] lg:py-[12px] ${
               activeId === "all"
                 ? "bg-green text-white"
                 : "text-green hover:bg-green bg-transparent hover:text-white"
@@ -58,21 +58,14 @@ export default function RouteSelectPanel({
             {allLabel}
           </button>
         )}
-        {ROUTES.map((route) => {
-          const displayRoute =
-            direction === "west"
-              ? { ...route, from: route.to, to: route.from }
-              : route;
-
-          return (
-            <MapRouteOptionButton
-              key={route.id}
-              route={displayRoute}
-              active={route.id === activeId}
-              onClick={() => onSelect(route.id)}
-            />
-          );
-        })}
+        {routesForDirection(direction).map((route) => (
+          <MapRouteOptionButton
+            key={route.id}
+            route={route}
+            active={route.id === activeId}
+            onClick={() => onSelect(route.id)}
+          />
+        ))}
       </div>
     </div>
   );

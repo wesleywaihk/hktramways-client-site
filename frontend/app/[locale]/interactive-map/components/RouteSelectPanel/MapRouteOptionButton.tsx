@@ -1,6 +1,6 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { devClassName } from "@/lib/devClassName";
-import type { RouteStop } from "@/consts/routes";
+import { stationByLocCode, stationName, type RouteStop } from "../routes";
 
 export interface MapRouteOptionButtonProps {
   route: RouteStop;
@@ -8,17 +8,34 @@ export interface MapRouteOptionButtonProps {
   onClick: () => void;
 }
 
-const gridClasses = `grid items-center w-full grid-cols-[1fr_20px_1fr] justify-between rounded-[21px] lg:rounded-[14px] p-[15px] gap-[7px] lg:p-[8px] lg:gap-[4px] transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]`;
+const gridClasses = `text-left w-full rounded-[21px] lg:rounded-[14px] p-[15px] lg:py-[12px] transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)]`;
 
 const txtClass =
-  "text-center text-[14px] leading-[120%] font-semibold tracking-[0.02em] normal-case! md:text-[18px] md:leading-[178%] lg:text-[14px] lg:leading-[120%] min-[393px]:whitespace-nowrap";
+  "text-right text-[14px] leading-[120%] font-semibold tracking-[0.02em] normal-case! md:text-[18px] md:leading-[178%] lg:text-[14px] lg:leading-[120%] min-[393px]:whitespace-nowrap";
 
 export default function MapRouteOptionButton({
   route,
   active,
   onClick,
 }: MapRouteOptionButtonProps) {
+  const locale = useLocale();
   const t = useTranslations("common");
+  const fromName = stationName(stationByLocCode(route.from), locale);
+  const toName = route.to
+    ? stationName(stationByLocCode(route.to), locale)
+    : null;
+
+  const content = toName ? (
+    <>
+      <span className={txtClass}>
+        {fromName} → {toName}
+      </span>
+    </>
+  ) : (
+    <span className={`${txtClass}`}>
+      {fromName} ({t("routeCirculationLine")})
+    </span>
+  );
 
   if (active) {
     return (
@@ -28,9 +45,7 @@ export default function MapRouteOptionButton({
         aria-pressed={active}
         className={`${devClassName("map-route-option-button")}${gridClasses} bg-green text-white`}
       >
-        <span className={txtClass}>{t(route.from)}</span>
-        <span className={txtClass}>→</span>
-        <span className={txtClass}>{t(route.to)}</span>
+        {content}
       </button>
     );
   }
@@ -42,9 +57,7 @@ export default function MapRouteOptionButton({
       aria-pressed={active}
       className={`${devClassName("map-route-option-button")}${gridClasses} group text-green hover:bg-green cursor-pointer bg-transparent hover:text-white`}
     >
-      <span className={txtClass}>{t(route.from)}</span>
-      <span className={txtClass}>→</span>
-      <span className={txtClass}>{t(route.to)}</span>
+      {content}
     </button>
   );
 }

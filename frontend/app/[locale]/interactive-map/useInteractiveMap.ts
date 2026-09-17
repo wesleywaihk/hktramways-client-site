@@ -1,19 +1,20 @@
 import { useMemo, useState } from "react";
 import type { Direction } from "@/consts";
-import { ROUTES, STATIONS, type StationKey } from "@/consts/routes";
+import {
+  routesForDirection,
+  allTramRoutes,
+  stationByLocCode,
+} from "./components/routes";
 
 export function useInteractiveMap() {
   const [direction, setDirectionState] = useState<Direction>("east");
   const [selectedRoute, setSelectedRouteState] = useState<number | "all">(
     "all",
   );
-  const [selectedStation, setSelectedStation] = useState<StationKey | null>(
-    null,
-  );
+  const [selectedStation, setSelectedStation] = useState<string | null>(null);
 
   const setDirection = (next: Direction) => {
     setDirectionState(next);
-    setSelectedRouteState("all");
     setSelectedStation(null);
   };
 
@@ -23,19 +24,13 @@ export function useInteractiveMap() {
   };
 
   const stations = useMemo(() => {
-    const orderedStations =
+    const locCodes =
       selectedRoute === "all"
-        ? STATIONS.map((station, index) => ({
-            id: index + 1,
-            name: station.key,
-          }))
-        : ROUTES.find((r) => r.id === selectedRoute)?.stations;
+        ? allTramRoutes[direction]
+        : routesForDirection(direction).find((r) => r.id === selectedRoute)
+            ?.stations;
 
-    if (!orderedStations) return [];
-
-    return direction === "west"
-      ? [...orderedStations].reverse()
-      : orderedStations;
+    return (locCodes ?? []).map(stationByLocCode);
   }, [selectedRoute, direction]);
 
   return {

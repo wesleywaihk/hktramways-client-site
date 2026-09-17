@@ -20,8 +20,8 @@ export default function CloseIcon({ className }: CloseIconProps) {
         x2="27"
         y2="25.5858"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
       <line
         x1="1"
@@ -30,8 +30,8 @@ export default function CloseIcon({ className }: CloseIconProps) {
         y2="-1"
         transform="matrix(-0.707107 0.707107 0.707107 0.707107 27 1)"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );

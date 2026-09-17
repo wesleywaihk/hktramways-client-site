@@ -42,6 +42,7 @@ export default function InteractiveMapPage({
 
         <div className="thin-scrollbar max-h-[50vh] overflow-y-auto lg:max-h-none lg:min-h-0 lg:flex-1 lg:pr-2">
           <RouteStationList
+            key={`${direction}-${selectedRoute}`}
             routeId={selectedRoute}
             stations={stations}
             selectedStation={selectedStation}

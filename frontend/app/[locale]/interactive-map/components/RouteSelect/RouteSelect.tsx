@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import RouteSelectPanel from "../RouteSelectPanel/RouteSelectPanel";
-import { ROUTES } from "@/consts/routes";
+import { routesForDirection, stationByLocCode, stationName } from "../routes";
 import type { Direction } from "@/consts";
 import { devClassName } from "@/lib/devClassName";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
@@ -22,6 +22,7 @@ export default function RouteSelect({
   onChange,
 }: RouteSelectProps) {
   const t = useTranslations("common");
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -47,11 +48,13 @@ export default function RouteSelect({
   }, [mounted]);
 
   const activeRoute =
-    value === "all" ? null : ROUTES.find((r) => r.id === value);
+    value === "all"
+      ? null
+      : routesForDirection(direction).find((r) => r.id === value);
   const label = activeRoute
-    ? direction === "west"
-      ? `${t(activeRoute.to)} → ${t(activeRoute.from)}`
-      : `${t(activeRoute.from)} → ${t(activeRoute.to)}`
+    ? activeRoute.to
+      ? `${stationName(stationByLocCode(activeRoute.from), locale)} → ${stationName(stationByLocCode(activeRoute.to), locale)}`
+      : `${stationName(stationByLocCode(activeRoute.from), locale)} (${t("routeCirculationLine")})`
     : t("routeSelectAll");
 
   const handleOpen = () => {
@@ -88,7 +91,7 @@ export default function RouteSelect({
       )}
       {mounted && (
         <div
-          className={`fixed right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto transition-[transform,opacity] duration-300 ease-in-out lg:absolute lg:inset-x-0 lg:top-full lg:right-auto lg:bottom-auto lg:left-0 lg:mt-2 lg:max-h-none lg:translate-y-0 lg:overflow-visible ${
+          className={`fixed right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] min-w-full overflow-y-auto transition-[transform,opacity] duration-300 ease-in-out lg:absolute lg:inset-x-0 lg:top-full lg:right-auto lg:bottom-auto lg:left-0 lg:mt-2 lg:max-h-none lg:translate-y-0 lg:overflow-visible ${
             visible
               ? "translate-y-0 opacity-100"
               : "translate-y-[calc(100%+20px)] opacity-0 lg:translate-y-0"
