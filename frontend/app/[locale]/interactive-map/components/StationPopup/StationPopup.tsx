@@ -2,28 +2,46 @@
 
 import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
+import Image from "next/image";
 import CloseIcon from "@/components/icons/CloseIcon";
+import ChevronIcon from "@/components/icons/ChevronIcon";
+import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import { devClassName } from "@/lib/devClassName";
+import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { IMG_URL } from "@/consts";
 import type { Direction } from "@/consts";
+import type { AttractionData, StationItemData } from "@/types/api";
 import { routesForDirection, stationByLocCode, stationName } from "../routes";
 
 export interface StationPopupProps {
   locCode: string;
   direction: Direction;
+  station?: StationItemData | null;
   onClose: () => void;
 }
 
-function withoutTerminus(name: string): string {
-  return name.replace(/\s*Terminus$/i, "");
+function mediaSrc(url: string) {
+  return url.startsWith("http") ? url : `${IMG_URL}${url}`;
+}
+
+function attractionText(attraction: AttractionData, locale: string): string {
+  if (locale === "zh-HK") return attraction.textZhHK;
+  if (locale === "zh-CN") return attraction.textZhCN;
+  return attraction.textEn;
 }
 
 export default function StationPopup({
   locCode,
   direction,
+  station: stationItem,
   onClose,
 }: StationPopupProps) {
   const locale = useLocale();
   const [visible, setVisible] = useState(false);
+  const { isLgUp } = useMediaQuery();
+
+  useLockBodyScroll(!isLgUp);
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => setVisible(true));
@@ -37,12 +55,8 @@ export default function StationPopup({
   const routePills = routesForDirection(direction)
     .filter((route) => route.stations.includes(locCode))
     .map((route) => {
-      const fromName = withoutTerminus(
-        stationName(stationByLocCode(route.from), locale),
-      );
-      const toName = route.to
-        ? withoutTerminus(stationName(stationByLocCode(route.to), locale))
-        : null;
+      const fromName = stationName(route.from, locale);
+      const toName = route.to ? stationName(route.to, locale) : null;
       return {
         id: route.id,
         label: toName ? `${fromName} - ${toName}` : fromName,
@@ -53,38 +67,101 @@ export default function StationPopup({
     <div
       className={`${devClassName(
         "station-popup",
-      )}fixed inset-x-0 top-[calc(max(33dvh,200px)+76px)] bottom-0 z-[200] h-auto rounded-none bg-white p-5 shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] transition-[opacity,transform] duration-300 ease-in-out lg:absolute lg:inset-x-auto lg:top-4 lg:right-4 lg:bottom-auto lg:h-auto lg:w-[340px] lg:rounded-[16px] ${
+      )}fixed inset-x-0 top-[calc(max(33dvh,200px)+76px)] bottom-0 z-[200] flex h-auto flex-col overflow-hidden rounded-none bg-white shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] transition-[opacity,transform] duration-300 ease-in-out lg:absolute lg:inset-x-auto lg:top-4 lg:right-4 lg:bottom-auto lg:h-auto lg:max-h-[calc(100%-32px)] lg:w-[340px] lg:rounded-[16px] ${
         visible ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
       }`}
     >
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label="Close"
-        className="text-green absolute top-4 right-4 cursor-pointer transition-transform duration-200 ease-in-out hover:scale-110"
-      >
-        <CloseIcon className="h-[18px] w-[18px]" />
-      </button>
+      <div className="relative shrink-0 p-5 pb-0">
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="text-green absolute top-4 right-4 cursor-pointer transition-transform duration-200 ease-in-out hover:scale-110"
+        >
+          <CloseIcon className="h-[18px] w-[18px]" />
+        </button>
 
-      <h3 className="pr-6 font-sans text-[18px] leading-[130%] font-semibold tracking-[0.02em]">
-        {name}
-      </h3>
-      <p className="text-green mt-1 text-[14px] tracking-[0.02em]">
-        {district} &bull; {station.locCode}
-      </p>
+        <h3 className="pr-6 font-sans text-[18px] leading-[130%] font-semibold tracking-[0.02em]">
+          {name}
+        </h3>
+        <p className="text-green mt-1 text-[14px] tracking-[0.02em]">
+          {district} &bull; {station.locCode}
+        </p>
+      </div>
 
-      {routePills.length > 0 && (
-        <div className="mt-3 flex flex-col flex-wrap items-start gap-2">
-          {routePills.map((pill) => (
-            <span
-              key={pill.id}
-              className="bg-green inline-flex rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.02em] text-white uppercase"
-            >
-              {pill.label}
-            </span>
-          ))}
-        </div>
-      )}
+      <div className="thin-scrollbar min-h-0 flex-1 overflow-y-auto p-5 pt-3">
+        {routePills.length > 0 && (
+          <div className="flex flex-col flex-wrap items-start gap-2">
+            {routePills.map((pill) => (
+              <span
+                key={pill.id}
+                className="bg-green inline-flex rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.02em] text-white uppercase"
+              >
+                {pill.label}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {stationItem?.image && (
+          <div className="relative mt-4 h-[160px] w-full overflow-hidden rounded-[12px]">
+            <ResponsiveImg
+              bannerImage={{
+                id: stationItem.image.id,
+                altText: name,
+                imageD: stationItem.image,
+                imageM: null,
+              }}
+            />
+          </div>
+        )}
+
+        {stationItem?.attraction && stationItem.attraction.length > 0 && (
+          <ul className="mt-3 flex flex-col gap-3">
+            {stationItem.attraction.map((attraction) => {
+              const icon = attraction.icon?.[0];
+              const text = attractionText(attraction, locale);
+              const row = (
+                <div className="flex items-center gap-2">
+                  {icon?.url && (
+                    <Image
+                      src={mediaSrc(icon.url)}
+                      alt=""
+                      width={18}
+                      height={18}
+                      className="h-[18px] w-[18px] shrink-0 object-contain"
+                    />
+                  )}
+                  <span className="text-[14px] tracking-[0.02em]">{text}</span>
+                  {attraction.link && (
+                    <ChevronIcon
+                      desktop
+                      className="text-green ml-auto h-4 w-4 shrink-0"
+                    />
+                  )}
+                </div>
+              );
+
+              return (
+                <li key={attraction.id}>
+                  {attraction.link ? (
+                    <a
+                      href={attraction.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block"
+                    >
+                      {row}
+                    </a>
+                  ) : (
+                    row
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,30 +1,33 @@
 {
-  "collectionName": "components_content_fare_items",
+  "collectionName": "components_content_attractions",
   "info": {
-    "displayName": "fareItem"
+    "displayName": "attraction"
   },
   "options": {},
   "attributes": {
     "icon": {
       "type": "media",
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "allowedTypes": [
         "images",
         "files"
       ]
     },
-    "title": {
+    "textEn": {
       "type": "string",
       "required": true
     },
-    "desc": {
-      "type": "richtext",
+    "textZhHK": {
+      "type": "string",
       "required": true
     },
-    "note": {
-      "type": "text",
-      "required": false
+    "textZhCN": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string"
     }
   },
   "config": {}

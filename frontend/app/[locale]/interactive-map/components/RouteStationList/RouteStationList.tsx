@@ -23,7 +23,7 @@ export default function RouteStationList({
     "font-sans text-[16px] leading-[163%] font-semibold tracking-[0.02em] text-center";
 
   return (
-    <div className={`${devClassName("route-station-list")}flex flex-col pb-10`}>
+    <div className={`${devClassName("route-station-list")}flex flex-col pb-5`}>
       {stations.map((station, index) => {
         const isTerminus =
           index === 0 ||

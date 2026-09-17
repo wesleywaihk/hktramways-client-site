@@ -12,8 +12,7 @@
       "allowedTypes": [
         "images",
         "files",
-        "videos",
-        "audios"
+        "videos"
       ]
     },
     "imageM": {
@@ -22,8 +21,7 @@
       "allowedTypes": [
         "images",
         "files",
-        "videos",
-        "audios"
+        "videos"
       ]
     },
     "altText": {

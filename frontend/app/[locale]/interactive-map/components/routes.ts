@@ -210,8 +210,8 @@ export const allTramRoutes = {
 
 export interface RouteStop {
   id: number;
-  from: string;
-  to?: string;
+  from: LocalizedText;
+  to?: LocalizedText;
   stations: string[];
 }
 
@@ -225,7 +225,7 @@ export function routesForDirection(direction: Direction): RouteStop[] {
 export const EAST_ROUTES: RouteStop[] = [
   {
     id: 0,
-    from: "WD",
+    from: { en: "Whitty Street Depot Entrance", zhHK: "屈地街車廠入口", zhCN: "屈地街车厂入口" },
     to: undefined,
     stations: [
       "WD",
@@ -260,8 +260,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 1,
-    from: "HVT",
-    to: "SKT",
+    from: { en: "Happy Valley", zhHK: "跑馬地", zhCN: "跑马地" },
+    to: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
     stations: [
       "HVT",
       "109",
@@ -298,8 +298,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 2,
-    from: "KTT",
-    to: "HVT",
+    from: { en: "Kennedy Town", zhHK: "堅尼地城", zhCN: "坚尼地城" },
+    to: { en: "Happy Valley", zhHK: "跑馬地", zhCN: "跑马地" },
     stations: [
       "KTT",
       "01E",
@@ -336,8 +336,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 3,
-    from: "KTT",
-    to: "SKT",
+    from: { en: "Kennedy Town", zhHK: "堅尼地城", zhCN: "坚尼地城" },
+    to: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
     stations: [
       "KTT",
       "01E",
@@ -394,8 +394,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 4,
-    from: "WMT",
-    to: "SKT",
+    from: { en: "Western Market", zhHK: "上環(西港城)", zhCN: "上环(西港城)" },
+    to: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
     stations: [
       "WMT",
       "21E",
@@ -442,8 +442,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 5,
-    from: "WST",
-    to: "CBT",
+    from: { en: "Shek Tong Tsui", zhHK: "石塘咀", zhCN: "石塘咀" },
+    to: { en: "Causeway Bay", zhHK: "銅鑼灣", zhCN: "铜锣湾" },
     stations: [
       "WST",
       "09E",
@@ -474,8 +474,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 6,
-    from: "WST",
-    to: "NPT",
+    from: { en: "Shek Tong Tsui", zhHK: "石塘咀", zhCN: "石塘咀" },
+    to: { en: "North Point", zhHK: "北角", zhCN: "北角" },
     stations: [
       "WST",
       "09E",
@@ -516,7 +516,7 @@ export const EAST_ROUTES: RouteStop[] = [
 export const WEST_ROUTES: RouteStop[] = [
   {
     id: 0,
-    from: "WD",
+    from: { en: "Whitty Street Depot Entrance", zhHK: "屈地街車廠入口", zhCN: "屈地街车厂入口" },
     to: undefined,
     stations: [
       "WD",
@@ -558,8 +558,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 1,
-    from: "SKT",
-    to: "HVT",
+    from: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
+    to: { en: "Happy Valley", zhHK: "跑馬地", zhCN: "跑马地" },
     stations: [
       "SKT",
       "02W",
@@ -595,8 +595,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 2,
-    from: "HVT",
-    to: "KTT",
+    from: { en: "Happy Valley", zhHK: "跑馬地", zhCN: "跑马地" },
+    to: { en: "Kennedy Town", zhHK: "堅尼地城", zhCN: "坚尼地城" },
     stations: [
       "HVT",
       "109",
@@ -635,8 +635,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 3,
-    from: "SKT",
-    to: "KTT",
+    from: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
+    to: { en: "Kennedy Town", zhHK: "堅尼地城", zhCN: "坚尼地城" },
     stations: [
       "SKT",
       "02W",
@@ -696,8 +696,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 4,
-    from: "SKT",
-    to: "WMT",
+    from: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
+    to: { en: "Western Market", zhHK: "上環(西港城)", zhCN: "上环(西港城)" },
     stations: [
       "SKT",
       "02W",
@@ -743,8 +743,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 5,
-    from: "CBT",
-    to: "WST",
+    from: { en: "Causeway Bay", zhHK: "銅鑼灣", zhCN: "铜锣湾" },
+    to: { en: "Shek Tong Tsui", zhHK: "石塘咀", zhCN: "石塘咀" },
     stations: [
       "CBT",
       "46W",
@@ -775,8 +775,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 6,
-    from: "NPT",
-    to: "WST",
+    from: { en: "North Point", zhHK: "北角", zhCN: "北角" },
+    to: { en: "Shek Tong Tsui", zhHK: "石塘咀", zhCN: "石塘咀" },
     stations: [
       "NPT",
       "32W",

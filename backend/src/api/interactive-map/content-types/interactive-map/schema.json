@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "interactive_maps",
+  "info": {
+    "singularName": "interactive-map",
+    "pluralName": "interactive-maps",
+    "displayName": "InteractiveMap"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "station": {
+      "type": "component",
+      "component": "content.station-item",
+      "repeatable": true
+    }
+  }
+}

@@ -25,6 +25,21 @@ export interface ContentArcCarouselItem extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentAttraction extends Struct.ComponentSchema {
+  collectionName: 'components_content_attractions';
+  info: {
+    displayName: 'attraction';
+  };
+  attributes: {
+    icon: Schema.Attribute.Media<'images' | 'files', true> &
+      Schema.Attribute.Required;
+    link: Schema.Attribute.String;
+    textEn: Schema.Attribute.String & Schema.Attribute.Required;
+    textZhCN: Schema.Attribute.String & Schema.Attribute.Required;
+    textZhHK: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ContentBannerImageUnit extends Struct.ComponentSchema {
   collectionName: 'components_content_banner_image_units';
   info: {
@@ -32,9 +47,9 @@ export interface ContentBannerImageUnit extends Struct.ComponentSchema {
   };
   attributes: {
     altText: Schema.Attribute.String;
-    imageD: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+    imageD: Schema.Attribute.Media<'images' | 'files' | 'videos'> &
       Schema.Attribute.Required;
-    imageM: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+    imageM: Schema.Attribute.Media<'images' | 'files' | 'videos'> &
       Schema.Attribute.Required;
   };
 }
@@ -48,7 +63,7 @@ export interface ContentCarouselItem extends Struct.ComponentSchema {
   attributes: {
     desc: Schema.Attribute.Text & Schema.Attribute.Required;
     hyperlink: Schema.Attribute.Component<'content.hyperlink', false>;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+    image: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
   };
 }
@@ -64,7 +79,7 @@ export interface ContentDownloadAppArea extends Struct.ComponentSchema {
     actionButton2: Schema.Attribute.Component<'content.action-button', false>;
     bgColor: Schema.Attribute.String;
     desc: Schema.Attribute.Text & Schema.Attribute.Required;
-    Image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+    Image: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -77,7 +92,7 @@ export interface ContentFareItem extends Struct.ComponentSchema {
   };
   attributes: {
     desc: Schema.Attribute.RichText & Schema.Attribute.Required;
-    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+    icon: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
     note: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -159,9 +174,7 @@ export interface ContentPartyTramItem extends Struct.ComponentSchema {
     callActionText: Schema.Attribute.String;
     carouselItem: Schema.Attribute.Component<'content.carousel-item', false>;
     overlayH: Schema.Attribute.Decimal;
-    overlayImg: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
+    overlayImg: Schema.Attribute.Media<'images' | 'files'>;
     overlayW: Schema.Attribute.Decimal;
     overlayX: Schema.Attribute.Decimal;
     overlayY: Schema.Attribute.Decimal;
@@ -296,12 +309,24 @@ export interface ContentSouveniorItem extends Struct.ComponentSchema {
   attributes: {
     icon: Schema.Attribute.Component<'shared.icon-enum', false> &
       Schema.Attribute.Required;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+    image: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
     link: Schema.Attribute.Component<'content.hyperlink', false>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     pirce: Schema.Attribute.Decimal & Schema.Attribute.Required;
     preDiscountPrice: Schema.Attribute.Decimal;
+  };
+}
+
+export interface ContentStationItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_station_items';
+  info: {
+    displayName: 'stationItem';
+  };
+  attributes: {
+    attraction: Schema.Attribute.Component<'content.attraction', true>;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locCode: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -322,7 +347,7 @@ export interface ContentTramoramicTourItem extends Struct.ComponentSchema {
   };
   attributes: {
     hashTag: Schema.Attribute.String;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image: Schema.Attribute.Media<'images' | 'files'>;
   };
 }
 
@@ -334,8 +359,8 @@ export interface MediaBannerImage extends Struct.ComponentSchema {
   };
   attributes: {
     altText: Schema.Attribute.String;
-    imageD: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    imageM: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    imageD: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    imageM: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
   };
 }
 
@@ -492,6 +517,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'content.action-button': ContentActionButton;
       'content.arc-carousel-item': ContentArcCarouselItem;
+      'content.attraction': ContentAttraction;
       'content.banner-image-unit': ContentBannerImageUnit;
       'content.carousel-item': ContentCarouselItem;
       'content.download-app-area': ContentDownloadAppArea;
@@ -507,6 +533,7 @@ declare module '@strapi/strapi' {
       'content.schedule-westbound': ContentScheduleWestbound;
       'content.service-updates': ContentServiceUpdates;
       'content.souvenior-item': ContentSouveniorItem;
+      'content.station-item': ContentStationItem;
       'content.tram-details-item': ContentTramDetailsItem;
       'content.tramoramic-tour-item': ContentTramoramicTourItem;
       'media.banner-image': MediaBannerImage;

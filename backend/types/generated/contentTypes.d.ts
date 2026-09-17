@@ -549,7 +549,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    favicon: Schema.Attribute.Media<'images' | 'files' | 'videos'> &
+    favicon: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
     footer: Schema.Attribute.Component<'content.footer', false> &
       Schema.Attribute.Required &
@@ -646,6 +646,35 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiInteractiveMapInteractiveMap
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'interactive_maps';
+  info: {
+    displayName: 'InteractiveMap';
+    pluralName: 'interactive-maps';
+    singularName: 'interactive-map';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::interactive-map.interactive-map'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    station: Schema.Attribute.Component<'content.station-item', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1368,6 +1397,7 @@ declare module '@strapi/strapi' {
       'api::announcement-type.announcement-type': ApiAnnouncementTypeAnnouncementType;
       'api::global.global': ApiGlobalGlobal;
       'api::home.home': ApiHomeHome;
+      'api::interactive-map.interactive-map': ApiInteractiveMapInteractiveMap;
       'api::party-tram.party-tram': ApiPartyTramPartyTram;
       'api::plan-your-ride.plan-your-ride': ApiPlanYourRidePlanYourRide;
       'api::tram-route.tram-route': ApiTramRouteTramRoute;

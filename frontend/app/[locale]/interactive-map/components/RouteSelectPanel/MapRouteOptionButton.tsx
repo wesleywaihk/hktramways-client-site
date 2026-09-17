@@ -1,6 +1,6 @@
 import { useLocale, useTranslations } from "next-intl";
 import { devClassName } from "@/lib/devClassName";
-import { stationByLocCode, stationName, type RouteStop } from "../routes";
+import { stationName, type RouteStop } from "../routes";
 
 export interface MapRouteOptionButtonProps {
   route: RouteStop;
@@ -20,20 +20,20 @@ export default function MapRouteOptionButton({
 }: MapRouteOptionButtonProps) {
   const locale = useLocale();
   const t = useTranslations("common");
-  const fromName = stationName(stationByLocCode(route.from), locale);
-  const toName = route.to
-    ? stationName(stationByLocCode(route.to), locale)
-    : null;
+  const fromName = stationName(route.from, locale);
+  const toName = route.to ? stationName(route.to, locale) : null;
 
-  const content = toName ? (
-    <>
-      <span className={txtClass}>
-        {fromName} → {toName}
-      </span>
-    </>
-  ) : (
-    <span className={`${txtClass}`}>
-      {fromName} ({t("routeCirculationLine")})
+  const content = (
+    <span className={txtClass}>
+      {fromName}
+      {toName ? (
+        <>
+          <span className="mx-1.5">→</span>
+          {toName}
+        </>
+      ) : (
+        ""
+      )}
     </span>
   );
 

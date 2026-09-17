@@ -2,7 +2,7 @@ import { cache } from "react";
 import { API_URL } from "@/consts";
 import { buildPopulate } from "@/lib/buildPopulate";
 import { routing } from "@/i18n/routing";
-import type { DownloadAppAreaData } from "@/types/api";
+import type { DownloadAppAreaData, InteractiveMapResponse } from "@/types/api";
 
 export async function fetchGlobal(
   locale: string,
@@ -317,6 +317,22 @@ export async function fetchPartyTram(locale: string) {
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch party tram: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side interactive-map page, directly against NEXT_PUBLIC_API_URL.
+export async function fetchInteractiveMap(
+  locale: string,
+): Promise<InteractiveMapResponse> {
+  const populate = buildPopulate(["station.image", "station.attraction.icon"]);
+  const url = `${API_URL}/api/interactive-maps?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch interactive map: ${res.status}`);
 
   return res.json();
 }

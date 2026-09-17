@@ -277,6 +277,32 @@ export interface PlanYourRideInteractiveRouteMapResponse {
   data: { interactiveRouteMap: DownloadAppAreaData | null }[];
 }
 
+export interface AttractionData {
+  id: number;
+  icon: Media[] | null;
+  textEn: string;
+  textZhHK: string;
+  textZhCN: string;
+  link: string | null;
+}
+
+export interface StationItemData {
+  id: number;
+  locCode: string;
+  image: Media | null;
+  attraction: AttractionData[];
+}
+
+export interface InteractiveMapData {
+  id: number;
+  documentId: string;
+  station: StationItemData[];
+}
+
+export interface InteractiveMapResponse {
+  data: InteractiveMapData[];
+}
+
 export interface GlobalFaviconFormat {
   url: string;
   width: number;
