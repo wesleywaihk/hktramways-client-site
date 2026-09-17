@@ -90,7 +90,9 @@ export default function StationPopup({
       className={`${devClassName(
         "station-popup",
       )}fixed inset-x-0 top-[calc(max(33dvh,200px)+76px)] bottom-0 z-[200] flex h-auto flex-col overflow-hidden rounded-none bg-white shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] transition-[opacity,transform] duration-300 ease-in-out lg:absolute lg:inset-x-auto lg:top-4 lg:right-4 lg:bottom-auto lg:h-auto lg:max-h-[calc(100%-32px)] lg:w-[340px] lg:rounded-[16px] ${
-        visible ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"
+        visible
+          ? "translate-y-0 opacity-100"
+          : "-translate-y-2 opacity-0 lg:max-h-[calc(100dvh-176px)]"
       }`}
     >
       <div className="relative shrink-0 p-[15px] pb-0">
