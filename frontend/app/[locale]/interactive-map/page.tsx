@@ -70,6 +70,7 @@ export default function InteractiveMapPage({
             key={selectedStation}
             locCode={selectedStation}
             direction={direction}
+            loading={interactiveMapData === undefined}
             station={interactiveMapData?.station.find(
               (s) => s.locCode === selectedStation,
             )}

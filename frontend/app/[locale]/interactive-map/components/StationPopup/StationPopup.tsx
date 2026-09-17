@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
 import Image from "next/image";
+import CircularProgress from "@mui/material/CircularProgress";
 import CloseIcon from "@/components/icons/CloseIcon";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
@@ -18,6 +19,7 @@ export interface StationPopupProps {
   locCode: string;
   direction: Direction;
   station?: StationItemData | null;
+  loading?: boolean;
   onClose: () => void;
 }
 
@@ -35,6 +37,7 @@ export default function StationPopup({
   locCode,
   direction,
   station: stationItem,
+  loading = false,
   onClose,
 }: StationPopupProps) {
   const locale = useLocale();
@@ -103,63 +106,73 @@ export default function StationPopup({
           </div>
         )}
 
-        {stationItem?.image && (
-          <div className="relative mt-4 h-[160px] w-full overflow-hidden rounded-[12px]">
-            <ResponsiveImg
-              bannerImage={{
-                id: stationItem.image.id,
-                altText: name,
-                imageD: stationItem.image,
-                imageM: null,
-              }}
-            />
+        {loading ? (
+          <div className="flex items-center justify-center py-8">
+            <CircularProgress size={32} className="text-green!" />
           </div>
-        )}
+        ) : (
+          <>
+            {stationItem?.image && (
+              <div className="relative mt-4 h-[160px] w-full overflow-hidden rounded-[12px]">
+                <ResponsiveImg
+                  bannerImage={{
+                    id: stationItem.image.id,
+                    altText: name,
+                    imageD: stationItem.image,
+                    imageM: null,
+                  }}
+                />
+              </div>
+            )}
 
-        {stationItem?.attraction && stationItem.attraction.length > 0 && (
-          <ul className="mt-3 flex flex-col gap-3">
-            {stationItem.attraction.map((attraction) => {
-              const icon = attraction.icon?.[0];
-              const text = attractionText(attraction, locale);
-              const row = (
-                <div className="flex items-center gap-2">
-                  {icon?.url && (
-                    <Image
-                      src={mediaSrc(icon.url)}
-                      alt=""
-                      width={18}
-                      height={18}
-                      className="h-[18px] w-[18px] shrink-0 object-contain"
-                    />
-                  )}
-                  <span className="text-[14px] tracking-[0.02em]">{text}</span>
-                  {attraction.link && (
-                    <ChevronIcon
-                      desktop
-                      className="text-green ml-auto h-4 w-4 shrink-0"
-                    />
-                  )}
-                </div>
-              );
+            {stationItem?.attraction && stationItem.attraction.length > 0 && (
+              <ul className="mt-3 flex flex-col gap-3">
+                {stationItem.attraction.map((attraction) => {
+                  const icon = attraction.icon?.[0];
+                  const text = attractionText(attraction, locale);
+                  const row = (
+                    <div className="flex items-center gap-2">
+                      {icon?.url && (
+                        <Image
+                          src={mediaSrc(icon.url)}
+                          alt=""
+                          width={18}
+                          height={18}
+                          className="h-[18px] w-[18px] shrink-0 object-contain"
+                        />
+                      )}
+                      <span className="text-[14px] tracking-[0.02em]">
+                        {text}
+                      </span>
+                      {attraction.link && (
+                        <ChevronIcon
+                          desktop
+                          className="text-green ml-auto h-4 w-4 shrink-0"
+                        />
+                      )}
+                    </div>
+                  );
 
-              return (
-                <li key={attraction.id}>
-                  {attraction.link ? (
-                    <a
-                      href={attraction.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="block"
-                    >
-                      {row}
-                    </a>
-                  ) : (
-                    row
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+                  return (
+                    <li key={attraction.id}>
+                      {attraction.link ? (
+                        <a
+                          href={attraction.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block"
+                        >
+                          {row}
+                        </a>
+                      ) : (
+                        row
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </>
         )}
       </div>
     </div>
