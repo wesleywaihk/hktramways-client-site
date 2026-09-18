@@ -8,3 +8,5 @@ export const IMG_URL = (
   process.env.NEXT_PUBLIC_API_URL ??
   ""
 ).replace(/\/+$/, "");
+
+export type Direction = "west" | "east";

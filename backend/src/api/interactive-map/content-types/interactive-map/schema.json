@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "interactive_maps",
+  "info": {
+    "singularName": "interactive-map",
+    "pluralName": "interactive-maps",
+    "displayName": "InteractiveMap"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "station": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.station-item",
+      "repeatable": true
+    },
+    "ScheduleAppLink": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "bannerLink": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.image-link",
+      "repeatable": false
+    }
+  }
+}

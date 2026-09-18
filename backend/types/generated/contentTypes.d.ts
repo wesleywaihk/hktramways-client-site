@@ -549,7 +549,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    favicon: Schema.Attribute.Media<'images' | 'files' | 'videos'> &
+    favicon: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
     footer: Schema.Attribute.Component<'content.footer', false> &
       Schema.Attribute.Required &
@@ -641,6 +641,57 @@ export interface ApiHomeHome extends Struct.CollectionTypeSchema {
       'page-home.tramoramic-tour',
       false
     > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiInteractiveMapInteractiveMap
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'interactive_maps';
+  info: {
+    displayName: 'InteractiveMap';
+    pluralName: 'interactive-maps';
+    singularName: 'interactive-map';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    bannerLink: Schema.Attribute.Component<'content.image-link', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::interactive-map.interactive-map'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    ScheduleAppLink: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    station: Schema.Attribute.Component<'content.station-item', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1368,6 +1419,7 @@ declare module '@strapi/strapi' {
       'api::announcement-type.announcement-type': ApiAnnouncementTypeAnnouncementType;
       'api::global.global': ApiGlobalGlobal;
       'api::home.home': ApiHomeHome;
+      'api::interactive-map.interactive-map': ApiInteractiveMapInteractiveMap;
       'api::party-tram.party-tram': ApiPartyTramPartyTram;
       'api::plan-your-ride.plan-your-ride': ApiPlanYourRidePlanYourRide;
       'api::tram-route.tram-route': ApiTramRouteTramRoute;

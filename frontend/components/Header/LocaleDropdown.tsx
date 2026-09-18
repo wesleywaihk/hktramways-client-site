@@ -73,7 +73,7 @@ export default function LocaleDropdown({
       </button>
       {mounted && (
         <div
-          className={`absolute top-[calc(100%+10px)] right-0 z-10 flex w-auto flex-col overflow-hidden rounded-[14px] bg-white py-[13px] shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-opacity duration-200 ease-out ${
+          className={`absolute top-[calc(100%+10px)] right-0 z-[300] flex w-auto flex-col overflow-hidden rounded-[14px] bg-white py-[13px] shadow-[0_4px_12px_rgba(0,0,0,0.15)] transition-opacity duration-200 ease-out ${
             visible ? "opacity-100" : "opacity-0"
           }`}
           role="listbox"

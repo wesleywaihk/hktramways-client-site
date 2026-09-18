@@ -5,6 +5,8 @@ import BusketIco from "@/components/icons/BusketIco";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
 import FaqIco from "@/components/icons/FaqIco";
 import SpeakerIco from "@/components/icons/SpeakerIco";
+import DirectionIco from "@/components/icons/DirectionIco";
+import ClockIco from "@/components/icons/ClockIco";
 import { devClassName } from "@/lib/devClassName";
 import type { IconEnum } from "@/types/api";
 
@@ -18,6 +20,8 @@ const IconComponents: Record<
   upRightArrow: UprightArrowIco,
   faq: FaqIco,
   speaker: SpeakerIco,
+  direction: DirectionIco,
+  clock: ClockIco,
 };
 
 export interface BtnIconProps extends SVGProps<SVGSVGElement> {

@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_content_station_items",
+  "info": {
+    "displayName": "stationItem"
+  },
+  "options": {},
+  "attributes": {
+    "locCode": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "attraction": {
+      "type": "component",
+      "component": "content.attraction",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
