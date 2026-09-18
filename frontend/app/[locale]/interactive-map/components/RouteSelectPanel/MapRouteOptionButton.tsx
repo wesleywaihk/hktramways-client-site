@@ -1,6 +1,6 @@
 import { useLocale, useTranslations } from "next-intl";
 import { devClassName } from "@/lib/devClassName";
-import { stationName, type RouteStop } from "../routes";
+import { localeTxt, type RouteStop } from "../routes";
 
 export interface MapRouteOptionButtonProps {
   route: RouteStop;
@@ -20,8 +20,8 @@ export default function MapRouteOptionButton({
 }: MapRouteOptionButtonProps) {
   const locale = useLocale();
   const t = useTranslations("common");
-  const fromName = stationName(route.from, locale);
-  const toName = route.to ? stationName(route.to, locale) : null;
+  const fromName = localeTxt(route.from, locale);
+  const toName = route.to ? localeTxt(route.to, locale) : null;
 
   const content = (
     <span className={txtClass}>

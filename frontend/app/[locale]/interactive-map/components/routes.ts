@@ -13,12 +13,10 @@ export interface LocalizedText {
 }
 
 export interface StationInfo {
-  en: string;
+  name: LocalizedText;
   locCode: string;
   type: StationType;
   direction: StationDirection;
-  zhHK: string;
-  zhCN: string;
   district: LocalizedText;
   latitude?: number;
   longitude?: number;
@@ -34,10 +32,11 @@ export function stationByLocCode(locCode: string): StationInfo {
   return info;
 }
 
-export function stationName(info: LocalizedText, locale: string): string {
-  if (locale === "zh-HK") return info.zhHK;
-  if (locale === "zh-CN") return info.zhCN;
-  return info.en;
+export function localeTxt(
+  { en, zhHK, zhCN }: LocalizedText,
+  locale: string,
+): string {
+  return locale === "zh-HK" ? zhHK : locale === "zh-CN" ? zhCN : en;
 }
 
 export const allTramRoutes = {
@@ -225,7 +224,11 @@ export function routesForDirection(direction: Direction): RouteStop[] {
 export const EAST_ROUTES: RouteStop[] = [
   {
     id: 0,
-    from: { en: "Whitty Street Depot Entrance", zhHK: "屈地街車廠入口", zhCN: "屈地街车厂入口" },
+    from: {
+      en: "Whitty Street Depot Entrance",
+      zhHK: "屈地街車廠入口",
+      zhCN: "屈地街车厂入口",
+    },
     to: undefined,
     stations: [
       "WD",
@@ -516,7 +519,11 @@ export const EAST_ROUTES: RouteStop[] = [
 export const WEST_ROUTES: RouteStop[] = [
   {
     id: 0,
-    from: { en: "Whitty Street Depot Entrance", zhHK: "屈地街車廠入口", zhCN: "屈地街车厂入口" },
+    from: {
+      en: "Whitty Street Depot Entrance",
+      zhHK: "屈地街車廠入口",
+      zhCN: "屈地街车厂入口",
+    },
     to: undefined,
     stations: [
       "WD",

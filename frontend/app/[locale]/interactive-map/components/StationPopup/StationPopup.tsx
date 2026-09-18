@@ -15,7 +15,7 @@ import { useUserAgent } from "@/hooks/useUserAgent";
 import { IMG_URL } from "@/consts";
 import type { Direction } from "@/consts";
 import type { AttractionData, StationItemData } from "@/types/api";
-import { routesForDirection, stationByLocCode, stationName } from "../routes";
+import { routesForDirection, stationByLocCode, localeTxt } from "../routes";
 
 const GOOGLE_MAP_URL = "https://www.google.com/maps/dir/?api=1&destination=";
 
@@ -60,8 +60,8 @@ export default function StationPopup({
   const bannerLink = stationItem?.bannerLink;
 
   const station = stationByLocCode(locCode);
-  const name = stationName(station, locale);
-  const district = stationName(station.district, locale);
+  const name = localeTxt(station.name, locale);
+  const district = localeTxt(station.district, locale);
 
   const directionsUrl =
     station.latitude != null && station.longitude != null
@@ -73,8 +73,8 @@ export default function StationPopup({
   const routePills = routesForDirection(direction)
     .filter((route) => route.stations.includes(locCode))
     .map((route) => {
-      const fromName = stationName(route.from, locale);
-      const toName = route.to ? stationName(route.to, locale) : null;
+      const fromName = localeTxt(route.from, locale);
+      const toName = route.to ? localeTxt(route.to, locale) : null;
       return {
         id: route.id,
         label: toName ? `${fromName} - ${toName}` : fromName,
