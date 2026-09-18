@@ -1,5 +1,5 @@
 import { useLocale } from "next-intl";
-import { type StationInfo, stationName } from "../routes";
+import { type StationInfo, localeTxt } from "../routes";
 import { devClassName } from "@/lib/devClassName";
 import FlagIcon from "@/components/icons/FlagIcon";
 import StationDotIcon from "@/components/icons/StationDotIcon";
@@ -31,7 +31,7 @@ export default function RouteStationList({
           (routeId === "all" && station.type === "TERMINUS");
 
         const isSelected = selectedStation === station.locCode;
-        const name = stationName(station, locale);
+        const name = localeTxt(station.name, locale);
 
         return (
           <div key={station.locCode} className="relative flex flex-col">

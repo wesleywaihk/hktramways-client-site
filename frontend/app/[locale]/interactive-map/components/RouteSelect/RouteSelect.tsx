@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import RouteSelectPanel from "../RouteSelectPanel/RouteSelectPanel";
-import { routesForDirection, stationName } from "../routes";
+import { routesForDirection, localeTxt } from "../routes";
 import type { Direction } from "@/consts";
 import { devClassName } from "@/lib/devClassName";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
@@ -53,20 +53,17 @@ export default function RouteSelect({
       : routesForDirection(direction).find((r) => r.id === value);
   const label = activeRoute ? (
     <>
-      {stationName(activeRoute.from, locale)}
+      {localeTxt(activeRoute.from, locale)}
       {activeRoute.to ? (
         <>
           <span className="mx-1.5">→</span>
-          {stationName(activeRoute.to, locale)}
+          {localeTxt(activeRoute.to, locale)}
         </>
       ) : (
         ""
       )}
     </>
   ) : (
-    // ? activeRoute.to
-    //   ? `${stationName(activeRoute.from, locale)} → ${stationName(activeRoute.to, locale)}`
-    //   : `${stationName(activeRoute.from, locale)} (${t("routeCirculationLine")})`
     t("routeSelectAll")
   );
 
