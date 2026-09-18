@@ -32,8 +32,12 @@ export default function InteractiveMapPage({
   return (
     <>
       <SetHeaderStyle style="white" />
-      <section className="pageWrapper min- mt-0 flex h-auto flex-col items-stretch justify-center gap-5 lg:h-[calc(100dvh-100px)] lg:flex-row lg:gap-10">
-        <div className="relative order-2 flex w-full grow flex-col gap-[15px] px-4 pb-10 lg:order-1 lg:h-full lg:w-[420px] lg:grow-0 lg:gap-5 lg:px-0">
+      <section className="pageWrapper relative mt-0 flex h-auto flex-col items-stretch justify-center gap-5 lg:h-[calc(100dvh-100px)] lg:flex-row lg:gap-10">
+        <div
+          className={`relative order-2 h-[calc(100dvh-50.89vw-76px)] w-full flex-col gap-[15px] px-4 lg:order-1 lg:flex lg:h-full lg:w-[420px] lg:grow-0 lg:gap-5 lg:px-0 lg:pb-10 ${
+            selectedStation ? "hidden" : "flex"
+          }`}
+        >
           <RouteToggle direction={direction} onChange={setDirection} />
 
           <RouteSelect
@@ -43,7 +47,7 @@ export default function InteractiveMapPage({
           />
 
           <div
-            className={`thin-scrollbar max-h-[50vh] lg:mr-[-40px] lg:max-h-none lg:min-h-0 lg:w-[calc(100%+40px)] lg:flex-1 lg:overflow-y-auto lg:pr-2 lg:pr-[32px] ${
+            className={`thin-scrollbar mr-[-36px] max-h-[50vh] w-[calc(100%+36px)] pr-[28px] lg:mr-[-40px] lg:max-h-none lg:min-h-0 lg:w-[calc(100%+40px)] lg:flex-1 lg:overflow-y-auto lg:pr-2 lg:pr-[32px] ${
               selectedStation ? "overflow-hidden" : "overflow-y-auto"
             }`}
           >
@@ -55,9 +59,9 @@ export default function InteractiveMapPage({
               onSelectStation={setSelectedStation}
             />
           </div>
-          <div className="pointer-events-none absolute right-0 bottom-10 left-0 z-[100] h-5 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(255,255,255,1)]" />
+          <div className="pointer-events-none absolute right-0 bottom-0 left-0 z-[100] h-5 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(255,255,255,1)] lg:bottom-10" />
         </div>
-        <div className="relative order-1 -mx-5 flex h-[max(33dvh,200px)] w-[calc(100%+40px)] lg:order-2 lg:mx-0 lg:h-auto lg:w-[calc(100%-460px)] lg:w-full lg:grow lg:pb-10">
+        <div className="relative order-1 -mx-5 flex h-[50.89vw] w-[calc(100%+40px)] lg:order-2 lg:mx-0 lg:h-auto lg:w-[calc(100%-460px)] lg:w-full lg:grow lg:pb-10">
           <iframe
             src="https://www.google.com/maps/d/embed?mid=1XEfC8fEOSY5x1QmyraeklfG0FDvDCkM&ehbc=2E312F"
             title={t("interactiveMapTitle")}
@@ -65,20 +69,20 @@ export default function InteractiveMapPage({
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
-          {selectedStation && (
-            <StationPopup
-              key={selectedStation}
-              locCode={selectedStation}
-              direction={direction}
-              loading={interactiveMapData === undefined}
-              station={interactiveMapData?.station.find(
-                (s) => s.locCode === selectedStation,
-              )}
-              scheduleAppLink={interactiveMapData?.ScheduleAppLink}
-              onClose={() => setSelectedStation(null)}
-            />
-          )}
         </div>
+        {selectedStation && (
+          <StationPopup
+            key={selectedStation}
+            locCode={selectedStation}
+            direction={direction}
+            loading={interactiveMapData === undefined}
+            station={interactiveMapData?.station.find(
+              (s) => s.locCode === selectedStation,
+            )}
+            scheduleAppLink={interactiveMapData?.ScheduleAppLink}
+            onClose={() => setSelectedStation(null)}
+          />
+        )}
       </section>
       <div className="bg-green h-[clamp(3.375rem,15.2671755725vw,4.5rem)] md:h-[clamp(4rem,5.5555555556vw,7.5rem)]" />
     </>
