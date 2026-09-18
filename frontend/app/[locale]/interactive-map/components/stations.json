@@ -1,0 +1,2172 @@
+[
+  {
+    "en": "North Street",
+    "locCode": "01E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "北街",
+    "zhCN": "北街",
+    "latitude": 22.2833882,
+    "longitude": 114.1287486,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Chai Wan Road",
+    "locCode": "02W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "柴灣道",
+    "zhCN": "柴湾道",
+    "latitude": 22.2767613,
+    "longitude": 114.2289566,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Holland Street",
+    "locCode": "03E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "荷蘭街",
+    "zhCN": "荷兰街",
+    "latitude": 22.2843983,
+    "longitude": 114.1303539,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Sun Sing Street",
+    "locCode": "04W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "新成街",
+    "zhCN": "新成街",
+    "latitude": 22.279517,
+    "longitude": 114.2258406,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Queen's Road West",
+    "locCode": "05E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "皇后大道西",
+    "zhCN": "皇后大道西",
+    "latitude": 22.2864651,
+    "longitude": 114.1322107,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Hoi Foo Street",
+    "locCode": "06W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "海富街",
+    "zhCN": "海富街",
+    "latitude": 22.2804049,
+    "longitude": 114.224419,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Hill Road",
+    "locCode": "07E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "山道",
+    "zhCN": "山道",
+    "latitude": 22.2871116,
+    "longitude": 114.1343611,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Holy Cross Path",
+    "locCode": "08W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "聖十字徑",
+    "zhCN": "圣十字径",
+    "latitude": 22.2812233,
+    "longitude": 114.2226474,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Whitty Street",
+    "locCode": "09E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "屈地街",
+    "zhCN": "屈地街",
+    "latitude": 22.2867995,
+    "longitude": 114.1364378,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Sands Street",
+    "locCode": "100W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "山市街",
+    "zhCN": "山市街",
+    "latitude": 22.2835125,
+    "longitude": 114.1293567,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Chai Wan Road",
+    "locCode": "101E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "柴灣道",
+    "zhCN": "柴湾道",
+    "latitude": 22.2767551,
+    "longitude": 114.2291189,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Smithfield",
+    "locCode": "102W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "士美非路",
+    "zhCN": "士美非路",
+    "latitude": 22.2831909,
+    "longitude": 114.1277629,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Davis Street",
+    "locCode": "104W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "爹核士街",
+    "zhCN": "爹核士街",
+    "latitude": 22.2830543,
+    "longitude": 114.1269408,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Foo Ming Street",
+    "locCode": "105",
+    "type": "STATION",
+    "direction": "Happy Valley Loop",
+    "zhHK": "富明街",
+    "zhCN": "富明街",
+    "latitude": 22.279095,
+    "longitude": 114.1830553,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Leighton Road",
+    "locCode": "106",
+    "type": "STATION",
+    "direction": "Happy Valley Loop",
+    "zhHK": "禮頓道",
+    "zhCN": "礼顿道",
+    "latitude": 22.2769996,
+    "longitude": 114.1823432,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Broadwood Road",
+    "locCode": "107",
+    "type": "STATION",
+    "direction": "Happy Valley Loop",
+    "zhHK": "樂活道",
+    "zhCN": "乐活道",
+    "latitude": 22.2738884,
+    "longitude": 114.1836669,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Wong Nai Chung Road",
+    "locCode": "108",
+    "type": "STATION",
+    "direction": "Happy Valley Loop",
+    "zhHK": "黃泥涌道",
+    "zhCN": "黄泥涌道",
+    "latitude": 22.2722365,
+    "longitude": 114.1844568,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Hong Kong Cemetery",
+    "locCode": "109",
+    "type": "STATION",
+    "direction": "Happy Valley Loop",
+    "zhHK": "香港墳場",
+    "zhCN": "香港坟场",
+    "latitude": 22.2717432,
+    "longitude": 114.1802752,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tai Hong Street",
+    "locCode": "10W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "太康街",
+    "zhCN": "太康街",
+    "latitude": 22.2831729,
+    "longitude": 114.2210595,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Queen's Road East",
+    "locCode": "110",
+    "type": "STATION",
+    "direction": "Happy Valley Loop",
+    "zhHK": "皇后大道東",
+    "zhCN": "皇后大道东",
+    "latitude": 22.2743991,
+    "longitude": 114.1794484,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Morrison Hill Road",
+    "locCode": "111",
+    "type": "STATION",
+    "direction": "Happy Valley Loop",
+    "zhHK": "摩理臣山道",
+    "zhCN": "摩理臣山道",
+    "latitude": 22.2758479,
+    "longitude": 114.1805434,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tin Lok Lane",
+    "locCode": "112",
+    "type": "STATION",
+    "direction": "Happy Valley Loop",
+    "zhHK": "天樂里",
+    "zhCN": "天乐里",
+    "latitude": 22.2785043,
+    "longitude": 114.1796516,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Water Street",
+    "locCode": "11E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "水街",
+    "zhCN": "水街",
+    "latitude": 22.2874131,
+    "longitude": 114.1386527,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tai Koo Shing Road",
+    "locCode": "12W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "太古城道",
+    "zhCN": "太古城道",
+    "latitude": 22.2840837,
+    "longitude": 114.2203474,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Western Street",
+    "locCode": "13E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "西邊街",
+    "zhCN": "西边街",
+    "latitude": 22.2878915,
+    "longitude": 114.1404397,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Kornhill",
+    "locCode": "14W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "康山",
+    "zhCN": "康山",
+    "latitude": 22.284621,
+    "longitude": 114.2159405,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Eastern Street",
+    "locCode": "15E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "東邊街",
+    "zhCN": "东边街",
+    "latitude": 22.2879076,
+    "longitude": 114.1435088,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shipyard Lane",
+    "locCode": "16W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "船塢里",
+    "zhCN": "船坞里",
+    "latitude": 22.2846694,
+    "longitude": 114.2138645,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Queen Street",
+    "locCode": "17E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "皇后街",
+    "zhCN": "皇后街",
+    "latitude": 22.2876917,
+    "longitude": 114.1468971,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Mount Parker Road",
+    "locCode": "18W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "柏架山道",
+    "zhCN": "柏架山道",
+    "latitude": 22.2848196,
+    "longitude": 114.2121968,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Macau Ferry Terminal",
+    "locCode": "19E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "港澳碼頭",
+    "zhCN": "港澳码头",
+    "latitude": 22.2877966,
+    "longitude": 114.1498697,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Finney Street",
+    "locCode": "20W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "芬尼街",
+    "zhCN": "芬尼街",
+    "latitude": 22.2884859,
+    "longitude": 114.2098747,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Hillier Street",
+    "locCode": "21E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "禧利街",
+    "zhCN": "禧利街",
+    "latitude": 22.2866072,
+    "longitude": 114.1518907,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Java Road",
+    "locCode": "22W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "渣華道",
+    "zhCN": "渣华道",
+    "latitude": 22.2908057,
+    "longitude": 114.2090902,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Gilman Street",
+    "locCode": "23E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "機利文街",
+    "zhCN": "机利文街",
+    "latitude": 22.2854785,
+    "longitude": 114.1546279,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Healthy Street East",
+    "locCode": "24W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "健康東街",
+    "zhCN": "健康东街",
+    "latitude": 22.2917122,
+    "longitude": 114.2075425,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Jubilee Street",
+    "locCode": "25E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "租庇利街",
+    "zhCN": "租庇利街",
+    "latitude": 22.2846943,
+    "longitude": 114.1556418,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Healthy Street West",
+    "locCode": "26W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "健康西街",
+    "zhCN": "健康西街",
+    "latitude": 22.2920863,
+    "longitude": 114.2051547,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Pedder Street",
+    "locCode": "27E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "畢打街",
+    "zhCN": "毕打街",
+    "latitude": 22.2822272,
+    "longitude": 114.1576105,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tin Chiu Street",
+    "locCode": "28W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "電照街",
+    "zhCN": "电照街",
+    "latitude": 22.2918394,
+    "longitude": 114.2034951,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Ice House Street",
+    "locCode": "29E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "雪廠街",
+    "zhCN": "雪厂街",
+    "latitude": 22.2810663,
+    "longitude": 114.1585714,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shu Kuk Street",
+    "locCode": "30W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "書局街",
+    "zhCN": "书局街",
+    "latitude": 22.2912419,
+    "longitude": 114.2006137,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Bank Street",
+    "locCode": "31E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "銀行街",
+    "zhCN": "银行街",
+    "latitude": 22.2805445,
+    "longitude": 114.1601318,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "North Point Road",
+    "locCode": "32W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "北角道",
+    "zhCN": "北角道",
+    "latitude": 22.2905265,
+    "longitude": 114.1971242,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Murray Road",
+    "locCode": "33E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "美利道",
+    "zhCN": "美利道",
+    "latitude": 22.2797732,
+    "longitude": 114.1617304,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Fortress Hill",
+    "locCode": "34W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "炮台山",
+    "zhCN": "炮台山",
+    "latitude": 22.2891492,
+    "longitude": 114.1942904,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Admiralty MTR Station",
+    "locCode": "35E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "金鐘港鐵站",
+    "zhCN": "金钟港铁站",
+    "latitude": 22.2783982,
+    "longitude": 114.1643322,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Jupiter Street",
+    "locCode": "36W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "木星街",
+    "zhCN": "木星街",
+    "latitude": 22.2866053,
+    "longitude": 114.1929084,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Arsenal Street",
+    "locCode": "37E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "軍器廠街",
+    "zhCN": "军器厂街",
+    "latitude": 22.2778367,
+    "longitude": 114.1681945,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Lau Li Street",
+    "locCode": "38W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "琉璃街",
+    "zhCN": "琉璃街",
+    "latitude": 22.2845056,
+    "longitude": 114.1927502,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Fenwick Street",
+    "locCode": "39E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "分域街",
+    "zhCN": "分域街",
+    "latitude": 22.2772484,
+    "longitude": 114.170056,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Lau Sin Street",
+    "locCode": "40W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "留仙街",
+    "zhCN": "留仙街",
+    "latitude": 22.2827553,
+    "longitude": 114.1922177,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Luard Road",
+    "locCode": "41E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "盧押道",
+    "zhCN": "卢押道",
+    "latitude": 22.276438,
+    "longitude": 114.1719764,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Victoria Park",
+    "locCode": "42W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "維多利亞公園",
+    "zhCN": "维多利亚公园",
+    "latitude": 22.2806872,
+    "longitude": 114.189612,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "O'Brien Road",
+    "locCode": "43E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "柯布連道",
+    "zhCN": "柯布连道",
+    "latitude": 22.2765609,
+    "longitude": 114.1731412,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shelter Street",
+    "locCode": "44W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "信德街",
+    "zhCN": "信德街",
+    "latitude": 22.2796771,
+    "longitude": 114.1880992,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Fleming Road",
+    "locCode": "45E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "菲林明道",
+    "zhCN": "菲林明道",
+    "latitude": 22.2769884,
+    "longitude": 114.1753527,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Pennington Street",
+    "locCode": "46W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "邊寧頓街",
+    "zhCN": "边宁顿街",
+    "latitude": 22.2795263,
+    "longitude": 114.1865616,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tonnochy Road",
+    "locCode": "47E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "杜老誌道",
+    "zhCN": "杜老志道",
+    "latitude": 22.2782667,
+    "longitude": 114.1778297,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Paterson Street",
+    "locCode": "48W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "百德新街",
+    "zhCN": "百德新街",
+    "latitude": 22.2798303,
+    "longitude": 114.1856235,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Canal Road West",
+    "locCode": "49E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "堅拿道西",
+    "zhCN": "坚拿道西",
+    "latitude": 22.2792235,
+    "longitude": 114.1807848,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Canal Road West",
+    "locCode": "50W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "堅拿道西",
+    "zhCN": "坚拿道西",
+    "latitude": 22.2793922,
+    "longitude": 114.1813139,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Percival Street",
+    "locCode": "51E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "波斯富街",
+    "zhCN": "波斯富街",
+    "latitude": 22.2800388,
+    "longitude": 114.1829675,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tonnochy Road",
+    "locCode": "52W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "杜老誌道",
+    "zhCN": "杜老志道",
+    "latitude": 22.2781997,
+    "longitude": 114.1777003,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Paterson Street",
+    "locCode": "53E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "百德新街",
+    "zhCN": "百德新街",
+    "latitude": 22.2796913,
+    "longitude": 114.1861372,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Burrows Street",
+    "locCode": "54W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "巴路士街",
+    "zhCN": "巴路士街",
+    "latitude": 22.2773365,
+    "longitude": 114.175991,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shelter Street",
+    "locCode": "55E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "信德街",
+    "zhCN": "信德街",
+    "latitude": 22.2796082,
+    "longitude": 114.187941,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "O'Brien Road",
+    "locCode": "56W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "柯布連道",
+    "zhCN": "柯布连道",
+    "latitude": 22.2765789,
+    "longitude": 114.17351,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Victoria Park",
+    "locCode": "57E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "維多利亞公園",
+    "zhCN": "维多利亚公园",
+    "latitude": 22.2804738,
+    "longitude": 114.1892505,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Swatow Street",
+    "locCode": "58W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "汕頭街",
+    "zhCN": "汕头街",
+    "latitude": 22.2764287,
+    "longitude": 114.1720998,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Hing Fat Street",
+    "locCode": "59E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "興發街",
+    "zhCN": "兴发街",
+    "latitude": 22.2817346,
+    "longitude": 114.1911113,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Gresson Street",
+    "locCode": "60W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "機利臣街",
+    "zhCN": "机利臣街",
+    "latitude": 22.2771324,
+    "longitude": 114.1701948,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Wing Hing Street",
+    "locCode": "61E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "永興街",
+    "zhCN": "永兴街",
+    "latitude": 22.2850088,
+    "longitude": 114.192838,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Arsenal Street",
+    "locCode": "62W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "軍器廠街",
+    "zhCN": "军器厂街",
+    "latitude": 22.2777951,
+    "longitude": 114.168442,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Jupiter Street",
+    "locCode": "63E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "木星街",
+    "zhCN": "木星街",
+    "latitude": 22.2864123,
+    "longitude": 114.1928963,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Admiralty MTR Station",
+    "locCode": "64W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "金鐘港鐵站",
+    "zhCN": "金钟港铁站",
+    "latitude": 22.2782803,
+    "longitude": 114.1646279,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Fortress Hill",
+    "locCode": "65E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "炮台山",
+    "zhCN": "炮台山",
+    "latitude": 22.2891454,
+    "longitude": 114.1942542,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Cotton Tree Drive",
+    "locCode": "66W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "紅棉道",
+    "zhCN": "红棉道",
+    "latitude": 22.2792154,
+    "longitude": 114.1629092,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Chun Yeung Street",
+    "locCode": "67E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "春秧街",
+    "zhCN": "春秧街",
+    "latitude": 22.2910713,
+    "longitude": 114.1967078,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Bank Street",
+    "locCode": "68W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "銀行街",
+    "zhCN": "银行街",
+    "latitude": 22.2805854,
+    "longitude": 114.1598736,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "North Point Road",
+    "locCode": "69E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "北角道",
+    "zhCN": "北角道",
+    "latitude": 22.2905656,
+    "longitude": 114.1971939,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Pedder Street",
+    "locCode": "70W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "畢打街",
+    "zhCN": "毕打街",
+    "latitude": 22.2816918,
+    "longitude": 114.158039,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shu Kuk Street",
+    "locCode": "71E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "書局街",
+    "zhCN": "书局街",
+    "latitude": 22.2912891,
+    "longitude": 114.2007203,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Pottinger Street",
+    "locCode": "72W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "砵典乍街",
+    "zhCN": "砵典乍街",
+    "latitude": 22.2834477,
+    "longitude": 114.1566335,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tin Chiu Street",
+    "locCode": "73E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "電照街",
+    "zhCN": "电照街",
+    "latitude": 22.2918754,
+    "longitude": 114.203593,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Gilman Street",
+    "locCode": "74W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "機利文街",
+    "zhCN": "机利文街",
+    "latitude": 22.2853197,
+    "longitude": 114.1548532,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Healthy Street West",
+    "locCode": "75E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "健康西街",
+    "zhCN": "健康西街",
+    "latitude": 22.2921149,
+    "longitude": 114.20527,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Man Wah Lane",
+    "locCode": "76W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "文華里",
+    "zhCN": "文华里",
+    "latitude": 22.2863329,
+    "longitude": 114.1529173,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Healthy Street East",
+    "locCode": "77E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "健康東街",
+    "zhCN": "健康东街",
+    "latitude": 22.2917376,
+    "longitude": 114.2075533,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Macau Ferry Terminal",
+    "locCode": "78W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "港澳碼頭",
+    "zhCN": "港澳码头",
+    "latitude": 22.2877265,
+    "longitude": 114.1500306,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Java Road",
+    "locCode": "79E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "渣華道",
+    "zhCN": "渣华道",
+    "latitude": 22.2907412,
+    "longitude": 114.2091002,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Connaught Road West",
+    "locCode": "80W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "干諾道西",
+    "zhCN": "干诺道西",
+    "latitude": 22.2880448,
+    "longitude": 114.1487653,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Finney Street",
+    "locCode": "81E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "芬尼街",
+    "zhCN": "芬尼街",
+    "latitude": 22.2884921,
+    "longitude": 114.2098975,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Sutherland Street",
+    "locCode": "82W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "修打蘭街",
+    "zhCN": "修打兰街",
+    "latitude": 22.287742,
+    "longitude": 114.1461421,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Mount Parker Road",
+    "locCode": "83E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "柏架山道",
+    "zhCN": "柏架山道",
+    "latitude": 22.2856045,
+    "longitude": 114.2112064,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Eastern Street",
+    "locCode": "84W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "東邊街",
+    "zhCN": "东边街",
+    "latitude": 22.287863,
+    "longitude": 114.1440386,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shipyard Lane",
+    "locCode": "85E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "船塢里",
+    "zhCN": "船坞里",
+    "latitude": 22.2846899,
+    "longitude": 114.2138739,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Western Street",
+    "locCode": "86W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "西邊街",
+    "zhCN": "西边街",
+    "latitude": 22.2879461,
+    "longitude": 114.1410828,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Kornhill",
+    "locCode": "87E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "康山",
+    "zhCN": "康山",
+    "latitude": 22.284639,
+    "longitude": 114.2160653,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Water Street",
+    "locCode": "88W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "水街",
+    "zhCN": "水街",
+    "latitude": 22.2874938,
+    "longitude": 114.1390671,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tai Koo Shing Road",
+    "locCode": "89E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "太古城道",
+    "zhCN": "太古城道",
+    "latitude": 22.2840744,
+    "longitude": 114.220385,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Whitty Street",
+    "locCode": "90W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "屈地街",
+    "zhCN": "屈地街",
+    "latitude": 22.2868783,
+    "longitude": 114.1368026,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tai Hong Street",
+    "locCode": "91E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "太康街",
+    "zhCN": "太康街",
+    "latitude": 22.2831505,
+    "longitude": 114.2211098,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Hill Road",
+    "locCode": "92W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "山道",
+    "zhCN": "山道",
+    "latitude": 22.2870781,
+    "longitude": 114.1343833,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tai On Street",
+    "locCode": "93E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "太安街",
+    "zhCN": "太安街",
+    "latitude": 22.2823352,
+    "longitude": 114.2217422,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Whitty Street Depot",
+    "locCode": "94W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "屈地街電車廠",
+    "zhCN": "屈地街电车厂",
+    "latitude": 22.2875329,
+    "longitude": 114.1349579,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Hoi Foo Street",
+    "locCode": "95E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "海富街",
+    "zhCN": "海富街",
+    "latitude": 22.2804254,
+    "longitude": 114.2244244,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Queen's Road West",
+    "locCode": "96W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "皇后大道西",
+    "zhCN": "皇后大道西",
+    "latitude": 22.2863757,
+    "longitude": 114.1321959,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Sai Wan Ho Depot",
+    "locCode": "97E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "西灣河電車廠",
+    "zhCN": "西湾河电车厂",
+    "latitude": 22.280164,
+    "longitude": 114.22583,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Kennedy Town Praya",
+    "locCode": "98W",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "堅尼地城海傍",
+    "zhCN": "坚尼地城海傍",
+    "latitude": 22.2843381,
+    "longitude": 114.1303311,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Nam Hong Street",
+    "locCode": "99E",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "南康街",
+    "zhCN": "南康街",
+    "latitude": 22.2787369,
+    "longitude": 114.226339,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Causeway Bay Terminus",
+    "locCode": "CBT",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "銅鑼灣總站",
+    "zhCN": "铜锣湾总站",
+    "latitude": 22.2792632,
+    "longitude": 114.1870625,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Sai Wan Ho Depot Entrance",
+    "locCode": "ED",
+    "type": "TERMINUS",
+    "direction": "Eastbound/Westbound",
+    "zhHK": "西灣河車廠入口",
+    "zhCN": "西湾河车厂入口",
+    "latitude": 22.2802802,
+    "longitude": 114.2259425,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Happy Valley Terminus",
+    "locCode": "HVT",
+    "type": "TERMINUS",
+    "direction": "Happy Valley Loop",
+    "zhHK": "跑馬地總站",
+    "zhCN": "跑马地总站",
+    "latitude": 22.269849,
+    "longitude": 114.184226,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Kennedy Town Terminus",
+    "locCode": "KTT",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "堅尼地城總站",
+    "zhCN": "坚尼地城总站",
+    "latitude": 22.2829669,
+    "longitude": 114.1262106,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "North Point Terminus",
+    "locCode": "NPT",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "北角總站",
+    "zhCN": "北角总站",
+    "latitude": 22.2910682,
+    "longitude": 114.1987731,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shau Kei Wan Terminus",
+    "locCode": "SKT",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "筲箕灣總站",
+    "zhCN": "筲箕湾总站",
+    "latitude": 22.2778888,
+    "longitude": 114.2301703,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shau Kei Wan Terminus",
+    "locCode": "SKT",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "筲箕灣總站",
+    "zhCN": "筲箕湾总站",
+    "latitude": 22.2778888,
+    "longitude": 114.2301703,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Whitty Street Depot Entrance",
+    "locCode": "WD",
+    "type": "TERMINUS",
+    "direction": "Eastbound/Westbound",
+    "zhHK": "屈地街車廠入口",
+    "zhCN": "屈地街车厂入口",
+    "latitude": 22.287535,
+    "longitude": 114.135399,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Western Market",
+    "locCode": "WM",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "上環(西港城)",
+    "zhCN": "上环(西港城)",
+    "latitude": 22.2868584,
+    "longitude": 114.1507662,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Western Market Terminus",
+    "locCode": "WMT",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "上環(西港城)總站",
+    "zhCN": "上环(西港城)总站",
+    "latitude": 22.2868932,
+    "longitude": 114.1507756,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Western Market Terminus",
+    "locCode": "WMT",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "上環(西港城)總站",
+    "zhCN": "上环(西港城)总站",
+    "latitude": 22.2868932,
+    "longitude": 114.1507756,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shek Tong Tsui Terminus",
+    "locCode": "WST",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "石塘咀總站",
+    "zhCN": "石塘咀总站",
+    "latitude": 22.2871215,
+    "longitude": 114.1350478,
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Central",
+    "locCode": "ECT",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "中環",
+    "zhCN": "中环",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Central",
+    "locCode": "WCT",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "中環",
+    "zhCN": "中环",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Admiralty",
+    "locCode": "EAD",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "金鐘",
+    "zhCN": "金钟",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Admiralty",
+    "locCode": "WAD",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "金鐘",
+    "zhCN": "金钟",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Wan Chai",
+    "locCode": "EWC",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "灣仔",
+    "zhCN": "湾仔",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Wan Chai",
+    "locCode": "WWC",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "灣仔",
+    "zhCN": "湾仔",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tin Hau",
+    "locCode": "ETH",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "天后",
+    "zhCN": "天后",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Tin Hau",
+    "locCode": "WTH",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "天后",
+    "zhCN": "天后",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Quarry Bay",
+    "locCode": "EQB",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "鰂魚涌",
+    "zhCN": "鲗鱼涌",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Quarry Bay",
+    "locCode": "WQB",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "鰂魚涌",
+    "zhCN": "鲗鱼涌",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Sai Wan Ho",
+    "locCode": "EWH",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "西灣河",
+    "zhCN": "西湾河",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Sai Wan Ho",
+    "locCode": "WWH",
+    "type": "STATION",
+    "direction": "Westbound",
+    "zhHK": "西灣河",
+    "zhCN": "西湾河",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Western Market",
+    "locCode": "TWM",
+    "type": "STATION",
+    "direction": "Eastbound",
+    "zhHK": "上環(西港城)",
+    "zhCN": "上环(西港城)",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Causeway Bay",
+    "locCode": "TCB",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "銅鑼灣",
+    "zhCN": "铜锣湾",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Causeway Bay",
+    "locCode": "TCB",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "銅鑼灣",
+    "zhCN": "铜锣湾",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "North Point",
+    "locCode": "TNP",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "北角",
+    "zhCN": "北角",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "North Point",
+    "locCode": "TNP",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "北角",
+    "zhCN": "北角",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shau Kei Wan",
+    "locCode": "TKW",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "筲箕灣",
+    "zhCN": "筲箕湾",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shau Kei Wan",
+    "locCode": "TKW",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "筲箕灣",
+    "zhCN": "筲箕湾",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shek Tong Tsui",
+    "locCode": "TTT",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "石塘咀",
+    "zhCN": "石塘咀",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Shek Tong Tsui",
+    "locCode": "TTT",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "石塘咀",
+    "zhCN": "石塘咀",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Happy Valley",
+    "locCode": "THV",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "跑馬地",
+    "zhCN": "跑马地",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Happy Valley",
+    "locCode": "THV",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "跑馬地",
+    "zhCN": "跑马地",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Kennedy Town",
+    "locCode": "TKT",
+    "type": "TERMINUS",
+    "direction": "Eastbound",
+    "zhHK": "堅尼地城",
+    "zhCN": "坚尼地城",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  },
+  {
+    "en": "Kennedy Town",
+    "locCode": "TKT",
+    "type": "TERMINUS",
+    "direction": "Westbound",
+    "zhHK": "堅尼地城",
+    "zhCN": "坚尼地城",
+    "district": {
+      "en": "Placeholder",
+      "zhHK": "Placeholder",
+      "zhCN": "Placeholder"
+    }
+  }
+]

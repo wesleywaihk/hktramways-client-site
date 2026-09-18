@@ -1,20 +1,22 @@
 {
-  "collectionName": "components_content_tramoramic_tour_items",
+  "collectionName": "components_content_image_links",
   "info": {
-    "displayName": "tramoramicTourItem"
+    "displayName": "imageLink"
   },
   "options": {},
   "attributes": {
     "image": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
       ]
     },
-    "hashTag": {
-      "type": "string"
+    "link": {
+      "type": "string",
+      "required": true
     }
   },
   "config": {}
