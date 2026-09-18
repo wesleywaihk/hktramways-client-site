@@ -33,16 +33,6 @@
         }
       },
       "required": true
-    },
-    "bannerLink": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "content.image-link",
-      "repeatable": false
     }
   }
 }

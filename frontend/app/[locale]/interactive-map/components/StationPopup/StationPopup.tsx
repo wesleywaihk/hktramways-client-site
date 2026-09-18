@@ -14,11 +14,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useUserAgent } from "@/hooks/useUserAgent";
 import { IMG_URL } from "@/consts";
 import type { Direction } from "@/consts";
-import type {
-  AttractionData,
-  ImageLinkData,
-  StationItemData,
-} from "@/types/api";
+import type { AttractionData, StationItemData } from "@/types/api";
 import { routesForDirection, stationByLocCode, stationName } from "../routes";
 
 const GOOGLE_MAP_URL = "https://www.google.com/maps/dir/?api=1&destination=";
@@ -29,7 +25,6 @@ export interface StationPopupProps {
   station?: StationItemData | null;
   loading?: boolean;
   scheduleAppLink?: string | null;
-  bannerLink?: ImageLinkData | null;
   onClose: () => void;
 }
 
@@ -47,7 +42,6 @@ export default function StationPopup({
   station: stationItem,
   loading = false,
   scheduleAppLink,
-  bannerLink,
   onClose,
 }: StationPopupProps) {
   const locale = useLocale();
@@ -62,6 +56,8 @@ export default function StationPopup({
     const raf = requestAnimationFrame(() => setVisible(true));
     return () => cancelAnimationFrame(raf);
   }, []);
+
+  const bannerLink = stationItem?.bannerLink;
 
   const station = stationByLocCode(locCode);
   const name = stationName(station, locale);

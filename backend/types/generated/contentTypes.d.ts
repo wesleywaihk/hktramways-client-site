@@ -669,12 +669,6 @@ export interface ApiInteractiveMapInteractiveMap
     };
   };
   attributes: {
-    bannerLink: Schema.Attribute.Component<'content.image-link', false> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
