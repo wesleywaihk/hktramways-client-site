@@ -19,6 +19,7 @@ export type ButtonProps = {
   startIcon?: IconEnum | null;
   variant?: ButtonVariant;
   color?: ButtonColor;
+  disabled?: boolean;
 };
 
 const variantColorClasses: Record<
@@ -69,10 +70,12 @@ export default function Button({
   startIcon,
   variant = "outline",
   color = "green",
+  disabled = false,
 }: ButtonProps) {
   const classes = [
     buttonClasses,
     variantColorClasses[variant][color],
+    disabled && "pointer-events-none cursor-not-allowed opacity-40",
     className,
   ]
     .filter(Boolean)
@@ -92,7 +95,7 @@ export default function Button({
     </>
   );
 
-  if (href) {
+  if (href && !disabled) {
     return (
       <Link
         href={href}
@@ -109,6 +112,8 @@ export default function Button({
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
+      aria-disabled={disabled}
       className={`${devClassName("button")}${classes}`}
     >
       {content}

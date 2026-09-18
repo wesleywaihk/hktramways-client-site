@@ -21,7 +21,7 @@ import type {
 } from "@/types/api";
 import { routesForDirection, stationByLocCode, stationName } from "../routes";
 
-const GOOGLE_MAP_URL = "ttps://www.google.com/maps/dir/?api=1&destination=";
+const GOOGLE_MAP_URL = "https://www.google.com/maps/dir/?api=1&destination=";
 
 export interface StationPopupProps {
   locCode: string;
@@ -208,16 +208,15 @@ export default function StationPopup({
               {t("stationPopupDirections")}
             </Button>
           )}
-          {scheduleAppLink && (
-            <Button
-              href={scheduleAppLink}
-              target="_blank"
-              startIcon="clock"
-              className="lg:!py-[10px]] !min-h-0 w-full !gap-[10px] !rounded-[14px] !px-[12px] !py-[11.73px]"
-            >
-              {t("stationPopupNextTram")}
-            </Button>
-          )}
+          <Button
+            href={scheduleAppLink ?? undefined}
+            target="_blank"
+            startIcon="clock"
+            disabled={!scheduleAppLink}
+            className="!min-h-0 w-full !gap-[10px] !rounded-[14px] !px-[12px] !py-[11.73px] lg:!py-[10px]"
+          >
+            {t("stationPopupNextTram")}
+          </Button>
         </div>
 
         {bannerLink?.image && (
