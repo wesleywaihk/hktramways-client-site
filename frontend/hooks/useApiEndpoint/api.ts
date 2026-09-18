@@ -329,7 +329,7 @@ export async function fetchInteractiveMap(
   const populate = buildPopulate([
     "station.image",
     "station.attraction.icon",
-    "bannerLink.image",
+    "station.bannerLink.image",
   ]);
   const url = `${API_URL}/api/interactive-maps?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")

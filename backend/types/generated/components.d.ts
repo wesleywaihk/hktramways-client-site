@@ -335,6 +335,7 @@ export interface ContentStationItem extends Struct.ComponentSchema {
   };
   attributes: {
     attraction: Schema.Attribute.Component<'content.attraction', true>;
+    bannerLink: Schema.Attribute.Component<'content.image-link', false>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locCode: Schema.Attribute.String & Schema.Attribute.Required;
   };

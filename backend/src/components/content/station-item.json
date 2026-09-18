@@ -23,6 +23,11 @@
       "type": "component",
       "component": "content.attraction",
       "repeatable": true
+    },
+    "bannerLink": {
+      "type": "component",
+      "component": "content.image-link",
+      "repeatable": false
     }
   },
   "config": {}

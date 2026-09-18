@@ -291,17 +291,18 @@ export interface AttractionData {
   link: string | null;
 }
 
+export interface ImageLinkData {
+  id: number;
+  image: Media;
+  link: string;
+}
+
 export interface StationItemData {
   id: number;
   locCode: string;
   image: Media | null;
   attraction: AttractionData[];
-}
-
-export interface ImageLinkData {
-  id: number;
-  image: Media;
-  link: string;
+  bannerLink: ImageLinkData | null;
 }
 
 export interface InteractiveMapData {
@@ -309,7 +310,6 @@ export interface InteractiveMapData {
   documentId: string;
   station: StationItemData[];
   ScheduleAppLink: string;
-  bannerLink: ImageLinkData | null;
 }
 
 export interface InteractiveMapResponse {
