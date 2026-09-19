@@ -205,6 +205,8 @@ export const allTramRoutes = {
     "NPT",
     "WST",
   ],
+  center: { lat: 22.288, lng: 114.1773 },
+  zoom: 14,
 };
 
 export interface RouteStop {
@@ -212,6 +214,10 @@ export interface RouteStop {
   from: LocalizedText;
   to?: LocalizedText;
   stations: string[];
+  // Default map camera position when this route is selected. Currently all
+  // set to the same default view below — amend per route as needed.
+  center: { lat: number; lng: number };
+  zoom: number;
 }
 
 // Route stops are static (not CMS-driven) — no field for them exists on the
@@ -224,6 +230,8 @@ export function routesForDirection(direction: Direction): RouteStop[] {
 export const EAST_ROUTES: RouteStop[] = [
   {
     id: 0,
+    center: { lat: 22.288, lng: 114.165 },
+    zoom: 14.7,
     from: {
       en: "Whitty Street Depot Entrance",
       zhHK: "屈地街車廠入口",
@@ -263,6 +271,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 1,
+    center: { lat: 22.284, lng: 114.205 },
+    zoom: 14.8,
     from: { en: "Happy Valley", zhHK: "跑馬地", zhCN: "跑马地" },
     to: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
     stations: [
@@ -301,6 +311,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 2,
+    center: { lat: 22.284, lng: 114.154 },
+    zoom: 14.8,
     from: { en: "Kennedy Town", zhHK: "堅尼地城", zhCN: "坚尼地城" },
     to: { en: "Happy Valley", zhHK: "跑馬地", zhCN: "跑马地" },
     stations: [
@@ -339,6 +351,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 3,
+    center: { lat: 22.288, lng: 114.1773 },
+    zoom: 14,
     from: { en: "Kennedy Town", zhHK: "堅尼地城", zhCN: "坚尼地城" },
     to: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
     stations: [
@@ -397,6 +411,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 4,
+    center: { lat: 22.288, lng: 114.19 },
+    zoom: 14.4,
     from: { en: "Western Market", zhHK: "上環(西港城)", zhCN: "上环(西港城)" },
     to: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
     stations: [
@@ -445,6 +461,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 5,
+    center: { lat: 22.288, lng: 114.16 },
+    zoom: 14.9,
     from: { en: "Shek Tong Tsui", zhHK: "石塘咀", zhCN: "石塘咀" },
     to: { en: "Causeway Bay", zhHK: "銅鑼灣", zhCN: "铜锣湾" },
     stations: [
@@ -477,6 +495,8 @@ export const EAST_ROUTES: RouteStop[] = [
   },
   {
     id: 6,
+    center: { lat: 22.29, lng: 114.1672 },
+    zoom: 14.7,
     from: { en: "Shek Tong Tsui", zhHK: "石塘咀", zhCN: "石塘咀" },
     to: { en: "North Point", zhHK: "北角", zhCN: "北角" },
     stations: [
@@ -519,6 +539,8 @@ export const EAST_ROUTES: RouteStop[] = [
 export const WEST_ROUTES: RouteStop[] = [
   {
     id: 0,
+    center: { lat: 22.288, lng: 114.165 },
+    zoom: 14.7,
     from: {
       en: "Whitty Street Depot Entrance",
       zhHK: "屈地街車廠入口",
@@ -565,6 +587,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 1,
+    center: { lat: 22.284, lng: 114.205 },
+    zoom: 14.8,
     from: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
     to: { en: "Happy Valley", zhHK: "跑馬地", zhCN: "跑马地" },
     stations: [
@@ -602,6 +626,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 2,
+    center: { lat: 22.284, lng: 114.154 },
+    zoom: 14.8,
     from: { en: "Happy Valley", zhHK: "跑馬地", zhCN: "跑马地" },
     to: { en: "Kennedy Town", zhHK: "堅尼地城", zhCN: "坚尼地城" },
     stations: [
@@ -642,6 +668,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 3,
+    center: { lat: 22.288, lng: 114.1773 },
+    zoom: 14,
     from: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
     to: { en: "Kennedy Town", zhHK: "堅尼地城", zhCN: "坚尼地城" },
     stations: [
@@ -703,6 +731,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 4,
+    center: { lat: 22.288, lng: 114.19 },
+    zoom: 14.4,
     from: { en: "Shau Kei Wan", zhHK: "筲箕灣", zhCN: "筲箕湾" },
     to: { en: "Western Market", zhHK: "上環(西港城)", zhCN: "上环(西港城)" },
     stations: [
@@ -750,6 +780,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 5,
+    center: { lat: 22.288, lng: 114.16 },
+    zoom: 14.9,
     from: { en: "Causeway Bay", zhHK: "銅鑼灣", zhCN: "铜锣湾" },
     to: { en: "Shek Tong Tsui", zhHK: "石塘咀", zhCN: "石塘咀" },
     stations: [
@@ -782,6 +814,8 @@ export const WEST_ROUTES: RouteStop[] = [
   },
   {
     id: 6,
+    center: { lat: 22.29, lng: 114.1672 },
+    zoom: 14.7,
     from: { en: "North Point", zhHK: "北角", zhCN: "北角" },
     to: { en: "Shek Tong Tsui", zhHK: "石塘咀", zhCN: "石塘咀" },
     stations: [

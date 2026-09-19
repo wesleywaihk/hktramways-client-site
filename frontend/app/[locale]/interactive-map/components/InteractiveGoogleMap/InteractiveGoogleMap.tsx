@@ -5,8 +5,6 @@ import { useLocale } from "next-intl";
 import { Map, Marker, useMap } from "@vis.gl/react-google-maps";
 import { type StationInfo, localeTxt } from "../routes";
 
-const DEFAULT_CENTER = { lat: 22.288, lng: 114.1773 };
-export const DEFAULT_ZOOM = 14;
 const STATION_ZOOM = 17;
 const ICON_ZOOM_THRESHOLD = 16;
 
@@ -84,20 +82,28 @@ const STATION_ICON = {
   },
 };
 
+export interface RouteView {
+  center: { lat: number; lng: number };
+  zoom: number;
+}
+
 export interface InteractiveGoogleMapProps {
   stations: StationInfo[];
   selectedStation: string | null;
   onSelectStation: (locCode: string) => void;
+  routeView: RouteView;
   className?: string;
 }
 
 function MapCameraController({
   selectedStation,
   stations,
+  routeView,
   onZoomChange,
 }: {
   selectedStation: string | null;
   stations: StationInfo[];
+  routeView: RouteView;
   onZoomChange: (zoom: number) => void;
 }) {
   const map = useMap();
@@ -113,10 +119,10 @@ function MapCameraController({
       map.panTo({ lat: station.latitude, lng: station.longitude });
       map.setZoom(STATION_ZOOM);
     } else {
-      map.panTo(DEFAULT_CENTER);
-      map.setZoom(DEFAULT_ZOOM);
+      map.panTo(routeView.center);
+      map.setZoom(routeView.zoom);
     }
-  }, [map, selectedStation, stations]);
+  }, [map, selectedStation, stations, routeView]);
 
   useEffect(() => {
     if (!map) return;
@@ -136,10 +142,11 @@ export default function InteractiveGoogleMap({
   stations,
   selectedStation,
   onSelectStation,
+  routeView,
   className,
 }: InteractiveGoogleMapProps) {
   const locale = useLocale();
-  const [zoom, setZoom] = useState(DEFAULT_ZOOM);
+  const [zoom, setZoom] = useState(routeView.zoom);
   const showCustomIcons = zoom >= ICON_ZOOM_THRESHOLD;
 
   const visibleStations = useMemo(
@@ -156,17 +163,19 @@ export default function InteractiveGoogleMap({
   return (
     <Map
       styles={MAP_STYLES}
-      defaultCenter={DEFAULT_CENTER}
-      defaultZoom={DEFAULT_ZOOM}
+      defaultCenter={routeView.center}
+      defaultZoom={routeView.zoom}
       gestureHandling="greedy"
       disableDefaultUI={false}
       fullscreenControl={false}
       mapTypeControl={false}
+      streetViewControl={false}
       className={`overflow-hidden ${className ?? ""}`}
     >
       <MapCameraController
         selectedStation={selectedStation}
         stations={stations}
+        routeView={routeView}
         onZoomChange={setZoom}
       />
       {visibleStations.map((station) => {

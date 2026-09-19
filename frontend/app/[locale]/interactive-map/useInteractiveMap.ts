@@ -8,6 +8,9 @@ import {
   stationByLocCode,
 } from "./components/routes";
 
+const DEFAULT_ROUTE_CENTER = { lat: 22.288, lng: 114.1773 };
+const DEFAULT_ROUTE_ZOOM = 14;
+
 export function useInteractiveMap(locale: string) {
   const [direction, setDirectionState] = useState<Direction>("west");
   const [selectedRoute, setSelectedRouteState] = useState<number | "all">(
@@ -54,6 +57,18 @@ export function useInteractiveMap(locale: string) {
     return (locCodes ?? []).map(stationByLocCode);
   }, [selectedRoute, direction]);
 
+  const routeView = useMemo(() => {
+    if (selectedRoute === "all") {
+      return { center: allTramRoutes.center, zoom: allTramRoutes.zoom };
+    }
+    const route = routesForDirection(direction).find(
+      (r) => r.id === selectedRoute,
+    );
+    return route
+      ? { center: route.center, zoom: route.zoom }
+      : { center: DEFAULT_ROUTE_CENTER, zoom: DEFAULT_ROUTE_ZOOM };
+  }, [selectedRoute, direction]);
+
   return {
     direction,
     setDirection,
@@ -62,6 +77,7 @@ export function useInteractiveMap(locale: string) {
     selectedStation,
     setSelectedStation,
     stations,
+    routeView,
     interactiveMapData,
   };
 }

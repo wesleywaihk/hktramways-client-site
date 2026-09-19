@@ -36,6 +36,7 @@ export default function InteractiveMapPage({
     selectedStation,
     setSelectedStation,
     stations,
+    routeView,
     interactiveMapData,
   } = useInteractiveMap(locale);
 
@@ -76,6 +77,7 @@ export default function InteractiveMapPage({
             stations={stations}
             selectedStation={selectedStation}
             onSelectStation={setSelectedStation}
+            routeView={routeView}
             className="h-full w-full lg:rounded-[16px]"
           />
           <a
