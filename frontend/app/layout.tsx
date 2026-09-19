@@ -1,6 +1,7 @@
 import { Outfit, Noto_Sans_HK, Noto_Sans_SC } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import StoreProvider from "@/store/StoreProvider";
+import GoogleMapsProvider from "@/components/GoogleMapsProvider/GoogleMapsProvider";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -31,7 +32,9 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning>
         <AppRouterCacheProvider>
-          <StoreProvider>{children}</StoreProvider>
+          <GoogleMapsProvider>
+            <StoreProvider>{children}</StoreProvider>
+          </GoogleMapsProvider>
         </AppRouterCacheProvider>
       </body>
     </html>
