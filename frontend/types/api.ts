@@ -7,6 +7,7 @@ export interface ImageFormat {
 
 export interface Media {
   id: number;
+  name: string;
   url: string;
   width: number;
   height: number;
@@ -69,7 +70,8 @@ export type IconEnum =
   | "faq"
   | "speaker"
   | "direction"
-  | "clock";
+  | "clock"
+  | "download";
 
 export interface IconComponent {
   id: number;
@@ -310,6 +312,7 @@ export interface InteractiveMapData {
   documentId: string;
   station: StationItemData[];
   ScheduleAppLink: string;
+  downlaodMap: Media | null;
 }
 
 export interface InteractiveMapResponse {

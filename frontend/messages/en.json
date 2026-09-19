@@ -16,6 +16,8 @@
     "interactiveMapTitle": "Interactive Map",
     "stationPopupDirections": "Directions",
     "stationPopupNextTram": "Next Tram",
+    "offlineRouteMap": "Offline Route Map",
+    "viewLargerMap": "View larger map",
     "routeToggleWestbound": "Westbound",
     "routeToggleEastbound": "Eastbound",
     "routeToggleWestboundSub": "Kennedy Town Bound",

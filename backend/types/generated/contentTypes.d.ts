@@ -549,8 +549,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    favicon: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
+    favicon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     footer: Schema.Attribute.Component<'content.footer', false> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
@@ -672,6 +671,12 @@ export interface ApiInteractiveMapInteractiveMap
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    downlaodMap: Schema.Attribute.Media<'files' | 'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

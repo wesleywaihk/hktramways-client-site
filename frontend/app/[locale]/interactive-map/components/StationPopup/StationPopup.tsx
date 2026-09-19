@@ -9,8 +9,6 @@ import ChevronIcon from "@/components/icons/ChevronIcon";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import Button from "@/components/Button/Button";
 import { devClassName } from "@/lib/devClassName";
-import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useUserAgent } from "@/hooks/useUserAgent";
 import { IMG_URL } from "@/consts";
 import type { Direction } from "@/consts";
@@ -47,10 +45,7 @@ export default function StationPopup({
   const locale = useLocale();
   const t = useTranslations("common");
   const [visible, setVisible] = useState(false);
-  const { isLgUp } = useMediaQuery();
   const { isAndroid } = useUserAgent();
-
-  useLockBodyScroll(!isLgUp);
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => setVisible(true));
@@ -85,7 +80,7 @@ export default function StationPopup({
     <div
       className={`${devClassName(
         "station-popup",
-      )}fixed inset-x-0 top-[calc(max(33dvh,200px)+76px)] bottom-0 z-[200] flex h-auto flex-col overflow-hidden rounded-none bg-white shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] transition-[opacity,transform] duration-300 ease-in-out lg:absolute lg:inset-x-auto lg:top-4 lg:right-4 lg:bottom-auto lg:h-auto lg:max-h-[calc(100%-32px)] lg:w-[340px] lg:rounded-[16px] ${
+      )}relative order-2 -mx-5 -mt-5 flex h-[calc(100dvh-50.89vw-76px)] w-[calc(100%+40px)] flex-col overflow-hidden rounded-none bg-white shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] transition-[opacity,transform] duration-300 ease-in-out lg:absolute lg:top-4 lg:right-[56px] lg:z-[200] lg:mx-0 lg:mt-0 lg:h-auto lg:max-h-[calc(100%-72px)] lg:w-[340px] lg:rounded-[16px] ${
         visible
           ? "translate-y-0 opacity-100"
           : "-translate-y-2 opacity-0 lg:max-h-[calc(100dvh-176px)]"
