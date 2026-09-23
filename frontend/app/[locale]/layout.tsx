@@ -11,7 +11,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { generateGlobalMetadata, getGlobalData } from "@/lib/pageMetadata";
-import type { GlobalFooter } from "@/types/api";
+import type { GlobalFooter, GlobalMainNavExtLink } from "@/types/api";
 import "@/app/globals.scss";
 
 export function generateStaticParams() {
@@ -44,11 +44,13 @@ export default async function LocaleLayout({
 
   let metaTitle = "";
   let footer: GlobalFooter | null = null;
+  let mainNavExtLink: GlobalMainNavExtLink | null = null;
   let structuredData: unknown = null;
   try {
     const globalRes = await getGlobalData(locale);
     metaTitle = globalRes.data?.seo?.metaTitle ?? "";
     footer = globalRes.data?.footer ?? null;
+    mainNavExtLink = globalRes.data?.mainNavExtLink ?? null;
     structuredData = globalRes.data?.seo?.structuredData ?? null;
   } catch {
     metaTitle = "";
@@ -61,7 +63,7 @@ export default async function LocaleLayout({
           <StructuredData data={structuredData} />
           <MetaUpdater metaTitle={metaTitle} />
           <ScrollToTop />
-          <Header />
+          <Header mainNavExtLink={mainNavExtLink} />
           <main className="flex min-h-[calc(100dvh-76px)] flex-col lg:min-h-[calc(100dvh-100px)]">
             {children}
           </main>

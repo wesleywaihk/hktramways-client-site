@@ -26,6 +26,12 @@
     "labelZhCn": {
       "type": "string",
       "required": true
+    },
+    "announcement_items": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::announcement.announcement",
+      "mappedBy": "announcement_types"
     }
   }
 }

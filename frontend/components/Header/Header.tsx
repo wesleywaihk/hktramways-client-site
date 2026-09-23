@@ -8,8 +8,13 @@ import HeaderContent from "./HeaderContent";
 import { useAtTop } from "./useAtTop";
 import { useHeaderStyle } from "./HeaderStyle/HeaderStyleProvider";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import type { GlobalMainNavExtLink } from "@/types/api";
 
-export default function Header() {
+export interface HeaderProps {
+  mainNavExtLink?: GlobalMainNavExtLink | null;
+}
+
+export default function Header({ mainNavExtLink = null }: HeaderProps) {
   const locale = useLocale();
   const [navOpen, setNavOpen] = useState(false);
   const atTop = useAtTop();
@@ -28,6 +33,7 @@ export default function Header() {
           logoSrc="/logo-green.svg"
           // alignClassName="items-center"
           invertLangHover
+          mainNavExtLink={mainNavExtLink}
         />
       </header>
 
@@ -41,6 +47,7 @@ export default function Header() {
           logoSrc={headerStyle === "white" ? "/logo-green.svg" : "/logo-white.svg"}
           className="py-0!"
           invertLangHover={headerStyle === "white"}
+          mainNavExtLink={mainNavExtLink}
         />
       </header>
 
@@ -53,14 +60,23 @@ export default function Header() {
             logoSrc="/logo-v.svg"
             // logoClassName="h-[110px]"
             className="items-start"
+            mainNavExtLink={mainNavExtLink}
           />
         </header>
       )}
 
       {isLgUp ? (
-        <DesktopNavOverlay open={navOpen} onClose={() => setNavOpen(false)} />
+        <DesktopNavOverlay
+          open={navOpen}
+          onClose={() => setNavOpen(false)}
+          mainNavExtLink={mainNavExtLink}
+        />
       ) : (
-        <MobileNavOverlay open={navOpen} onClose={() => setNavOpen(false)} />
+        <MobileNavOverlay
+          open={navOpen}
+          onClose={() => setNavOpen(false)}
+          mainNavExtLink={mainNavExtLink}
+        />
       )}
     </>
   );

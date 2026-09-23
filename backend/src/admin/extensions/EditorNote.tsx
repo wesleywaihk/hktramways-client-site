@@ -7,9 +7,7 @@ const NOTES: Record<string, string[]> = {
   "api::home.home": [
     "Souvenior: \n- Only the first 5 souvenior items will be displayed.",
   ],
-  "api::plan-your-ride.plan-your-ride": [
-    'Service Updates: \n- The latest 3 announcements of type "news" will be rendered in the "Service Updates" section.',
-  ],
+  "api::plan-your-ride.plan-your-ride": [],
   "api::party-tram.party-tram": [
     "Overlay image:\n- overlayX: counted by %, 0 if left empty.\n- overlayY: counted by %, 0 if left empty.\n- overlayW: counted by %, 100 if left empty.\n- overlayH: counted by %, auto if left empty.",
   ],

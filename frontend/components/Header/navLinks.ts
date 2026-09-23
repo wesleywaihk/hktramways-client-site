@@ -4,6 +4,8 @@ export type NavLink = {
   external?: boolean;
   hasChevron?: boolean;
   children?: NavLink[];
+  /** Renders using the CMS-driven `mainNavExtLink.careersLink` URL instead of `href`; hidden when that URL is absent. */
+  isCareersLink?: boolean;
 };
 
 // Desktop bar: subset of links shown inline (see Figma "00-Nav" frame)
@@ -13,7 +15,7 @@ export const desktopNavLinks: NavLink[] = [
   { labelKey: "navTramTour", href: "/tram-tour" },
   { labelKey: "navPartyTram", href: "/party-tram" },
   { labelKey: "navStore", href: "/store" },
-  { labelKey: "navCareers", href: "/careers", external: true },
+  { labelKey: "navCareers", href: "/careers", isCareersLink: true },
   { labelKey: "navAboutUs", href: "/about-us" },
 ];
 
@@ -40,7 +42,7 @@ export const mobileNavLinks: NavLink[] = [
   { labelKey: "navPartyTram", href: "/party-tram" },
   { labelKey: "navStore", href: "/store" },
   { labelKey: "navExploreTheTrack", href: "/explore-the-track" },
-  { labelKey: "navCareers", href: "/careers", external: true },
+  { labelKey: "navCareers", href: "/careers", isCareersLink: true },
   {
     labelKey: "navAboutUs",
     href: "/about-us",

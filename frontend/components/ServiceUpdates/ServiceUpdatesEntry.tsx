@@ -1,13 +1,14 @@
 import IconButton from "@/components/Button/IconButton";
 import { devClassName } from "@/lib/devClassName";
-import type { AnnouncementItemData } from "@/types/api";
+import type { AnnouncementData } from "@/types/api";
 import { formatDate } from "@/lib/formatDate";
 
 export default function ServiceUpdatesEntry({
   dateTime,
-  text,
-  link,
-}: AnnouncementItemData) {
+  title,
+  actionButton,
+}: AnnouncementData) {
+  const link = actionButton[0]?.link ?? null;
   const url = link?.url ?? null;
   const openNewWindow = link?.openNewWindow ?? false;
   const noRefer = link?.noRefer ?? false;
@@ -21,11 +22,11 @@ export default function ServiceUpdatesEntry({
           {formatDate(dateTime)}
         </span>
         <p className="mt-3 text-[18px] leading-[135%] font-semibold tracking-[0.02em] text-[#222] lg:text-[21px]">
-          {text}
+          {title}
         </p>
       </div>
       <IconButton
-        ariaLabel={text}
+        ariaLabel={title}
         useArrow
         shape="square"
         href={url ?? undefined}

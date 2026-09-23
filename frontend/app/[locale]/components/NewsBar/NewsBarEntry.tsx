@@ -1,20 +1,23 @@
-import type { AnnouncementItemData } from "@/types/api";
+import type { AnnouncementData } from "@/types/api";
 import { devClassName } from "@/lib/devClassName";
 import { formatDate } from "@/lib/formatDate";
 import { getLocalizedLabel } from "@/lib/getLocalizedLabel";
 
-export interface NewsBarEntryProps extends AnnouncementItemData {
+export interface NewsBarEntryProps extends AnnouncementData {
   locale: string;
 }
 
 export default function NewsBarEntry({
   dateTime,
-  announcementType,
-  text,
-  link,
+  announcement_types,
+  title,
+  actionButton,
   locale,
 }: NewsBarEntryProps) {
-  const type = getLocalizedLabel(announcementType, locale);
+  const type = announcement_types[0]
+    ? getLocalizedLabel(announcement_types[0], locale)
+    : "";
+  const link = actionButton[0]?.link ?? null;
   const url = link?.url ?? null;
   const openNewWindow = link?.openNewWindow ?? false;
   const noRefer = link?.noRefer ?? false;
@@ -38,11 +41,11 @@ export default function NewsBarEntry({
           target={openNewWindow ? "_blank" : "_self"}
           {...(openNewWindow && noRefer ? { rel: "nofollow noreferrer" } : {})}
         >
-          {text}
+          {title}
         </a>
       ) : (
         <span className="text-green text-sm font-semibold tracking-[0.02em] whitespace-nowrap lg:text-[15px] lg:text-black">
-          {text}
+          {title}
         </span>
       )}
     </div>

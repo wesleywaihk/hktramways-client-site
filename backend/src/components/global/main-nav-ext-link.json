@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_global_main_nav_ext_links",
+  "info": {
+    "displayName": "mainNavExtLink"
+  },
+  "options": {},
+  "attributes": {
+    "careersLink": {
+      "type": "string"
+    },
+    "extLink1": {
+      "type": "component",
+      "component": "global.ext-link",
+      "repeatable": false
+    },
+    "extLink2": {
+      "type": "component",
+      "component": "global.ext-link",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

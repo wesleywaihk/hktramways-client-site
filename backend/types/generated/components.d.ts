@@ -301,6 +301,11 @@ export interface ContentServiceUpdates extends Struct.ComponentSchema {
   attributes: {
     actionButton: Schema.Attribute.Component<'content.action-button', false> &
       Schema.Attribute.Required;
+    announcement_types: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::announcement-type.announcement-type'
+    > &
+      Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -353,6 +358,30 @@ export interface ContentTramoramicTourItem extends Struct.ComponentSchema {
   attributes: {
     hashTag: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images'>;
+  };
+}
+
+export interface GlobalExtLink extends Struct.ComponentSchema {
+  collectionName: 'components_global_ext_links';
+  info: {
+    displayName: 'extLink';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    link: Schema.Attribute.Component<'content.hyperlink', false> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface GlobalMainNavExtLink extends Struct.ComponentSchema {
+  collectionName: 'components_global_main_nav_ext_links';
+  info: {
+    displayName: 'mainNavExtLink';
+  };
+  attributes: {
+    careersLink: Schema.Attribute.String;
+    extLink1: Schema.Attribute.Component<'global.ext-link', false>;
+    extLink2: Schema.Attribute.Component<'global.ext-link', false>;
   };
 }
 
@@ -550,6 +579,8 @@ declare module '@strapi/strapi' {
       'content.station-item': ContentStationItem;
       'content.tram-details-item': ContentTramDetailsItem;
       'content.tramoramic-tour-item': ContentTramoramicTourItem;
+      'global.ext-link': GlobalExtLink;
+      'global.main-nav-ext-link': GlobalMainNavExtLink;
       'media.banner-image': MediaBannerImage;
       'page-home.arc-carousel': PageHomeArcCarousel;
       'page-home.souvenior': PageHomeSouvenior;

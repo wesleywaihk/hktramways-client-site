@@ -10,26 +10,27 @@ import {
 import ServiceUpdatesEntry from "./ServiceUpdatesEntry";
 import { devClassName } from "@/lib/devClassName";
 import type {
-  AnnouncementItemData,
-  AnnouncementItemsResponse,
-  PlanYourRideResponse,
+  AnnouncementData,
+  AnnouncementsResponse,
   ServiceUpdatesData,
+  ServiceUpdatesResponse,
 } from "@/types/api";
 
 export interface ServiceUpdatesProps {
   locale: string;
-  type?: string;
+  /** API endpoint (e.g. "/api/plan-your-rides") of the content type that holds the ServiceUpdates component. */
+  endpoint: string;
   limit?: number;
 }
 
 interface ServiceUpdatesState {
   serviceUpdates: ServiceUpdatesData | null;
-  items: AnnouncementItemData[];
+  items: AnnouncementData[];
 }
 
 export default function ServiceUpdates({
   locale,
-  type = "news",
+  endpoint,
   limit = 3,
 }: ServiceUpdatesProps) {
   const [state, setState] = useState<ServiceUpdatesState | undefined>(
@@ -41,16 +42,29 @@ export default function ServiceUpdates({
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when inputs change before the refetch resolves
     setState(undefined);
 
-    Promise.all([
-      fetchServiceUpdates(locale) as Promise<PlanYourRideResponse>,
-      fetchAnnouncements({ type, limit }) as Promise<AnnouncementItemsResponse>,
-    ])
-      .then(([serviceUpdatesRes, announcementsRes]) => {
-        if (cancelled) return;
-        setState({
-          serviceUpdates: serviceUpdatesRes.data?.[0]?.ServiceUpdates ?? null,
-          items: announcementsRes.data ?? [],
-        });
+    (
+      fetchServiceUpdates(
+        locale,
+        endpoint,
+      ) as Promise<ServiceUpdatesResponse>
+    )
+      .then((serviceUpdatesRes) => {
+        if (cancelled) return null;
+        const serviceUpdates =
+          serviceUpdatesRes.data?.[0]?.ServiceUpdates ?? null;
+        const types = (serviceUpdates?.announcement_types ?? []).map(
+          (announcementType) => announcementType.key,
+        );
+
+        return fetchAnnouncements({ type: types, limit }).then(
+          (announcementsRes: AnnouncementsResponse) => {
+            if (cancelled) return;
+            setState({
+              serviceUpdates,
+              items: announcementsRes.data ?? [],
+            });
+          },
+        );
       })
       .catch(() => {
         if (!cancelled) setState({ serviceUpdates: null, items: [] });
@@ -59,7 +73,7 @@ export default function ServiceUpdates({
     return () => {
       cancelled = true;
     };
-  }, [locale, type, limit]);
+  }, [locale, endpoint, limit]);
 
   if (state === undefined) {
     return (

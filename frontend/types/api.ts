@@ -38,16 +38,18 @@ export interface AnnouncementType {
   labelZhCn: string | null;
 }
 
-export interface AnnouncementItemData {
+export interface AnnouncementData {
   id: number;
+  slug: string;
   dateTime: string;
-  text: string;
-  announcementType: AnnouncementType | null;
-  link: Hyperlink | null;
+  title: string;
+  pageContent: string | null;
+  announcement_types: AnnouncementType[];
+  actionButton: ActionButton[];
 }
 
-export interface AnnouncementItemsResponse {
-  data: AnnouncementItemData[];
+export interface AnnouncementsResponse {
+  data: AnnouncementData[];
 }
 
 export interface CarouselItem {
@@ -240,6 +242,11 @@ export interface ServiceUpdatesData {
   id: number;
   title: string;
   actionButton: ActionButton | null;
+  announcement_types: AnnouncementType[];
+}
+
+export interface ServiceUpdatesResponse {
+  data: { ServiceUpdates: ServiceUpdatesData | null }[];
 }
 
 export interface FareItemData {
@@ -374,12 +381,26 @@ export interface GlobalFooter {
   tncLink: string | null;
 }
 
+export interface GlobalExtLink {
+  id: number;
+  label: string | null;
+  link: Hyperlink | null;
+}
+
+export interface GlobalMainNavExtLink {
+  id: number;
+  careersLink: string | null;
+  extLink1: GlobalExtLink | null;
+  extLink2: GlobalExtLink | null;
+}
+
 export interface GlobalData {
   id: number;
   documentId: string;
   locale: string;
   favicon: GlobalFavicon | null;
   seo: Seo | null;
+  mainNavExtLink: GlobalMainNavExtLink | null;
   footer: GlobalFooter | null;
 }
 

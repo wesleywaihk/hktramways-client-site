@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import type { AnnouncementItemData } from "@/types/api";
+import type { AnnouncementData } from "@/types/api";
 import { devClassName } from "@/lib/devClassName";
 import NewsBarEntry from "./NewsBarEntry";
 
 const DEF_SPEED = 40;
 
 export interface NewsBarProps {
-  items?: AnnouncementItemData[];
+  items?: AnnouncementData[];
   locale: string;
   /** Scroll speed in pixels per second. */
   speed?: number;
@@ -18,11 +18,11 @@ export interface NewsBarProps {
 const MIN_ITEMS = 10;
 
 function repeatToMinimum(
-  items: AnnouncementItemData[],
+  items: AnnouncementData[],
   minLength: number = MIN_ITEMS,
 ) {
   if (items.length === 0) return items;
-  const repeated: AnnouncementItemData[] = [];
+  const repeated: AnnouncementData[] = [];
   while (repeated.length < minLength) repeated.push(...items);
   return repeated;
 }
@@ -36,7 +36,7 @@ export default function NewsBar({
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
 
-  const visibleItems = items.filter((item) => item.text.trim().length > 0);
+  const visibleItems = items.filter((item) => item.title.trim().length > 0);
 
   useEffect(() => {
     const track = trackRef.current;
