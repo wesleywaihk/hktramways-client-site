@@ -7,7 +7,7 @@ import {
   getEntityStructuredData,
 } from "@/lib/pageMetadata";
 import StructuredData from "@/components/StructuredData";
-import Hero from "./components/Hero/Hero";
+import Hero from "@/components/Hero/Hero";
 import Schedule from "./components/Schedule/Schedule";
 import Fares from "./components/Fares/Fares";
 import TramRoute from "@/components/TramRoute/TramRoute";
