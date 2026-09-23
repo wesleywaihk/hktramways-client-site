@@ -301,7 +301,7 @@ export const fetchAnnouncements = cache(
     const pagination = options?.limit
       ? `&pagination[page]=1&pagination[pageSize]=${options.limit}`
       : "";
-    const url = `${API_URL}/api/announceme-items?sort=dateTime:desc&${populate}${filter}${pagination}`;
+    const url = `${API_URL}/api/announcements?sort=dateTime:desc&${populate}${filter}${pagination}`;
     if (process.env.NODE_ENV === "development")
       console.log("[endpoint fetched]", url);
     const res = await fetch(url, { cache: options?.cache ?? "no-store" });

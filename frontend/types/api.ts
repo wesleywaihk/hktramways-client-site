@@ -38,7 +38,7 @@ export interface AnnouncementType {
   labelZhCn: string | null;
 }
 
-export interface AnnouncementItemData {
+export interface AnnouncementData {
   id: number;
   slug: string;
   dateTime: string;
@@ -48,8 +48,8 @@ export interface AnnouncementItemData {
   actionButton: ActionButton[];
 }
 
-export interface AnnouncementItemsResponse {
-  data: AnnouncementItemData[];
+export interface AnnouncementsResponse {
+  data: AnnouncementData[];
 }
 
 export interface CarouselItem {

@@ -7,7 +7,7 @@ import {
   getEntityStructuredData,
   getPreviewDocumentId,
 } from "@/lib/pageMetadata";
-import type { Home, AnnouncementItemsResponse } from "@/types/api";
+import type { Home, AnnouncementsResponse } from "@/types/api";
 import Banner from "@/components/Banner/Banner";
 import StructuredData from "@/components/StructuredData";
 import NewsBar from "./components/NewsBar/NewsBar";
@@ -47,7 +47,7 @@ export default async function LandingPage({ params }: LandingPageProps) {
     fetchWithErrorHandling(() =>
       fetchHome(documentId ?? "", documentId !== null, locale),
     ),
-    fetchWithErrorHandling<AnnouncementItemsResponse>(() =>
+    fetchWithErrorHandling<AnnouncementsResponse>(() =>
       fetchAnnouncements(),
     ),
   ]);

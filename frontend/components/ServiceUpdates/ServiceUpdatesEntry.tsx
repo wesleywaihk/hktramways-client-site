@@ -1,13 +1,13 @@
 import IconButton from "@/components/Button/IconButton";
 import { devClassName } from "@/lib/devClassName";
-import type { AnnouncementItemData } from "@/types/api";
+import type { AnnouncementData } from "@/types/api";
 import { formatDate } from "@/lib/formatDate";
 
 export default function ServiceUpdatesEntry({
   dateTime,
   title,
   actionButton,
-}: AnnouncementItemData) {
+}: AnnouncementData) {
   const link = actionButton[0]?.link ?? null;
   const url = link?.url ?? null;
   const openNewWindow = link?.openNewWindow ?? false;

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-09-23T14:41:24.313Z"
+    "x-generation-date": "2026-09-23T15:15:39.638Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -38,7 +38,7 @@
     }
   ],
   "paths": {
-    "/announceme-items": {
+    "/announcements": {
       "get": {
         "responses": {
           "200": {
@@ -46,7 +46,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AnnouncemeItemListResponse"
+                  "$ref": "#/components/schemas/AnnouncementListResponse"
                 }
               }
             }
@@ -103,7 +103,7 @@
           }
         },
         "tags": [
-          "Announceme-item"
+          "Announcement"
         ],
         "parameters": [
           {
@@ -219,7 +219,7 @@
             }
           }
         ],
-        "operationId": "get/announceme-items"
+        "operationId": "get/announcements"
       },
       "post": {
         "responses": {
@@ -228,7 +228,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AnnouncemeItemResponse"
+                  "$ref": "#/components/schemas/AnnouncementResponse"
                 }
               }
             }
@@ -285,23 +285,23 @@
           }
         },
         "tags": [
-          "Announceme-item"
+          "Announcement"
         ],
         "parameters": [],
-        "operationId": "post/announceme-items",
+        "operationId": "post/announcements",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AnnouncemeItemRequest"
+                "$ref": "#/components/schemas/AnnouncementRequest"
               }
             }
           }
         }
       }
     },
-    "/announceme-items/{id}": {
+    "/announcements/{id}": {
       "get": {
         "responses": {
           "200": {
@@ -309,7 +309,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AnnouncemeItemResponse"
+                  "$ref": "#/components/schemas/AnnouncementResponse"
                 }
               }
             }
@@ -366,7 +366,7 @@
           }
         },
         "tags": [
-          "Announceme-item"
+          "Announcement"
         ],
         "parameters": [
           {
@@ -380,7 +380,7 @@
             }
           }
         ],
-        "operationId": "get/announceme-items/{id}"
+        "operationId": "get/announcements/{id}"
       },
       "put": {
         "responses": {
@@ -389,7 +389,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AnnouncemeItemResponse"
+                  "$ref": "#/components/schemas/AnnouncementResponse"
                 }
               }
             }
@@ -446,7 +446,7 @@
           }
         },
         "tags": [
-          "Announceme-item"
+          "Announcement"
         ],
         "parameters": [
           {
@@ -460,13 +460,13 @@
             }
           }
         ],
-        "operationId": "put/announceme-items/{id}",
+        "operationId": "put/announcements/{id}",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AnnouncemeItemRequest"
+                "$ref": "#/components/schemas/AnnouncementRequest"
               }
             }
           }
@@ -537,7 +537,7 @@
           }
         },
         "tags": [
-          "Announceme-item"
+          "Announcement"
         ],
         "parameters": [
           {
@@ -551,7 +551,7 @@
             }
           }
         ],
-        "operationId": "delete/announceme-items/{id}"
+        "operationId": "delete/announcements/{id}"
       }
     },
     "/announcement-types": {
@@ -3948,7 +3948,7 @@
           }
         }
       },
-      "AnnouncemeItemRequest": {
+      "AnnouncementRequest": {
         "type": "object",
         "required": [
           "data"
@@ -4014,13 +4014,13 @@
           }
         }
       },
-      "AnnouncemeItemListResponse": {
+      "AnnouncementListResponse": {
         "type": "object",
         "properties": {
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/AnnouncemeItem"
+              "$ref": "#/components/schemas/Announcement"
             }
           },
           "meta": {
@@ -4049,7 +4049,7 @@
           }
         }
       },
-      "AnnouncemeItem": {
+      "Announcement": {
         "type": "object",
         "required": [
           "slug"
@@ -5050,11 +5050,11 @@
           }
         }
       },
-      "AnnouncemeItemResponse": {
+      "AnnouncementResponse": {
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/AnnouncemeItem"
+            "$ref": "#/components/schemas/Announcement"
           },
           "meta": {
             "type": "object"

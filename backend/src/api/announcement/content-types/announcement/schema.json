@@ -2,9 +2,9 @@
   "kind": "collectionType",
   "collectionName": "announceme_items",
   "info": {
-    "singularName": "announceme-item",
-    "pluralName": "announceme-items",
-    "displayName": "AnnouncementItem"
+    "singularName": "announcement",
+    "pluralName": "announcements",
+    "displayName": "Announcement"
   },
   "options": {
     "draftAndPublish": true

@@ -443,13 +443,49 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiAnnouncemeItemAnnouncemeItem
+export interface ApiAnnouncementTypeAnnouncementType
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'announcement_types';
+  info: {
+    displayName: 'AnnouncementType';
+    pluralName: 'announcement-types';
+    singularName: 'announcement-type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    announcement_items: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::announcement.announcement'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    key: Schema.Attribute.String & Schema.Attribute.Required;
+    labelEn: Schema.Attribute.String & Schema.Attribute.Required;
+    labelZhCn: Schema.Attribute.String & Schema.Attribute.Required;
+    labelZhHk: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::announcement-type.announcement-type'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiAnnouncementAnnouncement
   extends Struct.CollectionTypeSchema {
   collectionName: 'announceme_items';
   info: {
-    displayName: 'AnnouncementItem';
-    pluralName: 'announceme-items';
-    singularName: 'announceme-item';
+    displayName: 'Announcement';
+    pluralName: 'announcements';
+    singularName: 'announcement';
   };
   options: {
     draftAndPublish: true;
@@ -482,7 +518,7 @@ export interface ApiAnnouncemeItemAnnouncemeItem
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::announceme-item.announceme-item'
+      'api::announcement.announcement'
     >;
     pageContent: Schema.Attribute.RichText &
       Schema.Attribute.SetPluginOptions<{
@@ -504,42 +540,6 @@ export interface ApiAnnouncemeItemAnnouncemeItem
           localized: true;
         };
       }>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiAnnouncementTypeAnnouncementType
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'announcement_types';
-  info: {
-    displayName: 'AnnouncementType';
-    pluralName: 'announcement-types';
-    singularName: 'announcement-type';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    announcement_items: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::announceme-item.announceme-item'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    key: Schema.Attribute.String & Schema.Attribute.Required;
-    labelEn: Schema.Attribute.String & Schema.Attribute.Required;
-    labelZhCn: Schema.Attribute.String & Schema.Attribute.Required;
-    labelZhHk: Schema.Attribute.String & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::announcement-type.announcement-type'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1431,8 +1431,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
-      'api::announceme-item.announceme-item': ApiAnnouncemeItemAnnouncemeItem;
       'api::announcement-type.announcement-type': ApiAnnouncementTypeAnnouncementType;
+      'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::global.global': ApiGlobalGlobal;
       'api::home.home': ApiHomeHome;
       'api::interactive-map.interactive-map': ApiInteractiveMapInteractiveMap;

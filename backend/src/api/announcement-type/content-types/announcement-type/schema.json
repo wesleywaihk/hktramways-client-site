@@ -30,7 +30,7 @@
     "announcement_items": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::announceme-item.announceme-item",
+      "target": "api::announcement.announcement",
       "mappedBy": "announcement_types"
     }
   }

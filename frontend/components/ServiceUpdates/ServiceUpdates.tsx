@@ -10,8 +10,8 @@ import {
 import ServiceUpdatesEntry from "./ServiceUpdatesEntry";
 import { devClassName } from "@/lib/devClassName";
 import type {
-  AnnouncementItemData,
-  AnnouncementItemsResponse,
+  AnnouncementData,
+  AnnouncementsResponse,
   ServiceUpdatesData,
   ServiceUpdatesResponse,
 } from "@/types/api";
@@ -25,7 +25,7 @@ export interface ServiceUpdatesProps {
 
 interface ServiceUpdatesState {
   serviceUpdates: ServiceUpdatesData | null;
-  items: AnnouncementItemData[];
+  items: AnnouncementData[];
 }
 
 export default function ServiceUpdates({
@@ -57,7 +57,7 @@ export default function ServiceUpdates({
         );
 
         return fetchAnnouncements({ type: types, limit }).then(
-          (announcementsRes: AnnouncementItemsResponse) => {
+          (announcementsRes: AnnouncementsResponse) => {
             if (cancelled) return;
             setState({
               serviceUpdates,

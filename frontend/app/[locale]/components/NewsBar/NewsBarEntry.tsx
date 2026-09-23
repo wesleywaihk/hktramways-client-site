@@ -1,9 +1,9 @@
-import type { AnnouncementItemData } from "@/types/api";
+import type { AnnouncementData } from "@/types/api";
 import { devClassName } from "@/lib/devClassName";
 import { formatDate } from "@/lib/formatDate";
 import { getLocalizedLabel } from "@/lib/getLocalizedLabel";
 
-export interface NewsBarEntryProps extends AnnouncementItemData {
+export interface NewsBarEntryProps extends AnnouncementData {
   locale: string;
 }
 
