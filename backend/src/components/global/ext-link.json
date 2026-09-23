@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_global_ext_links",
+  "info": {
+    "displayName": "extLink"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "component",
+      "component": "content.hyperlink",
+      "repeatable": false,
+      "required": true
+    }
+  },
+  "config": {}
+}

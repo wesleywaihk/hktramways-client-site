@@ -9,13 +9,16 @@ import { mobileNavLinks } from "./navLinks";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
+import type { GlobalMainNavExtLink, Hyperlink } from "@/types/api";
 
 export default function DesktopNavOverlay({
   open,
   onClose,
+  mainNavExtLink = null,
 }: {
   open: boolean;
   onClose: () => void;
+  mainNavExtLink?: GlobalMainNavExtLink | null;
 }) {
   const t = useTranslations("common");
   const { locale, locales, switchLocale } = useLocaleSwitcher();
@@ -23,6 +26,26 @@ export default function DesktopNavOverlay({
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   const activeLink = mobileNavLinks.find((link) => link.href === activeParent);
+
+  const extraLinks = [
+    mainNavExtLink?.extLink1?.link?.url
+      ? {
+          key: "extLink1",
+          label: mainNavExtLink.extLink1.label ?? "",
+          link: mainNavExtLink.extLink1.link,
+        }
+      : null,
+    mainNavExtLink?.extLink2?.link?.url
+      ? {
+          key: "extLink2",
+          label: mainNavExtLink.extLink2.label ?? "",
+          link: mainNavExtLink.extLink2.link,
+        }
+      : null,
+  ].filter(
+    (link): link is { key: string; label: string; link: Hyperlink } =>
+      Boolean(link),
+  );
 
   useLockBodyScroll(open);
 
@@ -88,9 +111,13 @@ export default function DesktopNavOverlay({
           >
             <div className="flex w-full flex-col gap-[30px]">
               {mobileNavLinks.map((link) => {
+                if (link.isCareersLink && !mainNavExtLink?.careersLink)
+                  return null;
+
                 const hasChildren = !!link.children?.length;
                 const isHovered = hoveredLink === link.href;
                 const dimmed = !!hoveredLink && !isHovered;
+                const isExternal = link.external || link.isCareersLink;
 
                 const content = (
                   <>
@@ -98,19 +125,40 @@ export default function DesktopNavOverlay({
                     {hasChildren && (
                       <ChevronIcon desktop className="h-[26px] w-[26px]" />
                     )}
-                    {link.external && (
+                    {isExternal && (
                       <UprightArrowIco className="h-[26px] w-[26px]" />
                     )}
                   </>
                 );
 
+                const className = `inline-flex w-auto max-w-[56%] shrink-0 cursor-pointer items-center gap-2 self-start border-none bg-transparent pr-4 text-left font-sans text-[32px] leading-[118%] font-semibold tracking-[0.64px] text-white transition-opacity duration-200 ease-out ${
+                  dimmed ? "opacity-30" : "opacity-100"
+                }`;
+
+                if (link.isCareersLink) {
+                  return (
+                    <a
+                      key={link.href}
+                      href={mainNavExtLink?.careersLink ?? undefined}
+                      className={className}
+                      onClick={handleClose}
+                      target="_blank"
+                      rel="noopener"
+                      onMouseEnter={() => {
+                        setHoveredLink(link.href);
+                        setActiveParent(null);
+                      }}
+                    >
+                      {content}
+                    </a>
+                  );
+                }
+
                 return (
                   <Link
                     key={link.href}
                     href={`/${locale}${link.href}`}
-                    className={`inline-flex w-auto max-w-[56%] shrink-0 cursor-pointer items-center gap-2 self-start border-none bg-transparent pr-4 text-left font-sans text-[32px] leading-[118%] font-semibold tracking-[0.64px] text-white transition-opacity duration-200 ease-out ${
-                      dimmed ? "opacity-30" : "opacity-100"
-                    }`}
+                    className={className}
                     onClick={handleClose}
                     target={link.external ? "_blank" : undefined}
                     rel={link.external ? "noopener noreferrer" : undefined}
@@ -123,6 +171,24 @@ export default function DesktopNavOverlay({
                   </Link>
                 );
               })}
+
+              {extraLinks.map((link) => (
+                <a
+                  key={link.key}
+                  href={link.link.url ?? undefined}
+                  className="inline-flex w-auto max-w-[56%] shrink-0 cursor-pointer items-center gap-2 self-start border-none bg-transparent pr-4 text-left font-sans text-[32px] leading-[118%] font-semibold tracking-[0.64px] text-white opacity-100 transition-opacity duration-200 ease-out"
+                  onClick={handleClose}
+                  target={link.link.openNewWindow ? "_blank" : undefined}
+                  rel={
+                    link.link.openNewWindow && link.link.noRefer
+                      ? "nofollow noreferrer"
+                      : undefined
+                  }
+                >
+                  {link.label}
+                  <UprightArrowIco className="h-[26px] w-[26px]" />
+                </a>
+              ))}
             </div>
 
             {activeLink?.children && (

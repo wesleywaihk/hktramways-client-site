@@ -5,6 +5,7 @@ import { desktopNavLinks } from "./navLinks";
 import LocaleDropdown from "./LocaleDropdown";
 import HamburgerIcon from "./HamburgerIcon";
 import { devClassName } from "@/lib/devClassName";
+import type { GlobalMainNavExtLink, Hyperlink } from "@/types/api";
 
 export interface HeaderContentProps {
   locale: string;
@@ -16,6 +17,7 @@ export interface HeaderContentProps {
   className?: string;
   /** true when this header sits on a white background, so the lang button's hover state must invert to stay visible */
   invertLangHover?: boolean;
+  mainNavExtLink?: GlobalMainNavExtLink | null;
 }
 
 export default function HeaderContent({
@@ -27,8 +29,29 @@ export default function HeaderContent({
   // alignClassName = "items-center",
   className = "",
   invertLangHover = false,
+  mainNavExtLink = null,
 }: HeaderContentProps) {
   const t = useTranslations("common");
+
+  const extraLinks = [
+    mainNavExtLink?.extLink1?.link?.url
+      ? {
+          key: "extLink1",
+          label: mainNavExtLink.extLink1.label ?? "",
+          link: mainNavExtLink.extLink1.link,
+        }
+      : null,
+    mainNavExtLink?.extLink2?.link?.url
+      ? {
+          key: "extLink2",
+          label: mainNavExtLink.extLink2.label ?? "",
+          link: mainNavExtLink.extLink2.link,
+        }
+      : null,
+  ].filter(
+    (link): link is { key: string; label: string; link: Hyperlink } =>
+      Boolean(link),
+  );
   return (
     <div
       className={`${devClassName("header-content")}flex pageBorder w-full items-center justify-between self-center py-[clamp(1rem,1.3889vw,1.875rem)] ${className}`}
@@ -51,15 +74,57 @@ export default function HeaderContent({
       <div className="flex items-center gap-[clamp(1rem,1.3888888889vw,1.875rem)]">
         <div className="hidden gap-[clamp(1rem,1.3888888889vw,1.875rem)] lg:flex lg:items-center">
           <nav className="mr-[clamp(0.5rem,0.6944444444vw,0.9375rem)] flex items-center gap-[clamp(1.5rem,2.0833333333vw,2.8125rem)]">
-            {desktopNavLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={`/${locale}${link.href}`}
+            {desktopNavLinks.map((link) => {
+              if (link.isCareersLink && !mainNavExtLink?.careersLink)
+                return null;
+
+              const content = (
+                <>
+                  {t(link.labelKey)}
+                  <span className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-right scale-x-0 transform-gpu bg-current/30 transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100" />
+                </>
+              );
+
+              if (link.isCareersLink) {
+                return (
+                  <a
+                    key={link.href}
+                    href={mainNavExtLink?.careersLink ?? undefined}
+                    className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] whitespace-nowrap text-[var(--header-fg)] uppercase"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {content}
+                  </a>
+                );
+              }
+
+              return (
+                <Link
+                  key={link.href}
+                  href={`/${locale}${link.href}`}
+                  className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] whitespace-nowrap text-[var(--header-fg)] uppercase"
+                >
+                  {content}
+                </Link>
+              );
+            })}
+
+            {extraLinks.map((link) => (
+              <a
+                key={link.key}
+                href={link.link.url ?? undefined}
                 className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] whitespace-nowrap text-[var(--header-fg)] uppercase"
+                target={link.link.openNewWindow ? "_blank" : undefined}
+                rel={
+                  link.link.openNewWindow && link.link.noRefer
+                    ? "nofollow noreferrer"
+                    : undefined
+                }
               >
-                {t(link.labelKey)}
+                {link.label}
                 <span className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-right scale-x-0 transform-gpu bg-current/30 transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100" />
-              </Link>
+              </a>
             ))}
           </nav>
 

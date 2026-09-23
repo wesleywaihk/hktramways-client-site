@@ -361,6 +361,30 @@ export interface ContentTramoramicTourItem extends Struct.ComponentSchema {
   };
 }
 
+export interface GlobalExtLink extends Struct.ComponentSchema {
+  collectionName: 'components_global_ext_links';
+  info: {
+    displayName: 'extLink';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    link: Schema.Attribute.Component<'content.hyperlink', false> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface GlobalMainNavExtLink extends Struct.ComponentSchema {
+  collectionName: 'components_global_main_nav_ext_links';
+  info: {
+    displayName: 'mainNavExtLink';
+  };
+  attributes: {
+    careersLink: Schema.Attribute.String;
+    extLink1: Schema.Attribute.Component<'global.ext-link', false>;
+    extLink2: Schema.Attribute.Component<'global.ext-link', false>;
+  };
+}
+
 export interface MediaBannerImage extends Struct.ComponentSchema {
   collectionName: 'components_media_banner_images';
   info: {
@@ -555,6 +579,8 @@ declare module '@strapi/strapi' {
       'content.station-item': ContentStationItem;
       'content.tram-details-item': ContentTramDetailsItem;
       'content.tramoramic-tour-item': ContentTramoramicTourItem;
+      'global.ext-link': GlobalExtLink;
+      'global.main-nav-ext-link': GlobalMainNavExtLink;
       'media.banner-image': MediaBannerImage;
       'page-home.arc-carousel': PageHomeArcCarousel;
       'page-home.souvenior': PageHomeSouvenior;

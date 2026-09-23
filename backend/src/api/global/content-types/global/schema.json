@@ -35,6 +35,16 @@
       "repeatable": false,
       "required": true
     },
+    "mainNavExtLink": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "global.main-nav-ext-link",
+      "repeatable": false
+    },
     "footer": {
       "type": "component",
       "pluginOptions": {

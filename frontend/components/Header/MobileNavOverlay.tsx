@@ -9,13 +9,16 @@ import { mobileNavLinks } from "./navLinks";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import CloseIcon from "@/components/icons/CloseIcon";
 import UprightArrowIco from "@/components/icons/UprightArrowIco";
+import type { GlobalMainNavExtLink, Hyperlink } from "@/types/api";
 
 export default function MobileNavOverlay({
   open,
   onClose,
+  mainNavExtLink = null,
 }: {
   open: boolean;
   onClose: () => void;
+  mainNavExtLink?: GlobalMainNavExtLink | null;
 }) {
   const t = useTranslations("common");
   const { locale, locales, switchLocale } = useLocaleSwitcher();
@@ -27,6 +30,26 @@ export default function MobileNavOverlay({
     setActiveParent(null);
     onClose();
   };
+
+  const extraLinks = [
+    mainNavExtLink?.extLink1?.link?.url
+      ? {
+          key: "extLink1",
+          label: mainNavExtLink.extLink1.label ?? "",
+          link: mainNavExtLink.extLink1.link,
+        }
+      : null,
+    mainNavExtLink?.extLink2?.link?.url
+      ? {
+          key: "extLink2",
+          label: mainNavExtLink.extLink2.label ?? "",
+          link: mainNavExtLink.extLink2.link,
+        }
+      : null,
+  ].filter(
+    (link): link is { key: string; label: string; link: Hyperlink } =>
+      Boolean(link),
+  );
 
   return (
     <>
@@ -78,9 +101,13 @@ export default function MobileNavOverlay({
           <nav className="flex w-full items-start">
             <div className="flex w-full max-w-[333px] flex-col gap-7">
               {mobileNavLinks.map((link) => {
+                if (link.isCareersLink && !mainNavExtLink?.careersLink)
+                  return null;
+
                 const hasChildren = !!link.children?.length;
                 const isActive = activeParent === link.href;
                 const dimmed = !!activeParent && !isActive;
+                const isExternal = link.external || link.isCareersLink;
 
                 const content = (
                   <>
@@ -91,7 +118,7 @@ export default function MobileNavOverlay({
                         className="h-[22px] w-[22px]"
                       />
                     )}
-                    {link.external && (
+                    {isExternal && (
                       <UprightArrowIco className="h-[22px] w-[22px]" />
                     )}
                   </>
@@ -116,6 +143,16 @@ export default function MobileNavOverlay({
                       >
                         {content}
                       </button>
+                    ) : link.isCareersLink ? (
+                      <a
+                        href={mainNavExtLink?.careersLink ?? undefined}
+                        className={sharedClassName}
+                        onClick={handleClose}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        {content}
+                      </a>
                     ) : (
                       <Link
                         href={`/${locale}${link.href}`}
@@ -149,6 +186,24 @@ export default function MobileNavOverlay({
                   </div>
                 );
               })}
+
+              {extraLinks.map((link) => (
+                <a
+                  key={link.key}
+                  href={link.link.url ?? undefined}
+                  className="flex items-center justify-start gap-[3px] border-none bg-transparent text-left font-sans text-[24px] leading-[118%] font-semibold tracking-[0.48px] text-white opacity-100 transition-opacity duration-200 ease-out"
+                  onClick={handleClose}
+                  target={link.link.openNewWindow ? "_blank" : undefined}
+                  rel={
+                    link.link.openNewWindow && link.link.noRefer
+                      ? "nofollow noreferrer"
+                      : undefined
+                  }
+                >
+                  {link.label}
+                  <UprightArrowIco className="h-[22px] w-[22px]" />
+                </a>
+              ))}
             </div>
           </nav>
 

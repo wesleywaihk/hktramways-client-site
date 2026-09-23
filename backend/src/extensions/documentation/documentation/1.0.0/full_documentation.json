@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-09-23T15:15:39.638Z"
+    "x-generation-date": "2026-09-23T15:42:01.032Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6273,6 +6273,9 @@
               "seo": {
                 "$ref": "#/components/schemas/SeoSeoComponent"
               },
+              "mainNavExtLink": {
+                "$ref": "#/components/schemas/GlobalMainNavExtLinkComponent"
+              },
               "footer": {
                 "$ref": "#/components/schemas/ContentFooterComponent"
               },
@@ -7474,6 +7477,9 @@
           "seo": {
             "$ref": "#/components/schemas/SeoSeoComponent"
           },
+          "mainNavExtLink": {
+            "$ref": "#/components/schemas/GlobalMainNavExtLinkComponent"
+          },
           "footer": {
             "$ref": "#/components/schemas/ContentFooterComponent"
           },
@@ -7720,6 +7726,9 @@
                 },
                 "seo": {
                   "$ref": "#/components/schemas/SeoSeoComponent"
+                },
+                "mainNavExtLink": {
+                  "$ref": "#/components/schemas/GlobalMainNavExtLinkComponent"
                 },
                 "footer": {
                   "$ref": "#/components/schemas/ContentFooterComponent"
@@ -8016,6 +8025,51 @@
             ]
           },
           "structuredData": {}
+        }
+      },
+      "GlobalExtLinkComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "link": {
+            "$ref": "#/components/schemas/ContentHyperlinkComponent"
+          }
+        }
+      },
+      "GlobalMainNavExtLinkComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "careersLink": {
+            "type": "string"
+          },
+          "extLink1": {
+            "$ref": "#/components/schemas/GlobalExtLinkComponent"
+          },
+          "extLink2": {
+            "$ref": "#/components/schemas/GlobalExtLinkComponent"
+          }
         }
       },
       "ContentGetInTouchComponent": {

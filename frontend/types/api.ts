@@ -381,12 +381,26 @@ export interface GlobalFooter {
   tncLink: string | null;
 }
 
+export interface GlobalExtLink {
+  id: number;
+  label: string | null;
+  link: Hyperlink | null;
+}
+
+export interface GlobalMainNavExtLink {
+  id: number;
+  careersLink: string | null;
+  extLink1: GlobalExtLink | null;
+  extLink2: GlobalExtLink | null;
+}
+
 export interface GlobalData {
   id: number;
   documentId: string;
   locale: string;
   favicon: GlobalFavicon | null;
   seo: Seo | null;
+  mainNavExtLink: GlobalMainNavExtLink | null;
   footer: GlobalFooter | null;
 }
 
