@@ -14,6 +14,12 @@
       "component": "content.action-button",
       "repeatable": false,
       "required": true
+    },
+    "announcement_types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::announcement-type.announcement-type",
+      "required": true
     }
   },
   "config": {}

@@ -460,8 +460,14 @@ export interface ApiAnnouncemeItemAnnouncemeItem
     };
   };
   attributes: {
-    announcementType: Schema.Attribute.Relation<
-      'oneToOne',
+    actionButton: Schema.Attribute.Component<'content.action-button', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    announcement_types: Schema.Attribute.Relation<
+      'manyToMany',
       'api::announcement-type.announcement-type'
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -473,19 +479,26 @@ export interface ApiAnnouncemeItemAnnouncemeItem
           localized: true;
         };
       }>;
-    link: Schema.Attribute.Component<'content.hyperlink', false> &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::announceme-item.announceme-item'
     >;
+    pageContent: Schema.Attribute.RichText &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
-    text: Schema.Attribute.String &
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -509,6 +522,10 @@ export interface ApiAnnouncementTypeAnnouncementType
     draftAndPublish: true;
   };
   attributes: {
+    announcement_items: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::announceme-item.announceme-item'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

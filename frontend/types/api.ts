@@ -40,10 +40,12 @@ export interface AnnouncementType {
 
 export interface AnnouncementItemData {
   id: number;
+  slug: string;
   dateTime: string;
-  text: string;
-  announcementType: AnnouncementType | null;
-  link: Hyperlink | null;
+  title: string;
+  pageContent: string | null;
+  announcement_types: AnnouncementType[];
+  actionButton: ActionButton[];
 }
 
 export interface AnnouncementItemsResponse {
@@ -240,6 +242,11 @@ export interface ServiceUpdatesData {
   id: number;
   title: string;
   actionButton: ActionButton | null;
+  announcement_types: AnnouncementType[];
+}
+
+export interface ServiceUpdatesResponse {
+  data: { ServiceUpdates: ServiceUpdatesData | null }[];
 }
 
 export interface FareItemData {

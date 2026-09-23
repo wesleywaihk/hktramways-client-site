@@ -195,9 +195,12 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side ServiceUpdates component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchServiceUpdates(locale: string) {
-  const populate = buildPopulate(["ServiceUpdates.actionButton"]);
-  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
+export async function fetchServiceUpdates(locale: string, endpoint: string) {
+  const populate = buildPopulate([
+    "ServiceUpdates.actionButton",
+    "ServiceUpdates.announcement_types",
+  ]);
+  const url = `${API_URL}${endpoint}?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
@@ -283,12 +286,17 @@ export async function fetchSchedule(locale: string) {
 export const fetchAnnouncements = cache(
   async function fetchAnnouncements(options?: {
     cache?: RequestCache;
-    type?: string;
+    type?: string[];
     limit?: number;
   }) {
-    const populate = buildPopulate(["announcementType", "link"]);
-    const filter = options?.type
-      ? `&filters[announcementType][key][$eq]=${options.type}`
+    const populate = buildPopulate(["announcement_types", "actionButton"]);
+    const filter = options?.type?.length
+      ? options.type
+          .map(
+            (type, i) =>
+              `&filters[announcement_types][key][$in][${i}]=${type}`,
+          )
+          .join("")
       : "";
     const pagination = options?.limit
       ? `&pagination[page]=1&pagination[pageSize]=${options.limit}`

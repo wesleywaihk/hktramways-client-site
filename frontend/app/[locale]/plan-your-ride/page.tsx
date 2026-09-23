@@ -14,7 +14,7 @@ import TramRoute from "@/components/TramRoute/TramRoute";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
-import ServiceUpdates from "./components/ServiceUpdates/ServiceUpdates";
+import ServiceUpdates from "@/components/ServiceUpdates/ServiceUpdates";
 import type { PlanYourRideResponse } from "@/types/api";
 
 interface PlanYourRidePageProps {
@@ -61,7 +61,11 @@ export default async function PlanYourRidePage({
         actionButton={heroData.actionButton}
         bannerImage={heroData.bannerImage}
       />
-      <ServiceUpdates locale={locale} type="news" limit={3} />
+      <ServiceUpdates
+        locale={locale}
+        endpoint="/api/plan-your-rides"
+        limit={3}
+      />
       <TramRoute locale={locale} />
       <Schedule locale={locale} />
       <InteractiveRouteMap locale={locale} />

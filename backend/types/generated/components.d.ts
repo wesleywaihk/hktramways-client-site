@@ -301,6 +301,11 @@ export interface ContentServiceUpdates extends Struct.ComponentSchema {
   attributes: {
     actionButton: Schema.Attribute.Component<'content.action-button', false> &
       Schema.Attribute.Required;
+    announcement_types: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::announcement-type.announcement-type'
+    > &
+      Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }

@@ -36,7 +36,7 @@ export default function NewsBar({
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
 
-  const visibleItems = items.filter((item) => item.text.trim().length > 0);
+  const visibleItems = items.filter((item) => item.title.trim().length > 0);
 
   useEffect(() => {
     const track = trackRef.current;
