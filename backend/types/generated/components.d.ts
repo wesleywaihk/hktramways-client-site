@@ -114,7 +114,6 @@ export interface ContentFooter extends Struct.ComponentSchema {
     seniorPrice: Schema.Attribute.Decimal;
     tncLink: Schema.Attribute.String & Schema.Attribute.Required;
     tripAdvLink: Schema.Attribute.String;
-    weChatLink: Schema.Attribute.String;
     weiBoLink: Schema.Attribute.String;
     youtubeLink: Schema.Attribute.String;
   };

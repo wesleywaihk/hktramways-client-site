@@ -59,10 +59,6 @@
       "type": "string",
       "required": false
     },
-    "weChatLink": {
-      "type": "string",
-      "required": false
-    },
     "weiBoLink": {
       "type": "string",
       "required": false

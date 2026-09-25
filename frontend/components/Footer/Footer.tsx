@@ -7,6 +7,7 @@ import { devClassName } from "@/lib/devClassName";
 import type { GlobalFooter } from "@/types/api";
 import { socialPlatforms } from "./footerData";
 import Logo from "./Logo";
+import WeChatPopup from "./WeChatPopup";
 
 const columnHeading =
   "font-sans text-[clamp(1.05rem,1.4583333333vw,1.96875rem)] leading-[1.52] font-semibold tracking-[0.0625rem] m-0 mb-[clamp(0.25rem,0.3472222222vw,0.46875rem)]";
@@ -145,24 +146,32 @@ export default async function Footer({ data = undefined }: FooterProps) {
           {t("navDisclaimerPrivacy")}
         </Link>
         <div className="order-3 mt-[25px] flex items-center gap-2.5">
-          {socialLinks.map((social) => (
-            <a
-              key={social.name}
-              href={social.href ?? "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.name}
-              className="flex h-8 w-8 items-center justify-center rounded-full hover:opacity-80 xl:rounded-[21px] xl:p-0.5"
-            >
-              <Image
-                src={social.icon}
-                alt=""
-                width={32}
-                height={32}
-                aria-hidden="true"
+          {socialLinks.map((social) =>
+            social.name === "WeChat" ? (
+              <WeChatPopup
+                key={social.name}
+                icon={social.icon}
+                className="flex h-8 w-8 items-center justify-center rounded-full p-0 hover:opacity-80 xl:rounded-[21px] xl:p-0.5"
               />
-            </a>
-          ))}
+            ) : (
+              <a
+                key={social.name}
+                href={social.href ?? "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                className="flex h-8 w-8 items-center justify-center rounded-full hover:opacity-80 xl:rounded-[21px] xl:p-0.5"
+              >
+                <Image
+                  src={social.icon}
+                  alt=""
+                  width={32}
+                  height={32}
+                  aria-hidden="true"
+                />
+              </a>
+            ),
+          )}
         </div>
       </div>
     </footer>
