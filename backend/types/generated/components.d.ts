@@ -3,7 +3,7 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface ContentActionButton extends Struct.ComponentSchema {
   collectionName: 'components_content_action_buttons';
   info: {
-    displayName: 'actionButton';
+    displayName: 'Action Button';
     icon: 'code';
   };
   attributes: {
@@ -17,7 +17,7 @@ export interface ContentActionButton extends Struct.ComponentSchema {
 export interface ContentArcCarouselItem extends Struct.ComponentSchema {
   collectionName: 'components_content_arc_carousel_items';
   info: {
-    displayName: 'ArcCarouselItem';
+    displayName: 'Arc Carousel Item';
   };
   attributes: {
     callActionText: Schema.Attribute.String;
@@ -28,7 +28,7 @@ export interface ContentArcCarouselItem extends Struct.ComponentSchema {
 export interface ContentAttraction extends Struct.ComponentSchema {
   collectionName: 'components_content_attractions';
   info: {
-    displayName: 'attraction';
+    displayName: 'Attraction';
   };
   attributes: {
     icon: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
@@ -40,7 +40,7 @@ export interface ContentAttraction extends Struct.ComponentSchema {
 export interface ContentBannerImageUnit extends Struct.ComponentSchema {
   collectionName: 'components_content_banner_image_units';
   info: {
-    displayName: 'bannerImageUnit';
+    displayName: 'Banner Image Unit';
   };
   attributes: {
     altText: Schema.Attribute.String;
@@ -54,7 +54,7 @@ export interface ContentBannerImageUnit extends Struct.ComponentSchema {
 export interface ContentCarouselItem extends Struct.ComponentSchema {
   collectionName: 'components_content_carousel_items';
   info: {
-    displayName: 'carouselItem';
+    displayName: 'Carousel Item';
     icon: 'code';
   };
   attributes: {
@@ -67,7 +67,7 @@ export interface ContentCarouselItem extends Struct.ComponentSchema {
 export interface ContentDownloadAppArea extends Struct.ComponentSchema {
   collectionName: 'components_content_download_app_areas';
   info: {
-    displayName: 'DownloadAppArea';
+    displayName: 'Download App Area';
   };
   attributes: {
     actionButton1: Schema.Attribute.Component<'content.action-button', false> &
@@ -83,7 +83,7 @@ export interface ContentDownloadAppArea extends Struct.ComponentSchema {
 export interface ContentFareItem extends Struct.ComponentSchema {
   collectionName: 'components_content_fare_items';
   info: {
-    displayName: 'fareItem';
+    displayName: 'Fare Item';
   };
   attributes: {
     desc: Schema.Attribute.RichText & Schema.Attribute.Required;
@@ -96,7 +96,7 @@ export interface ContentFareItem extends Struct.ComponentSchema {
 export interface ContentFooter extends Struct.ComponentSchema {
   collectionName: 'components_content_footers';
   info: {
-    displayName: 'footer';
+    displayName: 'Footer';
   };
   attributes: {
     adultPrice: Schema.Attribute.Decimal;
@@ -122,7 +122,7 @@ export interface ContentFooter extends Struct.ComponentSchema {
 export interface ContentGetInTouch extends Struct.ComponentSchema {
   collectionName: 'components_content_get_in_touches';
   info: {
-    displayName: 'getInTouch';
+    displayName: 'Get In Touch';
   };
   attributes: {
     ButtonLabel: Schema.Attribute.String & Schema.Attribute.Required;
@@ -134,7 +134,7 @@ export interface ContentGetInTouch extends Struct.ComponentSchema {
 export interface ContentHyperlink extends Struct.ComponentSchema {
   collectionName: 'components_content_hyperlinks';
   info: {
-    displayName: 'hyperlink';
+    displayName: 'Hyperlink';
     icon: 'link';
   };
   attributes: {
@@ -147,7 +147,7 @@ export interface ContentHyperlink extends Struct.ComponentSchema {
 export interface ContentIconList extends Struct.ComponentSchema {
   collectionName: 'components_content_icon_lists';
   info: {
-    displayName: 'iconList';
+    displayName: 'Icon List';
     icon: 'code';
   };
   attributes: {
@@ -160,7 +160,7 @@ export interface ContentIconList extends Struct.ComponentSchema {
 export interface ContentImageLink extends Struct.ComponentSchema {
   collectionName: 'components_content_image_links';
   info: {
-    displayName: 'imageLink';
+    displayName: 'Image Link';
   };
   attributes: {
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
@@ -171,7 +171,7 @@ export interface ContentImageLink extends Struct.ComponentSchema {
 export interface ContentPartyTramItem extends Struct.ComponentSchema {
   collectionName: 'components_content_party_tram_items';
   info: {
-    displayName: 'partyTramItem';
+    displayName: 'Party Tram Item';
   };
   attributes: {
     callActionNumber: Schema.Attribute.Integer;
@@ -192,7 +192,7 @@ export interface ContentPartyTramItem extends Struct.ComponentSchema {
 export interface ContentScheduleBasicUnit extends Struct.ComponentSchema {
   collectionName: 'components_content_schedule_basic_units';
   info: {
-    displayName: 'scheduleBasicUnit';
+    displayName: 'Schedule Basic Unit';
   };
   attributes: {
     monToFri: Schema.Attribute.Time & Schema.Attribute.Required;
@@ -204,7 +204,7 @@ export interface ContentScheduleBasicUnit extends Struct.ComponentSchema {
 export interface ContentScheduleDay extends Struct.ComponentSchema {
   collectionName: 'components_content_schedule_days';
   info: {
-    displayName: 'ScheduleDay';
+    displayName: 'Schedule Day';
   };
   attributes: {
     first: Schema.Attribute.Component<'content.schedule-basic-unit', false> &
@@ -217,7 +217,7 @@ export interface ContentScheduleDay extends Struct.ComponentSchema {
 export interface ContentScheduleEastBound extends Struct.ComponentSchema {
   collectionName: 'components_content_schedule_east_bounds';
   info: {
-    displayName: 'scheduleEastBound';
+    displayName: 'Schedule East Bound';
   };
   attributes: {
     happyValley_shauKeiWan: Schema.Attribute.Component<
@@ -256,7 +256,7 @@ export interface ContentScheduleEastBound extends Struct.ComponentSchema {
 export interface ContentScheduleWestbound extends Struct.ComponentSchema {
   collectionName: 'components_content_schedule_westbounds';
   info: {
-    displayName: 'ScheduleWestbound';
+    displayName: 'Schedule West Bound';
   };
   attributes: {
     causewayBay_shekTongTsui: Schema.Attribute.Component<
@@ -295,7 +295,7 @@ export interface ContentScheduleWestbound extends Struct.ComponentSchema {
 export interface ContentServiceUpdates extends Struct.ComponentSchema {
   collectionName: 'components_content_service_updates';
   info: {
-    displayName: 'ServiceUpdates';
+    displayName: 'Latest News';
   };
   attributes: {
     actionButton: Schema.Attribute.Component<'content.action-button', false> &
@@ -312,7 +312,7 @@ export interface ContentServiceUpdates extends Struct.ComponentSchema {
 export interface ContentSouveniorItem extends Struct.ComponentSchema {
   collectionName: 'components_content_souvenior_items';
   info: {
-    displayName: 'souveniorItem';
+    displayName: 'Souvenior Item';
     icon: 'gift';
   };
   attributes: {
@@ -329,7 +329,7 @@ export interface ContentSouveniorItem extends Struct.ComponentSchema {
 export interface ContentStationItem extends Struct.ComponentSchema {
   collectionName: 'components_content_station_items';
   info: {
-    displayName: 'stationItem';
+    displayName: 'Station Item';
   };
   attributes: {
     attraction: Schema.Attribute.Component<'content.attraction', true>;
@@ -342,7 +342,7 @@ export interface ContentStationItem extends Struct.ComponentSchema {
 export interface ContentTramDetailsItem extends Struct.ComponentSchema {
   collectionName: 'components_content_tram_details_items';
   info: {
-    displayName: 'tramDetailsItem';
+    displayName: 'Tram Details Item';
   };
   attributes: {
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -352,7 +352,7 @@ export interface ContentTramDetailsItem extends Struct.ComponentSchema {
 export interface ContentTramoramicTourItem extends Struct.ComponentSchema {
   collectionName: 'components_content_tramoramic_tour_items';
   info: {
-    displayName: 'tramoramicTourItem';
+    displayName: 'Tramoramic Tour Item';
   };
   attributes: {
     hashTag: Schema.Attribute.String;
@@ -363,7 +363,7 @@ export interface ContentTramoramicTourItem extends Struct.ComponentSchema {
 export interface GlobalExtLink extends Struct.ComponentSchema {
   collectionName: 'components_global_ext_links';
   info: {
-    displayName: 'extLink';
+    displayName: 'Ext. Link';
   };
   attributes: {
     label: Schema.Attribute.String & Schema.Attribute.Required;
@@ -375,7 +375,7 @@ export interface GlobalExtLink extends Struct.ComponentSchema {
 export interface GlobalMainNavExtLink extends Struct.ComponentSchema {
   collectionName: 'components_global_main_nav_ext_links';
   info: {
-    displayName: 'mainNavExtLink';
+    displayName: 'Main Nav Ext. Link';
   };
   attributes: {
     careersLink: Schema.Attribute.String;
@@ -400,7 +400,7 @@ export interface MediaBannerImage extends Struct.ComponentSchema {
 export interface PageHomeArcCarousel extends Struct.ComponentSchema {
   collectionName: 'components_page_home_arc_carousels';
   info: {
-    displayName: 'ArcCarousel';
+    displayName: 'Arc Carousel';
     icon: 'landscape';
   };
   attributes: {
@@ -414,7 +414,7 @@ export interface PageHomeArcCarousel extends Struct.ComponentSchema {
 export interface PageHomeSouvenior extends Struct.ComponentSchema {
   collectionName: 'components_page_home_souveniors';
   info: {
-    displayName: 'souvenior';
+    displayName: 'Souvenior';
     icon: 'gift';
   };
   attributes: {
@@ -428,7 +428,7 @@ export interface PageHomeSouvenior extends Struct.ComponentSchema {
 export interface PageHomeTramRoutes extends Struct.ComponentSchema {
   collectionName: 'components_page_home_tram_routes';
   info: {
-    displayName: 'tramRoutes';
+    displayName: 'Tram Routes';
     icon: 'code';
   };
   attributes: {
@@ -442,7 +442,7 @@ export interface PageHomeTramRoutes extends Struct.ComponentSchema {
 export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
   collectionName: 'components_page_home_tramoramic_tours';
   info: {
-    displayName: 'tramoramicTour';
+    displayName: 'Tramoramic Tour';
     icon: 'code';
   };
   attributes: {
@@ -534,7 +534,7 @@ export interface SeoSeo extends Struct.ComponentSchema {
 export interface SharedIconEnum extends Struct.ComponentSchema {
   collectionName: 'components_shared_icon_enums';
   info: {
-    displayName: 'icon-enum';
+    displayName: 'Icon Enum';
     icon: 'bulletList';
   };
   attributes: {

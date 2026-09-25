@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "plan_your_rides",
+  "collectionName": "about_uses",
   "info": {
-    "singularName": "plan-your-ride",
-    "pluralName": "plan-your-rides",
-    "displayName": "Plan Your Ride"
+    "singularName": "about-us",
+    "pluralName": "about-uses",
+    "displayName": "About Us"
   },
   "options": {
     "draftAndPublish": true
@@ -23,7 +23,7 @@
         }
       },
       "component": "seo.seo",
-      "repeatable": false
+      "repeatable": true
     },
     "title": {
       "type": "string",
@@ -60,30 +60,10 @@
           "localized": true
         }
       },
-      "component": "content.banner-image-unit",
+      "component": "media.banner-image",
       "repeatable": true
     },
-    "latestNews": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "content.service-updates",
-      "repeatable": false
-    },
-    "schedule": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "page-play-your-ride.schedule",
-      "repeatable": false
-    },
-    "interactiveRouteMap": {
+    "storyOfHKT": {
       "type": "component",
       "pluginOptions": {
         "i18n": {
@@ -93,14 +73,14 @@
       "component": "content.download-app-area",
       "repeatable": false
     },
-    "Fares": {
+    "latestNews": {
       "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "page-play-your-ride.fares",
+      "component": "content.service-updates",
       "repeatable": false
     },
     "downloadAppArea": {

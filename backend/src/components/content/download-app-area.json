@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_download_app_areas",
   "info": {
-    "displayName": "DownloadAppArea"
+    "displayName": "Download App Area"
   },
   "options": {},
   "attributes": {
@@ -9,9 +9,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "title": {
       "type": "string",

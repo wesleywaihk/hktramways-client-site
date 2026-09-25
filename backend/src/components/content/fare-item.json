@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_fare_items",
   "info": {
-    "displayName": "fareItem"
+    "displayName": "Fare Item"
   },
   "options": {},
   "attributes": {
@@ -9,9 +9,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "title": {
       "type": "string",

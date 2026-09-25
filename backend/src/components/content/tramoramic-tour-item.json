@@ -1,16 +1,14 @@
 {
   "collectionName": "components_content_tramoramic_tour_items",
   "info": {
-    "displayName": "tramoramicTourItem"
+    "displayName": "Tramoramic Tour Item"
   },
   "options": {},
   "attributes": {
     "image": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "hashTag": {
       "type": "string"

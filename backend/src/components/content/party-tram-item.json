@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_party_tram_items",
   "info": {
-    "displayName": "partyTramItem"
+    "displayName": "Party Tram Item"
   },
   "options": {},
   "attributes": {
@@ -13,9 +13,7 @@
     "overlayImg": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "callActionNumber": {
       "type": "integer"

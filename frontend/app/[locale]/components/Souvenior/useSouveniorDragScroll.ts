@@ -69,7 +69,8 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
       const paddingLeft = parseFloat(
         getComputedStyle(containerRef.current).paddingLeft,
       );
-      contentLeft = containerRect.left + (Number.isNaN(paddingLeft) ? 0 : paddingLeft);
+      contentLeft =
+        containerRect.left + (Number.isNaN(paddingLeft) ? 0 : paddingLeft);
     }
 
     let minX: number;
@@ -77,7 +78,10 @@ export function useSouveniorDragScroll(data?: SouveniorData | null) {
       const buttonRight = actionButtonRef.current.getBoundingClientRect().right;
       minX = Math.min(startX, buttonRight - contentLeft - rowWidth);
     } else {
-      minX = Math.min(startX, viewportWidth - MOBILE_END_GUTTER - contentLeft - rowWidth);
+      minX = Math.min(
+        startX,
+        viewportWidth - MOBILE_END_GUTTER - contentLeft - rowWidth,
+      );
     }
 
     boundsRef.current = { min: minX, max: startX };

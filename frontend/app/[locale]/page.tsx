@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { fetchHome, fetchAnnouncements } from "@/hooks/useApiEndpoint/api";
+import { fetchHome } from "@/hooks/useApiEndpoint/api";
 import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
 import {
   generateEntityPageMetadata,
   getEntityStructuredData,
   getPreviewDocumentId,
 } from "@/lib/pageMetadata";
-import type { Home, AnnouncementsResponse } from "@/types/api";
-import Banner from "@/components/Banner/Banner";
+import type { Home } from "@/types/api";
 import StructuredData from "@/components/StructuredData";
+import HomeBanner from "./components/HomeBanner";
 import NewsBar from "./components/NewsBar/NewsBar";
 import ArcCarousel from "./components/ArcCarousel/ArcCarousel";
 import TramRoute from "@/components/TramRoute/TramRoute";
@@ -43,16 +43,10 @@ export default async function LandingPage({ params }: LandingPageProps) {
   const t = await getTranslations({ locale, namespace: "common" });
   const documentId = await getPreviewDocumentId();
 
-  const [{ data: res, loaded }, announcementsRes] = await Promise.all([
-    fetchWithErrorHandling(() =>
-      fetchHome(documentId ?? "", documentId !== null, locale),
-    ),
-    fetchWithErrorHandling<AnnouncementsResponse>(() =>
-      fetchAnnouncements(),
-    ),
-  ]);
+  const { data: res, loaded } = await fetchWithErrorHandling(() =>
+    fetchHome(documentId ?? "", documentId !== null, locale),
+  );
   const home: Home | null = res?.data[0] ?? null;
-  const newsItems = announcementsRes.data?.data ?? [];
 
   if (!loaded || !home) {
     return <ErrorPage message={t("noContent")} />;
@@ -62,23 +56,18 @@ export default async function LandingPage({ params }: LandingPageProps) {
     <div className="pageWrapper mt-0">
       <StructuredData data={getEntityStructuredData(home, (h) => h.seo)} />
       {/* <SetHeaderStyle style="transparent" /> */}
-      <Banner
-        bannerImage={home.bannerImage}
-        // newsBar rendered: header + banner + newsBar = 100dvh
-        // no newsBar: header + banner = 100dvh
-        className={
-          newsItems.length
-            ? "h-[calc(100dvh-128px)] lg:h-[calc(100dvh-160px)]"
-            : "h-[calc(100dvh-76px)] lg:h-[calc(100dvh-100px)]"
-        }
-      />
-      <NewsBar items={newsItems} locale={locale} />
+      <HomeBanner bannerImage={home.bannerImage} />
+      <NewsBar locale={locale} />
       <ArcCarousel locale={locale} documentId={documentId} />
       <TramRoute locale={locale} />
       <PartyTram locale={locale} />
       <TramoramicTour locale={locale} documentId={documentId} />
       <Souvenior locale={locale} documentId={documentId} />
-      <DownloadAppArea locale={locale} source="home" documentId={documentId} />
+      <DownloadAppArea
+        locale={locale}
+        endpoint="/api/homes"
+        documentId={documentId}
+      />
     </div>
   );
 }

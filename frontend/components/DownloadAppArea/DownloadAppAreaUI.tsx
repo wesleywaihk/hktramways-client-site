@@ -13,6 +13,10 @@ export interface DownloadAppAreaUIProps {
   data?: DownloadAppAreaData | null;
   compClassName?: string;
   className?: string;
+  /** Replaces the default title text color (`text-white`). */
+  titleClassName?: string;
+  /** Replaces the default desc text color (`text-white/90`). */
+  descClassName?: string;
   buttonColor?: ButtonColor;
   buttonVariant?: ButtonVariant;
 }
@@ -21,6 +25,8 @@ export default function DownloadAppAreaUI({
   data,
   compClassName = "download-app-area",
   className = "",
+  titleClassName = "text-white",
+  descClassName = "text-white/90",
   buttonColor = "white",
   buttonVariant = "outline",
 }: DownloadAppAreaUIProps) {
@@ -64,8 +70,10 @@ export default function DownloadAppAreaUI({
         </div>
 
         <div className="mx-auto flex w-full flex-col items-center text-center lg:mx-0 lg:w-[50%]! lg:items-start lg:text-left">
-          <h2 className="title-2-text text-white">{data.title}</h2>
-          <p className="mt-[clamp(0.75rem,1.0416666667vw,1.40625rem)] text-white/90">
+          <h2 className={`title-2-text ${titleClassName}`}>{data.title}</h2>
+          <p
+            className={`mt-[clamp(0.75rem,1.0416666667vw,1.40625rem)] ${descClassName}`}
+          >
             {data.desc}
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-[15px] lg:mt-8 lg:justify-start lg:gap-5">

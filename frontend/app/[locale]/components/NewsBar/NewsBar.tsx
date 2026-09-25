@@ -1,15 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import type { AnnouncementData } from "@/types/api";
 import { devClassName } from "@/lib/devClassName";
+import { useAnnouncements } from "@/hooks/useAnnouncements";
 import NewsBarEntry from "./NewsBarEntry";
 
 const DEF_SPEED = 40;
 
 export interface NewsBarProps {
-  items?: AnnouncementData[];
   locale: string;
   /** Scroll speed in pixels per second. */
   speed?: number;
@@ -27,16 +27,16 @@ function repeatToMinimum(
   return repeated;
 }
 
-export default function NewsBar({
-  items = [],
-  locale,
-  speed = DEF_SPEED,
-}: NewsBarProps) {
+export default function NewsBar({ locale, speed = DEF_SPEED }: NewsBarProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
 
-  const visibleItems = items.filter((item) => item.title.trim().length > 0);
+  const { items } = useAnnouncements();
+  const visibleItems = useMemo(
+    () => items.filter((item) => item.title.trim().length > 0),
+    [items],
+  );
 
   useEffect(() => {
     const track = trackRef.current;

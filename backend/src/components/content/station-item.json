@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_station_items",
   "info": {
-    "displayName": "stationItem"
+    "displayName": "Station Item"
   },
   "options": {},
   "attributes": {
@@ -12,9 +12,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "attraction": {
       "type": "component",

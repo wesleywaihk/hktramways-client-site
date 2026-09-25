@@ -4,37 +4,23 @@ import { useEffect, useState } from "react";
 import DownloadAppAreaUI, {
   type DownloadAppAreaUIProps,
 } from "@/components/DownloadAppArea/DownloadAppAreaUI";
-import {
-  fetchHomeDownloadAppArea,
-  fetchPlanYourRideDownloadAppArea,
-} from "@/hooks/useApiEndpoint/api";
+import { fetchDownloadAppArea } from "@/hooks/useApiEndpoint/api";
 import type { DownloadAppAreaData } from "@/types/api";
-
-// Keyed by source rather than accepting a fetch function directly: page.tsx
-// files are Server Components, and functions can't be passed as props
-// across the server/client boundary (only serializable values can).
-// `documentId` (preview mode) only applies to the `home` fetcher —
-// plan-your-ride preview isn't wired up (no SLUG_ROUTES entry).
-const FETCHERS: Record<
-  "home" | "planYourRide",
-  (locale: string, documentId?: string | null) => Promise<DownloadAppAreaData | null>
-> = {
-  home: fetchHomeDownloadAppArea,
-  planYourRide: (locale) => fetchPlanYourRideDownloadAppArea(locale),
-};
 
 export interface DownloadAppAreaProps extends Omit<
   DownloadAppAreaUIProps,
   "data"
 > {
   locale: string;
-  source: keyof typeof FETCHERS;
+  /** API endpoint (e.g. "/api/plan-your-rides") of the content type that holds the CMS downloadAppArea component. */
+  endpoint: string;
+  /** Preview mode document id; fetches that draft instead of the latest published entry. */
   documentId?: string | null;
 }
 
 export default function DownloadAppArea({
   locale,
-  source,
+  endpoint,
   documentId,
   className,
   buttonColor,
@@ -46,12 +32,10 @@ export default function DownloadAppArea({
 
   useEffect(() => {
     let cancelled = false;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale`/`source` changes before the refetch resolves
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when inputs change before the refetch resolves
     setData(undefined);
 
-    // `documentId` only applies to the `home` fetcher (preview isn't wired
-    // up for plan-your-ride); the other fetcher ignores the extra arg.
-    FETCHERS[source](locale, documentId)
+    fetchDownloadAppArea(locale, endpoint, documentId)
       .then((result) => {
         if (!cancelled) setData(result);
       })
@@ -62,7 +46,7 @@ export default function DownloadAppArea({
     return () => {
       cancelled = true;
     };
-  }, [locale, source, documentId]);
+  }, [locale, endpoint, documentId]);
 
   return (
     <DownloadAppAreaUI

@@ -2,20 +2,21 @@ import IconButton from "@/components/Button/IconButton";
 import { devClassName } from "@/lib/devClassName";
 import type { AnnouncementData } from "@/types/api";
 import { formatDate } from "@/lib/formatDate";
+import { newsHref } from "@/lib/newsHref";
 
-export default function ServiceUpdatesEntry({
+export interface LatestNewsEntryProps extends AnnouncementData {
+  locale: string;
+}
+
+export default function LatestNewsEntry({
   dateTime,
   title,
-  actionButton,
-}: AnnouncementData) {
-  const link = actionButton[0]?.link ?? null;
-  const url = link?.url ?? null;
-  const openNewWindow = link?.openNewWindow ?? false;
-  const noRefer = link?.noRefer ?? false;
-
+  slug,
+  locale,
+}: LatestNewsEntryProps) {
   return (
     <div
-      className={`${devClassName("service-updates-entry")}flex items-center justify-between gap-4 border-b border-black/10 py-6 first:pt-0 last:border-b-0 last:pb-0`}
+      className={`${devClassName("latest-news-entry")}flex items-center justify-between gap-4 border-b border-black/10 py-6 first:pt-0 last:border-b-0 last:pb-0`}
     >
       <div className="min-w-0">
         <span className="text-green block text-[15px] leading-none font-semibold tracking-[0.02em] lg:text-[16px]">
@@ -29,9 +30,7 @@ export default function ServiceUpdatesEntry({
         ariaLabel={title}
         useArrow
         shape="square"
-        href={url ?? undefined}
-        target={openNewWindow ? "_blank" : undefined}
-        rel={openNewWindow && noRefer ? "nofollow noreferrer" : undefined}
+        href={slug ? newsHref(locale, slug) : undefined}
         className="hover:text-green! hover:border-green! grid shrink-0 border-transparent! !bg-[#fdd021] text-white! hover:bg-white! lg:h-[60px] lg:w-[60px] lg:rounded-[21px]"
       />
     </div>
