@@ -4,9 +4,7 @@ import { Box, Typography } from "@strapi/design-system";
 // Add/edit entries below — keyed by content-type UID, not stored in the database.
 const NOTES: Record<string, string[]> = {
   "api::global.global": [],
-  "api::home.home": [
-    "Souvenior: \n- Only the first 5 souvenior items will be displayed.",
-  ],
+  "api::home.home": [],
   "api::plan-your-ride.plan-your-ride": [],
   "api::party-tram.party-tram": [
     "Overlay image:\n- overlayX: counted by %, 0 if left empty.\n- overlayY: counted by %, 0 if left empty.\n- overlayW: counted by %, 100 if left empty.\n- overlayH: counted by %, auto if left empty.",

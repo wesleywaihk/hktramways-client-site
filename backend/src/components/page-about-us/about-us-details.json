@@ -1,0 +1,71 @@
+{
+  "collectionName": "components_page_about_us_about_us_details",
+  "info": {
+    "displayName": "AboutUsDetails"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "accordionItem": {
+      "type": "component",
+      "component": "content.accordion-item",
+      "repeatable": true
+    },
+    "tramFleet": {
+      "type": "integer",
+      "required": true
+    },
+    "tramStops": {
+      "type": "integer",
+      "required": true
+    },
+    "devotedWorkforce": {
+      "type": "integer",
+      "required": true
+    },
+    "tramSystem": {
+      "type": "integer",
+      "required": true
+    },
+    "tramDepots": {
+      "type": "integer",
+      "required": true
+    },
+    "tramRoutes": {
+      "type": "integer",
+      "required": true
+    },
+    "image1": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "image2": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "image3": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

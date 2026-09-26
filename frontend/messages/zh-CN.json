@@ -23,7 +23,6 @@
     "routeToggleWestboundSub": "往坚尼地城",
     "routeToggleEastboundSub": "往筲箕湾",
     "routeSelectAll": "所有电车路线",
-
     "navOurStory": "我们的故事",
     "navNewsEvents": "新闻与活动",
     "navMobileApp": "手机应用程序",
@@ -69,6 +68,13 @@
     "footerMonthlyTicket": "月票",
     "footerDownloadApp": "下载应用程序",
     "footerWeChatFollowUs": "关注我们",
-    "footerWeChatCaption": "香港电车 HK Tramways"
+    "footerWeChatCaption": "香港电车 HK Tramways",
+    "aboutTramFleet": "电车车队",
+    "aboutTramStops": "电车站",
+    "aboutDevotedWorkforce": "敬业员工",
+    "aboutTramSystem": "电车系统",
+    "aboutTramDepots": "电车厂",
+    "aboutTramRoutes": "电车路线",
+    "aboutKm": "公里"
   }
 }

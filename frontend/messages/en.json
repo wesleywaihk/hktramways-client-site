@@ -68,6 +68,13 @@
     "footerMonthlyTicket": "Monthly Ticket",
     "footerDownloadApp": "Download App",
     "footerWeChatFollowUs": "Follow us",
-    "footerWeChatCaption": "HK Tramways"
+    "footerWeChatCaption": "HK Tramways",
+    "aboutTramFleet": "Tram Fleet",
+    "aboutTramStops": "Tram Stops",
+    "aboutDevotedWorkforce": "Devoted Workforce",
+    "aboutTramSystem": "Tram System",
+    "aboutTramDepots": "Tram Depots",
+    "aboutTramRoutes": "Tram Routes",
+    "aboutKm": "km"
   }
 }

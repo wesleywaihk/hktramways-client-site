@@ -19,7 +19,8 @@
     "item": {
       "type": "component",
       "component": "content.souvenior-item",
-      "repeatable": true
+      "repeatable": true,
+      "max": 5
     }
   },
   "config": {}

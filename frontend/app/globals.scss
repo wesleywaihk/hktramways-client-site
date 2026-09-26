@@ -37,7 +37,9 @@ body {
   background: var(--color-white);
   color: #171717;
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  // `clip`, not `hidden`: `hidden` makes body a scroll container, which breaks
+  // `position: sticky` for everything inside it.
+  overflow-x: clip;
 }
 
 @utility paragraph {

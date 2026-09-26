@@ -12,6 +12,7 @@ import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import StoryOfHkt from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import LatestNews from "@/components/LatestNews/LatestNews";
+import AboutDetails from "./components/AboutDetails/AboutDetails";
 import type { AboutUsResponse } from "@/types/api";
 
 interface AboutUsPageProps {
@@ -26,7 +27,7 @@ export async function generateMetadata({
     locale,
     fetchAboutUs,
     (entity) => entity.title,
-    (entity) => entity.seo?.[0],
+    (entity) => entity.seo,
   );
 }
 
@@ -45,15 +46,14 @@ export default async function AboutUsPage({ params }: AboutUsPageProps) {
 
   return (
     <div className="pageWrapper mt-0">
-      <StructuredData
-        data={getEntityStructuredData(heroData, (h) => h.seo?.[0])}
-      />
+      <StructuredData data={getEntityStructuredData(heroData, (h) => h.seo)} />
       <Hero
         title={heroData.title}
         desc={heroData.desc}
         actionButton={heroData.actionButton}
         bannerImage={heroData.bannerImage}
       />
+      <AboutDetails locale={locale} />
       <StoryOfHkt
         locale={locale}
         endpoint="/api/about-uses"

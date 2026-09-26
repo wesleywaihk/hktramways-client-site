@@ -481,6 +481,15 @@ export interface ApiAboutUsAboutUs extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    details: Schema.Attribute.Component<
+      'page-about-us.about-us-details',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     downloadAppArea: Schema.Attribute.Component<
       'content.download-app-area',
       false
@@ -502,7 +511,7 @@ export interface ApiAboutUsAboutUs extends Struct.CollectionTypeSchema {
       'api::about-us.about-us'
     >;
     publishedAt: Schema.Attribute.DateTime;
-    seo: Schema.Attribute.Component<'seo.seo', true> &
+    seo: Schema.Attribute.Component<'seo.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -795,6 +804,12 @@ export interface ApiInteractiveMapInteractiveMap
     publishedAt: Schema.Attribute.DateTime;
     ScheduleAppLink: Schema.Attribute.String &
       Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    seo: Schema.Attribute.Component<'seo.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

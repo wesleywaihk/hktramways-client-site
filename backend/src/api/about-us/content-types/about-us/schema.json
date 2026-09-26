@@ -23,7 +23,7 @@
         }
       },
       "component": "seo.seo",
-      "repeatable": true
+      "repeatable": false
     },
     "title": {
       "type": "string",
@@ -62,6 +62,16 @@
       },
       "component": "media.banner-image",
       "repeatable": true
+    },
+    "details": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "page-about-us.about-us-details",
+      "repeatable": false
     },
     "storyOfHKT": {
       "type": "component",

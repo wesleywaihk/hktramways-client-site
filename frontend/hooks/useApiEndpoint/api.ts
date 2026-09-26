@@ -222,6 +222,25 @@ export const fetchAboutUs = cache(async function fetchAboutUs(
 });
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side AboutDetails component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchAboutUsDetails(locale: string) {
+  const populate = buildPopulate([
+    "details.accordionItem.icon",
+    "details.image1",
+    "details.image2",
+    "details.image3",
+  ]);
+  const url = `${API_URL}/api/about-uses?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch about us details: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side Fares component, directly against NEXT_PUBLIC_API_URL.
 export async function fetchFares(locale: string) {
   const populate = buildPopulate([
