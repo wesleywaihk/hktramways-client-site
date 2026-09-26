@@ -1,5 +1,6 @@
 import type { StrapiApp } from "@strapi/strapi/admin";
 import editorNoteSidePanel from "./extensions/EditorNote";
+import { guardStationLocCodes } from "./extensions/StationLocCodeGuard";
 
 export default {
   config: {
@@ -87,9 +88,11 @@ export default {
     const contentManagerPlugin = app.getPlugin("content-manager") as unknown as {
       apis: {
         addEditViewSidePanel: (panels: Array<(context: never) => unknown>) => void;
+        addDocumentAction: (actions: (actions: never[]) => unknown[]) => void;
       };
     };
 
     contentManagerPlugin.apis.addEditViewSidePanel([editorNoteSidePanel]);
+    contentManagerPlugin.apis.addDocumentAction(guardStationLocCodes);
   },
 };

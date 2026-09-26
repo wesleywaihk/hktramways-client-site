@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_attractions",
   "info": {
-    "displayName": "attraction"
+    "displayName": "Attraction"
   },
   "options": {},
   "attributes": {
@@ -9,9 +9,7 @@
       "type": "media",
       "multiple": true,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "text": {
       "type": "string",

@@ -1,7 +1,9 @@
+import Link from "next/link";
 import type { AnnouncementData } from "@/types/api";
 import { devClassName } from "@/lib/devClassName";
 import { formatDate } from "@/lib/formatDate";
 import { getLocalizedLabel } from "@/lib/getLocalizedLabel";
+import { newsHref } from "@/lib/newsHref";
 
 export interface NewsBarEntryProps extends AnnouncementData {
   locale: string;
@@ -11,16 +13,12 @@ export default function NewsBarEntry({
   dateTime,
   announcement_types,
   title,
-  actionButton,
+  slug,
   locale,
 }: NewsBarEntryProps) {
   const type = announcement_types[0]
     ? getLocalizedLabel(announcement_types[0], locale)
     : "";
-  const link = actionButton[0]?.link ?? null;
-  const url = link?.url ?? null;
-  const openNewWindow = link?.openNewWindow ?? false;
-  const noRefer = link?.noRefer ?? false;
 
   return (
     <div
@@ -34,15 +32,13 @@ export default function NewsBarEntry({
           {type}
         </span>
       ) : null}
-      {url ? (
-        <a
-          href={url}
+      {slug ? (
+        <Link
+          href={newsHref(locale, slug)}
           className="text-green lg:hover:text-green cursor-pointer text-sm font-semibold tracking-[0.02em] whitespace-nowrap transition-colors duration-300 lg:text-[15px] lg:text-black"
-          target={openNewWindow ? "_blank" : "_self"}
-          {...(openNewWindow && noRefer ? { rel: "nofollow noreferrer" } : {})}
         >
           {title}
-        </a>
+        </Link>
       ) : (
         <span className="text-green text-sm font-semibold tracking-[0.02em] whitespace-nowrap lg:text-[15px] lg:text-black">
           {title}

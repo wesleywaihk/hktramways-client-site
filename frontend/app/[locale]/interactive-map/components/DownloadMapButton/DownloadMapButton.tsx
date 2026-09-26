@@ -23,7 +23,7 @@ export default function DownloadMapButton({
       aria-label={label}
       className={`${devClassName(
         "download-map-button",
-      )}group inline-flex h-[50px] w-[50px] shrink-0 cursor-pointer items-center justify-center gap-[10px] rounded-[18px] border-[2px] border-green bg-green px-0 text-white transition-colors duration-200 ease-out hover:bg-green-light lg:h-[60px] lg:w-auto lg:gap-[14px] lg:rounded-[21px] lg:px-8 lg:py-4 ${className ?? ""}`}
+      )}group border-green bg-green hover:bg-green-light inline-flex h-[50px] w-[50px] shrink-0 cursor-pointer items-center justify-center gap-[10px] rounded-[18px] border-[2px] px-0 text-white transition-colors duration-200 ease-out lg:h-[60px] lg:w-auto lg:gap-[14px] lg:rounded-[21px] lg:px-8 lg:py-4 ${className ?? ""}`}
     >
       <span className="hidden font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] whitespace-nowrap uppercase lg:inline lg:translate-y-[1px]">
         {label}

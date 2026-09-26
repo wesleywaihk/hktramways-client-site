@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_carousel_items",
   "info": {
-    "displayName": "carouselItem",
+    "displayName": "Carousel Item",
     "icon": "code"
   },
   "options": {},
@@ -10,9 +10,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "desc": {
       "type": "text",

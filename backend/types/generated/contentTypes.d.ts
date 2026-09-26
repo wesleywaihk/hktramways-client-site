@@ -443,11 +443,95 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAboutUsAboutUs extends Struct.CollectionTypeSchema {
+  collectionName: 'about_uses';
+  info: {
+    displayName: 'About Us';
+    pluralName: 'about-uses';
+    singularName: 'about-us';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    actionButton: Schema.Attribute.Component<'content.action-button', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    bannerImage: Schema.Attribute.Component<'media.banner-image', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    desc: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    downloadAppArea: Schema.Attribute.Component<
+      'content.download-app-area',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    latestNews: Schema.Attribute.Component<'content.service-updates', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::about-us.about-us'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'seo.seo', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    storyOfHKT: Schema.Attribute.Component<'content.download-app-area', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiAnnouncementTypeAnnouncementType
   extends Struct.CollectionTypeSchema {
   collectionName: 'announcement_types';
   info: {
-    displayName: 'AnnouncementType';
+    displayName: 'Announcement Type';
     pluralName: 'announcement-types';
     singularName: 'announcement-type';
   };
@@ -602,7 +686,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
 export interface ApiHomeHome extends Struct.CollectionTypeSchema {
   collectionName: 'homes';
   info: {
-    displayName: 'home';
+    displayName: 'Home';
     pluralName: 'homes';
     singularName: 'home';
   };
@@ -681,7 +765,7 @@ export interface ApiInteractiveMapInteractiveMap
   extends Struct.CollectionTypeSchema {
   collectionName: 'interactive_maps';
   info: {
-    displayName: 'InteractiveMap';
+    displayName: 'Interactive Map';
     pluralName: 'interactive-maps';
     singularName: 'interactive-map';
   };
@@ -731,7 +815,7 @@ export interface ApiInteractiveMapInteractiveMap
 export interface ApiPartyTramPartyTram extends Struct.SingleTypeSchema {
   collectionName: 'party_trams';
   info: {
-    displayName: 'partyTram';
+    displayName: 'Party Tram';
     pluralName: 'party-trams';
     singularName: 'party-tram';
   };
@@ -776,7 +860,7 @@ export interface ApiPlanYourRidePlanYourRide
   extends Struct.CollectionTypeSchema {
   collectionName: 'plan_your_rides';
   info: {
-    displayName: 'plan your ride';
+    displayName: 'Plan Your Ride';
     pluralName: 'plan-your-rides';
     singularName: 'plan-your-ride';
   };
@@ -835,6 +919,12 @@ export interface ApiPlanYourRidePlanYourRide
           localized: true;
         };
       }>;
+    latestNews: Schema.Attribute.Component<'content.service-updates', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -856,15 +946,6 @@ export interface ApiPlanYourRidePlanYourRide
           localized: true;
         };
       }>;
-    ServiceUpdates: Schema.Attribute.Component<
-      'content.service-updates',
-      false
-    > &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
@@ -881,7 +962,7 @@ export interface ApiPlanYourRidePlanYourRide
 export interface ApiTramRouteTramRoute extends Struct.SingleTypeSchema {
   collectionName: 'tram_routes';
   info: {
-    displayName: 'tramRoute';
+    displayName: 'Tram Route';
     pluralName: 'tram-routes';
     singularName: 'tram-route';
   };
@@ -1440,6 +1521,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::about-us.about-us': ApiAboutUsAboutUs;
       'api::announcement-type.announcement-type': ApiAnnouncementTypeAnnouncementType;
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::global.global': ApiGlobalGlobal;

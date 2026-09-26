@@ -14,7 +14,7 @@ import TramRoute from "@/components/TramRoute/TramRoute";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
-import ServiceUpdates from "@/components/ServiceUpdates/ServiceUpdates";
+import LatestNews from "@/components/LatestNews/LatestNews";
 import type { PlanYourRideResponse } from "@/types/api";
 
 interface PlanYourRidePageProps {
@@ -52,25 +52,19 @@ export default async function PlanYourRidePage({
 
   return (
     <div className="pageWrapper mt-0">
-      <StructuredData
-        data={getEntityStructuredData(heroData, (h) => h.seo)}
-      />
+      <StructuredData data={getEntityStructuredData(heroData, (h) => h.seo)} />
       <Hero
         title={heroData.title}
         desc={heroData.desc}
         actionButton={heroData.actionButton}
         bannerImage={heroData.bannerImage}
       />
-      <ServiceUpdates
-        locale={locale}
-        endpoint="/api/plan-your-rides"
-        limit={3}
-      />
+      <LatestNews locale={locale} endpoint="/api/plan-your-rides" limit={3} />
       <TramRoute locale={locale} />
       <Schedule locale={locale} />
       <InteractiveRouteMap locale={locale} />
       <Fares locale={locale} />
-      <DownloadAppArea locale={locale} source="planYourRide" />
+      <DownloadAppArea locale={locale} endpoint="/api/plan-your-rides" />
     </div>
   );
 }

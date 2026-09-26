@@ -48,9 +48,7 @@ export default function Souvenior({ locale, documentId }: SouveniorProps) {
 
   if (data === undefined) {
     return (
-      <section
-        className={`${devClassName("souvenior")}borderless bg-green`}
-      >
+      <section className={`${devClassName("souvenior")}borderless bg-green`}>
         <Loading />
       </section>
     );

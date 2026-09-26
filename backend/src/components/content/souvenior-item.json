@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_souvenior_items",
   "info": {
-    "displayName": "souveniorItem",
+    "displayName": "Souvenior Item",
     "icon": "gift"
   },
   "options": {},
@@ -10,9 +10,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "icon": {
       "type": "component",

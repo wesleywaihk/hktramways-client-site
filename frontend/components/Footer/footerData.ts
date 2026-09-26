@@ -4,7 +4,7 @@ export type SocialPlatform = {
   href: string | null;
 };
 
-/** Icon + display name per footer social link field. Hrefs come from CMS global.footer. */
+/** Icon + display name per footer social link field. Hrefs come from CMS global.footer (except WeChat, which opens a QR popup). */
 export function socialPlatforms(footer: {
   fbLink: string | null;
   igLink: string | null;
@@ -26,7 +26,8 @@ export function socialPlatforms(footer: {
     },
     { name: "RedBook", icon: "/footer/redbook.svg", href: footer.redBookLink },
     { name: "WeChat", icon: "/footer/wechat.svg", href: footer.weChatLink },
-  ].filter((social) => social.href);
+    // WeChat opens a QR popup instead of a link, so it shows regardless of weChatLink
+  ].filter((social) => social.name === "WeChat" || social.href);
 }
 
 export const paymentIcons = [

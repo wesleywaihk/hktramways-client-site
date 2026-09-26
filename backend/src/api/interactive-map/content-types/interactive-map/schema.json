@@ -4,7 +4,7 @@
   "info": {
     "singularName": "interactive-map",
     "pluralName": "interactive-maps",
-    "displayName": "InteractiveMap"
+    "displayName": "Interactive Map"
   },
   "options": {
     "draftAndPublish": true

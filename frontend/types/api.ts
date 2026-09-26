@@ -238,15 +238,15 @@ export interface ScheduleData {
   seheduleEastBound: ScheduleEastBound;
 }
 
-export interface ServiceUpdatesData {
+export interface LatestNewsData {
   id: number;
   title: string;
   actionButton: ActionButton | null;
   announcement_types: AnnouncementType[];
 }
 
-export interface ServiceUpdatesResponse {
-  data: { ServiceUpdates: ServiceUpdatesData | null }[];
+export interface LatestNewsResponse {
+  data: { latestNews: LatestNewsData | null }[];
 }
 
 export interface FareItemData {
@@ -276,7 +276,7 @@ export interface PlanYourRideData {
   desc: string;
   actionButton: ActionButton | null;
   bannerImage: ResponsiveImage[] | null;
-  ServiceUpdates: ServiceUpdatesData | null;
+  latestNews: LatestNewsData | null;
   Fares: FaresData | null;
   seo: Seo | null;
 }
@@ -289,8 +289,22 @@ export interface PlanYourRideScheduleResponse {
   data: { schedule: ScheduleData | null }[];
 }
 
-export interface PlanYourRideInteractiveRouteMapResponse {
-  data: { interactiveRouteMap: DownloadAppAreaData | null }[];
+export interface AboutUsData {
+  id: number;
+  documentId: string;
+  title: string;
+  desc: string;
+  actionButton: ActionButton | null;
+  bannerImage: ResponsiveImage[] | null;
+  latestNews: LatestNewsData | null;
+  storyOfHKT: DownloadAppAreaData | null;
+  downloadAppArea: DownloadAppAreaData | null;
+  // Repeatable in the CMS schema; the first entry is used.
+  seo: Seo[] | null;
+}
+
+export interface AboutUsResponse {
+  data: AboutUsData[];
 }
 
 export interface AttractionData {

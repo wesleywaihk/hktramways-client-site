@@ -4,7 +4,7 @@
   "info": {
     "singularName": "tram-route",
     "pluralName": "tram-routes",
-    "displayName": "tramRoute"
+    "displayName": "Tram Route"
   },
   "options": {
     "draftAndPublish": true

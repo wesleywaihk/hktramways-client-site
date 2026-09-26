@@ -4,7 +4,7 @@
   "info": {
     "singularName": "announcement-type",
     "pluralName": "announcement-types",
-    "displayName": "AnnouncementType"
+    "displayName": "Announcement Type"
   },
   "options": {
     "draftAndPublish": true

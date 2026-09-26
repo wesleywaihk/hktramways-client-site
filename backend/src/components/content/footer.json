@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_footers",
   "info": {
-    "displayName": "footer"
+    "displayName": "Footer"
   },
   "options": {},
   "attributes": {
@@ -56,10 +56,6 @@
       "required": false
     },
     "redBookLink": {
-      "type": "string",
-      "required": false
-    },
-    "weChatLink": {
       "type": "string",
       "required": false
     },

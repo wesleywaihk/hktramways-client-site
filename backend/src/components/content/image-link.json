@@ -1,7 +1,7 @@
 {
   "collectionName": "components_content_image_links",
   "info": {
-    "displayName": "imageLink"
+    "displayName": "Image Link"
   },
   "options": {},
   "attributes": {
@@ -9,9 +9,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "link": {
       "type": "string",

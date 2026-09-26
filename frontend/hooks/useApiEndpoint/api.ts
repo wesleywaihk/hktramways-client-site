@@ -46,8 +46,11 @@ export const fetchHome = cache(async function fetchHome(
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side DownloadAppArea component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchHomeDownloadAppArea(
+// `documentId` (preview mode) fetches that draft document instead of the
+// latest published entry.
+export async function fetchDownloadAppArea(
   locale: string,
+  endpoint: string,
   documentId?: string | null,
 ): Promise<DownloadAppAreaData | null> {
   const populate = buildPopulate([
@@ -56,16 +59,18 @@ export async function fetchHomeDownloadAppArea(
     "downloadAppArea.actionButton2",
   ]);
   const url = documentId
-    ? `${API_URL}/api/homes/${documentId}?status=draft&locale=${locale}&${populate}`
-    : `${API_URL}/api/homes?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
+    ? `${API_URL}${endpoint}/${documentId}?status=draft&locale=${locale}&${populate}`
+    : `${API_URL}${endpoint}?locale=${locale}&${populate}&sort=publishedAt:desc&pagination[page]=1&pagination[pageSize]=1`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok)
     throw new Error(`Failed to fetch download app area: ${res.status}`);
   if (documentId) {
-    const json: { data: { downloadAppArea: DownloadAppAreaData | null } | null } =
-      await res.json();
+    // The single-document (preview) endpoint returns `data` as an object, not an array.
+    const json: {
+      data: { downloadAppArea: DownloadAppAreaData | null } | null;
+    } = await res.json();
     return json.data?.downloadAppArea ?? null;
   }
   const json: { data: { downloadAppArea: DownloadAppAreaData | null }[] } =
@@ -74,29 +79,11 @@ export async function fetchHomeDownloadAppArea(
 }
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
-// client-side DownloadAppArea component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchPlanYourRideDownloadAppArea(
-  locale: string,
-): Promise<DownloadAppAreaData | null> {
-  const populate = buildPopulate([
-    "downloadAppArea.Image",
-    "downloadAppArea.actionButton1",
-    "downloadAppArea.actionButton2",
-  ]);
-  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
-  if (process.env.NODE_ENV === "development")
-    console.log("[endpoint fetched]", url);
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok)
-    throw new Error(`Failed to fetch download app area: ${res.status}`);
-  const json: { data: { downloadAppArea: DownloadAppAreaData | null }[] } =
-    await res.json();
-  return json.data?.[0]?.downloadAppArea ?? null;
-}
-
-// Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side Souvenior component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchSouvenior(locale: string, documentId?: string | null) {
+export async function fetchSouvenior(
+  locale: string,
+  documentId?: string | null,
+) {
   const populate = buildPopulate([
     "souvenior",
     "souvenior.actionButton",
@@ -116,7 +103,10 @@ export async function fetchSouvenior(locale: string, documentId?: string | null)
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side ArcCarousel component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchArcCarousel(locale: string, documentId?: string | null) {
+export async function fetchArcCarousel(
+  locale: string,
+  documentId?: string | null,
+) {
   const populate = buildPopulate([
     "arcCarousel",
     "arcCarousel.item.carouselItem",
@@ -183,6 +173,22 @@ export async function fetchTramRoute(locale: string) {
   return res.json();
 }
 
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side LatestNews component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchLatestNews(locale: string, endpoint: string) {
+  const populate = buildPopulate([
+    "latestNews.actionButton",
+    "latestNews.announcement_types",
+  ]);
+  const url = `${API_URL}${endpoint}?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch latest news: ${res.status}`);
+
+  return res.json();
+}
+
 export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
   locale: string,
   options?: { cache?: RequestCache },
@@ -199,22 +205,21 @@ export const fetchPlanYourRide = cache(async function fetchPlanYourRide(
   return res.json();
 });
 
-// Not wrapped in React's `cache` (server-only) — this is called from the
-// client-side ServiceUpdates component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchServiceUpdates(locale: string, endpoint: string) {
-  const populate = buildPopulate([
-    "ServiceUpdates.actionButton",
-    "ServiceUpdates.announcement_types",
-  ]);
-  const url = `${API_URL}${endpoint}?locale=${locale}&${populate}`;
+export const fetchAboutUs = cache(async function fetchAboutUs(
+  locale: string,
+  options?: { cache?: RequestCache },
+) {
+  const populate = buildPopulate(["actionButton", "bannerImage", "seo"]);
+  const url = `${API_URL}/api/about-uses?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok)
-    throw new Error(`Failed to fetch service updates: ${res.status}`);
+  const res = await fetch(url, {
+    cache: options?.cache ?? "no-store",
+  });
+  if (!res.ok) throw new Error(`Failed to fetch about us: ${res.status}`);
 
   return res.json();
-}
+});
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side Fares component, directly against NEXT_PUBLIC_API_URL.
@@ -235,20 +240,27 @@ export async function fetchFares(locale: string) {
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side InteractiveRouteMap component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchInteractiveRouteMap(locale: string) {
+// `endpoint`/`field` let other pages reuse it for their own download-app-area
+// shaped section (e.g. About Us `storyOfHKT`).
+export async function fetchInteractiveRouteMap(
+  locale: string,
+  endpoint: string = "/api/plan-your-rides",
+  field: string = "interactiveRouteMap",
+): Promise<DownloadAppAreaData | null> {
   const populate = buildPopulate([
-    "interactiveRouteMap.Image",
-    "interactiveRouteMap.actionButton1",
-    "interactiveRouteMap.actionButton2",
+    `${field}.Image`,
+    `${field}.actionButton1`,
+    `${field}.actionButton2`,
   ]);
-  const url = `${API_URL}/api/plan-your-rides?locale=${locale}&${populate}`;
+  const url = `${API_URL}${endpoint}?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok)
     throw new Error(`Failed to fetch interactive route map: ${res.status}`);
-
-  return res.json();
+  const json: { data: Record<string, DownloadAppAreaData | null>[] } =
+    await res.json();
+  return json.data?.[0]?.[field] ?? null;
 }
 
 // Not wrapped in React's `cache` (server-only) — this is called from a
@@ -299,8 +311,7 @@ export const fetchAnnouncements = cache(
     const filter = options?.type?.length
       ? options.type
           .map(
-            (type, i) =>
-              `&filters[announcement_types][key][$in][${i}]=${type}`,
+            (type, i) => `&filters[announcement_types][key][$in][${i}]=${type}`,
           )
           .join("")
       : "";
