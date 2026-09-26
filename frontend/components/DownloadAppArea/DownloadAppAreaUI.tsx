@@ -59,6 +59,7 @@ export default function DownloadAppAreaUI({
           style={{ aspectRatio }}
         >
           <ResponsiveImg
+            loading="lazy"
             bannerImage={{
               id: image?.id ?? 0,
               altText: image?.alternativeText ?? data.title,

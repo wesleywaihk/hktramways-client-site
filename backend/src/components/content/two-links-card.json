@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_content_two_links_cards",
+  "info": {
+    "displayName": "Two Links Card"
+  },
+  "options": {},
+  "attributes": {
+    "leftCard": {
+      "type": "component",
+      "component": "content.link-card",
+      "repeatable": false,
+      "required": true
+    },
+    "rightCard": {
+      "type": "component",
+      "component": "content.link-card",
+      "repeatable": false,
+      "required": true
+    }
+  },
+  "config": {}
+}

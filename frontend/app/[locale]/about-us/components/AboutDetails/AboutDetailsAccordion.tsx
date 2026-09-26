@@ -4,13 +4,9 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import RichText from "@/components/RichText/RichText";
-import { IMG_URL } from "@/consts";
 import { devClassName } from "@/lib/devClassName";
+import { mediaSrc } from "@/lib/media";
 import type { AccordionItemData } from "@/types/api";
-
-function mediaSrc(url: string) {
-  return url.startsWith("http") ? url : `${IMG_URL}${url}`;
-}
 
 export default function AboutDetailsAccordion({
   items,

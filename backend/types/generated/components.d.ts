@@ -1,13 +1,5 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface ContentAccordinItem extends Struct.ComponentSchema {
-  collectionName: 'components_content_accordin_items';
-  info: {
-    displayName: 'Accordin Item';
-  };
-  attributes: {};
-}
-
 export interface ContentAccordionItem extends Struct.ComponentSchema {
   collectionName: 'components_content_accordion_items';
   info: {
@@ -185,6 +177,20 @@ export interface ContentImageLink extends Struct.ComponentSchema {
   attributes: {
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     link: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ContentLinkCard extends Struct.ComponentSchema {
+  collectionName: 'components_content_link_cards';
+  info: {
+    displayName: 'Link Card';
+  };
+  attributes: {
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    link: Schema.Attribute.Component<'content.hyperlink', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -524,6 +530,19 @@ export interface ContentTramoramicTourItem extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentTwoLinksCard extends Struct.ComponentSchema {
+  collectionName: 'components_content_two_links_cards';
+  info: {
+    displayName: 'Two Links Card';
+  };
+  attributes: {
+    leftCard: Schema.Attribute.Component<'content.link-card', false> &
+      Schema.Attribute.Required;
+    rightCard: Schema.Attribute.Component<'content.link-card', false> &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface GlobalExtLink extends Struct.ComponentSchema {
   collectionName: 'components_global_ext_links';
   info: {
@@ -747,7 +766,6 @@ export interface SharedIconEnum extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export namespace Public {
     export interface ComponentSchemas {
-      'content.accordin-item': ContentAccordinItem;
       'content.accordion-item': ContentAccordionItem;
       'content.action-button': ContentActionButton;
       'content.arc-carousel-item': ContentArcCarouselItem;
@@ -761,6 +779,7 @@ declare module '@strapi/strapi' {
       'content.hyperlink': ContentHyperlink;
       'content.icon-list': ContentIconList;
       'content.image-link': ContentImageLink;
+      'content.link-card': ContentLinkCard;
       'content.party-tram-item': ContentPartyTramItem;
       'content.schedule-basic-unit': ContentScheduleBasicUnit;
       'content.schedule-day': ContentScheduleDay;
@@ -771,6 +790,7 @@ declare module '@strapi/strapi' {
       'content.station-item': ContentStationItem;
       'content.tram-details-item': ContentTramDetailsItem;
       'content.tramoramic-tour-item': ContentTramoramicTourItem;
+      'content.two-links-card': ContentTwoLinksCard;
       'global.ext-link': GlobalExtLink;
       'global.main-nav-ext-link': GlobalMainNavExtLink;
       'media.banner-image': MediaBannerImage;

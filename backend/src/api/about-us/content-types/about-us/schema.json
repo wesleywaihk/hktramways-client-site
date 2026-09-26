@@ -73,6 +73,16 @@
       "component": "page-about-us.about-us-details",
       "repeatable": false
     },
+    "whiteCards": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.two-links-card",
+      "repeatable": false
+    },
     "storyOfHKT": {
       "type": "component",
       "pluginOptions": {
@@ -91,6 +101,28 @@
         }
       },
       "component": "content.service-updates",
+      "repeatable": false
+    },
+    "panoramaImages": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "greenCards": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.two-links-card",
       "repeatable": false
     },
     "downloadAppArea": {

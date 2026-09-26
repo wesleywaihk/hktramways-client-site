@@ -19,6 +19,7 @@ export default function PolaroidCard({
       style={{ boxShadow: "-5px 0px 20px 0px #00000026" }}
     >
       <ResponsiveImg
+        loading="lazy"
         bannerImage={{
           id: image?.id ?? 0,
           altText: image?.alternativeText ?? null,

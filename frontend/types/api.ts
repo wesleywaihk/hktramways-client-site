@@ -315,6 +315,20 @@ export interface AboutUsDetailsData {
   image3: Media | null;
 }
 
+export interface LinkCardData {
+  id: number;
+  image: Media | null;
+  title: string;
+  desc: string;
+  link: Hyperlink | null;
+}
+
+export interface TwoLinksCardData {
+  id: number;
+  leftCard: LinkCardData | null;
+  rightCard: LinkCardData | null;
+}
+
 export interface AboutUsData {
   id: number;
   documentId: string;
@@ -324,6 +338,9 @@ export interface AboutUsData {
   bannerImage: ResponsiveImage[] | null;
   latestNews: LatestNewsData | null;
   details: AboutUsDetailsData | null;
+  whiteCards: TwoLinksCardData | null;
+  greenCards: TwoLinksCardData | null;
+  panoramaImages: Media[] | null;
   storyOfHKT: DownloadAppAreaData | null;
   downloadAppArea: DownloadAppAreaData | null;
   seo: Seo | null;

@@ -6,7 +6,7 @@ import RichText from "@/components/RichText/RichText";
 import { fetchAboutUsDetails } from "@/hooks/useApiEndpoint/api";
 import { devClassName } from "@/lib/devClassName";
 import AboutDetailsAccordion from "./AboutDetailsAccordion";
-import AboutDetailsStats from "./AboutDetailsStats";
+import AboutDetailsStats from "./AboutDetailsStats/AboutDetailsStats";
 import { useStickyColumn } from "./useStickyColumn";
 import type { AboutUsDetailsData, AboutUsResponse } from "@/types/api";
 
