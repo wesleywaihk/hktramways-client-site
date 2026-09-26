@@ -2,7 +2,13 @@ import { cache } from "react";
 import { API_URL } from "@/consts";
 import { buildPopulate } from "@/lib/buildPopulate";
 import { routing } from "@/i18n/routing";
-import type { DownloadAppAreaData, InteractiveMapResponse } from "@/types/api";
+import type {
+  AboutUsResponse,
+  DownloadAppAreaData,
+  Media,
+  InteractiveMapResponse,
+  TwoLinksCardData,
+} from "@/types/api";
 
 export async function fetchGlobal(
   locale: string,
@@ -220,6 +226,66 @@ export const fetchAboutUs = cache(async function fetchAboutUs(
 
   return res.json();
 });
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side AboutDetails component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchAboutUsDetails(locale: string) {
+  const populate = buildPopulate([
+    "details.accordionItem.icon",
+    "details.image1",
+    "details.image2",
+    "details.image3",
+  ]);
+  const url = `${API_URL}/api/about-uses?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch about us details: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side PanoramaImage component, directly against NEXT_PUBLIC_API_URL.
+export async function fetchAboutUsPanoramaImages(
+  locale: string,
+): Promise<Media[] | null> {
+  const populate = buildPopulate(["panoramaImages"]);
+  const url = `${API_URL}/api/about-uses?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch panorama images: ${res.status}`);
+  const json: AboutUsResponse = await res.json();
+  return json.data?.[0]?.panoramaImages ?? null;
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side TwoCardsLink component, directly against NEXT_PUBLIC_API_URL.
+// `endpoint`/`field` point at any content type's two-links-card component
+// (e.g. About Us `whiteCards`).
+export async function fetchTwoLinksCard(
+  locale: string,
+  endpoint: string,
+  field: string,
+): Promise<TwoLinksCardData | null> {
+  const populate = buildPopulate([
+    `${field}.leftCard.image`,
+    `${field}.leftCard.link`,
+    `${field}.rightCard.image`,
+    `${field}.rightCard.link`,
+  ]);
+  const url = `${API_URL}${endpoint}?locale=${locale}&${populate}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch two links card: ${res.status}`);
+  const json: { data: Record<string, TwoLinksCardData | null>[] } =
+    await res.json();
+  return json.data?.[0]?.[field] ?? null;
+}
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side Fares component, directly against NEXT_PUBLIC_API_URL.

@@ -58,6 +58,7 @@ function ArcCarouselCard({
               onClick={(e) => e.stopPropagation()}
             >
               <ResponsiveImg
+                loading="lazy"
                 bannerImage={{
                   id: item.image?.id ?? 0,
                   altText: item.image?.alternativeText ?? null,
@@ -74,6 +75,7 @@ function ArcCarouselCard({
               onDragStart={(e) => e.preventDefault()}
             >
               <ResponsiveImg
+                loading="lazy"
                 bannerImage={{
                   id: item.image?.id ?? 0,
                   altText: item.image?.alternativeText ?? null,

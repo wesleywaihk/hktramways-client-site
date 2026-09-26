@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_content_link_cards",
+  "info": {
+    "displayName": "Link Card"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "type": "text",
+      "required": true
+    },
+    "link": {
+      "type": "component",
+      "component": "content.hyperlink",
+      "repeatable": false,
+      "required": true
+    }
+  },
+  "config": {}
+}

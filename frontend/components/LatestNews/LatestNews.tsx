@@ -14,12 +14,15 @@ export interface LatestNewsProps {
   /** API endpoint (e.g. "/api/plan-your-rides") of the content type that holds the CMS latestNews component. */
   endpoint: string;
   limit?: number;
+  /** Show each entry's announcement type tags next to its date. */
+  useAnnouncementType?: boolean;
 }
 
 export default function LatestNews({
   locale,
   endpoint,
   limit = 3,
+  useAnnouncementType = false,
 }: LatestNewsProps) {
   const { items, loading: announcementsLoading } = useAnnouncements();
   // undefined = still loading; null = page has no latestNews block
@@ -93,7 +96,12 @@ export default function LatestNews({
 
         <div className="w-full lg:pt-4">
           {filteredItems.map((item) => (
-            <LatestNewsEntry key={item.id} {...item} locale={locale} />
+            <LatestNewsEntry
+              key={item.id}
+              {...item}
+              locale={locale}
+              useAnnouncementType={useAnnouncementType}
+            />
           ))}
         </div>
       </div>

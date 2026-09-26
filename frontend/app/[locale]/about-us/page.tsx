@@ -12,6 +12,9 @@ import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
 import StoryOfHkt from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import LatestNews from "@/components/LatestNews/LatestNews";
+import TwoCardsLink from "@/components/TwoCardsLink/TwoCardsLink";
+import AboutDetails from "./components/AboutDetails/AboutDetails";
+import PanoramaImage from "./components/PanoramaImage/PanoramaImage";
 import type { AboutUsResponse } from "@/types/api";
 
 interface AboutUsPageProps {
@@ -26,7 +29,7 @@ export async function generateMetadata({
     locale,
     fetchAboutUs,
     (entity) => entity.title,
-    (entity) => entity.seo?.[0],
+    (entity) => entity.seo,
   );
 }
 
@@ -45,26 +48,41 @@ export default async function AboutUsPage({ params }: AboutUsPageProps) {
 
   return (
     <div className="pageWrapper mt-0">
-      <StructuredData
-        data={getEntityStructuredData(heroData, (h) => h.seo?.[0])}
-      />
+      <StructuredData data={getEntityStructuredData(heroData, (h) => h.seo)} />
       <Hero
         title={heroData.title}
         desc={heroData.desc}
         actionButton={heroData.actionButton}
         bannerImage={heroData.bannerImage}
       />
+      <AboutDetails locale={locale} />
+      <TwoCardsLink
+        locale={locale}
+        endpoint="/api/about-uses"
+        field="whiteCards"
+        className="pt-0!"
+      />
       <StoryOfHkt
         locale={locale}
         endpoint="/api/about-uses"
         field="storyOfHKT"
+        className="pt-0! pb-[90px] lg:pb-[120px] [&>*]:mb-0!"
       />
-      <LatestNews locale={locale} endpoint="/api/about-uses" limit={3} />
-      <DownloadAppArea
+      <LatestNews
         locale={locale}
         endpoint="/api/about-uses"
-        className="pt-[60px]"
+        limit={3}
+        useAnnouncementType
       />
+      <PanoramaImage locale={locale} />
+      <TwoCardsLink
+        locale={locale}
+        endpoint="/api/about-uses"
+        field="greenCards"
+        variant="green"
+        className="pt-[60px] lg:pt-[100px] lg:pb-[60px]"
+      />
+      <DownloadAppArea locale={locale} endpoint="/api/about-uses" />
     </div>
   );
 }

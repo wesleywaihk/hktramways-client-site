@@ -127,6 +127,7 @@ export default function StationPopup({
             {stationItem?.image && (
               <div className="relative mt-5 aspect-[353/220] w-full overflow-hidden rounded-[12px] lg:aspect-[29/18] lg:rounded-[14px]">
                 <ResponsiveImg
+                  loading="lazy"
                   bannerImage={{
                     id: stationItem.image.id,
                     altText: name,

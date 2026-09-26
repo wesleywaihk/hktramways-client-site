@@ -39,6 +39,7 @@ export default function SouveniorCard({ item, order }: SouveniorCardProps) {
           className={`absolute inset-0 ${TRANSFORM_CLASS} group-hover:inset-[3vw] md:group-hover:inset-[2vw] lg:group-hover:inset-[18px]`}
         >
           <ResponsiveImg
+            loading="lazy"
             bannerImage={{
               id: item.image?.id ?? 0,
               altText: item.name,

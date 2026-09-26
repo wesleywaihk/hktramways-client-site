@@ -1,0 +1,10 @@
+// The track holds two identical tiles, so shifting it by half its width lands
+// exactly where it started and the loop is seamless.
+@keyframes panorama-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

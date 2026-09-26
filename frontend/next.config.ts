@@ -17,6 +17,13 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    // Dev-only. With the debug channel on, Next 16.2 reloads the page whenever
+    // the navigation entry's transferSize is 0 (its "served from cache" check).
+    // Firefox reports 0 while the document is still streaming, so every page
+    // reloaded forever in Firefox during `next dev`.
+    reactDebugChannel: false,
+  },
 };
 
 export default withNextIntl(nextConfig);

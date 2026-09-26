@@ -1,5 +1,17 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface ContentAccordionItem extends Struct.ComponentSchema {
+  collectionName: 'components_content_accordion_items';
+  info: {
+    displayName: 'Accordion Item';
+  };
+  attributes: {
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface ContentActionButton extends Struct.ComponentSchema {
   collectionName: 'components_content_action_buttons';
   info: {
@@ -165,6 +177,20 @@ export interface ContentImageLink extends Struct.ComponentSchema {
   attributes: {
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     link: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface ContentLinkCard extends Struct.ComponentSchema {
+  collectionName: 'components_content_link_cards';
+  info: {
+    displayName: 'Link Card';
+  };
+  attributes: {
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    link: Schema.Attribute.Component<'content.hyperlink', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -504,6 +530,19 @@ export interface ContentTramoramicTourItem extends Struct.ComponentSchema {
   };
 }
 
+export interface ContentTwoLinksCard extends Struct.ComponentSchema {
+  collectionName: 'components_content_two_links_cards';
+  info: {
+    displayName: 'Two Links Card';
+  };
+  attributes: {
+    leftCard: Schema.Attribute.Component<'content.link-card', false> &
+      Schema.Attribute.Required;
+    rightCard: Schema.Attribute.Component<'content.link-card', false> &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface GlobalExtLink extends Struct.ComponentSchema {
   collectionName: 'components_global_ext_links';
   info: {
@@ -541,6 +580,27 @@ export interface MediaBannerImage extends Struct.ComponentSchema {
   };
 }
 
+export interface PageAboutUsAboutUsDetails extends Struct.ComponentSchema {
+  collectionName: 'components_page_about_us_about_us_details';
+  info: {
+    displayName: 'AboutUsDetails';
+  };
+  attributes: {
+    accordionItem: Schema.Attribute.Component<'content.accordion-item', true>;
+    content: Schema.Attribute.RichText & Schema.Attribute.Required;
+    devotedWorkforce: Schema.Attribute.Integer & Schema.Attribute.Required;
+    image1: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    image2: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    image3: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    tramDepots: Schema.Attribute.Integer & Schema.Attribute.Required;
+    tramFleet: Schema.Attribute.Integer & Schema.Attribute.Required;
+    tramRoutes: Schema.Attribute.Integer & Schema.Attribute.Required;
+    tramStops: Schema.Attribute.Integer & Schema.Attribute.Required;
+    tramSystem: Schema.Attribute.Integer & Schema.Attribute.Required;
+  };
+}
+
 export interface PageHomeArcCarousel extends Struct.ComponentSchema {
   collectionName: 'components_page_home_arc_carousels';
   info: {
@@ -564,7 +624,13 @@ export interface PageHomeSouvenior extends Struct.ComponentSchema {
   attributes: {
     actionButton: Schema.Attribute.Component<'content.action-button', false> &
       Schema.Attribute.Required;
-    item: Schema.Attribute.Component<'content.souvenior-item', true>;
+    item: Schema.Attribute.Component<'content.souvenior-item', true> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+        },
+        number
+      >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -700,6 +766,7 @@ export interface SharedIconEnum extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export namespace Public {
     export interface ComponentSchemas {
+      'content.accordion-item': ContentAccordionItem;
       'content.action-button': ContentActionButton;
       'content.arc-carousel-item': ContentArcCarouselItem;
       'content.attraction': ContentAttraction;
@@ -712,6 +779,7 @@ declare module '@strapi/strapi' {
       'content.hyperlink': ContentHyperlink;
       'content.icon-list': ContentIconList;
       'content.image-link': ContentImageLink;
+      'content.link-card': ContentLinkCard;
       'content.party-tram-item': ContentPartyTramItem;
       'content.schedule-basic-unit': ContentScheduleBasicUnit;
       'content.schedule-day': ContentScheduleDay;
@@ -722,9 +790,11 @@ declare module '@strapi/strapi' {
       'content.station-item': ContentStationItem;
       'content.tram-details-item': ContentTramDetailsItem;
       'content.tramoramic-tour-item': ContentTramoramicTourItem;
+      'content.two-links-card': ContentTwoLinksCard;
       'global.ext-link': GlobalExtLink;
       'global.main-nav-ext-link': GlobalMainNavExtLink;
       'media.banner-image': MediaBannerImage;
+      'page-about-us.about-us-details': PageAboutUsAboutUsDetails;
       'page-home.arc-carousel': PageHomeArcCarousel;
       'page-home.souvenior': PageHomeSouvenior;
       'page-home.tram-routes': PageHomeTramRoutes;

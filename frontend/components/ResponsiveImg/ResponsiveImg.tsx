@@ -15,7 +15,8 @@ export interface ResponsiveImgProps {
   className?: string;
   sizes?: string;
   useMultiImg?: boolean;
-  isHero?: boolean;
+  /** Passed to the <img>; omitted when unset, so the browser default (eager) applies. */
+  loading?: "eager" | "lazy";
   autoHeightSm?: AutoHeight;
   autoHeightMd?: AutoHeight;
   autoHeightLg?: AutoHeight;
@@ -36,7 +37,7 @@ export default function ResponsiveImg({
   className = "",
   sizes = "100vw",
   useMultiImg = true,
-  isHero = false,
+  loading,
 }: ResponsiveImgProps) {
   const [loaded, setLoaded] = useState(false);
   const imageD = asImage(bannerImage?.imageD);
@@ -50,7 +51,7 @@ export default function ResponsiveImg({
       <div
         role="img"
         aria-label={alt}
-        className={`${devClassName("responsive-img")}bg-earth-light flex items-center justify-center ${className}`}
+        className={`${devClassName("responsive-img")}bg-earth-light flex items-center justify-center select-none ${className}`}
       >
         <ImageNotSupportedIcon
           className="text-green-30"
@@ -72,7 +73,7 @@ export default function ResponsiveImg({
 
   return (
     <div
-      className={`${devClassName("responsive-img")}relative flex aspect-auto h-full w-full items-center justify-center overflow-hidden ${className}`}
+      className={`${devClassName("responsive-img")}relative flex aspect-auto h-full w-full items-center justify-center overflow-hidden select-none ${className}`}
     >
       {!loaded && (
         <div
@@ -95,7 +96,8 @@ export default function ResponsiveImg({
           srcSet={srcSetM}
           sizes={sizes}
           alt={alt}
-          loading={isHero ? "eager" : "lazy"}
+          loading={loading}
+          draggable={false}
           onLoad={() => setLoaded(true)}
           ref={(node) => {
             if (node?.complete) setLoaded(true);

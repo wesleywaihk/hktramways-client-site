@@ -68,6 +68,13 @@
     "footerMonthlyTicket": "月票",
     "footerDownloadApp": "下載應用程式",
     "footerWeChatFollowUs": "關注我們",
-    "footerWeChatCaption": "香港電車 HK Tramways"
+    "footerWeChatCaption": "香港電車 HK Tramways",
+    "aboutTramFleet": "電車車隊",
+    "aboutTramStops": "電車站",
+    "aboutDevotedWorkforce": "敬業員工",
+    "aboutTramSystem": "電車系統",
+    "aboutTramDepots": "電車廠",
+    "aboutTramRoutes": "電車路線",
+    "aboutKm": "公里"
   }
 }

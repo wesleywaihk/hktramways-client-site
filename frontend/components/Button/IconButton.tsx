@@ -48,7 +48,10 @@ export default function IconButton({
   const classes = `${devClassName("icon-button")}group place-items-center cursor-pointer border-2 border-transparent hover:border-white transition-colors duration-200 ease-out ${shapeClasses[shape]} ${colorClasses[color]} ${reverse ? "rotate-180" : ""} ${className}`;
 
   const content = (
-    <span className="relative h-5 w-5 shrink-0 overflow-hidden">
+    // Only the arrow slides in (and needs clipping); other icons grow 10% on hover.
+    <span
+      className={`relative h-5 w-5 shrink-0 ${useArrow ? "overflow-hidden" : ""}`}
+    >
       {useArrow ? (
         <ArrowIco
           className="absolute inset-0 m-auto h-5 w-5 group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
@@ -57,7 +60,7 @@ export default function IconButton({
       ) : (
         <BtnIcon
           icon={icon}
-          className="absolute inset-0 m-auto group-hover:[animation:btn-arrow-slide-in_0.5s_ease]"
+          className="absolute inset-0 m-auto transition-transform duration-300 ease-out group-hover:scale-110"
         />
       )}
     </span>

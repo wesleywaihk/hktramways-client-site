@@ -481,10 +481,25 @@ export interface ApiAboutUsAboutUs extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    details: Schema.Attribute.Component<
+      'page-about-us.about-us-details',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     downloadAppArea: Schema.Attribute.Component<
       'content.download-app-area',
       false
     > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    greenCards: Schema.Attribute.Component<'content.two-links-card', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -501,8 +516,14 @@ export interface ApiAboutUsAboutUs extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::about-us.about-us'
     >;
+    panoramaImages: Schema.Attribute.Media<'images', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
-    seo: Schema.Attribute.Component<'seo.seo', true> &
+    seo: Schema.Attribute.Component<'seo.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -524,6 +545,12 @@ export interface ApiAboutUsAboutUs extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    whiteCards: Schema.Attribute.Component<'content.two-links-card', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
   };
 }
 
@@ -795,6 +822,12 @@ export interface ApiInteractiveMapInteractiveMap
     publishedAt: Schema.Attribute.DateTime;
     ScheduleAppLink: Schema.Attribute.String &
       Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    seo: Schema.Attribute.Component<'seo.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

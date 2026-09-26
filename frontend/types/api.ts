@@ -289,6 +289,46 @@ export interface PlanYourRideScheduleResponse {
   data: { schedule: ScheduleData | null }[];
 }
 
+export interface AccordionItemData {
+  id: number;
+  icon: Media | null;
+  title: string;
+  /** Markdown (CMS richtext). */
+  content: string;
+}
+
+export interface AboutUsDetailsData {
+  id: number;
+  title: string;
+  /** Markdown (CMS richtext). */
+  content: string;
+  accordionItem: AccordionItemData[];
+  tramFleet: number;
+  tramStops: number;
+  devotedWorkforce: number;
+  /** Track length in km. */
+  tramSystem: number;
+  tramDepots: number;
+  tramRoutes: number;
+  image1: Media | null;
+  image2: Media | null;
+  image3: Media | null;
+}
+
+export interface LinkCardData {
+  id: number;
+  image: Media | null;
+  title: string;
+  desc: string;
+  link: Hyperlink | null;
+}
+
+export interface TwoLinksCardData {
+  id: number;
+  leftCard: LinkCardData | null;
+  rightCard: LinkCardData | null;
+}
+
 export interface AboutUsData {
   id: number;
   documentId: string;
@@ -297,10 +337,13 @@ export interface AboutUsData {
   actionButton: ActionButton | null;
   bannerImage: ResponsiveImage[] | null;
   latestNews: LatestNewsData | null;
+  details: AboutUsDetailsData | null;
+  whiteCards: TwoLinksCardData | null;
+  greenCards: TwoLinksCardData | null;
+  panoramaImages: Media[] | null;
   storyOfHKT: DownloadAppAreaData | null;
   downloadAppArea: DownloadAppAreaData | null;
-  // Repeatable in the CMS schema; the first entry is used.
-  seo: Seo[] | null;
+  seo: Seo | null;
 }
 
 export interface AboutUsResponse {

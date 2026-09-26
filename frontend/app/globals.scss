@@ -6,6 +6,7 @@
   --color-green: #{colors.$color-green};
   --color-green-light: #{colors.$color-green-light};
   --color-green-fresh: #{colors.$color-green-fresh};
+  --color-green-pale: #{colors.$color-green-pale};
   --color-white: #{colors.$color-white};
   --color-earth-light: #{colors.$color-earth-light};
   --color-red-dark: #{colors.$color-red-dark};
@@ -18,6 +19,7 @@
   --color-green: var(--color-green);
   --color-green-light: var(--color-green-light);
   --color-green-fresh: var(--color-green-fresh);
+  --color-green-pale: var(--color-green-pale);
   --color-white: var(--color-white);
   --color-earth-light: var(--color-earth-light);
   --color-red-dark: var(--color-red-dark);
@@ -37,7 +39,9 @@ body {
   background: var(--color-white);
   color: #171717;
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  // `clip`, not `hidden`: `hidden` makes body a scroll container, which breaks
+  // `position: sticky` for everything inside it.
+  overflow-x: clip;
 }
 
 @utility paragraph {
