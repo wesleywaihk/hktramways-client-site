@@ -1,6 +1,7 @@
 import type { StrapiApp } from "@strapi/strapi/admin";
 import editorNoteSidePanel from "./extensions/EditorNote";
 import { guardStationLocCodes } from "./extensions/StationLocCodeGuard";
+import { configureCKEditor } from "./extensions/CKEditorConfig";
 
 export default {
   config: {
@@ -81,6 +82,10 @@ export default {
       //   "Auth.form.welcome.subtitle": "客户网站内容管理系统",
       // },
     },
+  },
+  register() {
+    // Must run before bootstrap, per the CKEditor plugin docs.
+    configureCKEditor();
   },
   bootstrap(app: StrapiApp) {
     localStorage.setItem("STRAPI_THEME", "light");

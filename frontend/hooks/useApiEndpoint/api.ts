@@ -4,6 +4,8 @@ import { buildPopulate } from "@/lib/buildPopulate";
 import { routing } from "@/i18n/routing";
 import type {
   AboutUsResponse,
+  AnnouncementData,
+  AnnouncementsResponse,
   DownloadAppAreaData,
   Media,
   InteractiveMapResponse,
@@ -367,6 +369,17 @@ export async function fetchSchedule(locale: string) {
   return res.json();
 }
 
+function buildAnnouncementTypeFilter(types?: string[]) {
+  return types?.length
+    ? types
+        .map(
+          (type, i) => `&filters[announcement_types][key][$in][${i}]=${type}`,
+        )
+        .join("")
+    : "";
+}
+
+// Defaults to the latest 10 announcements; pass `limit` to override.
 export const fetchAnnouncements = cache(
   async function fetchAnnouncements(options?: {
     cache?: RequestCache;
@@ -374,16 +387,8 @@ export const fetchAnnouncements = cache(
     limit?: number;
   }) {
     const populate = buildPopulate(["announcement_types", "actionButton"]);
-    const filter = options?.type?.length
-      ? options.type
-          .map(
-            (type, i) => `&filters[announcement_types][key][$in][${i}]=${type}`,
-          )
-          .join("")
-      : "";
-    const pagination = options?.limit
-      ? `&pagination[page]=1&pagination[pageSize]=${options.limit}`
-      : "";
+    const filter = buildAnnouncementTypeFilter(options?.type);
+    const pagination = `&pagination[page]=1&pagination[pageSize]=${options?.limit ?? 10}`;
     const url = `${API_URL}/api/announcements?sort=dateTime:desc&${populate}${filter}${pagination}`;
     if (process.env.NODE_ENV === "development")
       console.log("[endpoint fetched]", url);
@@ -394,6 +399,62 @@ export const fetchAnnouncements = cache(
     return res.json();
   },
 );
+
+const RECENT_ANNOUNCEMENT_DAYS = 300;
+
+// Not wrapped in React's `cache` (server-only) — intended for client-side
+// filter UIs, directly against NEXT_PUBLIC_API_URL.
+// Filters by calendar `year` (HKT) and announcement type keys. Without a
+// `year`, returns announcements from the last 300 days.
+export async function fetchFilteredAnnouncements(options?: {
+  year?: number | string | null;
+  types?: string[];
+  pageSize?: number;
+}): Promise<AnnouncementsResponse> {
+  const populate = buildPopulate(["announcement_types", "actionButton"]);
+  const year = options?.year ? Number(options.year) : null;
+  const dateFilter = year
+    ? `&filters[dateTime][$gte]=${year}-01-01T00:00:00%2B08:00` +
+      `&filters[dateTime][$lt]=${year + 1}-01-01T00:00:00%2B08:00`
+    : `&filters[dateTime][$gte]=${new Date(
+        Date.now() - RECENT_ANNOUNCEMENT_DAYS * 24 * 60 * 60 * 1000,
+      ).toISOString()}`;
+  const typeFilter = buildAnnouncementTypeFilter(options?.types);
+  // Strapi caps pageSize at its `maxLimit` (100 by default).
+  const pagination = `&pagination[page]=1&pagination[pageSize]=${options?.pageSize ?? 100}`;
+  const url = `${API_URL}/api/announcements?sort=dateTime:desc&${populate}${dateFilter}${typeFilter}${pagination}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch filtered announcements: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side news detail page, directly against NEXT_PUBLIC_API_URL.
+// Slugs are localized, so the lookup is per locale.
+export async function fetchAnnouncementBySlug(
+  slug: string,
+  locale: string,
+): Promise<AnnouncementData | null> {
+  const populate = buildPopulate([
+    "announcement_types",
+    "actionButton",
+    "thumbnail",
+    "banner.imageD",
+    "banner.imageM",
+  ]);
+  const url = `${API_URL}/api/announcements?locale=${locale}&filters[slug][$eq]=${encodeURIComponent(slug)}&${populate}&pagination[page]=1&pagination[pageSize]=1`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch announcement: ${res.status}`);
+  const json: AnnouncementsResponse = await res.json();
+  return json.data?.[0] ?? null;
+}
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side PartyTram component, directly against NEXT_PUBLIC_API_URL.

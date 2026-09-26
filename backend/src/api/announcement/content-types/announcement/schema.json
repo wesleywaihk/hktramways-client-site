@@ -46,12 +46,40 @@
         }
       }
     },
-    "pageContent": {
-      "type": "richtext",
+    "thumbnail": {
+      "type": "media",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "banner": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.banner-image-unit",
+      "repeatable": false,
+      "required": false
+    },
+    "pageContent": {
+      "type": "customField",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
       }
     },
     "actionButton": {
@@ -62,7 +90,7 @@
         }
       },
       "component": "content.action-button",
-      "repeatable": true
+      "repeatable": false
     }
   }
 }

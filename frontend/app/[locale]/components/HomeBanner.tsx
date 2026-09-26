@@ -1,19 +1,17 @@
-"use client";
-
 import Banner from "@/components/Banner/Banner";
-import { useAnnouncements } from "@/hooks/useAnnouncements";
 import type { ResponsiveImage } from "@/types/api";
 
 export interface HomeBannerProps {
   bannerImage?: ResponsiveImage[] | null;
+  /** Whether the NewsBar renders below the banner. */
+  hasNewsBar?: boolean;
 }
 
 /** Home banner sized so header + banner (+ NewsBar when there are announcements) fill 100dvh. */
-export default function HomeBanner({ bannerImage }: HomeBannerProps) {
-  const { items, loading } = useAnnouncements();
-  // Assume the NewsBar will render while loading, so the banner doesn't jump for the common case
-  const hasNewsBar = loading || items.some((item) => item.title.trim());
-
+export default function HomeBanner({
+  bannerImage,
+  hasNewsBar = false,
+}: HomeBannerProps) {
   return (
     <Banner
       bannerImage={bannerImage}

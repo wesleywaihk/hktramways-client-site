@@ -65,7 +65,7 @@ function AboutDetailsContent({ details }: { details: AboutUsDetailsData }) {
     <section
       className={`${devClassName("about-details")}borderless bg-green min-h-dvh pt-[90px] pb-[60px] text-white lg:pt-[120px]`}
     >
-      <div className="sectionContainer content-max-w flex-col gap-12 lg:max-w-[1270px] lg:flex-row lg:items-start lg:gap-[80px]">
+      <div className="sectionContainer content-max-w flex-col gap-12 lg:max-w-[1270px] lg:flex-row lg:items-start lg:gap-[60px] xl:gap-[80px]">
         <div
           ref={leftRef}
           className="flex min-w-0 flex-1 flex-col gap-6 lg:sticky lg:gap-8"
@@ -79,7 +79,7 @@ function AboutDetailsContent({ details }: { details: AboutUsDetailsData }) {
 
         <div
           ref={rightRef}
-          className="w-full lg:sticky lg:w-[600px] lg:shrink-0"
+          className="w-full lg:sticky lg:w-[calc(50%-30px)] lg:shrink-0 xl:w-[600px]"
         >
           <AboutDetailsStats details={details} />
         </div>

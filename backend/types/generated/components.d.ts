@@ -758,6 +758,7 @@ export interface SharedIconEnum extends Struct.ComponentSchema {
         'speaker',
         'direction',
         'clock',
+        'document',
       ]
     >;
   };

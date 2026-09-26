@@ -8,6 +8,7 @@ import SpeakerIco from "@/components/icons/SpeakerIco";
 import DirectionIco from "@/components/icons/DirectionIco";
 import ClockIco from "@/components/icons/ClockIco";
 import DownloadIco from "@/components/icons/DownloadIco";
+import DocumentIco from "@/components/icons/DocumentIco";
 import { devClassName } from "@/lib/devClassName";
 import type { IconEnum } from "@/types/api";
 
@@ -24,6 +25,7 @@ const IconComponents: Record<
   direction: DirectionIco,
   clock: ClockIco,
   download: DownloadIco,
+  document: DocumentIco,
 };
 
 export interface BtnIconProps extends SVGProps<SVGSVGElement> {

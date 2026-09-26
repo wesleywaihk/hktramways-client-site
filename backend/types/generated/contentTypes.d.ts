@@ -607,7 +607,7 @@ export interface ApiAnnouncementAnnouncement
     };
   };
   attributes: {
-    actionButton: Schema.Attribute.Component<'content.action-button', true> &
+    actionButton: Schema.Attribute.Component<'content.action-button', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -617,6 +617,12 @@ export interface ApiAnnouncementAnnouncement
       'manyToMany',
       'api::announcement-type.announcement-type'
     >;
+    banner: Schema.Attribute.Component<'content.banner-image-unit', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -632,6 +638,12 @@ export interface ApiAnnouncementAnnouncement
       'api::announcement.announcement'
     >;
     pageContent: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -640,6 +652,12 @@ export interface ApiAnnouncementAnnouncement
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    thumbnail: Schema.Attribute.Media<'images'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

@@ -73,7 +73,8 @@ export type IconEnum =
   | "speaker"
   | "direction"
   | "clock"
-  | "download";
+  | "download"
+  | "document";
 
 export interface IconComponent {
   id: number;
