@@ -2,6 +2,7 @@ import type { StrapiApp } from "@strapi/strapi/admin";
 import editorNoteSidePanel from "./extensions/EditorNote";
 import { guardStationLocCodes } from "./extensions/StationLocCodeGuard";
 import { configureCKEditor } from "./extensions/CKEditorConfig";
+import slugAutoFill from "./extensions/SlugAutoFill";
 
 export default {
   config: {
@@ -71,7 +72,7 @@ export default {
     translations: {
       en: {
         "Auth.form.welcome.title": "HK Tramway",
-        "Auth.form.welcome.subtitle": "Client site CMS",
+        "Auth.form.welcome.subtitle": "Public website CMS",
       },
       // zh: {
       //   "Auth.form.welcome.title": "香港電車",
@@ -90,14 +91,20 @@ export default {
   bootstrap(app: StrapiApp) {
     localStorage.setItem("STRAPI_THEME", "light");
 
-    const contentManagerPlugin = app.getPlugin("content-manager") as unknown as {
+    const contentManagerPlugin = app.getPlugin(
+      "content-manager",
+    ) as unknown as {
       apis: {
-        addEditViewSidePanel: (panels: Array<(context: never) => unknown>) => void;
+        addEditViewSidePanel: (
+          panels: Array<(context: never) => unknown>,
+        ) => void;
         addDocumentAction: (actions: (actions: never[]) => unknown[]) => void;
+        addDocumentHeaderAction: (actions: Array<(context: never) => unknown>) => void;
       };
     };
 
     contentManagerPlugin.apis.addEditViewSidePanel([editorNoteSidePanel]);
     contentManagerPlugin.apis.addDocumentAction(guardStationLocCodes);
+    contentManagerPlugin.apis.addDocumentHeaderAction([slugAutoFill]);
   },
 };

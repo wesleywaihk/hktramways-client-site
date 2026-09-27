@@ -15,11 +15,20 @@
     }
   },
   "attributes": {
-    "slug": {
+    "title": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
+        }
+      },
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
         }
       },
       "required": true
@@ -36,15 +45,8 @@
         "i18n": {
           "localized": true
         }
-      }
-    },
-    "title": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      },
+      "required": true
     },
     "thumbnail": {
       "type": "media",
@@ -80,7 +82,8 @@
       "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      }
+      },
+      "required": true
     },
     "actionButton": {
       "type": "component",

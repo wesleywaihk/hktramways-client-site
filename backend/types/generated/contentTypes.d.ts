@@ -627,6 +627,7 @@ export interface ApiAnnouncementAnnouncement
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     dateTime: Schema.Attribute.DateTime &
+      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -638,6 +639,7 @@ export interface ApiAnnouncementAnnouncement
       'api::announcement.announcement'
     >;
     pageContent: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
       Schema.Attribute.CustomField<
         'plugin::ckeditor5.CKEditor',
         {
@@ -654,7 +656,7 @@ export interface ApiAnnouncementAnnouncement
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }>;
     thumbnail: Schema.Attribute.Media<'images'> &
@@ -664,6 +666,7 @@ export interface ApiAnnouncementAnnouncement
         };
       }>;
     title: Schema.Attribute.String &
+      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
