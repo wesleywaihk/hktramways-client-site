@@ -718,6 +718,12 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
         };
       }>;
     publishedAt: Schema.Attribute.DateTime;
+    redirect: Schema.Attribute.Component<'global.redirect', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     seo: Schema.Attribute.Component<'seo.seo', false> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{

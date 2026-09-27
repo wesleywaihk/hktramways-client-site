@@ -567,6 +567,20 @@ export interface GlobalMainNavExtLink extends Struct.ComponentSchema {
   };
 }
 
+export interface GlobalRedirect extends Struct.ComponentSchema {
+  collectionName: 'components_global_redirects';
+  info: {
+    displayName: 'redirect';
+  };
+  attributes: {
+    from: Schema.Attribute.String & Schema.Attribute.Required;
+    isPermanent: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    to: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface MediaBannerImage extends Struct.ComponentSchema {
   collectionName: 'components_media_banner_images';
   info: {
@@ -794,6 +808,7 @@ declare module '@strapi/strapi' {
       'content.two-links-card': ContentTwoLinksCard;
       'global.ext-link': GlobalExtLink;
       'global.main-nav-ext-link': GlobalMainNavExtLink;
+      'global.redirect': GlobalRedirect;
       'media.banner-image': MediaBannerImage;
       'page-about-us.about-us-details': PageAboutUsAboutUsDetails;
       'page-home.arc-carousel': PageHomeArcCarousel;

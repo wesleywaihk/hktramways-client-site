@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-09-26T23:53:32.813Z"
+    "x-generation-date": "2026-09-27T01:19:30.472Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -10782,6 +10782,12 @@
               "footer": {
                 "$ref": "#/components/schemas/ContentFooterComponent"
               },
+              "redirect": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GlobalRedirectComponent"
+                }
+              },
               "locale": {
                 "type": "string"
               },
@@ -11986,6 +11992,12 @@
           "footer": {
             "$ref": "#/components/schemas/ContentFooterComponent"
           },
+          "redirect": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GlobalRedirectComponent"
+            }
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -12236,6 +12248,12 @@
                 "footer": {
                   "$ref": "#/components/schemas/ContentFooterComponent"
                 },
+                "redirect": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GlobalRedirectComponent"
+                  }
+                },
                 "createdAt": {
                   "type": "string",
                   "format": "date-time"
@@ -12457,6 +12475,30 @@
           },
           "tncLink": {
             "type": "string"
+          }
+        }
+      },
+      "GlobalRedirectComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "isPermanent": {
+            "type": "boolean"
           }
         }
       },

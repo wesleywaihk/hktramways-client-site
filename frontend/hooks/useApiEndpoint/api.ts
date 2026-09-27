@@ -7,6 +7,7 @@ import type {
   AnnouncementData,
   AnnouncementsResponse,
   DownloadAppAreaData,
+  GlobalRedirect,
   Media,
   InteractiveMapResponse,
   TwoLinksCardData,
@@ -22,6 +23,7 @@ export async function fetchGlobal(
     "mainNavExtLink.extLink1",
     "mainNavExtLink.extLink2",
     "footer.getInTouch",
+    "redirect",
   ]);
   const url = `${API_URL}/api/global?${populate}&locale=${locale}`;
   if (process.env.NODE_ENV === "development")
@@ -32,6 +34,20 @@ export async function fetchGlobal(
   if (!res.ok) throw new Error(`Failed to fetch global: ${res.status}`);
 
   return res.json();
+}
+
+// Redirects are non-localized on Global, so any locale returns the same list.
+// Called from `proxy.ts`, which caches the result itself.
+export async function fetchRedirects(): Promise<GlobalRedirect[]> {
+  const populate = buildPopulate(["redirect"]);
+  const url = `${API_URL}/api/global?${populate}&fields[0]=id&locale=${routing.defaultLocale}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch redirects: ${res.status}`);
+  const json: { data: { redirect: GlobalRedirect[] | null } | null } =
+    await res.json();
+  return json.data?.redirect ?? [];
 }
 
 export const fetchHome = cache(async function fetchHome(

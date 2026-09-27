@@ -463,6 +463,16 @@ export interface GlobalMainNavExtLink {
   extLink2: GlobalExtLink | null;
 }
 
+export interface GlobalRedirect {
+  id: number;
+  /** Source path (e.g. "/old-page"), matched ignoring the trailing slash. */
+  from: string;
+  /** Destination path or absolute URL. */
+  to: string;
+  /** true → 301, false → 302. */
+  isPermanent: boolean;
+}
+
 export interface GlobalData {
   id: number;
   documentId: string;
@@ -471,6 +481,7 @@ export interface GlobalData {
   seo: Seo | null;
   mainNavExtLink: GlobalMainNavExtLink | null;
   footer: GlobalFooter | null;
+  redirect: GlobalRedirect[] | null;
 }
 
 export interface GlobalResponse {
