@@ -1,13 +1,24 @@
-"use client";
+import { fetchLatestAnnouncement } from "@/hooks/useApiEndpoint/api";
+import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
+import AnnouncementList from "@/components/AnnouncementList/AnnouncementList";
 
-import { useFetchAnnouncements } from "@/hooks/useFetchAnnouncements";
+interface NewsEventsPageProps {
+  params: Promise<{ locale: string }>;
+}
 
-// Testing only — dumps the fetched announcements; no UI yet.
-export default function NewsEventsPage() {
-  const { items, loading, error } = useFetchAnnouncements();
+// Testing only — dumps the data; no UI yet. `latest` is for the banner and is
+// left out of the list.
+export default async function NewsEventsPage({ params }: NewsEventsPageProps) {
+  const { locale } = await params;
+  const { data: latest } = await fetchWithErrorHandling(() =>
+    fetchLatestAnnouncement(locale),
+  );
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error.message}</p>;
-
-  return <pre>{JSON.stringify(items, null, 2)}</pre>;
+  return (
+    <>
+      <pre>{JSON.stringify(latest, null, 2)}</pre>
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      <AnnouncementList locale={locale} excludeId={latest?.id ?? null} />
+    </>
+  );
 }

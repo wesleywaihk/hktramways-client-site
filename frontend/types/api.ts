@@ -46,10 +46,21 @@ export interface AnnouncementData {
   pageContent: string | null;
   announcement_types: AnnouncementType[];
   actionButton: ActionButton[];
+  // Only present when the request populates them
+  thumbnail?: Media | null;
+  banner?: ResponsiveImage | null;
 }
 
 export interface AnnouncementsResponse {
   data: AnnouncementData[];
+  meta?: {
+    pagination?: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
 }
 
 export interface CarouselItem {

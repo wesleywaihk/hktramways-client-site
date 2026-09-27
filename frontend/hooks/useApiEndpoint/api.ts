@@ -432,6 +432,65 @@ export async function fetchFilteredAnnouncements(options?: {
   return res.json();
 }
 
+// Latest announcement (no filters) for the news page banner.
+export const fetchLatestAnnouncement = cache(
+  async function fetchLatestAnnouncement(
+    locale: string,
+  ): Promise<AnnouncementData | null> {
+    const populate = buildPopulate([
+      "announcement_types",
+      "actionButton",
+      "thumbnail",
+      "banner.imageD",
+      "banner.imageM",
+    ]);
+    const url = `${API_URL}/api/announcements?locale=${locale}&sort=dateTime:desc&${populate}&pagination[page]=1&pagination[pageSize]=1`;
+    if (process.env.NODE_ENV === "development")
+      console.log("[endpoint fetched]", url);
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok)
+      throw new Error(`Failed to fetch latest announcement: ${res.status}`);
+    const json: AnnouncementsResponse = await res.json();
+    return json.data?.[0] ?? null;
+  },
+);
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side AnnouncementList, directly against NEXT_PUBLIC_API_URL.
+// One Strapi page of announcements, optionally filtered by calendar `year`
+// (HKT) and announcement type keys. Unlike `fetchFilteredAnnouncements`, no
+// year means all dates.
+export async function fetchAnnouncementPage(options: {
+  locale: string;
+  page: number;
+  pageSize: number;
+  year?: number | null;
+  types?: string[];
+  /** Announcement id to leave out (e.g. the one already shown in the banner). */
+  excludeId?: number | null;
+}): Promise<AnnouncementsResponse> {
+  const populate = buildPopulate(["announcement_types", "thumbnail"]);
+  const { locale, page, pageSize, year } = options;
+  const dateFilter = year
+    ? `&filters[dateTime][$gte]=${year}-01-01T00:00:00%2B08:00` +
+      `&filters[dateTime][$lt]=${year + 1}-01-01T00:00:00%2B08:00`
+    : "";
+  const typeFilter = buildAnnouncementTypeFilter(options.types);
+  const excludeFilter = options.excludeId
+    ? `&filters[id][$ne]=${options.excludeId}`
+    : "";
+  // Strapi caps pageSize at its `maxLimit` (100 by default).
+  const pagination = `&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
+  const url = `${API_URL}/api/announcements?locale=${locale}&sort=dateTime:desc&${populate}${dateFilter}${typeFilter}${excludeFilter}${pagination}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch announcement page: ${res.status}`);
+
+  return res.json();
+}
+
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side news detail page, directly against NEXT_PUBLIC_API_URL.
 // Slugs are localized, so the lookup is per locale.
