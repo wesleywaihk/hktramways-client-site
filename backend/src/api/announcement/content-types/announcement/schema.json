@@ -72,6 +72,15 @@
       "repeatable": false,
       "required": false
     },
+    "desc": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
     "pageContent": {
       "type": "customField",
       "pluginOptions": {

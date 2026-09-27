@@ -20,32 +20,32 @@
     },
     "tramFleet": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "tramStops": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "devotedWorkforce": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "tramSystem": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "tramDepots": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "tramRoutes": {
       "type": "integer",
-      "required": true
+      "required": false
     },
     "image1": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images"
       ]
@@ -53,7 +53,7 @@
     "image2": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images"
       ]
@@ -61,7 +61,7 @@
     "image3": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images"
       ]

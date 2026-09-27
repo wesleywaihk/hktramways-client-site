@@ -3,6 +3,7 @@ import { API_URL } from "@/consts";
 import { buildPopulate } from "@/lib/buildPopulate";
 import { routing } from "@/i18n/routing";
 import type {
+  AboutUsDetailsData,
   AboutUsResponse,
   AnnouncementData,
   AnnouncementsResponse,
@@ -247,7 +248,9 @@ export const fetchAboutUs = cache(async function fetchAboutUs(
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side AboutDetails component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchAboutUsDetails(locale: string) {
+export async function fetchAboutUsDetails(
+  locale: string,
+): Promise<AboutUsDetailsData | null> {
   const populate = buildPopulate([
     "details.accordionItem.icon",
     "details.image1",
@@ -260,8 +263,8 @@ export async function fetchAboutUsDetails(locale: string) {
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok)
     throw new Error(`Failed to fetch about us details: ${res.status}`);
-
-  return res.json();
+  const json: AboutUsResponse = await res.json();
+  return json.data?.[0]?.details ?? null;
 }
 
 // Not wrapped in React's `cache` (server-only) — this is called from the

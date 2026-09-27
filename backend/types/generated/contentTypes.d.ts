@@ -633,6 +633,13 @@ export interface ApiAnnouncementAnnouncement
           localized: true;
         };
       }>;
+    desc: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

@@ -8,7 +8,7 @@ import { devClassName } from "@/lib/devClassName";
 import AboutDetailsAccordion from "./AboutDetailsAccordion";
 import AboutDetailsStats from "./AboutDetailsStats/AboutDetailsStats";
 import { useStickyColumn } from "./useStickyColumn";
-import type { AboutUsDetailsData, AboutUsResponse } from "@/types/api";
+import type { AboutUsDetailsData } from "@/types/api";
 
 // Desktop header is 100px tall; keep a little breathing room under it.
 const STICKY_TOP = 120;
@@ -28,9 +28,9 @@ export default function AboutDetails({ locale }: AboutDetailsProps) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale` changes before the refetch resolves
     setDetails(undefined);
 
-    (fetchAboutUsDetails(locale) as Promise<AboutUsResponse>)
+    fetchAboutUsDetails(locale)
       .then((res) => {
-        if (!cancelled) setDetails(res.data?.[0]?.details ?? null);
+        if (!cancelled) setDetails(res);
       })
       .catch(() => {
         if (!cancelled) setDetails(null);

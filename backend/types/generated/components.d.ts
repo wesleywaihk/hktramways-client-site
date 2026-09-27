@@ -602,16 +602,16 @@ export interface PageAboutUsAboutUsDetails extends Struct.ComponentSchema {
   attributes: {
     accordionItem: Schema.Attribute.Component<'content.accordion-item', true>;
     content: Schema.Attribute.RichText & Schema.Attribute.Required;
-    devotedWorkforce: Schema.Attribute.Integer & Schema.Attribute.Required;
-    image1: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    image2: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
-    image3: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    devotedWorkforce: Schema.Attribute.Integer;
+    image1: Schema.Attribute.Media<'images'>;
+    image2: Schema.Attribute.Media<'images'>;
+    image3: Schema.Attribute.Media<'images'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    tramDepots: Schema.Attribute.Integer & Schema.Attribute.Required;
-    tramFleet: Schema.Attribute.Integer & Schema.Attribute.Required;
-    tramRoutes: Schema.Attribute.Integer & Schema.Attribute.Required;
-    tramStops: Schema.Attribute.Integer & Schema.Attribute.Required;
-    tramSystem: Schema.Attribute.Integer & Schema.Attribute.Required;
+    tramDepots: Schema.Attribute.Integer;
+    tramFleet: Schema.Attribute.Integer;
+    tramRoutes: Schema.Attribute.Integer;
+    tramStops: Schema.Attribute.Integer;
+    tramSystem: Schema.Attribute.Integer;
   };
 }
 

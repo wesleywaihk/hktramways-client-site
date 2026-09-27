@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-09-27T01:19:30.472Z"
+    "x-generation-date": "2026-09-27T12:53:06.366Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -7418,6 +7418,7 @@
               "title",
               "slug",
               "dateTime",
+              "desc",
               "pageContent"
             ],
             "type": "object",
@@ -7459,6 +7460,9 @@
               },
               "banner": {
                 "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
+              },
+              "desc": {
+                "type": "string"
               },
               "pageContent": {
                 "type": "string"
@@ -7528,6 +7532,7 @@
           "title",
           "slug",
           "dateTime",
+          "desc",
           "pageContent"
         ],
         "properties": {
@@ -8750,6 +8755,9 @@
                       "banner": {
                         "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
                       },
+                      "desc": {
+                        "type": "string"
+                      },
                       "pageContent": {
                         "type": "string"
                       },
@@ -9084,6 +9092,9 @@
           },
           "banner": {
             "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
+          },
+          "desc": {
+            "type": "string"
           },
           "pageContent": {
             "type": "string"
@@ -10581,6 +10592,9 @@
                 },
                 "banner": {
                   "$ref": "#/components/schemas/ContentBannerImageUnitComponent"
+                },
+                "desc": {
+                  "type": "string"
                 },
                 "pageContent": {
                   "type": "string"

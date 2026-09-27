@@ -43,9 +43,13 @@ export interface AnnouncementData {
   slug: string;
   dateTime: string;
   title: string;
+  /** Short summary for list cards and the news page banner. */
+  desc: string;
+  /** HTML (CKEditor). */
   pageContent: string | null;
   announcement_types: AnnouncementType[];
-  actionButton: ActionButton[];
+  // Only present when the request populates it
+  actionButton?: ActionButton | null;
   // Only present when the request populates them
   thumbnail?: Media | null;
   banner?: ResponsiveImage | null;
@@ -315,13 +319,13 @@ export interface AboutUsDetailsData {
   /** Markdown (CMS richtext). */
   content: string;
   accordionItem: AccordionItemData[];
-  tramFleet: number;
-  tramStops: number;
-  devotedWorkforce: number;
+  tramFleet: number | null;
+  tramStops: number | null;
+  devotedWorkforce: number | null;
   /** Track length in km. */
-  tramSystem: number;
-  tramDepots: number;
-  tramRoutes: number;
+  tramSystem: number | null;
+  tramDepots: number | null;
+  tramRoutes: number | null;
   image1: Media | null;
   image2: Media | null;
   image3: Media | null;
