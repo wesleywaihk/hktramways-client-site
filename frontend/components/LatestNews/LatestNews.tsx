@@ -5,9 +5,16 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Button from "@/components/Button/Button";
 import LatestNewsEntry from "./LatestNewsEntry";
 import { devClassName } from "@/lib/devClassName";
-import { useAnnouncements } from "@/hooks/useAnnouncements";
-import { fetchLatestNews } from "@/hooks/useApiEndpoint/api";
-import type { LatestNewsData, LatestNewsResponse } from "@/types/api";
+import {
+  fetchAnnouncements,
+  fetchLatestNews,
+} from "@/hooks/useApiEndpoint/api";
+import type {
+  AnnouncementData,
+  AnnouncementsResponse,
+  LatestNewsData,
+  LatestNewsResponse,
+} from "@/types/api";
 
 export interface LatestNewsProps {
   locale: string;
@@ -24,20 +31,32 @@ export default function LatestNews({
   limit = 3,
   useAnnouncementType = false,
 }: LatestNewsProps) {
-  const { items, loading: announcementsLoading } = useAnnouncements();
   // undefined = still loading; null = page has no latestNews block
   const [latestNews, setLatestNews] = useState<
     LatestNewsData | null | undefined
   >(undefined);
+  const [items, setItems] = useState<AnnouncementData[]>([]);
 
   useEffect(() => {
     let cancelled = false;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when inputs change before the refetch resolves
     setLatestNews(undefined);
 
+    setItems([]);
+
     (fetchLatestNews(locale, endpoint) as Promise<LatestNewsResponse>)
-      .then((res) => {
-        if (!cancelled) setLatestNews(res.data?.[0]?.latestNews ?? null);
+      .then(async (res) => {
+        const news = res.data?.[0]?.latestNews ?? null;
+        // Latest announcements matching any of the types picked on the page; no types picked = any announcement
+        const announcements: AnnouncementsResponse | null = news
+          ? await fetchAnnouncements({
+              type: news.announcement_types.map((t) => t.key),
+              limit,
+            })
+          : null;
+        if (cancelled) return;
+        setItems(announcements?.data ?? []);
+        setLatestNews(news);
       })
       .catch(() => {
         if (!cancelled) setLatestNews(null);
@@ -46,9 +65,9 @@ export default function LatestNews({
     return () => {
       cancelled = true;
     };
-  }, [locale, endpoint]);
+  }, [locale, endpoint, limit]);
 
-  if (latestNews === undefined || announcementsLoading) {
+  if (latestNews === undefined) {
     return (
       <section
         className={`${devClassName("latest-news")}borderless flex justify-center py-[90px] lg:py-[120px]`}
@@ -62,17 +81,7 @@ export default function LatestNews({
 
   if (!latestNews) return null;
 
-  // Announcements matching any of the types picked on the page; no types picked = any announcement
-  const typeKeys = new Set(latestNews.announcement_types.map((t) => t.key));
-  const filteredItems = items
-    .filter(
-      (item) =>
-        !typeKeys.size ||
-        item.announcement_types.some((type) => typeKeys.has(type.key)),
-    )
-    .slice(0, limit);
-
-  if (!filteredItems.length) return null;
+  if (!items.length) return null;
 
   const { title, actionButton } = latestNews;
 
@@ -95,7 +104,7 @@ export default function LatestNews({
         </div>
 
         <div className="w-full lg:pt-4">
-          {filteredItems.map((item) => (
+          {items.map((item) => (
             <LatestNewsEntry
               key={item.id}
               {...item}

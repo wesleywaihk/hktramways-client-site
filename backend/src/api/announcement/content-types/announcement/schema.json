@@ -15,11 +15,20 @@
     }
   },
   "attributes": {
-    "slug": {
+    "title": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
+        }
+      },
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
         }
       },
       "required": true
@@ -36,23 +45,54 @@
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
-    "title": {
-      "type": "string",
+    "thumbnail": {
+      "type": "media",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "banner": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "content.banner-image-unit",
+      "repeatable": false,
+      "required": false
+    },
+    "desc": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
     },
     "pageContent": {
-      "type": "richtext",
+      "type": "customField",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "required": true
     },
     "actionButton": {
       "type": "component",
@@ -62,7 +102,7 @@
         }
       },
       "component": "content.action-button",
-      "repeatable": true
+      "repeatable": false
     }
   }
 }

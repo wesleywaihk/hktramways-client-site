@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import pageTitleReducer from "./pageTitleSlice";
-import announcementsReducer from "./announcementsSlice";
 
 export const store = configureStore({
   reducer: {
     pageTitle: pageTitleReducer,
-    announcements: announcementsReducer,
   },
 });
 

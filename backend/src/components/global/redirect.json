@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_global_redirects",
+  "info": {
+    "displayName": "redirect"
+  },
+  "options": {},
+  "attributes": {
+    "from": {
+      "type": "string",
+      "required": true
+    },
+    "to": {
+      "type": "string",
+      "required": true
+    },
+    "isPermanent": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  },
+  "config": {}
+}

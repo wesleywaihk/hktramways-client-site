@@ -55,6 +55,16 @@
       "component": "content.footer",
       "repeatable": false,
       "required": true
+    },
+    "redirect": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "global.redirect",
+      "repeatable": true
     }
   }
 }

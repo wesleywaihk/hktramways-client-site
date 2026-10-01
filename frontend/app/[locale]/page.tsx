@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { fetchHome } from "@/hooks/useApiEndpoint/api";
+import { fetchAnnouncements, fetchHome } from "@/hooks/useApiEndpoint/api";
 import { fetchWithErrorHandling } from "@/hooks/fetchWithErrorHandling";
 import {
   generateEntityPageMetadata,
   getEntityStructuredData,
   getPreviewDocumentId,
 } from "@/lib/pageMetadata";
-import type { Home } from "@/types/api";
+import type { AnnouncementsResponse, Home } from "@/types/api";
 import StructuredData from "@/components/StructuredData";
 import HomeBanner from "./components/HomeBanner";
 import NewsBar from "./components/NewsBar/NewsBar";
@@ -43,8 +43,15 @@ export default async function LandingPage({ params }: LandingPageProps) {
   const t = await getTranslations({ locale, namespace: "common" });
   const documentId = await getPreviewDocumentId();
 
-  const { data: res, loaded } = await fetchWithErrorHandling(() =>
-    fetchHome(documentId ?? "", documentId !== null, locale),
+  const [{ data: res, loaded }, { data: announcementsRes }] = await Promise.all(
+    [
+      fetchWithErrorHandling(() =>
+        fetchHome(documentId ?? "", documentId !== null, locale),
+      ),
+      fetchWithErrorHandling<AnnouncementsResponse>(() =>
+        fetchAnnouncements({ limit: 10 }),
+      ),
+    ],
   );
   const home: Home | null = res?.data[0] ?? null;
 
@@ -52,12 +59,18 @@ export default async function LandingPage({ params }: LandingPageProps) {
     return <ErrorPage message={t("noContent")} />;
   }
 
+  const announcements = (announcementsRes?.data ?? []).filter((item) =>
+    item.title.trim(),
+  );
+
   return (
     <div className="pageWrapper mt-0">
       <StructuredData data={getEntityStructuredData(home, (h) => h.seo)} />
-      {/* <SetHeaderStyle style="transparent" /> */}
-      <HomeBanner bannerImage={home.bannerImage} />
-      <NewsBar locale={locale} />
+      <HomeBanner
+        bannerImage={home.bannerImage}
+        hasNewsBar={announcements.length > 0}
+      />
+      <NewsBar locale={locale} items={announcements} />
       <ArcCarousel locale={locale} documentId={documentId} />
       <TramRoute locale={locale} />
       <PartyTram locale={locale} />

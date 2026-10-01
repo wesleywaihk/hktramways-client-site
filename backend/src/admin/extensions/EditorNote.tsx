@@ -6,6 +6,9 @@ const NOTES: Record<string, string[]> = {
   "api::global.global": [],
   "api::home.home": [],
   "api::plan-your-ride.plan-your-ride": [],
+  "api::announcement.announcement": [
+    "Slug:\n- When creating a new item, the slug is filled in automatically from the title as you type (e.g. \"Service Update 2026\" → \"service-update-2026\").\n- Once you type into the slug field yourself, it stops following the title.\n- Editing an existing item never changes its slug.",
+  ],
   "api::party-tram.party-tram": [
     "Overlay image:\n- overlayX: counted by %, 0 if left empty.\n- overlayY: counted by %, 0 if left empty.\n- overlayW: counted by %, 100 if left empty.\n- overlayH: counted by %, auto if left empty.",
   ],

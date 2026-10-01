@@ -8,7 +8,7 @@ import { devClassName } from "@/lib/devClassName";
 import AboutDetailsAccordion from "./AboutDetailsAccordion";
 import AboutDetailsStats from "./AboutDetailsStats/AboutDetailsStats";
 import { useStickyColumn } from "./useStickyColumn";
-import type { AboutUsDetailsData, AboutUsResponse } from "@/types/api";
+import type { AboutUsDetailsData } from "@/types/api";
 
 // Desktop header is 100px tall; keep a little breathing room under it.
 const STICKY_TOP = 120;
@@ -28,9 +28,9 @@ export default function AboutDetails({ locale }: AboutDetailsProps) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when `locale` changes before the refetch resolves
     setDetails(undefined);
 
-    (fetchAboutUsDetails(locale) as Promise<AboutUsResponse>)
+    fetchAboutUsDetails(locale)
       .then((res) => {
-        if (!cancelled) setDetails(res.data?.[0]?.details ?? null);
+        if (!cancelled) setDetails(res);
       })
       .catch(() => {
         if (!cancelled) setDetails(null);
@@ -65,7 +65,7 @@ function AboutDetailsContent({ details }: { details: AboutUsDetailsData }) {
     <section
       className={`${devClassName("about-details")}borderless bg-green min-h-dvh pt-[90px] pb-[60px] text-white lg:pt-[120px]`}
     >
-      <div className="sectionContainer content-max-w flex-col gap-12 lg:max-w-[1270px] lg:flex-row lg:items-start lg:gap-[80px]">
+      <div className="sectionContainer content-max-w flex-col gap-12 lg:max-w-[1270px] lg:flex-row lg:items-start lg:gap-[60px] xl:gap-[80px]">
         <div
           ref={leftRef}
           className="flex min-w-0 flex-1 flex-col gap-6 lg:sticky lg:gap-8"
@@ -79,7 +79,7 @@ function AboutDetailsContent({ details }: { details: AboutUsDetailsData }) {
 
         <div
           ref={rightRef}
-          className="w-full lg:sticky lg:w-[600px] lg:shrink-0"
+          className="w-full lg:sticky lg:w-[calc(50%-30px)] lg:shrink-0 xl:w-[600px]"
         >
           <AboutDetailsStats details={details} />
         </div>

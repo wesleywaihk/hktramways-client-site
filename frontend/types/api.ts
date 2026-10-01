@@ -43,13 +43,28 @@ export interface AnnouncementData {
   slug: string;
   dateTime: string;
   title: string;
+  /** Short summary for list cards and the news page banner. */
+  desc: string;
+  /** HTML (CKEditor). */
   pageContent: string | null;
   announcement_types: AnnouncementType[];
-  actionButton: ActionButton[];
+  // Only present when the request populates it
+  actionButton?: ActionButton | null;
+  // Only present when the request populates them
+  thumbnail?: Media | null;
+  banner?: ResponsiveImage | null;
 }
 
 export interface AnnouncementsResponse {
   data: AnnouncementData[];
+  meta?: {
+    pagination?: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
 }
 
 export interface CarouselItem {
@@ -73,7 +88,8 @@ export type IconEnum =
   | "speaker"
   | "direction"
   | "clock"
-  | "download";
+  | "download"
+  | "document";
 
 export interface IconComponent {
   id: number;
@@ -303,13 +319,13 @@ export interface AboutUsDetailsData {
   /** Markdown (CMS richtext). */
   content: string;
   accordionItem: AccordionItemData[];
-  tramFleet: number;
-  tramStops: number;
-  devotedWorkforce: number;
+  tramFleet: number | null;
+  tramStops: number | null;
+  devotedWorkforce: number | null;
   /** Track length in km. */
-  tramSystem: number;
-  tramDepots: number;
-  tramRoutes: number;
+  tramSystem: number | null;
+  tramDepots: number | null;
+  tramRoutes: number | null;
   image1: Media | null;
   image2: Media | null;
   image3: Media | null;
@@ -376,7 +392,8 @@ export interface InteractiveMapData {
   documentId: string;
   station: StationItemData[];
   ScheduleAppLink: string;
-  downlaodMap: Media | null;
+  downloadMapWest: Media | null;
+  downloadMapEast: Media | null;
 }
 
 export interface InteractiveMapResponse {
@@ -451,6 +468,16 @@ export interface GlobalMainNavExtLink {
   extLink2: GlobalExtLink | null;
 }
 
+export interface GlobalRedirect {
+  id: number;
+  /** Source path (e.g. "/old-page"), matched ignoring the trailing slash. */
+  from: string;
+  /** Destination path or absolute URL. */
+  to: string;
+  /** true → 301, false → 302. */
+  isPermanent: boolean;
+}
+
 export interface GlobalData {
   id: number;
   documentId: string;
@@ -459,6 +486,7 @@ export interface GlobalData {
   seo: Seo | null;
   mainNavExtLink: GlobalMainNavExtLink | null;
   footer: GlobalFooter | null;
+  redirect: GlobalRedirect[] | null;
 }
 
 export interface GlobalResponse {

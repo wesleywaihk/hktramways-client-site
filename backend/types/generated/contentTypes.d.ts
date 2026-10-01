@@ -607,7 +607,7 @@ export interface ApiAnnouncementAnnouncement
     };
   };
   attributes: {
-    actionButton: Schema.Attribute.Component<'content.action-button', true> &
+    actionButton: Schema.Attribute.Component<'content.action-button', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -617,10 +617,24 @@ export interface ApiAnnouncementAnnouncement
       'manyToMany',
       'api::announcement-type.announcement-type'
     >;
+    banner: Schema.Attribute.Component<'content.banner-image-unit', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     dateTime: Schema.Attribute.DateTime &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    desc: Schema.Attribute.Text &
+      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -632,6 +646,13 @@ export interface ApiAnnouncementAnnouncement
       'api::announcement.announcement'
     >;
     pageContent: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -642,10 +663,17 @@ export interface ApiAnnouncementAnnouncement
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
+          localized: false;
+        };
+      }>;
+    thumbnail: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
           localized: true;
         };
       }>;
     title: Schema.Attribute.String &
+      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -697,6 +725,12 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
         };
       }>;
     publishedAt: Schema.Attribute.DateTime;
+    redirect: Schema.Attribute.Component<'global.redirect', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     seo: Schema.Attribute.Component<'seo.seo', false> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
@@ -808,10 +842,16 @@ export interface ApiInteractiveMapInteractiveMap
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    downlaodMap: Schema.Attribute.Media<'files' | 'images'> &
+    downloadMapEast: Schema.Attribute.Media<'files'> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
+        };
+      }>;
+    downloadMapWest: Schema.Attribute.Media<'files'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
         };
       }>;
     locale: Schema.Attribute.String;

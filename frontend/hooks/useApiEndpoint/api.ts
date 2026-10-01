@@ -3,8 +3,12 @@ import { API_URL } from "@/consts";
 import { buildPopulate } from "@/lib/buildPopulate";
 import { routing } from "@/i18n/routing";
 import type {
+  AboutUsDetailsData,
   AboutUsResponse,
+  AnnouncementData,
+  AnnouncementsResponse,
   DownloadAppAreaData,
+  GlobalRedirect,
   Media,
   InteractiveMapResponse,
   TwoLinksCardData,
@@ -20,6 +24,7 @@ export async function fetchGlobal(
     "mainNavExtLink.extLink1",
     "mainNavExtLink.extLink2",
     "footer.getInTouch",
+    "redirect",
   ]);
   const url = `${API_URL}/api/global?${populate}&locale=${locale}`;
   if (process.env.NODE_ENV === "development")
@@ -30,6 +35,20 @@ export async function fetchGlobal(
   if (!res.ok) throw new Error(`Failed to fetch global: ${res.status}`);
 
   return res.json();
+}
+
+// Redirects are non-localized on Global, so any locale returns the same list.
+// Called from `proxy.ts`, which caches the result itself.
+export async function fetchRedirects(): Promise<GlobalRedirect[]> {
+  const populate = buildPopulate(["redirect"]);
+  const url = `${API_URL}/api/global?${populate}&fields[0]=id&locale=${routing.defaultLocale}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch redirects: ${res.status}`);
+  const json: { data: { redirect: GlobalRedirect[] | null } | null } =
+    await res.json();
+  return json.data?.redirect ?? [];
 }
 
 export const fetchHome = cache(async function fetchHome(
@@ -229,7 +248,9 @@ export const fetchAboutUs = cache(async function fetchAboutUs(
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side AboutDetails component, directly against NEXT_PUBLIC_API_URL.
-export async function fetchAboutUsDetails(locale: string) {
+export async function fetchAboutUsDetails(
+  locale: string,
+): Promise<AboutUsDetailsData | null> {
   const populate = buildPopulate([
     "details.accordionItem.icon",
     "details.image1",
@@ -242,8 +263,8 @@ export async function fetchAboutUsDetails(locale: string) {
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok)
     throw new Error(`Failed to fetch about us details: ${res.status}`);
-
-  return res.json();
+  const json: AboutUsResponse = await res.json();
+  return json.data?.[0]?.details ?? null;
 }
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
@@ -367,6 +388,17 @@ export async function fetchSchedule(locale: string) {
   return res.json();
 }
 
+function buildAnnouncementTypeFilter(types?: string[]) {
+  return types?.length
+    ? types
+        .map(
+          (type, i) => `&filters[announcement_types][key][$in][${i}]=${type}`,
+        )
+        .join("")
+    : "";
+}
+
+// Defaults to the latest 10 announcements; pass `limit` to override.
 export const fetchAnnouncements = cache(
   async function fetchAnnouncements(options?: {
     cache?: RequestCache;
@@ -374,16 +406,8 @@ export const fetchAnnouncements = cache(
     limit?: number;
   }) {
     const populate = buildPopulate(["announcement_types", "actionButton"]);
-    const filter = options?.type?.length
-      ? options.type
-          .map(
-            (type, i) => `&filters[announcement_types][key][$in][${i}]=${type}`,
-          )
-          .join("")
-      : "";
-    const pagination = options?.limit
-      ? `&pagination[page]=1&pagination[pageSize]=${options.limit}`
-      : "";
+    const filter = buildAnnouncementTypeFilter(options?.type);
+    const pagination = `&pagination[page]=1&pagination[pageSize]=${options?.limit ?? 10}`;
     const url = `${API_URL}/api/announcements?sort=dateTime:desc&${populate}${filter}${pagination}`;
     if (process.env.NODE_ENV === "development")
       console.log("[endpoint fetched]", url);
@@ -394,6 +418,121 @@ export const fetchAnnouncements = cache(
     return res.json();
   },
 );
+
+const RECENT_ANNOUNCEMENT_DAYS = 300;
+
+// Not wrapped in React's `cache` (server-only) — intended for client-side
+// filter UIs, directly against NEXT_PUBLIC_API_URL.
+// Filters by calendar `year` (HKT) and announcement type keys. Without a
+// `year`, returns announcements from the last 300 days.
+export async function fetchFilteredAnnouncements(options?: {
+  year?: number | string | null;
+  types?: string[];
+  pageSize?: number;
+}): Promise<AnnouncementsResponse> {
+  const populate = buildPopulate(["announcement_types", "actionButton"]);
+  const year = options?.year ? Number(options.year) : null;
+  const dateFilter = year
+    ? `&filters[dateTime][$gte]=${year}-01-01T00:00:00%2B08:00` +
+      `&filters[dateTime][$lt]=${year + 1}-01-01T00:00:00%2B08:00`
+    : `&filters[dateTime][$gte]=${new Date(
+        Date.now() - RECENT_ANNOUNCEMENT_DAYS * 24 * 60 * 60 * 1000,
+      ).toISOString()}`;
+  const typeFilter = buildAnnouncementTypeFilter(options?.types);
+  // Strapi caps pageSize at its `maxLimit` (100 by default).
+  const pagination = `&pagination[page]=1&pagination[pageSize]=${options?.pageSize ?? 100}`;
+  const url = `${API_URL}/api/announcements?sort=dateTime:desc&${populate}${dateFilter}${typeFilter}${pagination}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch filtered announcements: ${res.status}`);
+
+  return res.json();
+}
+
+// Latest announcement (no filters) for the news page banner.
+export const fetchLatestAnnouncement = cache(
+  async function fetchLatestAnnouncement(
+    locale: string,
+  ): Promise<AnnouncementData | null> {
+    const populate = buildPopulate([
+      "announcement_types",
+      "actionButton",
+      "thumbnail",
+      "banner.imageD",
+      "banner.imageM",
+    ]);
+    const url = `${API_URL}/api/announcements?locale=${locale}&sort=dateTime:desc&${populate}&pagination[page]=1&pagination[pageSize]=1`;
+    if (process.env.NODE_ENV === "development")
+      console.log("[endpoint fetched]", url);
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok)
+      throw new Error(`Failed to fetch latest announcement: ${res.status}`);
+    const json: AnnouncementsResponse = await res.json();
+    return json.data?.[0] ?? null;
+  },
+);
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side AnnouncementList, directly against NEXT_PUBLIC_API_URL.
+// One Strapi page of announcements, optionally filtered by calendar `year`
+// (HKT) and announcement type keys. Unlike `fetchFilteredAnnouncements`, no
+// year means all dates.
+export async function fetchAnnouncementPage(options: {
+  locale: string;
+  page: number;
+  pageSize: number;
+  year?: number | null;
+  types?: string[];
+  /** Announcement id to leave out (e.g. the one already shown in the banner). */
+  excludeId?: number | null;
+}): Promise<AnnouncementsResponse> {
+  const populate = buildPopulate(["announcement_types", "thumbnail"]);
+  const { locale, page, pageSize, year } = options;
+  const dateFilter = year
+    ? `&filters[dateTime][$gte]=${year}-01-01T00:00:00%2B08:00` +
+      `&filters[dateTime][$lt]=${year + 1}-01-01T00:00:00%2B08:00`
+    : "";
+  const typeFilter = buildAnnouncementTypeFilter(options.types);
+  const excludeFilter = options.excludeId
+    ? `&filters[id][$ne]=${options.excludeId}`
+    : "";
+  // Strapi caps pageSize at its `maxLimit` (100 by default).
+  const pagination = `&pagination[page]=${page}&pagination[pageSize]=${pageSize}`;
+  const url = `${API_URL}/api/announcements?locale=${locale}&sort=dateTime:desc&${populate}${dateFilter}${typeFilter}${excludeFilter}${pagination}`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch announcement page: ${res.status}`);
+
+  return res.json();
+}
+
+// Not wrapped in React's `cache` (server-only) — this is called from the
+// client-side news detail page, directly against NEXT_PUBLIC_API_URL.
+// Slugs are localized, so the lookup is per locale.
+export async function fetchAnnouncementBySlug(
+  slug: string,
+  locale: string,
+): Promise<AnnouncementData | null> {
+  const populate = buildPopulate([
+    "announcement_types",
+    "actionButton",
+    "thumbnail",
+    "banner.imageD",
+    "banner.imageM",
+  ]);
+  const url = `${API_URL}/api/announcements?locale=${locale}&filters[slug][$eq]=${encodeURIComponent(slug)}&${populate}&pagination[page]=1&pagination[pageSize]=1`;
+  if (process.env.NODE_ENV === "development")
+    console.log("[endpoint fetched]", url);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok)
+    throw new Error(`Failed to fetch announcement: ${res.status}`);
+  const json: AnnouncementsResponse = await res.json();
+  return json.data?.[0] ?? null;
+}
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side PartyTram component, directly against NEXT_PUBLIC_API_URL.
@@ -421,7 +560,8 @@ export async function fetchInteractiveMap(
     "station.image",
     "station.attraction.icon",
     "station.bannerLink.image",
-    "downlaodMap",
+    "downloadMapWest",
+    "downloadMapEast",
   ]);
   const url = `${API_URL}/api/interactive-maps?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")
