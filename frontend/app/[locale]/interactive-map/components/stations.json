@@ -1843,7 +1843,7 @@
     },
     "locCode": "97E",
     "type": "STATION",
-    "direction": "Eastbound",
+    "direction": "Eastbound/Westbound",
     "latitude": 22.280164,
     "longitude": 114.22583,
     "district": {
