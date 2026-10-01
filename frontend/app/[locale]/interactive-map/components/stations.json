@@ -2047,24 +2047,7 @@
     },
     "locCode": "WMT",
     "type": "TERMINUS",
-    "direction": "Eastbound",
-    "latitude": 22.2868932,
-    "longitude": 114.1507756,
-    "district": {
-      "en": "Sheung Wan",
-      "zhHK": "上環",
-      "zhCN": "上环"
-    }
-  },
-  {
-    "name": {
-      "en": "Western Market Terminus",
-      "zhHK": "上環(西港城)總站",
-      "zhCN": "上环(西港城)总站"
-    },
-    "locCode": "WMT",
-    "type": "TERMINUS",
-    "direction": "Westbound",
+    "direction": "Eastbound/Westbound",
     "latitude": 22.2868932,
     "longitude": 114.1507756,
     "district": {
