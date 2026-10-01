@@ -392,7 +392,8 @@ export interface InteractiveMapData {
   documentId: string;
   station: StationItemData[];
   ScheduleAppLink: string;
-  downlaodMap: Media | null;
+  downloadMapWest: Media | null;
+  downloadMapEast: Media | null;
 }
 
 export interface InteractiveMapResponse {

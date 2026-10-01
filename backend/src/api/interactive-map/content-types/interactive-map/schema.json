@@ -25,17 +25,30 @@
       "component": "seo.seo",
       "repeatable": false
     },
-    "downlaodMap": {
+    "downloadMapWest": {
       "type": "media",
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       },
       "multiple": false,
+      "required": false,
       "allowedTypes": [
-        "files",
-        "images"
+        "files"
+      ]
+    },
+    "downloadMapEast": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "files"
       ]
     },
     "station": {

@@ -39,6 +39,10 @@ export default function InteractiveMapPage({
     routeView,
     interactiveMapData,
   } = useInteractiveMap(locale);
+  const downloadMap =
+    direction === "west"
+      ? interactiveMapData?.downloadMapWest
+      : interactiveMapData?.downloadMapEast;
 
   return (
     <>
@@ -88,10 +92,10 @@ export default function InteractiveMapPage({
           >
             {t("viewLargerMap")}
           </a>
-          {interactiveMapData?.downlaodMap && !selectedStation && (
+          {downloadMap && !selectedStation && (
             <DownloadMapButton
-              href={mediaSrc(interactiveMapData.downlaodMap.url)}
-              download={interactiveMapData.downlaodMap.name}
+              href={mediaSrc(downloadMap.url)}
+              download={downloadMap.name}
               label={t("offlineRouteMap")}
               className="absolute top-3 right-3 z-[100]"
             />

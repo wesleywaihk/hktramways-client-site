@@ -560,7 +560,8 @@ export async function fetchInteractiveMap(
     "station.image",
     "station.attraction.icon",
     "station.bannerLink.image",
-    "downlaodMap",
+    "downloadMapWest",
+    "downloadMapEast",
   ]);
   const url = `${API_URL}/api/interactive-maps?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")

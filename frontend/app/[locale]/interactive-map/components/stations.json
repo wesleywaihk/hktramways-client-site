@@ -1979,24 +1979,7 @@
     },
     "locCode": "SKT",
     "type": "TERMINUS",
-    "direction": "Westbound",
-    "latitude": 22.2778888,
-    "longitude": 114.2301703,
-    "district": {
-      "en": "Shau Kei Wan",
-      "zhHK": "筲箕灣",
-      "zhCN": "筲箕湾"
-    }
-  },
-  {
-    "name": {
-      "en": "Shau Kei Wan Terminus",
-      "zhHK": "筲箕灣總站",
-      "zhCN": "筲箕湾总站"
-    },
-    "locCode": "SKT",
-    "type": "TERMINUS",
-    "direction": "Eastbound",
+    "direction": "Eastbound/Westbound",
     "latitude": 22.2778888,
     "longitude": 114.2301703,
     "district": {
@@ -2171,12 +2154,7 @@
     },
     "locCode": "ETH",
     "type": "STATION",
-    "direction": "Eastbound",
-    "district": {
-      "en": "Placeholder",
-      "zhHK": "Placeholder",
-      "zhCN": "Placeholder"
-    }
+    "direction": "Eastbound"
   },
   {
     "name": {
@@ -2186,12 +2164,7 @@
     },
     "locCode": "WTH",
     "type": "STATION",
-    "direction": "Westbound",
-    "district": {
-      "en": "Placeholder",
-      "zhHK": "Placeholder",
-      "zhCN": "Placeholder"
-    }
+    "direction": "Westbound"
   },
   {
     "name": {
@@ -2231,12 +2204,7 @@
     },
     "locCode": "EWH",
     "type": "STATION",
-    "direction": "Eastbound",
-    "district": {
-      "en": "Placeholder",
-      "zhHK": "Placeholder",
-      "zhCN": "Placeholder"
-    }
+    "direction": "Eastbound"
   },
   {
     "name": {
@@ -2246,12 +2214,7 @@
     },
     "locCode": "WWH",
     "type": "STATION",
-    "direction": "Westbound",
-    "district": {
-      "en": "Placeholder",
-      "zhHK": "Placeholder",
-      "zhCN": "Placeholder"
-    }
+    "direction": "Westbound"
   },
   {
     "name": {
@@ -2276,22 +2239,7 @@
     },
     "locCode": "TCB",
     "type": "TERMINUS",
-    "direction": "Eastbound",
-    "district": {
-      "en": "Causeway Bay",
-      "zhHK": "銅鑼灣",
-      "zhCN": "铜锣湾"
-    }
-  },
-  {
-    "name": {
-      "en": "Causeway Bay",
-      "zhHK": "銅鑼灣",
-      "zhCN": "铜锣湾"
-    },
-    "locCode": "TCB",
-    "type": "TERMINUS",
-    "direction": "Westbound",
+    "direction": "Eastbound/Westbound",
     "district": {
       "en": "Causeway Bay",
       "zhHK": "銅鑼灣",
@@ -2306,22 +2254,7 @@
     },
     "locCode": "TNP",
     "type": "TERMINUS",
-    "direction": "Eastbound",
-    "district": {
-      "en": "North Point",
-      "zhHK": "北角",
-      "zhCN": "北角"
-    }
-  },
-  {
-    "name": {
-      "en": "North Point",
-      "zhHK": "北角",
-      "zhCN": "北角"
-    },
-    "locCode": "TNP",
-    "type": "TERMINUS",
-    "direction": "Westbound",
+    "direction": "Eastbound/Westbound",
     "district": {
       "en": "North Point",
       "zhHK": "北角",
@@ -2336,22 +2269,7 @@
     },
     "locCode": "TKW",
     "type": "TERMINUS",
-    "direction": "Eastbound",
-    "district": {
-      "en": "Shau Kei Wan",
-      "zhHK": "筲箕灣",
-      "zhCN": "筲箕湾"
-    }
-  },
-  {
-    "name": {
-      "en": "Shau Kei Wan",
-      "zhHK": "筲箕灣",
-      "zhCN": "筲箕湾"
-    },
-    "locCode": "TKW",
-    "type": "TERMINUS",
-    "direction": "Westbound",
+    "direction": "Eastbound/Westbound",
     "district": {
       "en": "Shau Kei Wan",
       "zhHK": "筲箕灣",
@@ -2396,27 +2314,7 @@
     },
     "locCode": "THV",
     "type": "TERMINUS",
-    "direction": "Eastbound",
-    "district": {
-      "en": "Placeholder",
-      "zhHK": "Placeholder",
-      "zhCN": "Placeholder"
-    }
-  },
-  {
-    "name": {
-      "en": "Happy Valley",
-      "zhHK": "跑馬地",
-      "zhCN": "跑马地"
-    },
-    "locCode": "THV",
-    "type": "TERMINUS",
-    "direction": "Westbound",
-    "district": {
-      "en": "Placeholder",
-      "zhHK": "Placeholder",
-      "zhCN": "Placeholder"
-    }
+    "direction": "Eastbound/Westbound"
   },
   {
     "name": {
@@ -2426,22 +2324,7 @@
     },
     "locCode": "TKT",
     "type": "TERMINUS",
-    "direction": "Eastbound",
-    "district": {
-      "en": "Kennedy Town",
-      "zhHK": "堅尼地城",
-      "zhCN": "坚尼地城"
-    }
-  },
-  {
-    "name": {
-      "en": "Kennedy Town",
-      "zhHK": "堅尼地城",
-      "zhCN": "坚尼地城"
-    },
-    "locCode": "TKT",
-    "type": "TERMINUS",
-    "direction": "Westbound",
+    "direction": "Eastbound/Westbound",
     "district": {
       "en": "Kennedy Town",
       "zhHK": "堅尼地城",
