@@ -3,7 +3,7 @@ import { devClassName } from "@/lib/devClassName";
 import type { Direction } from "@/consts";
 
 const BUTTON_CLASSES =
-  "flex flex-1 cursor-pointer flex-col items-center justify-center rounded-[10px] p-[6px] pb-[14px] lg:p-[15px] lg:pb-[20px] transition-colors duration-200";
+  "flex flex-1 cursor-pointer flex-col items-center justify-center rounded-[18px] lg:rounded-[21px] p-[6px] pb-[14px] lg:p-[15px] lg:pb-[20px] transition-colors duration-200";
 
 const TXT_1_CLASS =
   "text-[18px] leading-[152%] font-semibold tracking-[0.02em] lg:text-[15px]";
@@ -21,7 +21,7 @@ export default function RouteToggle({ direction, onChange }: RouteToggleProps) {
 
   return (
     <div
-      className={`${devClassName("route-toggle")}flex w-full rounded-[18px] border-2 border-[#CCCCCC]/40 bg-white p-[8px]`}
+      className={`${devClassName("route-toggle")}flex border-grey-light/40 w-full rounded-[27px] border-2 bg-white p-[8px] lg:rounded-[30px]`}
     >
       <button
         type="button"

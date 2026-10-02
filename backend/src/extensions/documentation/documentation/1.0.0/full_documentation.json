@@ -17,10 +17,7 @@
     "x-generation-date": "2026-10-02T14:09:32.758Z"
   },
   "x-strapi-config": {
-    "plugins": [
-      "upload",
-      "i18n"
-    ]
+    "plugins": ["upload", "i18n"]
   },
   "servers": [
     {
@@ -102,9 +99,7 @@
             }
           }
         },
-        "tags": [
-          "About-us"
-        ],
+        "tags": ["About-us"],
         "parameters": [
           {
             "name": "sort",
@@ -284,9 +279,7 @@
             }
           }
         },
-        "tags": [
-          "About-us"
-        ],
+        "tags": ["About-us"],
         "parameters": [],
         "operationId": "post/about-uses",
         "requestBody": {
@@ -365,9 +358,7 @@
             }
           }
         },
-        "tags": [
-          "About-us"
-        ],
+        "tags": ["About-us"],
         "parameters": [
           {
             "name": "id",
@@ -445,9 +436,7 @@
             }
           }
         },
-        "tags": [
-          "About-us"
-        ],
+        "tags": ["About-us"],
         "parameters": [
           {
             "name": "id",
@@ -536,9 +525,7 @@
             }
           }
         },
-        "tags": [
-          "About-us"
-        ],
+        "tags": ["About-us"],
         "parameters": [
           {
             "name": "id",
@@ -618,9 +605,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement"
-        ],
+        "tags": ["Announcement"],
         "parameters": [
           {
             "name": "sort",
@@ -800,9 +785,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement"
-        ],
+        "tags": ["Announcement"],
         "parameters": [],
         "operationId": "post/announcements",
         "requestBody": {
@@ -881,9 +864,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement"
-        ],
+        "tags": ["Announcement"],
         "parameters": [
           {
             "name": "id",
@@ -961,9 +942,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement"
-        ],
+        "tags": ["Announcement"],
         "parameters": [
           {
             "name": "id",
@@ -1052,9 +1031,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement"
-        ],
+        "tags": ["Announcement"],
         "parameters": [
           {
             "name": "id",
@@ -1134,9 +1111,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement-type"
-        ],
+        "tags": ["Announcement-type"],
         "parameters": [
           {
             "name": "sort",
@@ -1316,9 +1291,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement-type"
-        ],
+        "tags": ["Announcement-type"],
         "parameters": [],
         "operationId": "post/announcement-types",
         "requestBody": {
@@ -1397,9 +1370,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement-type"
-        ],
+        "tags": ["Announcement-type"],
         "parameters": [
           {
             "name": "id",
@@ -1477,9 +1448,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement-type"
-        ],
+        "tags": ["Announcement-type"],
         "parameters": [
           {
             "name": "id",
@@ -1568,9 +1537,7 @@
             }
           }
         },
-        "tags": [
-          "Announcement-type"
-        ],
+        "tags": ["Announcement-type"],
         "parameters": [
           {
             "name": "id",
@@ -1650,9 +1617,7 @@
             }
           }
         },
-        "tags": [
-          "Global"
-        ],
+        "tags": ["Global"],
         "parameters": [
           {
             "name": "sort",
@@ -1832,9 +1797,7 @@
             }
           }
         },
-        "tags": [
-          "Global"
-        ],
+        "tags": ["Global"],
         "parameters": [],
         "operationId": "put/global",
         "requestBody": {
@@ -1912,9 +1875,7 @@
             }
           }
         },
-        "tags": [
-          "Global"
-        ],
+        "tags": ["Global"],
         "parameters": [],
         "operationId": "delete/global"
       }
@@ -1983,9 +1944,7 @@
             }
           }
         },
-        "tags": [
-          "Home"
-        ],
+        "tags": ["Home"],
         "parameters": [
           {
             "name": "sort",
@@ -2165,9 +2124,7 @@
             }
           }
         },
-        "tags": [
-          "Home"
-        ],
+        "tags": ["Home"],
         "parameters": [],
         "operationId": "post/homes",
         "requestBody": {
@@ -2246,9 +2203,7 @@
             }
           }
         },
-        "tags": [
-          "Home"
-        ],
+        "tags": ["Home"],
         "parameters": [
           {
             "name": "id",
@@ -2326,9 +2281,7 @@
             }
           }
         },
-        "tags": [
-          "Home"
-        ],
+        "tags": ["Home"],
         "parameters": [
           {
             "name": "id",
@@ -2417,9 +2370,7 @@
             }
           }
         },
-        "tags": [
-          "Home"
-        ],
+        "tags": ["Home"],
         "parameters": [
           {
             "name": "id",
@@ -2499,9 +2450,7 @@
             }
           }
         },
-        "tags": [
-          "Interactive-map"
-        ],
+        "tags": ["Interactive-map"],
         "parameters": [
           {
             "name": "sort",
@@ -2681,9 +2630,7 @@
             }
           }
         },
-        "tags": [
-          "Interactive-map"
-        ],
+        "tags": ["Interactive-map"],
         "parameters": [],
         "operationId": "post/interactive-maps",
         "requestBody": {
@@ -2762,9 +2709,7 @@
             }
           }
         },
-        "tags": [
-          "Interactive-map"
-        ],
+        "tags": ["Interactive-map"],
         "parameters": [
           {
             "name": "id",
@@ -2842,9 +2787,7 @@
             }
           }
         },
-        "tags": [
-          "Interactive-map"
-        ],
+        "tags": ["Interactive-map"],
         "parameters": [
           {
             "name": "id",
@@ -2933,9 +2876,7 @@
             }
           }
         },
-        "tags": [
-          "Interactive-map"
-        ],
+        "tags": ["Interactive-map"],
         "parameters": [
           {
             "name": "id",
@@ -3015,9 +2956,7 @@
             }
           }
         },
-        "tags": [
-          "Party-tram"
-        ],
+        "tags": ["Party-tram"],
         "parameters": [
           {
             "name": "sort",
@@ -3197,9 +3136,7 @@
             }
           }
         },
-        "tags": [
-          "Party-tram"
-        ],
+        "tags": ["Party-tram"],
         "parameters": [],
         "operationId": "put/party-tram",
         "requestBody": {
@@ -3277,9 +3214,7 @@
             }
           }
         },
-        "tags": [
-          "Party-tram"
-        ],
+        "tags": ["Party-tram"],
         "parameters": [],
         "operationId": "delete/party-tram"
       }
@@ -3348,9 +3283,7 @@
             }
           }
         },
-        "tags": [
-          "Plan-your-ride"
-        ],
+        "tags": ["Plan-your-ride"],
         "parameters": [
           {
             "name": "sort",
@@ -3530,9 +3463,7 @@
             }
           }
         },
-        "tags": [
-          "Plan-your-ride"
-        ],
+        "tags": ["Plan-your-ride"],
         "parameters": [],
         "operationId": "post/plan-your-rides",
         "requestBody": {
@@ -3611,9 +3542,7 @@
             }
           }
         },
-        "tags": [
-          "Plan-your-ride"
-        ],
+        "tags": ["Plan-your-ride"],
         "parameters": [
           {
             "name": "id",
@@ -3691,9 +3620,7 @@
             }
           }
         },
-        "tags": [
-          "Plan-your-ride"
-        ],
+        "tags": ["Plan-your-ride"],
         "parameters": [
           {
             "name": "id",
@@ -3782,9 +3709,7 @@
             }
           }
         },
-        "tags": [
-          "Plan-your-ride"
-        ],
+        "tags": ["Plan-your-ride"],
         "parameters": [
           {
             "name": "id",
@@ -3864,9 +3789,7 @@
             }
           }
         },
-        "tags": [
-          "Tram-route"
-        ],
+        "tags": ["Tram-route"],
         "parameters": [
           {
             "name": "sort",
@@ -4046,9 +3969,7 @@
             }
           }
         },
-        "tags": [
-          "Tram-route"
-        ],
+        "tags": ["Tram-route"],
         "parameters": [],
         "operationId": "put/tram-route",
         "requestBody": {
@@ -4126,9 +4047,7 @@
             }
           }
         },
-        "tags": [
-          "Tram-route"
-        ],
+        "tags": ["Tram-route"],
         "parameters": [],
         "operationId": "delete/tram-route"
       }
@@ -4197,9 +4116,7 @@
             }
           }
         },
-        "tags": [
-          "I18n - Locale"
-        ],
+        "tags": ["I18n - Locale"],
         "parameters": [],
         "operationId": "get/i18n/locales"
       }
@@ -4223,18 +4140,14 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "requestBody": {
           "description": "Upload files",
           "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
-                "required": [
-                  "files"
-                ],
+                "required": ["files"],
                 "type": "object",
                 "properties": {
                   "path": {
@@ -4297,9 +4210,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "requestBody": {
           "description": "Upload files",
           "required": true,
@@ -4335,9 +4246,7 @@
     },
     "/upload/files": {
       "get": {
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "responses": {
           "200": {
             "description": "Get a list of files",
@@ -4369,9 +4278,7 @@
             }
           }
         ],
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "responses": {
           "200": {
             "description": "Get a specific file",
@@ -4398,9 +4305,7 @@
             }
           }
         ],
-        "tags": [
-          "Upload - File"
-        ],
+        "tags": ["Upload - File"],
         "responses": {
           "200": {
             "description": "Delete a file",
@@ -4427,9 +4332,7 @@
     "schemas": {
       "Error": {
         "type": "object",
-        "required": [
-          "error"
-        ],
+        "required": ["error"],
         "properties": {
           "data": {
             "nullable": true,
@@ -4466,15 +4369,10 @@
       },
       "AboutUsRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "title",
-              "desc"
-            ],
+            "required": ["title", "desc"],
             "type": "object",
             "properties": {
               "seo": {
@@ -4585,10 +4483,7 @@
       },
       "AboutUs": {
         "type": "object",
-        "required": [
-          "title",
-          "desc"
-        ],
+        "required": ["title", "desc"],
         "properties": {
           "id": {
             "oneOf": [
@@ -7599,18 +7494,10 @@
       },
       "AnnouncementRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "title",
-              "slug",
-              "dateTime",
-              "desc",
-              "pageContent"
-            ],
+            "required": ["title", "slug", "dateTime", "desc", "pageContent"],
             "type": "object",
             "properties": {
               "title": {
@@ -7718,13 +7605,7 @@
       },
       "Announcement": {
         "type": "object",
-        "required": [
-          "title",
-          "slug",
-          "dateTime",
-          "desc",
-          "pageContent"
-        ],
+        "required": ["title", "slug", "dateTime", "desc", "pageContent"],
         "properties": {
           "id": {
             "oneOf": [
@@ -9379,17 +9260,10 @@
       },
       "AnnouncementTypeRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "key",
-              "labelEn",
-              "labelZhHk",
-              "labelZhCn"
-            ],
+            "required": ["key", "labelEn", "labelZhHk", "labelZhCn"],
             "type": "object",
             "properties": {
               "key": {
@@ -9476,12 +9350,7 @@
       },
       "AnnouncementType": {
         "type": "object",
-        "required": [
-          "key",
-          "labelEn",
-          "labelZhHk",
-          "labelZhCn"
-        ],
+        "required": ["key", "labelEn", "labelZhHk", "labelZhCn"],
         "properties": {
           "id": {
             "oneOf": [
@@ -9754,10 +9623,7 @@
                                           },
                                           "kind": {
                                             "type": "string",
-                                            "enum": [
-                                              "content-api",
-                                              "admin"
-                                            ]
+                                            "enum": ["content-api", "admin"]
                                           },
                                           "type": {
                                             "type": "string",
@@ -10954,16 +10820,10 @@
       },
       "GlobalRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "favicon",
-              "seo",
-              "footer"
-            ],
+            "required": ["favicon", "seo", "footer"],
             "type": "object",
             "properties": {
               "favicon": {
@@ -11050,11 +10910,7 @@
       },
       "Global": {
         "type": "object",
-        "required": [
-          "favicon",
-          "seo",
-          "footer"
-        ],
+        "required": ["favicon", "seo", "footer"],
         "properties": {
           "id": {
             "oneOf": [
@@ -11478,10 +11334,7 @@
                                             },
                                             "kind": {
                                               "type": "string",
-                                              "enum": [
-                                                "content-api",
-                                                "admin"
-                                              ]
+                                              "enum": ["content-api", "admin"]
                                             },
                                             "type": {
                                               "type": "string",
@@ -12708,15 +12561,10 @@
       },
       "HomeRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "Title",
-              "bannerImage"
-            ],
+            "required": ["Title", "bannerImage"],
             "type": "object",
             "properties": {
               "seo": {
@@ -12801,10 +12649,7 @@
       },
       "Home": {
         "type": "object",
-        "required": [
-          "Title",
-          "bannerImage"
-        ],
+        "required": ["Title", "bannerImage"],
         "properties": {
           "id": {
             "oneOf": [
@@ -13727,9 +13572,7 @@
       },
       "InteractiveMapRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
             "type": "object",
@@ -15643,14 +15486,10 @@
       },
       "PartyTramRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "title"
-            ],
+            "required": ["title"],
             "type": "object",
             "properties": {
               "title": {
@@ -15720,9 +15559,7 @@
       },
       "PartyTram": {
         "type": "object",
-        "required": [
-          "title"
-        ],
+        "required": ["title"],
         "properties": {
           "id": {
             "oneOf": [
@@ -16147,15 +15984,10 @@
       },
       "PlanYourRideRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "title",
-              "desc"
-            ],
+            "required": ["title", "desc"],
             "type": "object",
             "properties": {
               "seo": {
@@ -16249,10 +16081,7 @@
       },
       "PlanYourRide": {
         "type": "object",
-        "required": [
-          "title",
-          "desc"
-        ],
+        "required": ["title", "desc"],
         "properties": {
           "id": {
             "oneOf": [
@@ -16872,15 +16701,10 @@
       },
       "TramRouteRequest": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
-            "required": [
-              "title",
-              "desc"
-            ],
+            "required": ["title", "desc"],
             "type": "object",
             "properties": {
               "title": {
@@ -16950,10 +16774,7 @@
       },
       "TramRoute": {
         "type": "object",
-        "required": [
-          "title",
-          "desc"
-        ],
+        "required": ["title", "desc"],
         "properties": {
           "id": {
             "oneOf": [
@@ -17148,18 +16969,11 @@
                               },
                               "kind": {
                                 "type": "string",
-                                "enum": [
-                                  "content-api",
-                                  "admin"
-                                ]
+                                "enum": ["content-api", "admin"]
                               },
                               "type": {
                                 "type": "string",
-                                "enum": [
-                                  "read-only",
-                                  "full-access",
-                                  "custom"
-                                ]
+                                "enum": ["read-only", "full-access", "custom"]
                               },
                               "accessKey": {
                                 "type": "string"
@@ -17987,18 +17801,11 @@
                               },
                               "kind": {
                                 "type": "string",
-                                "enum": [
-                                  "content-api",
-                                  "admin"
-                                ]
+                                "enum": ["content-api", "admin"]
                               },
                               "type": {
                                 "type": "string",
-                                "enum": [
-                                  "read-only",
-                                  "full-access",
-                                  "custom"
-                                ]
+                                "enum": ["read-only", "full-access", "custom"]
                               },
                               "accessKey": {
                                 "type": "string"

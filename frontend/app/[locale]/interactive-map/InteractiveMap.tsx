@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import SetHeaderStyle from "@/components/Header/HeaderStyle/SetHeaderStyle";
 import { IMG_URL } from "@/consts";
@@ -9,6 +10,7 @@ import StationPopup from "./components/StationPopup/StationPopup";
 import InteractiveGoogleMap from "./components/InteractiveGoogleMap/InteractiveGoogleMap";
 import DownloadMapButton from "./components/DownloadMapButton/DownloadMapButton";
 import type { AppStoreLinks } from "./components/NextTramDialog/NextTramDialog";
+import { useScrollbarWidth } from "@/hooks/useScrollbarWidth";
 import { useInteractiveMap } from "./useInteractiveMap";
 
 const LARGER_MAP_URL =
@@ -33,11 +35,14 @@ export default function InteractiveMap({
     setDirection,
     selectedRoute,
     setSelectedRoute,
+    showRouteForStation,
     selectedStation,
     setSelectedStation,
     stations,
     interactiveMapData,
   } = useInteractiveMap(locale);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  useScrollbarWidth(scrollAreaRef);
   const downloadMap =
     direction === "west"
       ? interactiveMapData?.downloadMapWest
@@ -61,8 +66,12 @@ export default function InteractiveMap({
             className="hidden lg:flex"
           />
 
+          {/* Widened past the column so the scrollbar sits outside it; the padding
+              gives back the extra width minus the real scrollbar width, so the
+              content lines up with the column whether or not scrollbars take space. */}
           <div
-            className={`thin-scrollbar mr-[-36px] max-h-[50vh] w-[calc(100%+36px)] pr-[28px] lg:mr-[-40px] lg:max-h-none lg:min-h-0 lg:w-[calc(100%+40px)] lg:flex-1 lg:overflow-y-auto lg:pr-2 lg:pr-[32px] ${
+            ref={scrollAreaRef}
+            className={`thin-scrollbar mr-[-36px] max-h-[50vh] w-[calc(100%+36px)] pr-[calc(36px-var(--scrollbar-w,0px))] lg:mr-[-40px] lg:max-h-none lg:min-h-0 lg:w-[calc(100%+40px)] lg:flex-1 lg:overflow-y-auto lg:pr-[calc(40px-var(--scrollbar-w,0px))] ${
               selectedStation ? "overflow-hidden" : "overflow-y-auto"
             }`}
           >
@@ -91,7 +100,7 @@ export default function InteractiveMap({
             stations={stations}
             selectedStation={selectedStation}
             onSelectStation={setSelectedStation}
-            className="h-full w-full lg:rounded-[16px]"
+            className="h-full w-full lg:rounded-[30px]"
           />
           <a
             href={LARGER_MAP_URL}
@@ -115,6 +124,7 @@ export default function InteractiveMap({
             key={selectedStation}
             locCode={selectedStation}
             direction={direction}
+            onRouteSelect={showRouteForStation}
             loading={interactiveMapData === undefined}
             station={interactiveMapData?.station.find(
               (s) => s.locCode === selectedStation,

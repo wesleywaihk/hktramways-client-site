@@ -18,6 +18,8 @@ export type ButtonProps = {
   className?: string;
   useArrow?: boolean;
   startIcon?: IconEnum | null;
+  /** Replaces the start icon's default size (20px, 24px on desktop). */
+  iconClassName?: string;
   variant?: ButtonVariant;
   color?: ButtonColor;
   size?: ButtonSize;
@@ -80,6 +82,7 @@ export default function Button({
   className,
   useArrow = false,
   startIcon,
+  iconClassName = "h-5 w-5 lg:h-[24px]! lg:w-[24px]!",
   variant = "outline",
   color = "green",
   size = "normal",
@@ -98,7 +101,9 @@ export default function Button({
   const content = (
     <>
       {startIcon && (
-        <span className="inline-flex h-5 w-5 shrink-0 transition-transform group-hover:scale-[115%] lg:h-[24px]! lg:w-[24px]!">
+        <span
+          className={`inline-flex shrink-0 transition-transform group-hover:scale-[115%] ${iconClassName}`}
+        >
           <BtnIcon icon={startIcon} />
         </span>
       )}
