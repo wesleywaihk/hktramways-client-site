@@ -68,7 +68,17 @@
           "localized": true
         }
       },
-      "required": true
+      "required": false
+    },
+    "nextTramDialog": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "page-interactive-map.next-tram-dialog",
+      "repeatable": false
     }
   }
 }
