@@ -85,17 +85,24 @@ export interface ContentDownloadAppArea extends Struct.ComponentSchema {
     actionButton1: Schema.Attribute.Component<'content.action-button', false> &
       Schema.Attribute.Required;
     actionButton2: Schema.Attribute.Component<'content.action-button', false>;
-    bgColor: Schema.Attribute.String;
+    bgColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     bgImg: Schema.Attribute.Media<'images'>;
-    buttonBgColor: Schema.Attribute.String;
-    buttonHoverBgColor: Schema.Attribute.String;
-    buttonHoverTextColor: Schema.Attribute.String;
-    buttonTextColor: Schema.Attribute.String;
+    buttonBgColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    buttonHoverBgColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    buttonHoverTextColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    buttonTextColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     desc: Schema.Attribute.Text & Schema.Attribute.Required;
-    descColor: Schema.Attribute.String;
+    descColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    titleColor: Schema.Attribute.String;
+    titleColor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
   };
 }
 
@@ -701,6 +708,19 @@ export interface PageHomeTramoramicTour extends Struct.ComponentSchema {
   };
 }
 
+export interface PageInteractiveMapNextTramDialog
+  extends Struct.ComponentSchema {
+  collectionName: 'components_page_interactive_map_next_tram_dialogs';
+  info: {
+    displayName: 'nextTramDialog';
+  };
+  attributes: {
+    desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface PagePlayYourRideFares extends Struct.ComponentSchema {
   collectionName: 'components_page_play_your_ride_fares';
   info: {
@@ -823,6 +843,7 @@ declare module '@strapi/strapi' {
       'page-home.souvenior': PageHomeSouvenior;
       'page-home.tram-routes': PageHomeTramRoutes;
       'page-home.tramoramic-tour': PageHomeTramoramicTour;
+      'page-interactive-map.next-tram-dialog': PageInteractiveMapNextTramDialog;
       'page-play-your-ride.fares': PagePlayYourRideFares;
       'page-play-your-ride.schedule': PagePlayYourRideSchedule;
       'seo.seo': SeoSeo;

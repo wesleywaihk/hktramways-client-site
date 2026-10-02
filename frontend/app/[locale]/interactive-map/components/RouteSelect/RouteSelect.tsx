@@ -101,7 +101,7 @@ export default function RouteSelect({
       )}
       {mounted && (
         <div
-          className={`fixed right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] min-w-full overflow-y-auto transition-[transform,opacity] duration-300 ease-in-out lg:absolute lg:inset-x-0 lg:top-full lg:right-auto lg:bottom-auto lg:left-0 lg:mt-2 lg:max-h-none lg:translate-y-0 lg:overflow-visible ${
+          className={`fixed right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto transition-[transform,opacity] duration-300 ease-in-out lg:absolute lg:inset-x-0 lg:top-full lg:min-w-full lg:right-auto lg:bottom-auto lg:left-0 lg:mt-2 lg:max-h-none lg:translate-y-0 lg:overflow-visible ${
             visible
               ? "translate-y-0 opacity-100"
               : "translate-y-[calc(100%+20px)] opacity-0 lg:translate-y-0"

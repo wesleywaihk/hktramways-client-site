@@ -3,6 +3,7 @@ import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { devClassName } from "@/lib/devClassName";
+import { withBase } from "@/lib/media";
 import { FADE_DURATION_MS } from "./Banner";
 
 export interface VideoCardProps {
@@ -37,8 +38,8 @@ export default function VideoCard({
   const imageD = bannerImage?.imageD;
   const imageM = bannerImage?.imageM;
   const alt = bannerImage?.altText ?? "";
-  const srcD = imageD?.url ? `${url}${imageD.url}` : undefined;
-  const srcM = imageM?.url ? `${url}${imageM.url}` : srcD;
+  const srcD = imageD?.url ? withBase(imageD.url, url) : undefined;
+  const srcM = imageM?.url ? withBase(imageM.url, url) : srcD;
   const src = isLgUp ? (srcD ?? srcM) : (srcM ?? srcD);
 
   // keep the <video> mounted through the fade-out instead of popping it out mid-transition

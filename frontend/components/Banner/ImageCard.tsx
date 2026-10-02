@@ -1,6 +1,7 @@
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
 import { devClassName } from "@/lib/devClassName";
+import { withBase } from "@/lib/media";
 export interface ImageCardProps {
   bannerImage?: ResponsiveImage | null;
   url?: string | null;
@@ -24,8 +25,8 @@ export default function ImageCard({
   const imageD = bannerImage?.imageD;
   const imageM = bannerImage?.imageM;
   const alt = bannerImage?.altText ?? "";
-  const srcD = imageD?.url ? `${url}${imageD.url}` : undefined;
-  const srcM = imageM?.url ? `${url}${imageM.url}` : srcD;
+  const srcD = imageD?.url ? withBase(imageD.url, url) : undefined;
+  const srcM = imageM?.url ? withBase(imageM.url, url) : srcD;
 
   const bgClass =
     "absolute inset-0 bottom-0 bg-no-repeat bg-center bg-cover transform-gpu";

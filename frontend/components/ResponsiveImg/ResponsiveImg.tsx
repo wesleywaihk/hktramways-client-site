@@ -5,7 +5,7 @@ import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 import { IMG_URL } from "@/consts";
 import { Media, ResponsiveImage } from "@/types/api";
 import { devClassName } from "@/lib/devClassName";
-import { asImage } from "@/lib/media";
+import { asImage, withBase } from "@/lib/media";
 
 type AutoHeight = "to-img" | "to-parent";
 
@@ -28,7 +28,9 @@ function buildSrcSet(banner: Media | null | undefined, url: string | null) {
     ...Object.values(banner.formats ?? {}),
     { url: banner.url, width: banner.width },
   ].sort((a, b) => a.width - b.width);
-  return sizes.map((size) => `${url}${size.url} ${size.width}w`).join(", ");
+  return sizes
+    .map((size) => `${withBase(size.url, url)} ${size.width}w`)
+    .join(", ");
 }
 
 export default function ResponsiveImg({
@@ -61,8 +63,10 @@ export default function ResponsiveImg({
     );
   }
 
-  const src = `${url}${srcM ?? srcD}`;
-  const srcSetD = !useMultiImg ? `${url}${srcD}` : buildSrcSet(imageD, url);
+  const src = withBase((srcM ?? srcD)!, url);
+  const srcSetD = !useMultiImg
+    ? srcD && withBase(srcD, url)
+    : buildSrcSet(imageD, url);
   const srcSetM = !useMultiImg
     ? undefined
     : imageM
@@ -80,7 +84,7 @@ export default function ResponsiveImg({
           className={`absolute inset-0 z-0 ${thumbnail ? "bg-cover bg-center blur-xl" : "bg-earth-light animate-pulse"}`}
           style={
             thumbnail
-              ? { backgroundImage: `url(${url}${thumbnail})` }
+              ? { backgroundImage: `url(${withBase(thumbnail, url)})` }
               : undefined
           }
           aria-hidden="true"
