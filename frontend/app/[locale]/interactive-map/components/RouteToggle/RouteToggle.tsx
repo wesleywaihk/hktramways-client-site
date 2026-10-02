@@ -21,7 +21,7 @@ export default function RouteToggle({ direction, onChange }: RouteToggleProps) {
 
   return (
     <div
-      className={`${devClassName("route-toggle")}flex border-grey-light/40 w-full rounded-[27px] border-2 bg-white p-[8px] lg:h-[62px] lg:rounded-[30px]`}
+      className={`${devClassName("route-toggle")}flex border-grey-light/40 w-full rounded-[27px] border-2 bg-white p-[8px] lg:rounded-[30px]`}
     >
       <button
         type="button"
