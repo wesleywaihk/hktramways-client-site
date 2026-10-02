@@ -49,7 +49,7 @@ export default function RouteSelectPanel({
             type="button"
             onClick={() => onSelect("all")}
             aria-pressed={activeId === "all"}
-            className={`w-full cursor-pointer bg-transparent p-[15px] text-center text-left text-[14px] font-semibold tracking-[0.02em] transition-colors duration-200 lg:p-[12px] ${
+            className={`w-full cursor-pointer bg-transparent p-[15px] text-center text-left text-[14px] font-semibold tracking-[0.02em] transition-colors duration-200 lg:px-[22px] lg:py-[12px] ${
               activeId === "all" ? "text-black" : "text-green hover:text-black"
             }`}
           >

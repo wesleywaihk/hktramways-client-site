@@ -44,6 +44,11 @@ export function useInteractiveMap(locale: string) {
     setSelectedStation(null);
   };
 
+  // From the station popup's route pills: the station is on that route, so keep it open
+  const showRouteForStation = (next: number) => {
+    setSelectedRouteState(next);
+  };
+
   const stations = useMemo(() => {
     const locCodes =
       selectedRoute === "all"
@@ -59,6 +64,7 @@ export function useInteractiveMap(locale: string) {
     setDirection,
     selectedRoute,
     setSelectedRoute,
+    showRouteForStation,
     selectedStation,
     setSelectedStation,
     stations,

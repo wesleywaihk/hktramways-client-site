@@ -8,7 +8,7 @@ export interface MapRouteOptionButtonProps {
   onClick: () => void;
 }
 
-const btnClasses = `text-left w-full p-[15px] lg:p-[12px] transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)] `;
+const btnClasses = `text-left w-full p-[15px] lg:px-[22px] lg:py-[12px] transition-colors duration-200 ease-[cubic-bezier(0.65,0.05,0.36,1)] `;
 
 const txtClass =
   "text-right text-[14px] leading-[120%] font-semibold tracking-[0.02em] normal-case! md:text-[18px] md:leading-[178%] lg:text-[14px] lg:leading-[120%] min-[393px]:whitespace-nowrap";

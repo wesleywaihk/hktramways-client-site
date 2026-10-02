@@ -27,6 +27,8 @@ const GOOGLE_MAP_URL = "https://www.google.com/maps/dir/?api=1&destination=";
 export interface StationPopupProps {
   locCode: string;
   direction: Direction;
+  /** Route pill clicked: show that route on the map/list. */
+  onRouteSelect: (routeId: number) => void;
   station?: StationItemData | null;
   loading?: boolean;
   scheduleAppLink?: string | null;
@@ -47,6 +49,7 @@ function attractionText(attraction: AttractionData): string {
 export default function StationPopup({
   locCode,
   direction,
+  onRouteSelect,
   station: stationItem,
   loading = false,
   scheduleAppLink,
@@ -96,7 +99,7 @@ export default function StationPopup({
     <div
       className={`${devClassName(
         "station-popup",
-      )}relative order-2 -mx-5 -mt-5 flex h-[calc(100dvh-50.89vw-76px)] w-[calc(100%+40px)] flex-col overflow-hidden rounded-none bg-white shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] transition-[opacity,transform] duration-300 ease-in-out lg:absolute lg:top-4 lg:right-[56px] lg:z-[200] lg:mx-0 lg:mt-0 lg:h-auto lg:max-h-[calc(100%-72px)] lg:w-[340px] lg:rounded-[16px] ${
+      )}relative order-2 -mx-5 -mt-5 flex h-[calc(100dvh-50.89vw-76px)] w-[calc(100%+40px)] flex-col overflow-hidden rounded-none bg-white shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] transition-[opacity,transform] duration-300 ease-in-out lg:absolute lg:top-4 lg:right-[56px] lg:z-[200] lg:mx-0 lg:mt-0 lg:h-auto lg:max-h-[calc(100%-72px)] lg:w-[340px] lg:rounded-[30px] ${
         visible
           ? "translate-y-0 opacity-100"
           : "-translate-y-2 opacity-0 lg:max-h-[calc(100dvh-176px)]"
@@ -128,12 +131,14 @@ export default function StationPopup({
           {routePills.length > 0 && (
             <div className="flex flex-col flex-wrap items-start gap-2">
               {routePills.map((pill) => (
-                <span
+                <button
                   key={pill.id}
-                  className="bg-green inline-flex rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.02em] text-white uppercase"
+                  type="button"
+                  onClick={() => onRouteSelect(pill.id)}
+                  className="bg-green hover:bg-green-light inline-flex cursor-pointer rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.02em] text-white uppercase transition-colors duration-200"
                 >
                   {pill.label}
-                </span>
+                </button>
               ))}
             </div>
           )}
@@ -159,7 +164,7 @@ export default function StationPopup({
               )}
 
               {stationItem?.attraction && stationItem.attraction.length > 0 && (
-                <ul className="mt-5 flex flex-col gap-3">
+                <ul className="mt-5 flex flex-col gap-2">
                   {stationItem.attraction.map((attraction) => {
                     const icon = attraction.icon?.[0];
                     const text = attractionText(attraction);
@@ -215,7 +220,8 @@ export default function StationPopup({
                 target="_blank"
                 rel="noopener"
                 startIcon="direction"
-                className="!min-h-0 w-full !gap-[10px] !rounded-[14px] !px-[12px] !py-[11.73px] lg:!py-[10px]"
+                className="!min-h-0 w-full !gap-[10px] !rounded-[14px] !px-[12px] !py-[9px]"
+                iconClassName="h-5 w-5"
               >
                 {t("stationPopupDirections")}
               </Button>
@@ -226,7 +232,8 @@ export default function StationPopup({
               onClick={nextTramDialog ? () => setNextTramOpen(true) : undefined}
               startIcon="clock"
               disabled={!nextTramDialog && !scheduleAppLink}
-              className="!min-h-0 w-full !gap-[10px] !rounded-[14px] !px-[12px] !py-[11.73px] lg:!py-[10px]"
+              className="!min-h-0 w-full !gap-[10px] !rounded-[14px] !px-[12px] !py-[9px]"
+              iconClassName="h-5 w-5"
             >
               {t("stationPopupNextTram")}
             </Button>

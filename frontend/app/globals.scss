@@ -15,6 +15,7 @@
   --color-yellow: #{colors.$color-yellow};
   --color-yellow-light: #{colors.$color-yellow-light};
   --color-accent-brown: #{colors.$color-accent-brown};
+  --color-grey-light: #{colors.$color-grey-light};
 }
 
 @theme inline {
@@ -30,6 +31,7 @@
   --color-yellow: var(--color-yellow);
   --color-yellow-light: var(--color-yellow-light);
   --color-accent-brown: var(--color-accent-brown);
+  --color-grey-light: var(--color-grey-light);
   --font-sans:
     var(--font-outfit), var(--font-noto-sans-hk), var(--font-noto-sans-sc),
     sans-serif;

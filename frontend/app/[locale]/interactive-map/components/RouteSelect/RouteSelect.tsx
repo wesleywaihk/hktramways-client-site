@@ -77,9 +77,11 @@ export default function RouteSelect({
       <button
         type="button"
         onClick={handleOpen}
-        className="text-green flex w-full cursor-pointer items-center justify-between gap-2 rounded-[18px] border-2 border-[#CCCCCC66] bg-white p-[15px] px-5 text-[14px] font-bold tracking-[0.02em]"
+        className="text-green border-grey-light/40 flex w-full cursor-pointer items-center justify-between gap-2 rounded-[18px] border-2 bg-white p-[15px] px-5 font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] uppercase lg:rounded-[21px]"
       >
-        <span className="truncate">{label}</span>
+        <span className="min-w-0 flex-1 truncate text-left">
+          {label}
+        </span>
         <ChevronIcon className="h-4 w-4 shrink-0" />
       </button>
 
@@ -101,7 +103,7 @@ export default function RouteSelect({
       )}
       {mounted && (
         <div
-          className={`fixed right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto transition-[transform,opacity] duration-300 ease-in-out lg:absolute lg:inset-x-0 lg:top-full lg:min-w-full lg:right-auto lg:bottom-auto lg:left-0 lg:mt-2 lg:max-h-none lg:translate-y-0 lg:overflow-visible ${
+          className={`fixed right-5 bottom-5 left-5 z-[1011] max-h-[80dvh] overflow-y-auto transition-[transform,opacity] duration-300 ease-in-out lg:absolute lg:inset-x-0 lg:top-full lg:right-auto lg:bottom-auto lg:left-0 lg:mt-2 lg:max-h-none lg:min-w-full lg:translate-y-0 lg:overflow-visible ${
             visible
               ? "translate-y-0 opacity-100"
               : "translate-y-[calc(100%+20px)] opacity-0 lg:translate-y-0"
