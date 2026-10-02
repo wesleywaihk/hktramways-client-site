@@ -4,8 +4,7 @@ import { use } from "react";
 import { useTranslations } from "next-intl";
 import SetHeaderStyle from "@/components/Header/HeaderStyle/SetHeaderStyle";
 import { IMG_URL } from "@/consts";
-import RouteToggle from "./components/RouteToggle/RouteToggle";
-import RouteSelect from "./components/RouteSelect/RouteSelect";
+import RouteControls from "./components/RouteControls/RouteControls";
 import RouteStationList from "./components/RouteStationList/RouteStationList";
 import StationPopup from "./components/StationPopup/StationPopup";
 import InteractiveGoogleMap from "./components/InteractiveGoogleMap/InteractiveGoogleMap";
@@ -36,7 +35,6 @@ export default function InteractiveMapPage({
     selectedStation,
     setSelectedStation,
     stations,
-    routeView,
     interactiveMapData,
   } = useInteractiveMap(locale);
   const downloadMap =
@@ -53,12 +51,13 @@ export default function InteractiveMapPage({
             selectedStation ? "hidden" : "flex"
           }`}
         >
-          <RouteToggle direction={direction} onChange={setDirection} />
-
-          <RouteSelect
+          {/* Desktop: fixed above the scrolling station list. */}
+          <RouteControls
             direction={direction}
-            value={selectedRoute}
-            onChange={setSelectedRoute}
+            onDirectionChange={setDirection}
+            selectedRoute={selectedRoute}
+            onRouteChange={setSelectedRoute}
+            className="hidden lg:flex"
           />
 
           <div
@@ -66,15 +65,21 @@ export default function InteractiveMapPage({
               selectedStation ? "overflow-hidden" : "overflow-y-auto"
             }`}
           >
+            {/* Mobile: scrolls together with the station list. */}
+            <RouteControls
+              direction={direction}
+              onDirectionChange={setDirection}
+              selectedRoute={selectedRoute}
+              onRouteChange={setSelectedRoute}
+              className="mb-[15px] flex lg:hidden"
+            />
             <RouteStationList
               key={`${direction}-${selectedRoute}`}
               routeId={selectedRoute}
               stations={stations}
               selectedStation={selectedStation}
               onSelectStation={(locCode) =>
-                setSelectedStation(
-                  locCode === selectedStation ? null : locCode,
-                )
+                setSelectedStation(locCode === selectedStation ? null : locCode)
               }
             />
           </div>
@@ -85,7 +90,6 @@ export default function InteractiveMapPage({
             stations={stations}
             selectedStation={selectedStation}
             onSelectStation={setSelectedStation}
-            routeView={routeView}
             className="h-full w-full lg:rounded-[16px]"
           />
           <a

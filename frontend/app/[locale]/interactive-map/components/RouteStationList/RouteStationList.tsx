@@ -20,7 +20,7 @@ export default function RouteStationList({
   const locale = useLocale();
 
   const codeClass =
-    "font-sans text-[16px] leading-[163%] font-semibold tracking-[0.02em] text-center";
+    "font-sans text-[15px] leading-[163%] font-semibold tracking-[0.02em] lg:text-[16px] text-center";
 
   return (
     <div className={`${devClassName("route-station-list")}flex flex-col pb-5`}>
@@ -42,8 +42,8 @@ export default function RouteStationList({
                 aria-pressed={isSelected}
                 className="bg-green z-10 grid w-full cursor-pointer grid-cols-[18px_1fr_40px] items-center gap-2 rounded-[14px] px-5 py-[17px] text-white"
               >
-                <FlagIcon className="h-4 w-4 shrink-0" />
-                <span className="truncate text-left text-[14px] font-semibold tracking-[0.02em]">
+                <FlagIcon className="h-4 w-4 shrink-0 lg:h-5 lg:w-5" />
+                <span className="truncate text-left text-[15px] leading-[163%] font-semibold tracking-[0.02em] lg:text-[16px]">
                   {name}
                 </span>
                 <span className={codeClass}>{station.locCode}</span>
@@ -57,7 +57,7 @@ export default function RouteStationList({
               >
                 <span className="border-green absolute top-0 left-[26.6px] h-full w-0 border-l-4 opacity-30" />
                 <StationDotIcon className="relative z-10 h-[18px] w-[18px] shrink-0" />
-                <span className="text-green truncate text-left text-[14px] tracking-[0.02em]">
+                <span className="text-green truncate text-left text-[15px] leading-[163%] font-semibold tracking-[0.02em] lg:text-[16px]">
                   {name}
                 </span>
                 <span className={`${codeClass} text-green`}>

@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { useLocale } from "next-intl";
 import { Map, Marker, useMap } from "@vis.gl/react-google-maps";
 import { type StationInfo, localeTxt } from "../routes";
 
 const STATION_ZOOM = 17;
 const ICON_ZOOM_THRESHOLD = 16;
-const MIN_ZOOM = 12;
+const MIN_ZOOM = 11;
 const MAX_ZOOM = 19;
 
 // Keep the camera around the tram network (Kennedy Town to Shau Kei Wan),
@@ -96,47 +96,235 @@ const STATION_ICON = {
   },
 };
 
-export interface RouteView {
-  center: { lat: number; lng: number };
-  zoom: number;
-}
-
 export interface InteractiveGoogleMapProps {
   stations: StationInfo[];
   selectedStation: string | null;
   onSelectStation: (locCode: string) => void;
-  routeView: RouteView;
   className?: string;
+}
+
+// Space kept clear around the fitted stations: pins are anchored at their tip
+// (so they extend upwards), and the top corners hold the "View larger map" /
+// download buttons.
+const FIT_PADDING = { top: 40, right: 20, bottom: 20, left: 20 };
+
+// Extra zoom-out on top of the exact fit, for breathing room around the route.
+const FIT_ZOOM_OUT = 0.1;
+
+const RESIZE_REFIT_DELAY_MS = 500;
+
+// Camera for the first frame only; the fit to the stations takes over as soon
+// as the map is ready.
+const INITIAL_VIEW = { center: { lat: 22.288, lng: 114.1773 }, zoom: 14 };
+
+// Web Mercator, as a 0–1 fraction of the world (Google's tile projection).
+const toWorldX = (lng: number) => (lng + 180) / 360;
+const toWorldY = (lat: number) => {
+  const sin = Math.sin((lat * Math.PI) / 180);
+  return 0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI);
+};
+const fromWorldY = (y: number) =>
+  (Math.atan(Math.sinh(Math.PI * (1 - 2 * y))) * 180) / Math.PI;
+
+/**
+ * Centre and zoom that fit every station into the map's current size (minus
+ * FIT_PADDING). Computed here instead of using map.fitBounds(), which didn't
+ * move the camera reliably on this map.
+ */
+function fitStationsView(
+  map: google.maps.Map,
+  stations: StationInfo[],
+): { center: google.maps.LatLngLiteral; zoom: number } | null {
+  const points = stations.filter(
+    (s) => s.latitude != null && s.longitude != null,
+  );
+  const div = map.getDiv();
+  const width = div.clientWidth - FIT_PADDING.left - FIT_PADDING.right;
+  const height = div.clientHeight - FIT_PADDING.top - FIT_PADDING.bottom;
+  if (!points.length || width <= 0 || height <= 0) return null;
+
+  const xs = points.map((s) => toWorldX(s.longitude!));
+  const ys = points.map((s) => toWorldY(s.latitude!));
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+  const minY = Math.min(...ys);
+  const maxY = Math.max(...ys);
+
+  // Largest zoom where the stations' box fits in the padded area
+  // (world width in px at zoom z is 256 * 2^z).
+  const fitZoom = Math.min(
+    maxX > minX ? Math.log2(width / 256 / (maxX - minX)) : MAX_ZOOM,
+    maxY > minY ? Math.log2(height / 256 / (maxY - minY)) : MAX_ZOOM,
+  );
+  const zoom = Math.min(
+    MAX_ZOOM,
+    Math.max(MIN_ZOOM, Math.floor((fitZoom - FIT_ZOOM_OUT) * 100) / 100),
+  );
+
+  // Centre of the box, shifted so the box sits centred inside the padding.
+  const scale = 256 * 2 ** zoom;
+  const centerX =
+    (minX + maxX) / 2 + (FIT_PADDING.right - FIT_PADDING.left) / 2 / scale;
+  const centerY =
+    (minY + maxY) / 2 - (FIT_PADDING.top - FIT_PADDING.bottom) / 2 / scale;
+
+  return {
+    center: { lat: fromWorldY(centerY), lng: centerX * 360 - 180 },
+    zoom,
+  };
+}
+
+type CameraTarget = { center: google.maps.LatLngLiteral; zoom: number };
+
+/**
+ * Station selected: centre on it at STATION_ZOOM (the auto-fit is skipped).
+ * No station selected: fit every station on the route into the map.
+ */
+function cameraTarget(
+  map: google.maps.Map,
+  selectedStation: string | null,
+  stations: StationInfo[],
+): CameraTarget | null {
+  const station = selectedStation
+    ? stations.find((s) => s.locCode === selectedStation)
+    : undefined;
+
+  if (station?.latitude != null && station?.longitude != null) {
+    return {
+      center: { lat: station.latitude, lng: station.longitude },
+      zoom: STATION_ZOOM,
+    };
+  }
+  return fitStationsView(map, stations);
+}
+
+const CAMERA_ANIMATION_MS = 600;
+const easeInOut = (t: number) =>
+  t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+
+/**
+ * Animate centre and zoom together by calling moveCamera() every frame.
+ * (panTo() followed by setZoom() lets the zoom cut the pan short, leaving the
+ * map centred somewhere between the old view and the target.)
+ * Returns a function that stops the animation.
+ */
+function animateCamera(map: google.maps.Map, target: CameraTarget) {
+  const fromCenter = map.getCenter();
+  const fromZoom = map.getZoom();
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  if (!fromCenter || fromZoom == null || reduceMotion) {
+    map.moveCamera(target);
+    return () => {};
+  }
+
+  // Interpolate the centre in Mercator space so the movement looks even.
+  const x0 = toWorldX(fromCenter.lng());
+  const y0 = toWorldY(fromCenter.lat());
+  const x1 = toWorldX(target.center.lng);
+  const y1 = toWorldY(target.center.lat);
+  const startTime = performance.now();
+  let frame = 0;
+
+  const step = (now: number) => {
+    const t = Math.min(1, (now - startTime) / CAMERA_ANIMATION_MS);
+    const k = easeInOut(t);
+    map.moveCamera({
+      center: {
+        lat: fromWorldY(y0 + (y1 - y0) * k),
+        lng: (x0 + (x1 - x0) * k) * 360 - 180,
+      },
+      zoom: fromZoom + (target.zoom - fromZoom) * k,
+    });
+    if (t < 1) frame = requestAnimationFrame(step);
+  };
+  frame = requestAnimationFrame(step);
+
+  return () => cancelAnimationFrame(frame);
 }
 
 function MapCameraController({
   selectedStation,
   stations,
-  routeView,
   onZoomChange,
 }: {
   selectedStation: string | null;
   stations: StationInfo[];
-  routeView: RouteView;
   onZoomChange: (zoom: number) => void;
 }) {
   const map = useMap();
+  // Latest values for the resize observer, which outlives individual renders.
+  const latest = useRef({ selectedStation, stations });
+  const stopAnimation = useRef<() => void>(() => {});
+  const hasPositioned = useRef(false);
 
+  useEffect(() => {
+    latest.current = { selectedStation, stations };
+    if (!map) return;
+
+    const target = cameraTarget(map, selectedStation, stations);
+    if (!target) return;
+
+    stopAnimation.current();
+    if (hasPositioned.current) {
+      stopAnimation.current = animateCamera(map, target);
+    } else {
+      // First placement after the map loads: no animation from INITIAL_VIEW.
+      map.moveCamera(target);
+      hasPositioned.current = true;
+    }
+  }, [map, selectedStation, stations]);
+
+  // Stop an in-flight animation as soon as the user takes over the map.
+  useEffect(() => {
+    if (!map) return;
+    const stop = () => stopAnimation.current();
+    const div = map.getDiv();
+    const listener = map.addListener("dragstart", stop);
+    div.addEventListener("wheel", stop, { passive: true });
+    div.addEventListener("touchstart", stop, { passive: true });
+    return () => {
+      listener.remove();
+      div.removeEventListener("wheel", stop);
+      div.removeEventListener("touchstart", stop);
+      stopAnimation.current();
+    };
+  }, [map]);
+
+  // Re-apply the camera after the map changes size (any window resize,
+  // mobile <-> desktop layout switch, device rotation). Debounced: each resize
+  // restarts the timer, so it runs once resizing settles. Instant, so it
+  // doesn't fight the layout change.
   useEffect(() => {
     if (!map) return;
 
-    const station = selectedStation
-      ? stations.find((s) => s.locCode === selectedStation)
-      : undefined;
+    const div = map.getDiv();
+    let lastSize = `${div.clientWidth}x${div.clientHeight}`;
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
-    if (station?.latitude != null && station?.longitude != null) {
-      map.panTo({ lat: station.latitude, lng: station.longitude });
-      map.setZoom(STATION_ZOOM);
-    } else {
-      map.panTo(routeView.center);
-      map.setZoom(routeView.zoom);
-    }
-  }, [map, selectedStation, stations, routeView]);
+    const observer = new ResizeObserver(() => {
+      const size = `${div.clientWidth}x${div.clientHeight}`;
+      if (size === lastSize) return;
+      lastSize = size;
+
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const { selectedStation, stations } = latest.current;
+        const target = cameraTarget(map, selectedStation, stations);
+        if (!target) return;
+        stopAnimation.current();
+        map.moveCamera(target);
+      }, RESIZE_REFIT_DELAY_MS);
+    });
+    observer.observe(div);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
+  }, [map]);
 
   useEffect(() => {
     if (!map) return;
@@ -156,11 +344,10 @@ export default function InteractiveGoogleMap({
   stations,
   selectedStation,
   onSelectStation,
-  routeView,
   className,
 }: InteractiveGoogleMapProps) {
   const locale = useLocale();
-  const [zoom, setZoom] = useState(routeView.zoom);
+  const [zoom, setZoom] = useState(INITIAL_VIEW.zoom);
   const showCustomIcons = zoom >= ICON_ZOOM_THRESHOLD;
 
   const visibleStations = useMemo(
@@ -177,8 +364,8 @@ export default function InteractiveGoogleMap({
   return (
     <Map
       styles={MAP_STYLES}
-      defaultCenter={routeView.center}
-      defaultZoom={routeView.zoom}
+      defaultCenter={INITIAL_VIEW.center}
+      defaultZoom={INITIAL_VIEW.zoom}
       minZoom={MIN_ZOOM}
       maxZoom={MAX_ZOOM}
       restriction={MAP_RESTRICTION}
@@ -192,7 +379,6 @@ export default function InteractiveGoogleMap({
       <MapCameraController
         selectedStation={selectedStation}
         stations={stations}
-        routeView={routeView}
         onZoomChange={setZoom}
       />
       {visibleStations.map((station) => {
