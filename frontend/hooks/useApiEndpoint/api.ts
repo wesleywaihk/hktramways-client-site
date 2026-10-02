@@ -72,16 +72,19 @@ export const fetchHome = cache(async function fetchHome(
 // Not wrapped in React's `cache` (server-only) — this is called from the
 // client-side DownloadAppArea component, directly against NEXT_PUBLIC_API_URL.
 // `documentId` (preview mode) fetches that draft document instead of the
-// latest published entry.
+// latest published entry. `field` picks which download-app-area shaped
+// component on that content type to read (e.g. About Us `storyOfHKT`).
 export async function fetchDownloadAppArea(
   locale: string,
   endpoint: string,
   documentId?: string | null,
+  field: string = "downloadAppArea",
 ): Promise<DownloadAppAreaData | null> {
   const populate = buildPopulate([
-    "downloadAppArea.Image",
-    "downloadAppArea.actionButton1",
-    "downloadAppArea.actionButton2",
+    `${field}.Image`,
+    `${field}.bgImg`,
+    `${field}.actionButton1`,
+    `${field}.actionButton2`,
   ]);
   const url = documentId
     ? `${API_URL}${endpoint}/${documentId}?status=draft&locale=${locale}&${populate}`
@@ -94,13 +97,13 @@ export async function fetchDownloadAppArea(
   if (documentId) {
     // The single-document (preview) endpoint returns `data` as an object, not an array.
     const json: {
-      data: { downloadAppArea: DownloadAppAreaData | null } | null;
+      data: Record<string, DownloadAppAreaData | null> | null;
     } = await res.json();
-    return json.data?.downloadAppArea ?? null;
+    return json.data?.[field] ?? null;
   }
-  const json: { data: { downloadAppArea: DownloadAppAreaData | null }[] } =
+  const json: { data: Record<string, DownloadAppAreaData | null>[] } =
     await res.json();
-  return json.data?.[0]?.downloadAppArea ?? null;
+  return json.data?.[0]?.[field] ?? null;
 }
 
 // Not wrapped in React's `cache` (server-only) — this is called from the
@@ -325,31 +328,6 @@ export async function fetchFares(locale: string) {
   return res.json();
 }
 
-// Not wrapped in React's `cache` (server-only) — this is called from the
-// client-side InteractiveRouteMap component, directly against NEXT_PUBLIC_API_URL.
-// `endpoint`/`field` let other pages reuse it for their own download-app-area
-// shaped section (e.g. About Us `storyOfHKT`).
-export async function fetchInteractiveRouteMap(
-  locale: string,
-  endpoint: string = "/api/plan-your-rides",
-  field: string = "interactiveRouteMap",
-): Promise<DownloadAppAreaData | null> {
-  const populate = buildPopulate([
-    `${field}.Image`,
-    `${field}.actionButton1`,
-    `${field}.actionButton2`,
-  ]);
-  const url = `${API_URL}${endpoint}?locale=${locale}&${populate}`;
-  if (process.env.NODE_ENV === "development")
-    console.log("[endpoint fetched]", url);
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok)
-    throw new Error(`Failed to fetch interactive route map: ${res.status}`);
-  const json: { data: Record<string, DownloadAppAreaData | null>[] } =
-    await res.json();
-  return json.data?.[0]?.[field] ?? null;
-}
-
 // Not wrapped in React's `cache` (server-only) — this is called from a
 // client component, directly against NEXT_PUBLIC_API_URL.
 export async function fetchSchedule(locale: string) {
@@ -528,8 +506,7 @@ export async function fetchAnnouncementBySlug(
   if (process.env.NODE_ENV === "development")
     console.log("[endpoint fetched]", url);
   const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok)
-    throw new Error(`Failed to fetch announcement: ${res.status}`);
+  if (!res.ok) throw new Error(`Failed to fetch announcement: ${res.status}`);
   const json: AnnouncementsResponse = await res.json();
   return json.data?.[0] ?? null;
 }

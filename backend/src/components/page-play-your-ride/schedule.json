@@ -16,6 +16,9 @@
       "component": "content.schedule-east-bound",
       "repeatable": false,
       "required": true
+    },
+    "remark": {
+      "type": "blocks"
     }
   },
   "config": {}

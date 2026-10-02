@@ -36,11 +36,11 @@ export async function generateGlobalMetadata(
           ? /^https?:\/\//.test(favicon.url)
             ? favicon.url
             : `${IMG_URL}${favicon.url}`
-          : "/favicon.ico",
+          : "/favicon-32x32.png",
       },
     };
   } catch {
-    return { icons: { icon: "/favicon.ico" } };
+    return { icons: { icon: "/favicon-32x32.png" } };
   }
 }
 

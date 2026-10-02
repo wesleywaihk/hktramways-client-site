@@ -6,6 +6,7 @@ import { ResponsiveImage } from "@/types/api";
 import { devClassName } from "@/lib/devClassName";
 import { isImageMedia, isVideoMedia } from "@/lib/media";
 import { useElementScrollProgress } from "@/hooks/useElementScrollProgress";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import ImageCard from "./ImageCard";
 import VideoCard from "./VideoCard";
 
@@ -14,10 +15,17 @@ export interface BannerProps {
   bannerImage?: ResponsiveImage[] | null;
   className?: string;
   useBorder?: boolean;
+  /** Parallax scroll distance (px) below the lg breakpoint. */
+  scrollDistanceM?: number;
+  /** Parallax scroll distance (px) at the lg breakpoint and up. */
+  scrollDistanceD?: number;
 }
 
 const SLIDE_INTERVAL_MS = 4000;
-export const SCROLL_DISTANCE = 200;
+/** Parallax scroll distance (px) below the lg breakpoint. */
+export const SCROLL_DISTANCE_M = 200;
+/** Parallax scroll distance (px) at the lg breakpoint and up. */
+export const SCROLL_DISTANCE_D = 200;
 export const FADE_DURATION_MS = 1000;
 
 // imageD and imageM must be the same media type (both image or both video),
@@ -31,14 +39,20 @@ export default function Banner({
   bannerImage,
   className = "",
   useBorder = true,
+  scrollDistanceM = SCROLL_DISTANCE_M,
+  scrollDistanceD = SCROLL_DISTANCE_D,
 }: BannerProps) {
   const banners = bannerImage?.filter(isValidBanner) ?? [];
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const scrollProgress = useElementScrollProgress(sectionRef, "pageTop");
+  const { isLgUp } = useMediaQuery();
+  const scrollDistance = isLgUp ? scrollDistanceD : scrollDistanceM;
 
   const activeBanner = banners[activeIndex];
-  const isActiveVideo = activeBanner ? isVideoMedia(activeBanner.imageD) : false;
+  const isActiveVideo = activeBanner
+    ? isVideoMedia(activeBanner.imageD)
+    : false;
 
   useEffect(() => {
     if (banners.length < 2 || isActiveVideo) return;
@@ -55,8 +69,8 @@ export default function Banner({
   };
 
   const transY = Math.min(
-    Math.max(0, scrollProgress * SCROLL_DISTANCE),
-    SCROLL_DISTANCE,
+    Math.max(0, scrollProgress * scrollDistance),
+    scrollDistance,
   );
 
   return (
@@ -77,6 +91,7 @@ export default function Banner({
             className={cardClassName}
             isActive={index === activeIndex}
             transY={transY}
+            scrollDistance={scrollDistance}
             style={cardStyle}
             useBorder={useBorder}
             onEnded={index === activeIndex ? goToNextSlide : undefined}
@@ -88,6 +103,7 @@ export default function Banner({
             url={url}
             className={cardClassName}
             transY={transY}
+            scrollDistance={scrollDistance}
             style={cardStyle}
             useBorder={useBorder}
           />

@@ -8,10 +8,12 @@
   --color-green-fresh: #{colors.$color-green-fresh};
   --color-green-pale: #{colors.$color-green-pale};
   --color-white: #{colors.$color-white};
+  --color-earth: #{colors.$color-earth};
   --color-earth-light: #{colors.$color-earth-light};
   --color-red-dark: #{colors.$color-red-dark};
   --color-gold: #{colors.$color-gold};
   --color-yellow: #{colors.$color-yellow};
+  --color-yellow-light: #{colors.$color-yellow-light};
   --color-accent-brown: #{colors.$color-accent-brown};
 }
 
@@ -21,10 +23,12 @@
   --color-green-fresh: var(--color-green-fresh);
   --color-green-pale: var(--color-green-pale);
   --color-white: var(--color-white);
+  --color-earth: var(--color-earth);
   --color-earth-light: var(--color-earth-light);
   --color-red-dark: var(--color-red-dark);
   --color-gold: var(--color-gold);
   --color-yellow: var(--color-yellow);
+  --color-yellow-light: var(--color-yellow-light);
   --color-accent-brown: var(--color-accent-brown);
   --font-sans:
     var(--font-outfit), var(--font-noto-sans-hk), var(--font-noto-sans-sc),

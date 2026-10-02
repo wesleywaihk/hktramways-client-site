@@ -9,7 +9,6 @@ import {
 import StructuredData from "@/components/StructuredData";
 import Hero from "@/components/Hero/Hero";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
-import StoryOfHkt from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import LatestNews from "@/components/LatestNews/LatestNews";
 import TwoCardsLink from "@/components/TwoCardsLink/TwoCardsLink";
@@ -62,7 +61,7 @@ export default async function AboutUsPage({ params }: AboutUsPageProps) {
         field="whiteCards"
         className="pt-0!"
       />
-      <StoryOfHkt
+      <DownloadAppArea
         locale={locale}
         endpoint="/api/about-uses"
         field="storyOfHKT"

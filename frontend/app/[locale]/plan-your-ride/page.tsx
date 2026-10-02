@@ -12,7 +12,6 @@ import Schedule from "./components/Schedule/Schedule";
 import Fares from "./components/Fares/Fares";
 import TramRoute from "@/components/TramRoute/TramRoute";
 import DownloadAppArea from "@/components/DownloadAppArea/DownloadAppArea";
-import InteractiveRouteMap from "@/components/InteractiveRouteMap/InteractiveRouteMap";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import LatestNews from "@/components/LatestNews/LatestNews";
 import type { PlanYourRideResponse } from "@/types/api";
@@ -62,7 +61,11 @@ export default async function PlanYourRidePage({
       <LatestNews locale={locale} endpoint="/api/plan-your-rides" limit={3} />
       <TramRoute locale={locale} />
       <Schedule locale={locale} />
-      <InteractiveRouteMap locale={locale} />
+      <DownloadAppArea
+        locale={locale}
+        endpoint="/api/plan-your-rides"
+        field="interactiveRouteMap"
+      />
       <Fares locale={locale} />
       <DownloadAppArea locale={locale} endpoint="/api/plan-your-rides" />
     </div>

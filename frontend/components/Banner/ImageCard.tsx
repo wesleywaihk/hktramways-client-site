@@ -1,12 +1,13 @@
 import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
 import { devClassName } from "@/lib/devClassName";
-import { SCROLL_DISTANCE } from "./Banner";
 export interface ImageCardProps {
   bannerImage?: ResponsiveImage | null;
   url?: string | null;
   className?: string;
   transY?: number;
+  /** Parallax scroll distance (px) for the current breakpoint. */
+  scrollDistance: number;
   style?: React.CSSProperties;
   useBorder?: boolean;
 }
@@ -16,6 +17,7 @@ export default function ImageCard({
   url = IMG_URL,
   className = "",
   transY = 0,
+  scrollDistance,
   style = {},
   useBorder = true,
 }: ImageCardProps) {
@@ -29,7 +31,7 @@ export default function ImageCard({
     "absolute inset-0 bottom-0 bg-no-repeat bg-center bg-cover transform-gpu";
 
   const bgStyle = {
-    top: `${0 - SCROLL_DISTANCE}px`,
+    top: `${0 - scrollDistance}px`,
     transform: `translateY(${transY}px)`,
   };
 

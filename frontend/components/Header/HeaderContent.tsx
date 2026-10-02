@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { desktopNavLinks } from "./navLinks";
 import LocaleDropdown from "./LocaleDropdown";
@@ -32,6 +33,12 @@ export default function HeaderContent({
   mainNavExtLink = null,
 }: HeaderContentProps) {
   const t = useTranslations("common");
+  const pathname = usePathname();
+  // Active on the page itself and its sub-pages (e.g. /about-us/news-events).
+  const isActive = (href: string) => {
+    const target = `/${locale}${href}`;
+    return pathname === target || pathname.startsWith(`${target}/`);
+  };
 
   const extraLinks = [
     mainNavExtLink?.extLink1?.link?.url
@@ -48,9 +55,8 @@ export default function HeaderContent({
           link: mainNavExtLink.extLink2.link,
         }
       : null,
-  ].filter(
-    (link): link is { key: string; label: string; link: Hyperlink } =>
-      Boolean(link),
+  ].filter((link): link is { key: string; label: string; link: Hyperlink } =>
+    Boolean(link),
   );
   return (
     <div
@@ -78,10 +84,13 @@ export default function HeaderContent({
               if (link.isCareersLink && !mainNavExtLink?.careersLink)
                 return null;
 
+              const active = !link.isCareersLink && isActive(link.href);
               const content = (
                 <>
                   {t(link.labelKey)}
-                  <span className="pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-right scale-x-0 transform-gpu bg-current/30 transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100" />
+                  <span
+                    className={`pointer-events-none absolute -bottom-1 left-0 h-[2px] w-full origin-right transform-gpu bg-current/30 transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100 ${active ? "scale-x-100" : "scale-x-0"}`}
+                  />
                 </>
               );
 
@@ -103,6 +112,7 @@ export default function HeaderContent({
                 <Link
                   key={link.href}
                   href={`/${locale}${link.href}`}
+                  aria-current={active ? "page" : undefined}
                   className="group relative font-sans text-[14px] leading-[157%] font-semibold tracking-[0.02em] whitespace-nowrap text-[var(--header-fg)] uppercase"
                 >
                   {content}

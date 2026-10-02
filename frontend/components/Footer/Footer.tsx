@@ -10,7 +10,7 @@ import Logo from "./Logo";
 import WeChatPopup from "./WeChatPopup";
 
 const columnHeading =
-  "font-sans text-[clamp(1.05rem,1.4583333333vw,1.96875rem)] leading-[1.52] font-semibold tracking-[0.0625rem] m-0 mb-[clamp(0.25rem,0.3472222222vw,0.46875rem)]";
+  "font-sans text-[clamp(1.05rem,1.4583333333vw,1.96875rem)] leading-[1.52] font-semibold tracking-[0.0625rem] mb-[clamp(0.25rem,0.3472222222vw,0.46875rem)]";
 
 const commonText = "paragraph text-[clamp(0.8rem,1.1111111111vw,1.5rem)]";
 
@@ -81,9 +81,9 @@ export default async function Footer({ data = undefined }: FooterProps) {
       {/* Download App + Get in Touch sit side by side on mobile; `xl:contents` dissolves this wrapper on desktop so both columns take their own place in the row via `xl:order` */}
       <div className="order-3 flex w-full gap-x-[clamp(4rem,5.5555555556vw,7.5rem)] xl:order-2 xl:w-auto">
         {/* Download App column */}
-        <div className="flex w-[50%] flex-col gap-[clamp(0.75rem,1.0416666667vw,1.40625rem)] xl:w-auto xl:flex-none">
+        <div className="flex w-[50%] flex-col xl:w-auto xl:flex-none">
           <h3 className={columnHeading}>{t("footerDownloadApp")}</h3>
-          <div className="flex w-[66%] min-w-[140px] flex-col gap-[15px] xl:w-[185px]">
+          <div className="mt-[5px] flex w-[66%] min-w-[140px] flex-col gap-[15px] xl:w-[185px]">
             {data.googlePlayLink && (
               <a
                 href={data.googlePlayLink}
@@ -135,7 +135,7 @@ export default async function Footer({ data = undefined }: FooterProps) {
 
       {/* Copyright, disclaimer, social icons — reordered per breakpoint via `order`, repositioned under the logo column at desktop via col/row-start */}
       <div className="items-centerorder-5 order-4 flex w-full grow flex-col items-center xl:order-1 xl:w-[355px] xl:items-start">
-        <Logo className="hidden xl:flex" />
+        <Logo className="hidden pb-[9px] xl:flex" />
         <p className="order-1 m-0 mb-[clamp(0.9rem,1.25vw,1.6875rem)] text-center text-[clamp(0.73125rem,3.3078880407vw,0.975rem)]! whitespace-pre-line opacity-[0.85] xl:order-2 xl:text-left">
           {data.desc}
         </p>

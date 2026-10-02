@@ -71,7 +71,11 @@ export default function InteractiveMapPage({
               routeId={selectedRoute}
               stations={stations}
               selectedStation={selectedStation}
-              onSelectStation={setSelectedStation}
+              onSelectStation={(locCode) =>
+                setSelectedStation(
+                  locCode === selectedStation ? null : locCode,
+                )
+              }
             />
           </div>
           <div className="pointer-events-none absolute right-0 bottom-0 left-0 z-[100] h-5 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(255,255,255,1)] lg:bottom-10" />

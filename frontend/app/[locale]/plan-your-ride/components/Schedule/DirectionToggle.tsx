@@ -7,15 +7,16 @@ interface DirectionToggleProps {
   onChange: (direction: Direction) => void;
   westLabel: string;
   eastLabel: string;
+  /** Shorter labels shown below the lg breakpoint. */
+  westLabelShort: string;
+  eastLabelShort: string;
 }
 
 const ArrowIcon = ({ flip }: { flip?: boolean }) => (
   <svg
-    width="24"
-    height="24"
     viewBox="0 0 21 20"
     fill="none"
-    className={`shrink-0 ${flip ? "rotate-180" : ""}`}
+    className={`h-5 w-5 shrink-0 lg:h-6 lg:w-6 ${flip ? "rotate-180" : ""}`}
     aria-hidden="true"
   >
     <path
@@ -30,33 +31,37 @@ export default function DirectionToggle({
   onChange,
   westLabel,
   eastLabel,
+  westLabelShort,
+  eastLabelShort,
 }: DirectionToggleProps) {
   return (
     <div
-      className={`${devClassName("direction-toggle")}flex rounded-[30px] bg-black/15 p-[10px]`}
+      className={`${devClassName("direction-toggle")}flex w-full rounded-[30px] bg-black/15 p-[10px] lg:w-auto`}
     >
       <button
         type="button"
         onClick={() => onChange("west")}
-        className={`flex cursor-pointer items-center gap-[15px] rounded-[21px] px-[25px] py-[15px] text-[13px] font-semibold uppercase transition-colors duration-200 ${
+        className={`flex flex-1 cursor-pointer items-center justify-center gap-[15px] lg:flex-none rounded-[21px] px-[25px] py-[15px] text-[18px] leading-[152%] font-semibold tracking-[0.02em] lg:text-[21px] transition-colors duration-200 ${
           direction === "west"
-            ? "text-green bg-yellow"
-            : "hover:text-yellow text-white"
+            ? "text-green bg-yellow-light"
+            : "hover:text-yellow-light text-white"
         }`}
       >
         <ArrowIcon flip />
-        {westLabel}
+        <span className="lg:hidden">{westLabelShort}</span>
+        <span className="hidden lg:inline">{westLabel}</span>
       </button>
       <button
         type="button"
         onClick={() => onChange("east")}
-        className={`flex cursor-pointer items-center gap-[15px] rounded-[21px] px-[25px] py-[15px] text-[13px] font-semibold uppercase transition-colors duration-200 ${
+        className={`flex flex-1 cursor-pointer items-center justify-center gap-[15px] lg:flex-none rounded-[21px] px-[25px] py-[15px] text-[18px] leading-[152%] font-semibold tracking-[0.02em] lg:text-[21px] transition-colors duration-200 ${
           direction === "east"
-            ? "text-green bg-yellow"
-            : "hover:text-yellow text-white"
+            ? "text-green bg-yellow-light"
+            : "hover:text-yellow-light text-white"
         }`}
       >
-        {eastLabel}
+        <span className="lg:hidden">{eastLabelShort}</span>
+        <span className="hidden lg:inline">{eastLabel}</span>
         <ArrowIcon />
       </button>
     </div>

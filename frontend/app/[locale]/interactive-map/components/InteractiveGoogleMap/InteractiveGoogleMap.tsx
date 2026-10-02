@@ -7,6 +7,20 @@ import { type StationInfo, localeTxt } from "../routes";
 
 const STATION_ZOOM = 17;
 const ICON_ZOOM_THRESHOLD = 16;
+const MIN_ZOOM = 12;
+const MAX_ZOOM = 19;
+
+// Keep the camera around the tram network (Kennedy Town to Shau Kei Wan),
+// padded so terminus stations aren't pinned to the edge of the viewport.
+const MAP_RESTRICTION: google.maps.MapRestriction = {
+  latLngBounds: {
+    north: 22.315,
+    south: 22.245,
+    west: 114.1,
+    east: 114.255,
+  },
+  strictBounds: false,
+};
 
 // No Map ID is used, so inline JS styles are free to hide the default POI
 // clutter (business/park icons and labels) around the tram stations.
@@ -165,6 +179,9 @@ export default function InteractiveGoogleMap({
       styles={MAP_STYLES}
       defaultCenter={routeView.center}
       defaultZoom={routeView.zoom}
+      minZoom={MIN_ZOOM}
+      maxZoom={MAX_ZOOM}
+      restriction={MAP_RESTRICTION}
       gestureHandling="greedy"
       disableDefaultUI={false}
       fullscreenControl={false}
