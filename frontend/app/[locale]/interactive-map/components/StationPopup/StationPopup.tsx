@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import CircularProgress from "@mui/material/CircularProgress";
-import CloseIcon from "@/components/icons/CloseIcon";
+import CloseBoldIcon from "@/components/icons/CloseBoldIcon";
 import ChevronIcon from "@/components/icons/ChevronIcon";
 import ResponsiveImg from "@/components/ResponsiveImg/ResponsiveImg";
 import Button from "@/components/Button/Button";
@@ -113,7 +113,7 @@ export default function StationPopup({
         // Mobile: white circle so it stays visible over scrolling content (e.g. the photo).
         className="text-green absolute top-4 right-[25px] z-50 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-white transition-transform duration-200 ease-in-out hover:scale-110 lg:right-4 lg:h-auto lg:w-auto lg:rounded-none lg:bg-transparent"
       >
-        <CloseIcon className="h-[18px] w-[18px]" />
+        <CloseBoldIcon className="h-6 w-6" />
       </button>
 
       {/* Mobile: header + body scroll together. Desktop: header stays fixed and only the body scrolls. */}
