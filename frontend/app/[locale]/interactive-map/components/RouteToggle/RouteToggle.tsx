@@ -3,7 +3,7 @@ import { devClassName } from "@/lib/devClassName";
 import type { Direction } from "@/consts";
 
 const BUTTON_CLASSES =
-  "flex flex-1 cursor-pointer flex-col items-center justify-center rounded-[18px] p-[6px] lg:rounded-[21px] lg:p-[15px] transition-colors duration-200";
+  "flex flex-1 cursor-pointer flex-col items-center justify-center rounded-[18px] lg:rounded-[21px] p-[6px] pb-[14px] lg:p-[15px] lg:pb-[20px] transition-colors duration-200";
 
 const TXT_1_CLASS =
   "text-[18px] leading-[152%] font-semibold tracking-[0.02em] lg:text-[15px]";
