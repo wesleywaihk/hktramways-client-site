@@ -33,7 +33,9 @@
       "repeatable": false
     },
     "bgColor": {
-      "type": "string"
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^(#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})|rgba?\\(\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*(,\\s*(0|1|0?\\.\\d+|1\\.0+)\\s*)?\\))$"
     },
     "bgImg": {
       "type": "media",
@@ -43,22 +45,34 @@
       ]
     },
     "titleColor": {
-      "type": "string"
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^(#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})|rgba?\\(\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*(,\\s*(0|1|0?\\.\\d+|1\\.0+)\\s*)?\\))$"
     },
     "descColor": {
-      "type": "string"
-    },
-    "buttonBgColor": {
-      "type": "string"
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^(#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})|rgba?\\(\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*(,\\s*(0|1|0?\\.\\d+|1\\.0+)\\s*)?\\))$"
     },
     "buttonTextColor": {
-      "type": "string"
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^(#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})|rgba?\\(\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*(,\\s*(0|1|0?\\.\\d+|1\\.0+)\\s*)?\\))$"
     },
-    "buttonHoverBgColor": {
-      "type": "string"
+    "buttonBgColor": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^(#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})|rgba?\\(\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*(,\\s*(0|1|0?\\.\\d+|1\\.0+)\\s*)?\\))$"
     },
     "buttonHoverTextColor": {
-      "type": "string"
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^(#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})|rgba?\\(\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*(,\\s*(0|1|0?\\.\\d+|1\\.0+)\\s*)?\\))$"
+    },
+    "buttonHoverBgColor": {
+      "type": "customField",
+      "customField": "plugin::color-picker.color",
+      "regex": "^(#([A-Fa-f0-9]{3,4}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})|rgba?\\(\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*,\\s*(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\s*(,\\s*(0|1|0?\\.\\d+|1\\.0+)\\s*)?\\))$"
     }
   },
   "config": {}

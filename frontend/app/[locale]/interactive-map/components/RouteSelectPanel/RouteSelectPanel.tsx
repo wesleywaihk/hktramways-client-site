@@ -28,9 +28,9 @@ export default function RouteSelectPanel({
 
   return (
     <div
-      className={`${devClassName("route-select-panel")}rounded-[21px] bg-[var(--color-earth-light)] py-[15px] lg:py-[12px] lg:shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] ${className}`}
+      className={`${devClassName("route-select-panel")}rounded-[21px] bg-[var(--color-earth-light)] px-[15px] py-[15px] lg:px-0 lg:py-[12px] lg:shadow-[0_8px_24px_0_rgba(0,0,0,0.15)] ${className}`}
     >
-      <div className="mb-[30px] flex items-center justify-between lg:hidden">
+      <div className="mb-[15px] flex items-center justify-between gap-4 px-[15px] pt-[15px] lg:hidden">
         <span className="text-green font-sans text-[20px] leading-[110%] font-semibold tracking-[0.02em]">
           {title}
         </span>

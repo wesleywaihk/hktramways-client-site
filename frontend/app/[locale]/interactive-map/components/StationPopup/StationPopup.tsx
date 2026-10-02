@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -12,8 +12,15 @@ import { devClassName } from "@/lib/devClassName";
 import { useUserAgent } from "@/hooks/useUserAgent";
 import { IMG_URL } from "@/consts";
 import type { Direction } from "@/consts";
-import type { AttractionData, StationItemData } from "@/types/api";
+import type {
+  AttractionData,
+  NextTramDialogData,
+  StationItemData,
+} from "@/types/api";
 import { routesForDirection, stationByLocCode, localeTxt } from "../routes";
+import NextTramDialog, {
+  type AppStoreLinks,
+} from "../NextTramDialog/NextTramDialog";
 
 const GOOGLE_MAP_URL = "https://www.google.com/maps/dir/?api=1&destination=";
 
@@ -23,6 +30,9 @@ export interface StationPopupProps {
   station?: StationItemData | null;
   loading?: boolean;
   scheduleAppLink?: string | null;
+  /** When set, Next Tram opens this dialog instead of linking to `scheduleAppLink`. */
+  nextTramDialog?: NextTramDialogData | null;
+  appStoreLinks: AppStoreLinks;
   onClose: () => void;
 }
 
@@ -40,17 +50,23 @@ export default function StationPopup({
   station: stationItem,
   loading = false,
   scheduleAppLink,
+  nextTramDialog,
+  appStoreLinks,
   onClose,
 }: StationPopupProps) {
   const locale = useLocale();
   const t = useTranslations("common");
   const [visible, setVisible] = useState(false);
+  const [nextTramOpen, setNextTramOpen] = useState(false);
   const { isAndroid } = useUserAgent();
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => setVisible(true));
     return () => cancelAnimationFrame(raf);
   }, []);
+
+  // Stable so the dialog's Escape listener isn't re-bound every render
+  const closeNextTram = useCallback(() => setNextTramOpen(false), []);
 
   const bannerLink = stationItem?.bannerLink;
 
@@ -205,10 +221,11 @@ export default function StationPopup({
               </Button>
             )}
             <Button
-              href={scheduleAppLink ?? undefined}
+              href={nextTramDialog ? undefined : (scheduleAppLink ?? undefined)}
               target="_blank"
+              onClick={nextTramDialog ? () => setNextTramOpen(true) : undefined}
               startIcon="clock"
-              disabled={!scheduleAppLink}
+              disabled={!nextTramDialog && !scheduleAppLink}
               className="!min-h-0 w-full !gap-[10px] !rounded-[14px] !px-[12px] !py-[11.73px] lg:!py-[10px]"
             >
               {t("stationPopupNextTram")}
@@ -234,6 +251,14 @@ export default function StationPopup({
           )}
         </div>
       </div>
+
+      {nextTramOpen && nextTramDialog && (
+        <NextTramDialog
+          data={nextTramDialog}
+          {...appStoreLinks}
+          onClose={closeNextTram}
+        />
+      )}
     </div>
   );
 }

@@ -539,6 +539,7 @@ export async function fetchInteractiveMap(
     "station.bannerLink.image",
     "downloadMapWest",
     "downloadMapEast",
+    "nextTramDialog.image",
   ]);
   const url = `${API_URL}/api/interactive-maps?locale=${locale}&${populate}`;
   if (process.env.NODE_ENV === "development")

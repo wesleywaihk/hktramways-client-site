@@ -395,6 +395,13 @@ export interface StationItemData {
   bannerLink: ImageLinkData | null;
 }
 
+export interface NextTramDialogData {
+  id: number;
+  image: Media[];
+  title: string;
+  desc: string;
+}
+
 export interface InteractiveMapData {
   id: number;
   documentId: string;
@@ -402,6 +409,7 @@ export interface InteractiveMapData {
   ScheduleAppLink: string;
   downloadMapWest: Media | null;
   downloadMapEast: Media | null;
+  nextTramDialog: NextTramDialogData | null;
 }
 
 export interface InteractiveMapResponse {

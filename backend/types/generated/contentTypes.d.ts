@@ -859,9 +859,17 @@ export interface ApiInteractiveMapInteractiveMap
       'oneToMany',
       'api::interactive-map.interactive-map'
     >;
+    nextTramDialog: Schema.Attribute.Component<
+      'page-interactive-map.next-tram-dialog',
+      false
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     ScheduleAppLink: Schema.Attribute.String &
-      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
