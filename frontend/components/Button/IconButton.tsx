@@ -20,6 +20,8 @@ export type IconButtonProps = {
   color?: IconButtonColor;
   shape?: IconButtonShape;
   className?: string;
+  /** Render as a non-interactive span, e.g. inside a clickable parent. */
+  decorative?: boolean;
 };
 
 const colorClasses: Record<IconButtonColor, string> = {
@@ -44,6 +46,7 @@ export default function IconButton({
   color = "green",
   shape = "circle",
   className = "",
+  decorative = false,
 }: IconButtonProps) {
   const classes = `${devClassName("icon-button")}group place-items-center cursor-pointer border-2 border-transparent hover:border-white transition-colors duration-200 ease-out ${shapeClasses[shape]} ${colorClasses[color]} ${reverse ? "rotate-180" : ""} ${className}`;
 
@@ -65,6 +68,14 @@ export default function IconButton({
       )}
     </span>
   );
+
+  if (decorative) {
+    return (
+      <span aria-hidden="true" className={classes}>
+        {content}
+      </span>
+    );
+  }
 
   if (href) {
     return (

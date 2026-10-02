@@ -9,7 +9,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "title": {
       "type": "string",
@@ -31,6 +33,31 @@
       "repeatable": false
     },
     "bgColor": {
+      "type": "string"
+    },
+    "bgImg": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "titleColor": {
+      "type": "string"
+    },
+    "descColor": {
+      "type": "string"
+    },
+    "buttonBgColor": {
+      "type": "string"
+    },
+    "buttonTextColor": {
+      "type": "string"
+    },
+    "buttonHoverBgColor": {
+      "type": "string"
+    },
+    "buttonHoverTextColor": {
       "type": "string"
     }
   },

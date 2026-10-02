@@ -7,10 +7,12 @@ export const colors = {
   greenFresh: "#86d478",
   greenPale: "#98d984",
   white: "#ffffff",
+  earth: "#aba787",
   earthLight: "#edebda",
   redDark: "#5a1716",
   gold: "#c8a96f",
-  yellow: "#fff03b",
+  yellow: "#fdd021",
+  yellowLight: "#fff03b",
   accentBrown: "#703900",
   black: "#222",
 } as const;

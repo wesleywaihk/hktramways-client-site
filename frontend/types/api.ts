@@ -158,6 +158,13 @@ export interface DownloadAppAreaData {
   title: string;
   desc: string;
   bgColor: string | null;
+  bgImg: Media | null;
+  titleColor: string | null;
+  descColor: string | null;
+  buttonBgColor: string | null;
+  buttonTextColor: string | null;
+  buttonHoverBgColor: string | null;
+  buttonHoverTextColor: string | null;
   actionButton1: ActionButton | null;
   actionButton2: ActionButton | null;
 }
@@ -252,6 +259,7 @@ export interface ScheduleData {
   ScheduleWestBound: ScheduleWestBound;
   // NOTE: "sehedule" (missing the "d") matches a typo in the backend schema field name.
   seheduleEastBound: ScheduleEastBound;
+  remark: BlocksContent | null;
 }
 
 export interface LatestNewsData {
@@ -492,3 +500,35 @@ export interface GlobalData {
 export interface GlobalResponse {
   data: GlobalData;
 }
+
+/** Strapi "blocks" rich-text field. */
+export interface BlocksTextNode {
+  type: "text";
+  text: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strikethrough?: boolean;
+  code?: boolean;
+}
+
+export interface BlocksLinkNode {
+  type: "link";
+  url: string;
+  children: BlocksTextNode[];
+}
+
+export type BlocksInlineNode = BlocksTextNode | BlocksLinkNode;
+
+export type BlocksNode =
+  | { type: "paragraph" | "quote" | "code"; children: BlocksInlineNode[] }
+  | { type: "heading"; level: number; children: BlocksInlineNode[] }
+  | {
+      type: "list";
+      format: "ordered" | "unordered";
+      children: BlocksNode[];
+    }
+  | { type: "list-item"; children: BlocksInlineNode[] }
+  | { type: "image"; image: Media };
+
+export type BlocksContent = BlocksNode[];

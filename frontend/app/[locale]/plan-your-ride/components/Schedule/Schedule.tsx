@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import BlocksText from "@/components/BlocksText/BlocksText";
 import Loading from "@/components/Loading/Loading";
+import LongArrowIco from "@/components/icons/LongArrowIco";
 import { fetchSchedule } from "@/hooks/useApiEndpoint/api";
 import { devClassName } from "@/lib/devClassName";
 import DirectionToggle from "./DirectionToggle";
@@ -23,25 +25,6 @@ type Direction = "west" | "east";
 function formatTime(value: string) {
   return value?.slice(0, 5) ?? "--:--";
 }
-
-const RouteArrow = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    fill="none"
-    className="shrink-0"
-    aria-hidden="true"
-  >
-    <path
-      d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
 
 export default function Schedule({ locale }: ScheduleProps) {
   const t = useTranslations("common");
@@ -79,6 +62,12 @@ export default function Schedule({ locale }: ScheduleProps) {
   if (!data) return null;
 
   const routes = direction === "west" ? WESTBOUND_ROUTES : EASTBOUND_ROUTES;
+  const fromStations = [...new Set(routes.map((route) => route.from))];
+  const toStations = [
+    ...new Map(
+      routes.map((route) => [`${route.to}${route.note ? "*" : ""}`, route]),
+    ).values(),
+  ];
   const routeData = (direction === "west"
     ? data.ScheduleWestBound
     : data.seheduleEastBound) as unknown as Record<string, ScheduleDay>;
@@ -99,10 +88,12 @@ export default function Schedule({ locale }: ScheduleProps) {
           onChange={setDirection}
           westLabel={t("scheduleWestbound")}
           eastLabel={t("scheduleEastbound")}
+          westLabelShort={t("routeToggleWestbound")}
+          eastLabelShort={t("routeToggleEastbound")}
         />
 
         <div className="w-full">
-          <div className="schedule-header text-yellow text-[21px] leading-[152%] font-semibold tracking-[0.02em]">
+          <div className="schedule-header text-yellow-light pb-[15px] text-[21px] leading-[152%] font-semibold tracking-[0.02em]">
             <span className="schedule-header-route">
               {t("scheduleColumnRoute")}
             </span>
@@ -117,18 +108,53 @@ export default function Schedule({ locale }: ScheduleProps) {
             </span>
           </div>
 
-          <div className="divide-y divide-white/15 border-t border-b border-white/15">
+          <div className="not:first:border-t-[2px] divide-y-2 divide-white/15 border-b-[2px]! border-white/10">
             {routes.map((route) => {
               const day: ScheduleDay = routeData[route.key];
 
               return (
                 <div key={route.key} className="schedule-row py-5 text-white">
-                  <div className="schedule-cell-route text-yellow flex items-center gap-2 pb-2 text-[18px] leading-[152%] font-semibold tracking-[0.02em] lg:text-[21px] lg:text-white">
-                    <span>{t(route.from)}</span>
-                    <RouteArrow />
-                    <span>
-                      {t(route.to)}
-                      {route.note && <sup>*</sup>}
+                  <div className="schedule-cell-route text-yellow-light flex items-center justify-center gap-3 pb-2 text-[18px] leading-[152%] font-semibold tracking-[0.02em] lg:justify-start lg:gap-6 lg:text-[21px] lg:text-white">
+                    {/* Every origin (and destination) label is stacked
+                        invisibly in the same cell so it sizes to the widest
+                        one: every row's route is then the same width, keeping
+                        the arrows aligned across rows in any locale, also
+                        when centred on mobile. */}
+                    <span className="grid">
+                      {fromStations.map((station) => (
+                        <span
+                          key={station}
+                          aria-hidden="true"
+                          className="invisible col-start-1 row-start-1"
+                        >
+                          {t(station)}
+                        </span>
+                      ))}
+                      <span className="col-start-1 row-start-1">
+                        {t(route.from)}
+                      </span>
+                    </span>
+                    <LongArrowIco
+                      width={24}
+                      height={24}
+                      className="shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span className="grid">
+                      {toStations.map((station) => (
+                        <span
+                          key={`${station.to}${station.note ? "*" : ""}`}
+                          aria-hidden="true"
+                          className="invisible col-start-1 row-start-1"
+                        >
+                          {t(station.to)}
+                          {station.note && <sup>*</sup>}
+                        </span>
+                      ))}
+                      <span className="col-start-1 row-start-1">
+                        {t(route.to)}
+                        {route.note && <sup>*</sup>}
+                      </span>
                     </span>
                   </div>
 
@@ -173,6 +199,9 @@ export default function Schedule({ locale }: ScheduleProps) {
               );
             })}
           </div>
+          <BlocksText className="mt-[15px] text-[13px] leading-[145%] font-normal tracking-[0.02em] text-white">
+            {data.remark}
+          </BlocksText>
         </div>
       </div>
     </section>

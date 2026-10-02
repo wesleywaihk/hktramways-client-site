@@ -1,7 +1,9 @@
+import type { Viewport } from "next";
 import { Outfit, Noto_Sans_HK, Noto_Sans_SC } from "next/font/google";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import StoreProvider from "@/store/StoreProvider";
 import GoogleMapsProvider from "@/components/GoogleMapsProvider/GoogleMapsProvider";
+import { colors } from "@/theme/colors";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -20,6 +22,11 @@ const notoSansSC = Noto_Sans_SC({
   weight: ["400", "500", "600"],
   variable: "--font-noto-sans-sc",
 });
+
+// Tints the Safari address bar / status bar on iPhone and iPad.
+export const viewport: Viewport = {
+  themeColor: colors.green,
+};
 
 export default function RootLayout({
   children,

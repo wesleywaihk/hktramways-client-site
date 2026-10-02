@@ -39,7 +39,7 @@ export default function BtnIcon({ icon, className, ...props }: BtnIconProps) {
 
   return (
     <Icon
-      className={`${devClassName("btn-icon")}h-5 w-5 shrink-0 ${className ?? ""}`}
+      className={`${devClassName("btn-icon")}h-5 w-5 shrink-0 lg:h-[24px]! lg:w-[24px]! ${className ?? ""}`}
       aria-hidden="true"
       {...props}
     />

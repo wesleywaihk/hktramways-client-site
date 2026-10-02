@@ -1,3 +1,4 @@
+import Link from "next/link";
 import IconButton from "@/components/Button/IconButton";
 import { devClassName } from "@/lib/devClassName";
 import type { AnnouncementData } from "@/types/api";
@@ -28,10 +29,11 @@ export default function LatestNewsEntry({
         .filter((type) => type.label)
     : [];
 
-  return (
-    <div
-      className={`${devClassName("latest-news-entry")}flex items-center justify-between gap-4 border-b border-black/10 py-6 first:pt-0 last:border-b-0 last:pb-0`}
-    >
+  const href = slug ? newsHref(locale, slug) : undefined;
+  const className = `${devClassName("latest-news-entry")}flex border-earth/30 items-center justify-between gap-4 border-b-2 py-6 first:pt-0 last:border-b-0 last:pb-0`;
+
+  const content = (
+    <>
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
           <span className="text-green block text-[15px] leading-none font-semibold tracking-[0.02em] lg:text-[16px]">
@@ -50,7 +52,7 @@ export default function LatestNewsEntry({
             </ul>
           )}
         </div>
-        <p className="mt-3 text-[18px] leading-[135%] font-semibold tracking-[0.02em] text-[#222] lg:text-[21px]">
+        <p className="mt-3 text-[18px]! leading-[152%]! font-semibold! tracking-[0.02em]! text-black lg:text-[21px]!">
           {title}
         </p>
       </div>
@@ -58,9 +60,20 @@ export default function LatestNewsEntry({
         ariaLabel={title}
         useArrow
         shape="square"
-        href={slug ? newsHref(locale, slug) : undefined}
-        className="hover:text-green! hover:border-green! grid shrink-0 border-transparent! !bg-[#fdd021] text-white! hover:bg-white! lg:h-[60px] lg:w-[60px] lg:rounded-[21px]"
+        decorative
+        className="group-hover:text-green! group-hover:border-green! grid shrink-0 border-transparent! bg-yellow! text-white! group-hover:bg-white! lg:h-[60px] lg:w-[60px] lg:rounded-[21px]"
       />
-    </div>
+    </>
   );
+
+  // The whole row is the link; the arrow button only mirrors the row's hover.
+  if (href) {
+    return (
+      <Link href={href} className={`group ${className}`}>
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className={className}>{content}</div>;
 }

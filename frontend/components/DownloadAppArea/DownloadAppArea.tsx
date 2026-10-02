@@ -16,12 +16,15 @@ export interface DownloadAppAreaProps extends Omit<
   endpoint: string;
   /** Preview mode document id; fetches that draft instead of the latest published entry. */
   documentId?: string | null;
+  /** Field name of the download-app-area shaped component on that content type. */
+  field?: string;
 }
 
 export default function DownloadAppArea({
   locale,
   endpoint,
   documentId,
+  field = "downloadAppArea",
   className,
   buttonColor,
   buttonVariant,
@@ -35,7 +38,7 @@ export default function DownloadAppArea({
     // eslint-disable-next-line react-hooks/set-state-in-effect -- reset to the loading state when inputs change before the refetch resolves
     setData(undefined);
 
-    fetchDownloadAppArea(locale, endpoint, documentId)
+    fetchDownloadAppArea(locale, endpoint, documentId, field)
       .then((result) => {
         if (!cancelled) setData(result);
       })
@@ -46,7 +49,7 @@ export default function DownloadAppArea({
     return () => {
       cancelled = true;
     };
-  }, [locale, endpoint, documentId]);
+  }, [locale, endpoint, documentId, field]);
 
   return (
     <DownloadAppAreaUI

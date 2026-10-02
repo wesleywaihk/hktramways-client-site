@@ -3,7 +3,6 @@ import { IMG_URL } from "@/consts";
 import { ResponsiveImage } from "@/types/api";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { devClassName } from "@/lib/devClassName";
-import { SCROLL_DISTANCE } from "./Banner";
 import { FADE_DURATION_MS } from "./Banner";
 
 export interface VideoCardProps {
@@ -13,6 +12,8 @@ export interface VideoCardProps {
   isFullScreen?: boolean;
   isActive?: boolean;
   transY?: number;
+  /** Parallax scroll distance (px) for the current breakpoint. */
+  scrollDistance: number;
   style?: React.CSSProperties;
   useBorder?: boolean;
   onEnded?: () => void;
@@ -25,6 +26,7 @@ export default function VideoCard({
   isFullScreen = false,
   isActive = false,
   transY = 0,
+  scrollDistance,
   style = {},
   useBorder = true,
   onEnded,
@@ -58,8 +60,8 @@ export default function VideoCard({
   }, [src, isActive]);
 
   const videoStyle = {
-    top: `${0 - SCROLL_DISTANCE}px`,
-    height: `calc(100% + ${SCROLL_DISTANCE}px)`,
+    top: `${0 - scrollDistance}px`,
+    height: `calc(100% + ${scrollDistance}px)`,
     transform: `translateY(${transY}px)`,
   };
 

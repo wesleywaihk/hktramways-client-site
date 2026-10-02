@@ -17,7 +17,7 @@ const variantClasses: Record<
   white: {
     section: "bg-green",
     card: "bg-white",
-    button: "bg-[#fdd021]!",
+    button: "bg-yellow!",
     spinner: "text-white/70!",
   },
   // Pale green cards on the page's white background (About Us `greenCards`).

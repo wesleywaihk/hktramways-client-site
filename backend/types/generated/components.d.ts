@@ -86,9 +86,16 @@ export interface ContentDownloadAppArea extends Struct.ComponentSchema {
       Schema.Attribute.Required;
     actionButton2: Schema.Attribute.Component<'content.action-button', false>;
     bgColor: Schema.Attribute.String;
+    bgImg: Schema.Attribute.Media<'images'>;
+    buttonBgColor: Schema.Attribute.String;
+    buttonHoverBgColor: Schema.Attribute.String;
+    buttonHoverTextColor: Schema.Attribute.String;
+    buttonTextColor: Schema.Attribute.String;
     desc: Schema.Attribute.Text & Schema.Attribute.Required;
+    descColor: Schema.Attribute.String;
     Image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+    titleColor: Schema.Attribute.String;
   };
 }
 
@@ -720,6 +727,7 @@ export interface PagePlayYourRideSchedule extends Struct.ComponentSchema {
     displayName: 'Schedule';
   };
   attributes: {
+    remark: Schema.Attribute.Blocks;
     ScheduleWestBound: Schema.Attribute.Component<
       'content.schedule-westbound',
       false

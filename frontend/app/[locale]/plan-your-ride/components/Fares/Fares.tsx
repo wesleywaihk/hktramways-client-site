@@ -87,7 +87,7 @@ export default function Fares({ locale }: FaresProps) {
             ))}
           </div>
 
-          <div className="flex w-full flex-col items-center gap-4 lg:w-[50%]">
+          <div className="flex w-full flex-col items-center gap-4 pt-[4.8px] lg:w-[50%] lg:pt-0">
             <FareGfx
               adult={{ label: t("footerAdult"), fare: `HK$${priceAdult}` }}
               child={{ label: t("footerChild"), fare: `HK$${priceChild}` }}
@@ -102,7 +102,10 @@ export default function Fares({ locale }: FaresProps) {
                 color="white"
                 useArrow={monthlyTicketActionButton.useArrow ?? true}
                 startIcon={monthlyTicketActionButton.startIcon?.icon}
-                className="border-yellow! bg-yellow! text-accent-brown! hover:bg-yellow! hover:text-accent-brown! text-body mt-[-20px] w-full! gap-0 py-[13px] pr-[15px] pl-[10px] text-center font-semibold normal-case! lg:gap-[10px] lg:py-[15px] lg:pr-[18px] lg:pl-[30px]"
+                // The label (the only child span without shrink-0) fills the
+                // space between the icon and the arrow, so the arrow sits at
+                // the right edge; its text is centred on mobile, left on desktop.
+                className="border-yellow-light! bg-yellow-light! text-accent-brown! hover:bg-yellow! hover:border-yellow! hover:text-accent-brown! text-body mt-[-20px] w-full! justify-start! gap-0 py-[13px]! pr-[15px]! pl-[10px]! font-semibold normal-case! lg:gap-[10px] lg:py-[15px]! lg:pr-[18px]! lg:pl-[30px]! [&>span]:normal-case! [&>span:not(.shrink-0)]:grow [&>span:not(.shrink-0)]:text-center! [&>span:not(.shrink-0)]:text-[15px]! [&>span:not(.shrink-0)]:leading-[163%]! [&>span:not(.shrink-0)]:font-semibold! [&>span:not(.shrink-0)]:tracking-[0.02em]! lg:[&>span:not(.shrink-0)]:text-left! lg:[&>span:not(.shrink-0)]:text-[16px]!"
               >
                 {monthlyTicketActionButton.label}
               </Button>
@@ -117,7 +120,11 @@ export default function Fares({ locale }: FaresProps) {
               color="white"
               useArrow={actionButton.useArrow ?? false}
               startIcon={actionButton.startIcon?.icon}
-              className="h-[62px]! w-[400px]! normal-case!"
+              // Label (the only child span without shrink-0) stretches between
+              // the icons: start icon on the left edge, arrow on the right,
+              // text centred in between.
+              className="h-[62px]! w-[400px]! normal-case! [&>span:not(.shrink-0)]:grow [&>span:not(.shrink-0)]:text-center!"
+              size="big"
             >
               {actionButton.label}
             </Button>
